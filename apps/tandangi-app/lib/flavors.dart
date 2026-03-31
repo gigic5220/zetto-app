@@ -19,7 +19,6 @@ class FlavorInfo {
       case Flavor.dev:
         return 'http://192.168.0.90:8080';
       case Flavor.prod:
-        return 'http://192.168.0.90:8080';
         return 'https://tandangi-api-741098864815.asia-northeast3.run.app';
     }
   }
