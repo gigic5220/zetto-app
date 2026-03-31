@@ -1,0 +1,343 @@
+{
+  "source": "scripts/api.json",
+  "filters": {
+    "tag": [
+      "auth"
+    ],
+    "api": []
+  },
+  "count": 7,
+  "apis": [
+    {
+      "method": "POST",
+      "path": "/logout",
+      "operationId": "logout",
+      "summary": "로그아웃",
+      "description": "토큰 폐기",
+      "tags": [
+        "Auth"
+      ],
+      "parameters": [],
+      "request": null,
+      "response": {
+        "200": {
+          "description": "OK",
+          "content": {}
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/login",
+      "operationId": "login",
+      "summary": "로그인",
+      "description": "회원 인증 후 리프레시 토큰 발급",
+      "tags": [
+        "Auth"
+      ],
+      "parameters": [],
+      "request": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/LoginRequest",
+              "schemaName": "LoginRequest"
+            }
+          }
+        }
+      },
+      "response": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginResponse",
+                "schemaName": "LoginResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/auth/token/access/adot-learning",
+      "operationId": "generateAdotLearningToken",
+      "summary": "에이닷러닝 액세스 토큰 발급",
+      "description": "에이닷러닝 서비스용 액세스 토큰 발급",
+      "tags": [
+        "Auth"
+      ],
+      "parameters": [],
+      "request": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/AdotLearningTokenRequest",
+              "schemaName": "AdotLearningTokenRequest"
+            }
+          }
+        }
+      },
+      "response": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccessTokenResponse",
+                "schemaName": "AccessTokenResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/auth/token/access/",
+      "operationId": "generateAccessToken",
+      "summary": "액세스 토큰 발급",
+      "description": "리프레시 토큰으로 JWT 액세스 토큰 발급",
+      "tags": [
+        "Auth"
+      ],
+      "parameters": [],
+      "request": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/AccessTokenRequest",
+              "schemaName": "AccessTokenRequest"
+            }
+          }
+        }
+      },
+      "response": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccessTokenResponse",
+                "schemaName": "AccessTokenResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/auth/token/access",
+      "operationId": "generateAccessToken_1",
+      "summary": "액세스 토큰 발급",
+      "description": "리프레시 토큰으로 JWT 액세스 토큰 발급",
+      "tags": [
+        "Auth"
+      ],
+      "parameters": [],
+      "request": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/AccessTokenRequest",
+              "schemaName": "AccessTokenRequest"
+            }
+          }
+        }
+      },
+      "response": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccessTokenResponse",
+                "schemaName": "AccessTokenResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/auth/token/refresh/verify/",
+      "operationId": "verifyRefreshToken",
+      "summary": "리프레시 토큰 검증",
+      "description": "리프레시 토큰 유효성 확인",
+      "tags": [
+        "Auth"
+      ],
+      "parameters": [
+        {
+          "name": "device_uuid",
+          "in": "query",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "refresh_token",
+          "in": "query",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "request": null,
+      "response": {
+        "200": {
+          "description": "OK",
+          "content": {}
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/auth/token/refresh/verify",
+      "operationId": "verifyRefreshToken_1",
+      "summary": "리프레시 토큰 검증",
+      "description": "리프레시 토큰 유효성 확인",
+      "tags": [
+        "Auth"
+      ],
+      "parameters": [
+        {
+          "name": "device_uuid",
+          "in": "query",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "refresh_token",
+          "in": "query",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "request": null,
+      "response": {
+        "200": {
+          "description": "OK",
+          "content": {}
+        }
+      }
+    }
+  ],
+  "schemas": {
+    "LoginRequest": {
+      "type": "object",
+      "description": "로그인 요청",
+      "properties": {
+        "member_id": {
+          "type": "string",
+          "description": "회원 ID",
+          "maxLength": 50,
+          "minLength": 0
+        },
+        "password": {
+          "type": "string",
+          "description": "비밀번호",
+          "maxLength": 50,
+          "minLength": 0
+        },
+        "device_uuid": {
+          "type": "string",
+          "description": "디바이스 UUID (없으면 서버에서 생성)",
+          "maxLength": 100,
+          "minLength": 0
+        }
+      },
+      "required": [
+        "member_id",
+        "password"
+      ]
+    },
+    "LoginResponse": {
+      "type": "object",
+      "description": "로그인 응답",
+      "properties": {
+        "device_uuid": {
+          "type": "string",
+          "description": "디바이스 UUID"
+        },
+        "refresh_token": {
+          "type": "string",
+          "description": "리프레시 토큰"
+        },
+        "expiration_time": {
+          "type": "integer",
+          "format": "int64",
+          "description": "만료 시각 (Unix timestamp)"
+        }
+      }
+    },
+    "AdotLearningTokenRequest": {
+      "type": "object",
+      "description": "에이닷러닝 액세스 토큰 발급 요청",
+      "properties": {
+        "memberId": {
+          "type": "string",
+          "description": "회원 ID",
+          "maxLength": 30,
+          "minLength": 0
+        },
+        "memberRole": {
+          "type": "string",
+          "description": "회원 역할",
+          "example": "student",
+          "minLength": 1,
+          "pattern": "^(student|teacher|staff)$"
+        }
+      },
+      "required": [
+        "memberId",
+        "memberRole"
+      ]
+    },
+    "AccessTokenResponse": {
+      "type": "object",
+      "description": "액세스 토큰 발급 응답",
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "JWT 액세스 토큰"
+        }
+      }
+    },
+    "AccessTokenRequest": {
+      "type": "object",
+      "description": "액세스 토큰 발급 요청",
+      "properties": {
+        "device_uuid": {
+          "type": "string",
+          "description": "디바이스 UUID",
+          "maxLength": 100,
+          "minLength": 0
+        },
+        "refresh_token": {
+          "type": "string",
+          "description": "리프레시 토큰",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "device_uuid",
+        "refresh_token"
+      ]
+    }
+  }
+}

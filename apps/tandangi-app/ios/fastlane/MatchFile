@@ -1,0 +1,5 @@
+git_url("https://github.com/gigic5220/tandangi-app-ios-match")
+storage_mode("git")
+
+username("zetto.labs@gmail.com")
+team_id("JAJNPQ76A7")

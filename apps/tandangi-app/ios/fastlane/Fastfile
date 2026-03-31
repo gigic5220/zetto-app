@@ -1,0 +1,121 @@
+default_platform(:ios)
+
+platform :ios do
+  # 공통: pubspec.yaml에서 build number 가져오기
+  def read_build_number_from_pubspec
+    require 'yaml'
+    pubspec_path = File.expand_path(File.join(__dir__, '..', '..', 'pubspec.yaml'))
+    pubspec = YAML.load_file(pubspec_path)
+    version_string = pubspec['version']
+    build_number = version_string.split('+').last if version_string.include?('+')
+
+    if build_number.nil?
+      UI.user_error!("pubspec.yaml에서 빌드 번호를 찾을 수 없습니다.")
+    end
+
+    build_number
+  end
+
+  desc "Build dev (AdHoc) and upload to Firebase App Distribution"
+  lane :dev do
+    firebase_token = ENV['FIREBASE_CLI_TOKEN']
+    project_id = ENV['FIREBASE_PROJECT_ID']
+
+    if firebase_token.nil? || project_id.nil?
+      UI.user_error!("FIREBASE_CLI_TOKEN과 FIREBASE_PROJECT_ID가 필요합니다.")
+    end
+
+    build_number = read_build_number_from_pubspec
+
+    match(
+      app_identifier: [
+        "com.zetto.tandangi.dev",
+        "com.zetto.tandangi.dev.ImageNotification"
+      ],
+      type: "adhoc",
+      api_key_path: "fastlane/#{ENV["APP_STORE_CONNECT_API_KEY_ID"]}.json",
+      readonly: true
+    )
+
+    increment_build_number(
+      xcodeproj: "Runner.xcodeproj",
+      build_number: build_number
+    )
+
+    build_app(
+      export_method: "ad-hoc",
+      workspace: "Runner.xcworkspace",
+      scheme: "dev",
+      output_directory: "./output",
+      output_name: "Runner-dev.ipa"
+    )
+
+    # gsp = File.expand_path("../Runner/GoogleService-Info.plist", __dir__)
+
+    # upload_symbols_to_crashlytics(
+    #   gsp_path: gsp
+    # )
+
+    firebase_app_distribution(
+      app: ENV["FIREBASE_DEV_APP_ID"],
+      groups: "zetto",
+      release_notes: "테스트",
+      ipa_path: "./output/Runner-dev.ipa",
+      service_credentials_file: ENV["FIREBASE_SERVICE_CREDENTIALS"],
+      debug: true
+    )
+
+  end
+
+  desc "Build prod (App Store) and upload to TestFlight"
+  lane :prod do
+    build_number = read_build_number_from_pubspec
+
+    match(
+      app_identifier: [
+        "com.zetto.tandangi",
+        "com.zetto.tandangi.ImageNotification"
+      ],
+      type: "appstore",
+      api_key_path: "fastlane/#{ENV["APP_STORE_CONNECT_API_KEY_ID"]}.json",
+      readonly: true
+    )
+
+    increment_build_number(
+      xcodeproj: "Runner.xcodeproj",
+      build_number: build_number
+    )
+
+    build_app(
+      export_method: "app-store",
+      workspace: "Runner.xcworkspace",
+      scheme: "prod",
+      output_directory: "./output",
+      output_name: "Runner-prod.ipa"
+    )
+
+    # gsp = File.expand_path("../Runner/GoogleService-Info.plist", __dir__)
+
+    # upload_symbols_to_crashlytics(
+    #   gsp_path: gsp
+    # )
+
+    upload_to_testflight(
+      ipa: "./output/Runner-prod.ipa",
+      api_key_path: "fastlane/#{ENV["APP_STORE_CONNECT_API_KEY_ID"]}.json",
+
+      # ✅ 중요: TestFlight 업로드 대상은 "메인 앱"만 지정 (extension 아님)
+      app_identifier: "com.zetto.tandangi",
+
+      skip_waiting_for_build_processing: true,
+
+      # 배포 대상 설정:
+      # - false: 내부 테스터만 (App Store Connect users / internal group)
+      # - true : 외부 테스터까지 배포 (Beta App Review 필요할 수 있음)
+      distribute_external: false
+
+      # 필요하면:
+      # changelog: ENV["RELEASE_NOTES"]
+    )
+  end
+end

@@ -1,0 +1,88 @@
+{
+  "source": "scripts/api.json",
+  "filters": {
+    "tag": [
+      "Share"
+    ],
+    "api": []
+  },
+  "count": 1,
+  "apis": [
+    {
+      "method": "POST",
+      "path": "/v1.0/share/dynamic-link",
+      "operationId": "createShareDynamicLink",
+      "summary": "공유 링크 생성",
+      "description": "Dynamic link 공유 링크 생성",
+      "tags": [
+        "Share"
+      ],
+      "parameters": [],
+      "request": {
+        "required": true,
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "$ref": "#/components/schemas/ShareDynamicLinkRequest",
+              "schemaName": "ShareDynamicLinkRequest"
+            }
+          }
+        }
+      },
+      "response": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json;charset=UTF-8": {
+              "schema": {
+                "$ref": "#/components/schemas/DataResponseString",
+                "schemaName": "DataResponseString"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "schemas": {
+    "ShareDynamicLinkRequest": {
+      "required": [
+        "deepLink"
+      ],
+      "type": "object",
+      "properties": {
+        "deepLink": {
+          "type": "string"
+        },
+        "socialTitle": {
+          "type": "string",
+          "nullable": true
+        },
+        "socialDescription": {
+          "type": "string",
+          "nullable": true
+        },
+        "socialImage": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    },
+    "DataResponseString": {
+      "required": [
+        "code",
+        "result"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "result": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

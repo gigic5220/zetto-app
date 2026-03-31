@@ -1,0 +1,27 @@
+flavors:
+  dev:
+    app:
+      name: "tandangi dev"
+  
+    android:
+      applicationId: "com.zetto.tandangi.dev"
+      firebase:
+        config: "android/firebase/dev/google-services.json"
+  
+    ios:
+      bundleId: "com.zetto.tandangi.dev"
+      firebase:
+        config: "ios/firebase/dev/GoogleService-Info.plist"
+  
+  prod:
+    app:
+      name: "tandangi"
+      
+    android:
+      applicationId: "com.zetto.tandangi"
+      firebase:
+        config: "android/firebase/prod/google-services.json"
+    ios:
+      bundleId: "com.zetto.tandangi"
+      firebase:
+        config: "ios/firebase/prod/GoogleService-Info.plist"

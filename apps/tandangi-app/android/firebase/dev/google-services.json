@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "527744918361",
+    "project_id": "tandangi-e3020",
+    "storage_bucket": "tandangi-e3020.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:527744918361:android:101047fd703242e2bce248",
+        "android_client_info": {
+          "package_name": "com.zetto.tandangi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "527744918361-4jc8ln6g7ssci321okhi6ku912it7ha9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2qtwWj5a-t1RJCgOcun6cO4dwZoiBwpg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "527744918361-4jc8ln6g7ssci321okhi6ku912it7ha9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "527744918361-frqig2ob3cbaipjqloodtnniul0sivh4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.zetto.tandangi.dev"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:527744918361:android:242d427096f4271cbce248",
+        "android_client_info": {
+          "package_name": "com.zetto.tandangi.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "527744918361-psct79sdtf04fflut9kqopsg9hf8o1pg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zetto.tandangi.dev",
+            "certificate_hash": "776fa308d4283a25168630876e5604dfb20d283e"
+          }
+        },
+        {
+          "client_id": "527744918361-4jc8ln6g7ssci321okhi6ku912it7ha9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2qtwWj5a-t1RJCgOcun6cO4dwZoiBwpg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "527744918361-4jc8ln6g7ssci321okhi6ku912it7ha9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "527744918361-frqig2ob3cbaipjqloodtnniul0sivh4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.zetto.tandangi.dev"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

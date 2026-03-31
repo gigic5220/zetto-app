@@ -1,0 +1,397 @@
+{
+  "source": "scripts/api.json",
+  "filters": {
+    "tag": [],
+    "api": [
+      "/v1.0/share"
+    ]
+  },
+  "count": 4,
+  "apis": [
+    {
+      "method": "POST",
+      "path": "/v1.0/share/problem/solve",
+      "operationId": "solveSharedProblem",
+      "summary": "문제 풀이",
+      "description": null,
+      "tags": [
+        "Problem"
+      ],
+      "parameters": [],
+      "request": {
+        "required": true,
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "$ref": "#/components/schemas/ShareProblemSolveInputDto",
+              "schemaName": "ShareProblemSolveInputDto"
+            }
+          }
+        }
+      },
+      "response": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json;charset=UTF-8": {
+              "schema": {
+                "$ref": "#/components/schemas/DataResponseProblemSolveResultDto",
+                "schemaName": "DataResponseProblemSolveResultDto"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/v1.0/share/dynamic-link",
+      "operationId": "createShareDynamicLink",
+      "summary": "공유 링크 생성",
+      "description": "Dynamic link 공유 링크 생성",
+      "tags": [
+        "Share"
+      ],
+      "parameters": [],
+      "request": {
+        "required": true,
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "$ref": "#/components/schemas/ShareDynamicLinkRequest",
+              "schemaName": "ShareDynamicLinkRequest"
+            }
+          }
+        }
+      },
+      "response": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json;charset=UTF-8": {
+              "schema": {
+                "$ref": "#/components/schemas/DataResponseString",
+                "schemaName": "DataResponseString"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1.0/share/problem/dynamic-link/social",
+      "operationId": "shareProblemDynamicLinkForSocial",
+      "summary": "문제 공유 앱용",
+      "description": null,
+      "tags": [
+        "Problem"
+      ],
+      "parameters": [
+        {
+          "name": "problemId",
+          "in": "query",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      ],
+      "request": null,
+      "response": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json;charset=UTF-8": {
+              "schema": {
+                "$ref": "#/components/schemas/DataResponseString",
+                "schemaName": "DataResponseString"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1.0/share/problem/code",
+      "operationId": "getProblemByProblemShareCode",
+      "summary": null,
+      "description": null,
+      "tags": [
+        "Problem"
+      ],
+      "parameters": [
+        {
+          "name": "problemShareCode",
+          "in": "query",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "request": null,
+      "response": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json;charset=UTF-8": {
+              "schema": {
+                "$ref": "#/components/schemas/DataResponseProblemShareResultDto",
+                "schemaName": "DataResponseProblemShareResultDto"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "schemas": {
+    "ShareProblemSolveInputDto": {
+      "type": "object",
+      "properties": {
+        "problemShareCode": {
+          "type": "string"
+        },
+        "problemSolveInputDto": {
+          "$ref": "#/components/schemas/ProblemSolveInputDto"
+        }
+      }
+    },
+    "DataResponseProblemSolveResultDto": {
+      "required": [
+        "code",
+        "result"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "result": {
+          "$ref": "#/components/schemas/ProblemSolveResultDto"
+        }
+      }
+    },
+    "ShareDynamicLinkRequest": {
+      "required": [
+        "deepLink"
+      ],
+      "type": "object",
+      "properties": {
+        "deepLink": {
+          "type": "string"
+        },
+        "socialTitle": {
+          "type": "string",
+          "nullable": true
+        },
+        "socialDescription": {
+          "type": "string",
+          "nullable": true
+        },
+        "socialImage": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    },
+    "DataResponseString": {
+      "required": [
+        "code",
+        "result"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "result": {
+          "type": "string"
+        }
+      }
+    },
+    "DataResponseProblemShareResultDto": {
+      "required": [
+        "code",
+        "result"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "result": {
+          "$ref": "#/components/schemas/ProblemShareResultDto"
+        }
+      }
+    },
+    "ProblemShareResultDto": {
+      "required": [
+        "dynamicLink",
+        "problemBaseDto",
+        "socialPreviewDescription",
+        "socialPreviewImageUrl",
+        "socialPreviewTitle"
+      ],
+      "type": "object",
+      "properties": {
+        "problemBaseDto": {
+          "$ref": "#/components/schemas/ProblemBaseDto"
+        },
+        "dynamicLink": {
+          "type": "string"
+        },
+        "socialPreviewTitle": {
+          "type": "string"
+        },
+        "socialPreviewDescription": {
+          "type": "string"
+        },
+        "socialPreviewImageUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "ProblemBaseDto": {
+      "required": [
+        "bookmarked",
+        "choiceHtml",
+        "choiceList",
+        "choiceType",
+        "correctAnswer",
+        "correctAnswerHtml",
+        "elorating",
+        "existSimilarCategoryBaseProblem",
+        "explanationHtml",
+        "id",
+        "measureUnit",
+        "problemNoteId",
+        "problemType",
+        "questionHtml",
+        "studentELORating",
+        "unit2Id"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "problemType": {
+          "type": "string",
+          "enum": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4"
+          ]
+        },
+        "correctAnswer": {
+          "type": "string"
+        },
+        "correctAnswerHtml": {
+          "type": "string"
+        },
+        "questionHtml": {
+          "type": "string"
+        },
+        "choiceHtml": {
+          "type": "string"
+        },
+        "choiceList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "choiceType": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3"
+          ]
+        },
+        "explanationHtml": {
+          "type": "string"
+        },
+        "studentELORating": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "unit2Id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "existSimilarCategoryBaseProblem": {
+          "type": "boolean"
+        },
+        "problemNoteId": {
+          "type": "integer",
+          "format": "int64",
+          "nullable": true
+        },
+        "measureUnit": {
+          "type": "string",
+          "nullable": true
+        },
+        "bookmarked": {
+          "type": "boolean"
+        },
+        "elorating": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ProblemSolveResultDto": {
+      "required": [
+        "correctness",
+        "problemSolveHistoryId"
+      ],
+      "type": "object",
+      "properties": {
+        "correctness": {
+          "type": "boolean"
+        },
+        "problemSolveHistoryId": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ProblemSolveInputDto": {
+      "required": [
+        "answer",
+        "duration",
+        "problemId"
+      ],
+      "type": "object",
+      "properties": {
+        "problemId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "answer": {
+          "type": "string"
+        },
+        "duration": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ocrResultId": {
+          "type": "integer",
+          "format": "int32",
+          "nullable": true
+        }
+      }
+    }
+  }
+}

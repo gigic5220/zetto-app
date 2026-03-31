@@ -1,0 +1,15 @@
+name: flutter_initialize_project
+
+environment:
+  sdk: ">=3.10.0 <4.0.0"
+
+workspace:
+  - apps/tandangi-app
+  - packages/core_app
+  - packages/design_system
+
+dev_dependencies:
+  flutter_lints: ^6.0.0
+
+dependency_overrides:
+  analyzer: ^10.0.0

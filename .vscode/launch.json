@@ -1,0 +1,83 @@
+{
+  // IntelliSense를 사용하여 가능한 특성에 대해 알아보세요.
+  // 기존 특성에 대한 설명을 보려면 가리킵니다.
+  // 자세한 내용을 보려면 https://go.microsoft.com/fwlink/?linkid=830387을(를) 방문하세요.
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "flutter_initialize_project",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "example_app (preview)",
+      "cwd": "apps/example_app",
+      "program": "lib/preview_main.dart",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release",
+      "args": ["--web-hostname", "0.0.0.0", "--web-port", "8080"]
+    },
+    {
+      "name": "example_app (flavor dev)",
+      "cwd": "apps/example_app",
+      "request": "launch",
+      "type": "dart",
+      "args": ["--flavor", "dev"]
+    },
+    {
+      "name": "example_app (profile mode)",
+      "cwd": "apps/example_app",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile"
+    },
+    {
+      "name": "example_app (release mode)",
+      "cwd": "apps/example_app",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release"
+    },
+    {
+      "name": "core_app",
+      "cwd": "packages/core_app",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "core_app (profile mode)",
+      "cwd": "packages/core_app",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile"
+    },
+    {
+      "name": "core_app (release mode)",
+      "cwd": "packages/core_app",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release"
+    },
+    {
+      "name": "core_flutter",
+      "cwd": "packages/core_flutter",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "core_flutter (profile mode)",
+      "cwd": "packages/core_flutter",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile"
+    },
+    {
+      "name": "core_flutter (release mode)",
+      "cwd": "packages/core_flutter",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release"
+    }
+  ]
+}

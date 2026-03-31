@@ -1,0 +1,103 @@
+#!/bin/bash
+COMMIT_MSG_FILE="$1"
+COMMIT_SOURCE="$2"
+
+# 커스터마이즈 가능한 Jira 키 정규식 (기본: EGG-123, DEV-456)
+JIRA_KEY_REGEX="${JIRA_KEY_REGEX:-(EGG|DEV|IT)-[0-9]+}"
+
+BRANCH_NAME=$(git symbolic-ref --short HEAD)
+BRANCH_NAME="${BRANCH_NAME##*/}"
+JIRA_ID=`echo $BRANCH_NAME | egrep -o '(${JIRA_KEY_REGEX})'`
+BRANCH_EXCLUDED=$(printf "%s\n" "${BRANCHES_TO_SKIP[@]}" | grep -c "^$BRANCH_NAME$")
+BRANCH_IN_COMMIT=$(grep -c "$JIRA_ID #resolve #comment" $1)
+CONVENTIONAL_COMMIT=$(grep -E "^(feat|fix|docs|style|refactor|test|chore)(\(.+\))?:" $1)
+if [ -n "$JIRA_ID" ] && ! [[ $BRANCH_EXCLUDED -eq 1 ]] && ! [[ $BRANCH_IN_COMMIT -ge 1 ]] && [ -z "$CONVENTIONAL_COMMIT" ]; then
+  JIRA_ID_WITH_BRACKETS="[$JIRA_ID]"
+  sed -i.bak -e "1s/^/$JIRA_ID_WITH_BRACKETS /" $1
+fi
+
+append_jira_keys() {
+  local keys="$1"
+  [ -z "$keys" ] && return 0
+
+  # 이미 "Jira Issues:" 라인이 있으면 중복 추가 금지
+  if grep -qE '^Jira Issues:' "$COMMIT_MSG_FILE"; then
+    # 기존 라인에 없는 키만 찾아 추가
+    local existing
+    existing="$(grep -E '^Jira Issues:' "$COMMIT_MSG_FILE" | sed -E 's/^Jira Issues:\s*//')"
+    local new_only
+    # 공백 단위 중복 제거
+    new_only="$(printf '%s\n' $keys $existing | tr ' ' '\n' | awk 'NF' | sort -u | tr '\n' ' ')"
+    # 변화 없으면 리턴
+    if [ "$(echo "$new_only" | sed 's/[[:space:]]\+$//')" = "$(echo "$existing" | sed 's/[[:space:]]\+$//')" ]; then
+      return 0
+    fi
+    # 라인 교체
+    sed -i.bak -E "s/^Jira Issues: .*/Jira Issues: ${new_only% }/" "$COMMIT_MSG_FILE" && rm -f "$COMMIT_MSG_FILE.bak"
+  else
+    {
+      echo ""
+      echo ""
+      echo "Jira Issues: ${keys% }"
+    } >> "$COMMIT_MSG_FILE"
+  fi
+}
+
+extract_keys_from_text() {
+  # stdin에서 키 추출 → 공백구분 유니크
+  grep -oE "$JIRA_KEY_REGEX" 2>/dev/null | sort -u | tr '\n' ' '
+}
+
+if [ "$COMMIT_SOURCE" = "merge" ] || [ -f .git/MERGE_HEAD ]; then
+  jira_from_msg=""
+  jira_from_range=""
+
+  # 1) MERGE_MSG에서 키 (있으면)
+  if [ -f .git/MERGE_MSG ]; then
+    jira_from_msg="$(extract_keys_from_text < .git/MERGE_MSG)"
+  fi
+
+  # 2) 이번 merge로 "새로 유입되는 모든 커밋" 범위에서 키 추출
+  if git rev-parse -q --verify MERGE_HEAD >/dev/null 2>&1; then
+    # MERGE_HEAD는 파일(.git/MERGE_HEAD)로도 존재하고, octopus merge면 여러 줄일 수도 있음
+    # 그래서 파일을 직접 읽어서 처리하는 게 더 튼튼함.
+    incoming_text=""
+
+    while read -r mh; do
+      [ -z "$mh" ] && continue
+
+      base="$(git merge-base HEAD "$mh" 2>/dev/null || true)"
+      if [ -z "$base" ]; then
+        continue
+      fi
+
+      # "이번 merge로 들어오는 모든 커밋" = base..MERGE_HEAD
+      # 머지 커밋(부모 2개 이상)을 포함할지 말지는 선택.
+      # 1) merge commit 제외(보통 원함): --no-merges
+      # 2) merge commit 포함: 옵션 제거
+      log_incoming="$(git log --pretty=format:'%s %b' --no-merges "$base..$mh" 2>/dev/null || true)"
+
+      incoming_text="${incoming_text}"$'\n'"${log_incoming}"
+    done < .git/MERGE_HEAD
+
+    jira_from_range="$(printf '%s\n' "$incoming_text" | extract_keys_from_text)"
+  fi
+
+  # 3) 합치고 유니크
+  jira_all="$(printf '%s\n%s\n' "$jira_from_msg" "$jira_from_range" \
+    | tr ' ' '\n' | awk 'NF' | sort -u | tr '\n' ' ')"
+
+  # 4) 커밋 메시지에 추가
+  append_jira_keys "$jira_all"
+fi
+
+# ===== Optional: squash/cherry-pick 대응 =====
+# SQUASH_MSG/CHERRY_PICK_HEAD도 처리하려면 아래 주석 해제
+# if [ -f .git/SQUASH_MSG ]; then
+#   keys="$(extract_keys_from_text < .git/SQUASH_MSG)"
+#   append_jira_keys "$keys"
+# fi
+# if [ -f .git/CHERRY_PICK_HEAD ]; then
+#   keys="$(git log --pretty=format:'%s %b' HEAD..CHERRY_PICK_HEAD 2>/dev/null | extract_keys_from_text)"
+#   append_jira_keys "$keys"
+# fi

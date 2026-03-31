@@ -1,0 +1,88 @@
+default_platform(:android)
+
+platform :android do
+  desc "Build dev"
+  lane :dev do
+    require "dotenv"
+
+    # Fastfile 위치(android/fastlane) 기준으로 고정
+    fastlane_dir  = __dir__
+    project_root  = File.expand_path("../..", fastlane_dir)
+
+    Dotenv.overload(File.expand_path(".env.dev", fastlane_dir))
+
+    firebase_token = ENV["FIREBASE_CLI_TOKEN"]
+    project_id     = ENV["FIREBASE_PROJECT_ID"]
+    if firebase_token.nil? || project_id.nil?
+      UI.user_error!("FIREBASE_CLI_TOKEN과 FIREBASE_PROJECT_ID가 필요합니다.")
+    end
+
+    Dir.chdir(project_root) do
+      sh("flutter build apk --flavor dev --debug")
+    end
+
+    apk_path = File.join(project_root, "build/app/outputs/flutter-apk/app-dev-debug.apk")
+    unless File.exist?(apk_path)
+      UI.user_error!("APK 파일을 찾을 수 없습니다: #{apk_path}")
+    end
+
+    release_notes = ENV["RELEASE_NOTES"] || "테스트"
+
+    firebase_app_distribution(
+      app: ENV["FIREBASE_APP_ID"],
+      groups: "zetto",
+      release_notes: release_notes,
+      apk_path: apk_path,
+      firebase_cli_token: firebase_token
+    )
+  end
+
+  desc "Build prod AAB and upload to Google Play (Internal track)"
+  lane :prod do
+    require "dotenv"
+
+    fastlane_dir  = __dir__
+    project_root  = File.expand_path("../..", fastlane_dir)
+
+    Dotenv.overload(File.expand_path(".env.prod", fastlane_dir))
+
+    package_name  = ENV["ANDROID_PACKAGE_NAME"]
+    json_key_path = ENV["SUPPLY_JSON_KEY"]
+    track         = ENV["PLAY_TRACK"] || "internal"
+    release_notes = ENV["RELEASE_NOTES"] || "자동 배포"
+
+    if package_name.nil? || json_key_path.nil?
+      UI.user_error!("ANDROID_PACKAGE_NAME과 SUPPLY_JSON_KEY가 필요합니다.")
+    end
+
+    Dir.chdir(project_root) do
+      sh("flutter clean")
+      sh("flutter pub get")
+      sh("flutter build appbundle --flavor prod --release")
+    end
+
+    aab_path = File.join(project_root, "build/app/outputs/bundle/prodRelease/app-prod-release.aab")
+    unless File.exist?(aab_path)
+      # 디버그용: 실제 생성된 aab 목록 확인
+      sh("find #{File.join(project_root, "build/app/outputs")} -name \"*.aab\" -print || true")
+      UI.user_error!("AAB 파일을 찾을 수 없습니다: #{aab_path}")
+    end
+
+    supply(
+      package_name: package_name,
+      json_key: File.expand_path(json_key_path, project_root), # 상대경로여도 루트 기준으로 안전
+      track: track,
+      aab: aab_path,
+      #release_notes: { "ko-KR" => release_notes },
+      skip_upload_changelogs: true, 
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true,
+
+      # internal이면 draft로 올려두고 콘솔에서 배포 제어 가능
+      release_status: "draft"
+    )
+
+    UI.success("✅ Uploaded AAB to Google Play (track: #{track})")
+  end
+end
