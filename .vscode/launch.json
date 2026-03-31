@@ -10,34 +10,50 @@
       "type": "dart"
     },
     {
-      "name": "example_app (preview)",
-      "cwd": "apps/example_app",
-      "program": "lib/preview_main.dart",
-      "request": "launch",
+      "name": "tandangi (dev)",
       "type": "dart",
+      "request": "launch",
+      "cwd": "apps/tandangi-app",
+      "program": "lib/main.dart",
+      "args": [
+        "--flavor",
+        "dev"
+      ]
+    },
+    {
+      "name": "tandangi (prod)",
+      "type": "dart",
+      "request": "launch",
+      "cwd": "apps/tandangi-app",
+      "program": "lib/main.dart",
+      "args": [
+        "--flavor",
+        "prod"
+      ]
+    },
+    {
+      "name": "tandangi (dev - profile)",
+      "type": "dart",
+      "request": "launch",
+      "cwd": "apps/tandangi-app",
+      "program": "lib/main.dart",
+      "flutterMode": "profile",
+      "args": [
+        "--flavor",
+        "dev"
+      ]
+    },
+    {
+      "name": "tandangi (prod - release)",
+      "type": "dart",
+      "request": "launch",
+      "cwd": "apps/tandangi-app",
+      "program": "lib/main.dart",
       "flutterMode": "release",
-      "args": ["--web-hostname", "0.0.0.0", "--web-port", "8080"]
-    },
-    {
-      "name": "example_app (flavor dev)",
-      "cwd": "apps/example_app",
-      "request": "launch",
-      "type": "dart",
-      "args": ["--flavor", "dev"]
-    },
-    {
-      "name": "example_app (profile mode)",
-      "cwd": "apps/example_app",
-      "request": "launch",
-      "type": "dart",
-      "flutterMode": "profile"
-    },
-    {
-      "name": "example_app (release mode)",
-      "cwd": "apps/example_app",
-      "request": "launch",
-      "type": "dart",
-      "flutterMode": "release"
+      "args": [
+        "--flavor",
+        "prod"
+      ]
     },
     {
       "name": "core_app",

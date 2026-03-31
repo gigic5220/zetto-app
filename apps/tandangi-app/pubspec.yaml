@@ -14,6 +14,8 @@ dependencies:
   flutter:
     sdk: flutter
 
+  core_app:
+  design_system:
   cupertino_icons: ^1.0.8
   flutter_flavorizr: ^2.4.2
   firebase_core: ^4.5.0
@@ -51,7 +53,7 @@ dependencies:
   flutter_gen_runner: ^5.13.0+1
   firebase_messaging: ^16.1.2
   app_links: ^7.0.0
-
+  chalkdart: ^3.0.5
 dev_dependencies:
   flutter_test:
     sdk: flutter

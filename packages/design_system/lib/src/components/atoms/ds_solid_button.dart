@@ -120,7 +120,6 @@ class _DSSolidButtonState extends State<DSSolidButton> {
   late Color backgroundColor;
   late Color textColor;
   late WrapperView wrapperView;
-  late BorderRadius borderRadius;
   late EdgeInsets padding;
   late double rowSpacing;
   late TextStyle textStyle;
@@ -173,7 +172,6 @@ class _DSSolidButtonState extends State<DSSolidButton> {
     switch (widget.size) {
       case .large:
         wrapperView = WrapperView.fix16;
-        borderRadius = .circular(context.componentRadius.large);
         padding = .symmetric(horizontal: context.componentPadding.xxLarge, vertical: context.componentPadding.xLarge);
         rowSpacing = context.componentGap.xSmall;
         textStyle = context.textTheme.buttonLSemiBold;
@@ -182,7 +180,6 @@ class _DSSolidButtonState extends State<DSSolidButton> {
         break;
       case .medium:
         wrapperView = WrapperView.fix12;
-        borderRadius = .circular(context.componentRadius.large);
         padding = .symmetric(horizontal: context.componentPadding.xLarge, vertical: context.componentPadding.xLarge);
         rowSpacing = context.componentGap.xxSmall;
         textStyle = context.textTheme.buttonMSemiBold;
@@ -191,7 +188,6 @@ class _DSSolidButtonState extends State<DSSolidButton> {
         break;
       case .small:
         wrapperView = WrapperView.fix12;
-        borderRadius = .circular(context.componentRadius.medium);
         padding = .symmetric(horizontal: context.componentPadding.large, vertical: context.componentPadding.large);
         rowSpacing = context.componentGap.xxSmall;
         textStyle = context.textTheme.buttonSSemiBold;
@@ -200,7 +196,6 @@ class _DSSolidButtonState extends State<DSSolidButton> {
         break;
       case .xSmall:
         wrapperView = WrapperView.fix10;
-        borderRadius = .circular(context.componentRadius.small);
         padding = .symmetric(horizontal: context.componentPadding.small, vertical: context.componentPadding.xSmall);
         rowSpacing = context.componentGap.xxxSmall;
         textStyle = context.textTheme.buttonSSemiBold;
@@ -237,7 +232,7 @@ class _DSSolidButtonState extends State<DSSolidButton> {
             }
           : null,
       child: Container(
-        decoration: BoxDecoration(borderRadius: borderRadius, color: backgroundColor),
+        decoration: BoxDecoration(borderRadius: .circular(999), color: backgroundColor),
         padding: padding,
         child: Stack(
           alignment: Alignment.center,

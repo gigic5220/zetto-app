@@ -12,7 +12,7 @@ class DSToast extends StatefulWidget {
   const DSToast({super.key, required this.text, this.wrapper, this.button, this.type = DSToastType.normal});
 
   final String text;
-  final DSWrapper? wrapper;
+  final Widget? wrapper;
   final DSSolidButton? button;
   final DSToastType type;
 
@@ -28,7 +28,7 @@ class _DSToastState extends State<DSToast> {
   late Color backgroundColor;
   late Color indicatorColor;
   late Color borderColor;
-  late DSWrapper? wrapper;
+  late Widget? wrapper;
 
   @override
   void didChangeDependencies() {

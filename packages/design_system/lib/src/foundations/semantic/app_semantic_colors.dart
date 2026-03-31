@@ -92,9 +92,9 @@ class AppSemanticColors extends ThemeExtension<AppSemanticColors> {
   final Color layerStrong;
 
   static const AppSemanticColors light = AppSemanticColors(
-    brandPrimary: AppColors.navy20,
-    brandSecondary: AppColors.navy100,
-    brandStrong: AppColors.navy10,
+    brandPrimary: AppColors.neutral15,
+    brandSecondary: AppColors.neutral90,
+    brandStrong: AppColors.neutral10,
     staticWhite: AppColors.neutral100,
     staticBlack: AppColors.neutral10,
     accentRed: AppColors.red50,
@@ -133,8 +133,8 @@ class AppSemanticColors extends ThemeExtension<AppSemanticColors> {
   );
 
   static const AppSemanticColors dark = AppSemanticColors(
-    brandPrimary: AppColors.navy40,
-    brandSecondary: AppColors.navy20,
+    brandPrimary: AppColors.neutral80,
+    brandSecondary: AppColors.neutral20,
     brandStrong: AppColors.navy100,
     staticWhite: AppColors.neutral100,
     staticBlack: AppColors.neutral10,

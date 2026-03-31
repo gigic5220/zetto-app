@@ -1,10 +1,9 @@
+import 'package:design_system/components/ions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tandangi/design_system/components/ions/ds_wrapper.dart';
 import 'package:tandangi/feature/splash/controller/splash_action_mixin.dart';
 import 'package:tandangi/gen/assets.gen.dart';
 
-//stateful widget
 class SplashPage extends ConsumerStatefulWidget {
   const SplashPage({super.key});
 

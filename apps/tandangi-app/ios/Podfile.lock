@@ -19,14 +19,14 @@ PODS:
   - Firebase/Messaging (12.9.0):
     - Firebase/CoreOnly
     - FirebaseMessaging (~> 12.9.0)
-  - firebase_auth (6.2.0):
+  - firebase_auth (6.3.0):
     - Firebase/Auth (= 12.9.0)
     - firebase_core
     - Flutter
-  - firebase_core (4.5.0):
+  - firebase_core (4.6.0):
     - Firebase/CoreOnly (= 12.9.0)
     - Flutter
-  - firebase_messaging (16.1.2):
+  - firebase_messaging (16.1.3):
     - Firebase/Messaging (= 12.9.0)
     - firebase_core
     - Flutter
@@ -127,6 +127,8 @@ PODS:
     - Flutter
   - PromisesObjC (2.4.0)
   - RecaptchaInterop (101.0.0)
+  - sensors_plus (0.0.1):
+    - Flutter
   - share_plus (0.0.1):
     - Flutter
   - shared_preferences_foundation (0.0.1):
@@ -156,6 +158,7 @@ DEPENDENCIES:
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - kakao_flutter_sdk_common (from `.symlinks/plugins/kakao_flutter_sdk_common/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
+  - sensors_plus (from `.symlinks/plugins/sensors_plus/ios`)
   - share_plus (from `.symlinks/plugins/share_plus/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - sign_in_with_apple (from `.symlinks/plugins/sign_in_with_apple/ios`)
@@ -208,6 +211,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/kakao_flutter_sdk_common/ios"
   package_info_plus:
     :path: ".symlinks/plugins/package_info_plus/ios"
+  sensors_plus:
+    :path: ".symlinks/plugins/sensors_plus/ios"
   share_plus:
     :path: ".symlinks/plugins/share_plus/ios"
   shared_preferences_foundation:
@@ -226,9 +231,9 @@ SPEC CHECKSUMS:
   AppAuth: 1c1a8afa7e12f2ec3a294d9882dfa5ab7d3cb063
   AppCheckCore: cc8fd0a3a230ddd401f326489c99990b013f0c4f
   Firebase: 065f2bb395062046623036d8e6dc857bc2521d56
-  firebase_auth: eeb19010b5aa7c83cc85f23b6c4f009ea28461f1
-  firebase_core: afac1aac13c931e0401c7e74ed1276112030efab
-  firebase_messaging: 7cb2727feb789751fc6936bcc8e08408970e2820
+  firebase_auth: 323c64eedef33fc3fdf438d16c29d2624b2ce4f4
+  firebase_core: 8e6f58412ca227827c366b92e7cee047a2148c60
+  firebase_messaging: c3aa897e0d40109cfb7927c40dc0dea799863f3b
   FirebaseAppCheckInterop: 4bade10286cc977e516f75d2d8312cbdfa534789
   FirebaseAuth: 3a39f6436c21ebfd7919b698228b4f89ff94c23b
   FirebaseAuthInterop: f8f6ff72dc24621906497fbe5cf3c42ee815e59c
@@ -252,6 +257,7 @@ SPEC CHECKSUMS:
   package_info_plus: af8e2ca6888548050f16fa2f1938db7b5a5df499
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   RecaptchaInterop: 11e0b637842dfb48308d242afc3f448062325aba
+  sensors_plus: 6a11ed0c2e1d0bd0b20b4029d3bad27d96e0c65b
   share_plus: 50da8cb520a8f0f65671c6c6a99b3617ed10a58a
   shared_preferences_foundation: 7036424c3d8ec98dfe75ff1667cb0cd531ec82bb
   sign_in_with_apple: c5dcc141574c8c54d5ac99dd2163c0c72ad22418

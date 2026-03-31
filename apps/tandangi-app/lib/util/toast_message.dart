@@ -1,12 +1,9 @@
 // lib/core/ui/app_messenger.dart
 import 'dart:async';
 
+import 'package:design_system/extenstion.dart';
 import 'package:flutter/material.dart' hide ButtonStyle;
-import 'package:tandangi/design_system/color/semantic/colors.dart';
-import 'package:tandangi/design_system/components/ions/ds_wrapper.dart';
-import 'package:tandangi/design_system/theme/theme_extensions.dart';
-import 'package:tandangi/design_system/typography/app_typography.dart';
-import 'package:tandangi/router/router.dart';
+//import 'package:tandangi/router/router.dart';
 import 'package:tandangi/util/extension/string_extension.dart';
 
 class ToastMessage {
@@ -32,8 +29,8 @@ class ToastMessage {
   }) {
     if (_entry != null) return;
 
-    final overlayState = rootNavigatorKey.currentState?.overlay;
-    if (overlayState == null) return;
+    //final overlayState = rootNavigatorKey.currentState?.overlay;
+    //if (overlayState == null) return;
 
     _entry = OverlayEntry(
       builder: (overlayContext) {
@@ -62,7 +59,7 @@ class ToastMessage {
       },
     );
 
-    overlayState.insert(_entry!);
+    //overlayState.insert(_entry!);
 
     _timer = Timer(duration, _remove);
   }
@@ -110,64 +107,65 @@ class _ToastCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Dismissible(
-      key: const ValueKey('top_toast'),
-      direction: DismissDirection.up,
-      onDismissed: (_) => onDismiss(),
-      child: Material(
-        elevation: 6,
-        color: SemanticColors.fillSecondary,
-        borderRadius: BorderRadius.circular(12),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          child: Row(
-            spacing: 12,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Row(
-                  spacing: 12,
-                  children: [
-                    if (svgPath.isExist)
-                      DSWrapper(uri: svgPath!, view: WrapperView.fix24),
-                    Flexible(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            title,
-                            style: AppTypography.bodyLMedium.withColor(
-                              SemanticColors.textPrimary,
-                            ),
-                          ),
-                          if (description.isExist) ...[
-                            const SizedBox(height: 2),
-                            Text(
-                              description!,
-                              style: AppTypography.bodySRegular.withColor(
-                                SemanticColors.textTertiary,
-                              ),
-                            ),
-                          ],
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              // if (buttonTitle.isExist && onPressedButton != null)
-              //   Button(
-              //     style: ButtonStyle.primary,
-              //     size: ButtonSize.small,
-              //     title: buttonTitle,
-              //     onPressed: onPressedButton,
-              //   ),
-            ],
-          ),
-        ),
-      ),
-    );
+    return Container();
+    // return Dismissible(
+    //   key: const ValueKey('top_toast'),
+    //   direction: DismissDirection.up,
+    //   onDismissed: (_) => onDismiss(),
+    //   child: Material(
+    //     elevation: 6,
+    //     color: context.componentColors.toastFill.base,
+    //     borderRadius: BorderRadius.circular(12),
+    //     child: Padding(
+    //       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+    //       child: Row(
+    //         spacing: 12,
+    //         mainAxisAlignment: MainAxisAlignment.start,
+    //         crossAxisAlignment: CrossAxisAlignment.center,
+    //         children: [
+    //           Expanded(
+    //             child: Row(
+    //               spacing: 12,
+    //               children: [
+    //                 if (svgPath.isExist)
+    //                   DSWrapper(uri: svgPath!, view: WrapperView.fix24),
+    //                 Flexible(
+    //                   child: Column(
+    //                     mainAxisSize: MainAxisSize.min,
+    //                     crossAxisAlignment: CrossAxisAlignment.start,
+    //                     children: [
+    //                       Text(
+    //                         title,
+    //                         style: AppTypography.bodyLMedium.withColor(
+    //                           SemanticColors.textPrimary,
+    //                         ),
+    //                       ),
+    //                       if (description.isExist) ...[
+    //                         const SizedBox(height: 2),
+    //                         Text(
+    //                           description!,
+    //                           style: AppTypography.bodySRegular.withColor(
+    //                             SemanticColors.textTertiary,
+    //                           ),
+    //                         ),
+    //                       ],
+    //                     ],
+    //                   ),
+    //                 ),
+    //               ],
+    //             ),
+    //           ),
+    //           // if (buttonTitle.isExist && onPressedButton != null)
+    //           //   Button(
+    //           //     style: ButtonStyle.primary,
+    //           //     size: ButtonSize.small,
+    //           //     title: buttonTitle,
+    //           //     onPressed: onPressedButton,
+    //           //   ),
+    //         ],
+    //       ),
+    //     ),
+    //   ),
+    // );
   }
 }

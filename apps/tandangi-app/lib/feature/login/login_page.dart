@@ -1,14 +1,11 @@
 import 'dart:io';
 
+import 'package:design_system/components/common.dart';
+import 'package:design_system/components/ions.dart';
+import 'package:design_system/extenstion.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tandangi/design_system/color/semantic/colors.dart';
-import 'package:tandangi/design_system/components/atoms/animated_button.dart';
-import 'package:tandangi/design_system/components/ions/ds_wrapper.dart';
-import 'package:tandangi/design_system/components/molecule/ds_app_bar.dart';
-import 'package:tandangi/design_system/theme/theme_extensions.dart';
-import 'package:tandangi/design_system/typography/app_typography.dart';
 import 'package:tandangi/feature/components/common_bottom_padding.dart';
 import 'package:tandangi/feature/login/controller/login_provider.dart';
 import 'package:tandangi/gen/assets.gen.dart';
@@ -50,18 +47,6 @@ class _LoginPageState extends ConsumerState<LoginPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: DSAppBar.title(
-        text: '로그인',
-        actionWidgets: [
-          IconButton(
-            onPressed: () {},
-            icon: DSWrapper(
-              uri: Assets.svgs.circleQuestionMarkBubble,
-              view: WrapperView.fix24,
-            ),
-          ),
-        ],
-      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
@@ -96,7 +81,7 @@ class _LoginPageState extends ConsumerState<LoginPage>
               child: Container(
                 decoration: BoxDecoration(
                   color: Color(0xFFFFE600),
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(999),
                 ),
                 padding: const EdgeInsets.symmetric(vertical: 13),
                 child: Row(
@@ -109,8 +94,8 @@ class _LoginPageState extends ConsumerState<LoginPage>
                     ),
                     Text(
                       '카카오로 계속하기',
-                      style: AppTypography.buttonM.copyWith(
-                        color: SemanticColors.textPrimary,
+                      style: context.textTheme.buttonLSemiBold.copyWith(
+                        color: context.semanticColors.textPrimary,
                       ),
                     ),
                   ],
@@ -119,11 +104,44 @@ class _LoginPageState extends ConsumerState<LoginPage>
               onTap: () async => await onPressedKakaoLoginButton(ref),
             ),
             const SizedBox(height: 8),
+            if (Platform.isIOS) ...[
+              AnimatedButton(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(999),
+                    border: Border.all(
+                      color: context.semanticColors.borderInverse,
+                    ),
+                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 13),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    spacing: 8,
+                    children: [
+                      DSWrapper(
+                        uri: Assets.svgs.logoApple,
+                        view: WrapperView.fix20,
+                      ),
+                      Text(
+                        'Apple로 계속하기',
+                        style: context.textTheme.buttonLSemiBold.copyWith(
+                          color: context.semanticColors.textPrimary,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                onTap: () async => await onPressedAppleLoginButton(ref),
+              ),
+              const SizedBox(height: 8),
+            ],
             AnimatedButton(
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: SemanticColors.borderSubtle),
+                  borderRadius: BorderRadius.circular(999),
+                  border: Border.all(
+                    color: context.semanticColors.borderSubtle,
+                  ),
                 ),
                 padding: const EdgeInsets.symmetric(vertical: 13),
                 child: Row(
@@ -136,8 +154,8 @@ class _LoginPageState extends ConsumerState<LoginPage>
                     ),
                     Text(
                       '구글로 계속하기',
-                      style: AppTypography.buttonM.copyWith(
-                        color: SemanticColors.textPrimary,
+                      style: context.textTheme.buttonLSemiBold.copyWith(
+                        color: context.semanticColors.textPrimary,
                       ),
                     ),
                   ],
@@ -145,58 +163,30 @@ class _LoginPageState extends ConsumerState<LoginPage>
               ),
               onTap: () async => await onPressedGoogleLoginButton(ref),
             ),
-            if (Platform.isIOS) ...[
-              const SizedBox(height: 8),
-              AnimatedButton(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: SemanticColors.borderSubtle),
-                  ),
-                  padding: const EdgeInsets.symmetric(vertical: 13),
-                  child: Row(
-                    spacing: 8,
-                    children: [
-                      DSWrapper(
-                        uri: Assets.svgs.logoGoogle,
-                        view: WrapperView.fix20,
-                      ),
-                      Text(
-                        '애플로 계속하기',
-                        style: AppTypography.buttonM.copyWith(
-                          color: SemanticColors.textPrimary,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                onTap: () async => await onPressedAppleLoginButton(ref),
-              ),
-            ],
             const SizedBox(height: 8),
             Text.rich(
               TextSpan(
-                style: AppTypography.labelS.withColor(
-                  SemanticColors.textTertiary,
+                style: context.textTheme.labelSMedium.copyWith(
+                  color: context.semanticColors.textTertiary,
                 ),
                 children: [
                   const TextSpan(text: '로그인함으로써 '),
                   TextSpan(
-                    text: 'Tandangi 이용약관',
-                    style: AppTypography.labelS.copyWith(
-                      color: SemanticColors.textTertiary,
+                    text: 'zetto.labs 이용약관 및',
+                    style: context.textTheme.labelSMedium.copyWith(
+                      color: context.semanticColors.textTertiary,
                       decoration: TextDecoration.underline,
-                      decorationColor: SemanticColors.textTertiary,
+                      decorationColor: context.semanticColors.textTertiary,
                     ),
                     recognizer: termsOfServiceRecognizer,
                   ),
                   const TextSpan(text: ' 및\n'),
                   TextSpan(
                     text: '개인정보처리방침',
-                    style: AppTypography.labelS.copyWith(
-                      color: SemanticColors.textTertiary,
+                    style: context.textTheme.labelSMedium.copyWith(
+                      color: context.semanticColors.textTertiary,
                       decoration: TextDecoration.underline,
-                      decorationColor: SemanticColors.textTertiary,
+                      decorationColor: context.semanticColors.textTertiary,
                     ),
                     recognizer: privacyPolicyRecognizer,
                   ),

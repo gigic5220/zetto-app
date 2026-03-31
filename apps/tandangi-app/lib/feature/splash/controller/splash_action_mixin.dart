@@ -11,12 +11,9 @@ import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:tandangi/core/di/di.dart';
-import 'package:tandangi/design_system/components/atoms/ds_solid_button.dart';
-import 'package:tandangi/design_system/components/molecule/ds_call_to_action.dart';
 import 'package:tandangi/domain/entity/app_version_entity.dart';
 import 'package:tandangi/domain/repository/app_version_repository.dart';
 import 'package:tandangi/domain/repository/user_repository.dart';
-import 'package:tandangi/feature/components/pop_up_widget.dart';
 import 'package:tandangi/feature/controller/common_provider.dart';
 import 'package:tandangi/feature/login/login_page.dart';
 import 'package:tandangi/feature/on_boarding/on_boarding_page.dart';
@@ -111,25 +108,26 @@ mixin SplashActionMixin {
             context: ref.context,
             barrierDismissible: false,
             builder: (context) {
-              return PopScope(
-                child: ConfirmModalWidget(
-                  title: '업데이트가 필요합니다',
-                  description: '앱 설치 페이지로 이동합니다',
-                  callToActionWidget: DSCallToAction.horizontal(
-                    buttons: [
-                      DSSolidButton.large(
-                        variant: DSSolidButtonVariant.primary,
-                        text: '확인',
-                        onTap: () {
-                          context.pop();
-                          _launchStoreDetailPage();
-                          appClose();
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              );
+              return Container();
+              // return PopScope(
+              //   child: DSmo(
+              //     title: '업데이트가 필요합니다',
+              //     description: '앱 설치 페이지로 이동합니다',
+              //     callToActionWidget: DSCallToAction.horizontal(
+              //       buttons: [
+              //         DSSolidButton.large(
+              //           variant: DSSolidButtonVariant.primary,
+              //           text: '확인',
+              //           onTap: () {
+              //             context.pop();
+              //             _launchStoreDetailPage();
+              //             appClose();
+              //           },
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // );
             },
           ) ??
           false;

@@ -1,5 +1,5 @@
+import 'package:design_system/components/molecules.dart';
 import 'package:flutter/material.dart';
-import 'package:tandangi/design_system/components/molecule/ds_app_bar.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewPage extends StatelessWidget {

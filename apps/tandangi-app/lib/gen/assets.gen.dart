@@ -102,6 +102,9 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/ic_x.svg
   String get icX => 'assets/svgs/ic_x.svg';
 
+  /// File path: assets/svgs/logo_apple.svg
+  String get logoApple => 'assets/svgs/logo_apple.svg';
+
   /// File path: assets/svgs/logo_google.svg
   String get logoGoogle => 'assets/svgs/logo_google.svg';
 
@@ -128,6 +131,7 @@ class $AssetsSvgsGen {
     icMinus,
     icReadingGlass,
     icX,
+    logoApple,
     logoGoogle,
     logoKakao,
     setting,

@@ -1,15 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:core_app/components/async_widget.dart';
+import 'package:design_system/components/atoms.dart';
+import 'package:design_system/components/ions.dart';
+import 'package:design_system/components/molecules.dart';
+import 'package:design_system/extenstion.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:tandangi/design_system/color/semantic/colors.dart';
-import 'package:tandangi/design_system/components/atoms/ds_solid_button.dart';
-import 'package:tandangi/design_system/components/ions/ds_wrapper.dart';
-import 'package:tandangi/design_system/components/molecule/ds_app_bar.dart';
-import 'package:tandangi/design_system/components/molecule/ds_call_to_action.dart';
-import 'package:tandangi/design_system/typography/app_typography.dart';
-import 'package:tandangi/feature/components/async_widget.dart';
 import 'package:tandangi/feature/components/common_bottom_padding.dart';
 import 'package:tandangi/feature/on_boarding/controller/on_boarding_provider.dart';
 import 'package:tandangi/gen/assets.gen.dart';
@@ -33,52 +31,27 @@ class _OnBoardingPageState extends ConsumerState<OnBoardingPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: DSAppBar.page(
-        actionWidgets: [
-          IconButton(
-            onPressed: () async {
-              await FirebaseAuth.instance.signOut();
-              await GoogleSignIn.instance.signOut();
-            },
-            icon: Text('로그아웃'),
-          ),
-        ],
-      ),
+      appBar: DSAppBar.page(text: '', showBackButton: true),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
             const SizedBox(height: 20),
-            Consumer(
-              builder: (context, ref, _) {
-                final currentStep = watchCurrentOnBoardingStep(ref);
-                return Row(
-                  spacing: 12,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: OnBoardingStep.values.map((step) {
-                    final isActive = step == currentStep;
-                    return Container(
-                      width: isActive ? 16 : 6,
-                      height: 6,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(3),
-                        color: isActive
-                            ? SemanticColors.fillPrimary
-                            : SemanticColors.fillSecondary,
-                      ),
-                    );
-                  }).toList(),
-                );
-              },
+            DSHighLight.small(
+              leadingWidget: Consumer(
+                builder: (context, ref, child) {
+                  final currentStep = watchCurrentOnBoardingStep(ref);
+                  return DSProgressBar(
+                    type: DSProgressBarType.fixed,
+                    totalCount: OnBoardingStep.values.length,
+                    currentCount:
+                        OnBoardingStep.values.indexOf(currentStep) + 1,
+                  );
+                },
+              ),
+              title: '탄단지에서 함께 할\n친구를 골라주세요',
+              description: '오늘 음식에 따라 친구의 상태가 달라질거에요!',
             ),
-            const SizedBox(height: 28),
-            Text('탄단지에서 함께 할\n친구를 골라주세요', style: AppTypography.titleS),
-            const SizedBox(height: 4),
-            Text(
-              '오늘 음식에 따라 친구의 상태가 달라질거에요!',
-              style: AppTypography.bodyLRegular,
-            ),
-            const SizedBox(height: 28),
             Expanded(child: _buildCurrentStepWidget()),
             const Spacer(),
             Consumer(
@@ -167,12 +140,10 @@ class _OnBoardingPageState extends ConsumerState<OnBoardingPage>
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 24),
-                              Text(character.name, style: AppTypography.titleS),
-                              const SizedBox(height: 4),
-                              Text(
-                                character.description,
-                                style: AppTypography.bodyLRegular,
+                              DSNotice.normal(
+                                size: DSNoticeSize.small,
+                                title: character.name,
+                                description: character.description,
                               ),
                             ],
                           );
@@ -182,24 +153,12 @@ class _OnBoardingPageState extends ConsumerState<OnBoardingPage>
                     Positioned(
                       top: 70,
                       left: 20,
-                      child: GestureDetector(
+                      child: DSIconSolidButton.small(
+                        variant: DSIconSolidButtonVariant.secondary,
+                        iconUri: Assets.svgs.chevronLeft,
                         onTap: () {
                           carouselSliderController.previousPage();
                         },
-                        child: Container(
-                          width: 38,
-                          height: 38,
-                          decoration: BoxDecoration(
-                            color: SemanticColors.fillSecondary,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          padding: const EdgeInsets.all(11),
-                          child: DSWrapper(
-                            uri: Assets.svgs.chevronLeft,
-                            view: WrapperView.fix16,
-                            svgColor: SemanticColors.textPrimary,
-                          ),
-                        ),
                       ),
                     ),
                     Positioned(
@@ -209,19 +168,12 @@ class _OnBoardingPageState extends ConsumerState<OnBoardingPage>
                         onTap: () {
                           carouselSliderController.nextPage();
                         },
-                        child: Container(
-                          width: 38,
-                          height: 38,
-                          decoration: BoxDecoration(
-                            color: SemanticColors.fillSecondary,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          padding: const EdgeInsets.all(11),
-                          child: DSWrapper(
-                            uri: Assets.svgs.chevronRight,
-                            view: WrapperView.fix16,
-                            svgColor: SemanticColors.textPrimary,
-                          ),
+                        child: DSIconSolidButton.small(
+                          variant: DSIconSolidButtonVariant.secondary,
+                          iconUri: Assets.svgs.chevronRight,
+                          onTap: () {
+                            carouselSliderController.nextPage();
+                          },
                         ),
                       ),
                     ),
