@@ -5,6 +5,7 @@ import '../../log/log.dart';
 import '../dev_tools.dart';
 import 'api/api_log_page.dart';
 import 'performance/performance_monitor_page.dart';
+import 'storage/storage_manage_page.dart';
 
 class DevToolsPage extends StatefulWidget {
   const DevToolsPage({super.key, required this.devTools});
@@ -50,6 +51,13 @@ class _DevToolsPageState extends State<DevToolsPage> {
                 context,
                 MaterialPageRoute(builder: (context) => PerformanceMonitorPage(devTools: widget.devTools)),
               );
+            },
+          ),
+          ListTile(
+            title: const Text('Go to Storage Manager'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => StorageManagePage()));
             },
           ),
           ListenableBuilder(

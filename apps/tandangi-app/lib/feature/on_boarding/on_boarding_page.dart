@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:core_app/components/async_widget.dart';
 import 'package:design_system/components/atoms.dart';
+import 'package:design_system/components/common.dart';
 import 'package:design_system/components/ions.dart';
 import 'package:design_system/components/molecules.dart';
 import 'package:design_system/extenstion.dart';
@@ -8,7 +9,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:tandangi/feature/components/common_bottom_padding.dart';
 import 'package:tandangi/feature/on_boarding/controller/on_boarding_provider.dart';
 import 'package:tandangi/gen/assets.gen.dart';
 

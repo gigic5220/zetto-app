@@ -48,7 +48,7 @@ class AsyncWidget<T> extends StatelessWidget {
           return Skeletonizer(enabled: true, child: builder(skeletonMockItems as T));
         }
 
-        return SizedBox.shrink();
+        return Center(child: CircularProgressIndicator());
       },
       skipLoadingOnRefresh: true,
     );

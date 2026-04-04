@@ -7,25 +7,49 @@ import '../../foundations/component/colors/generated_component_colors.dart';
 enum DSHighLightSize { large, medium, small, xSmall }
 
 class DSHighLight extends StatefulWidget {
-  const DSHighLight._({required this.size, required this.title, this.subTitle, this.description, this.wrapper});
+  const DSHighLight._({required this.size, required this.title, this.subTitle, this.description, this.leadingWidget});
 
-  factory DSHighLight.large({required String title, String? subTitle, String? description, DSWrapper? wrapper}) =>
-      DSHighLight._(size: .large, title: title, subTitle: subTitle, description: description, wrapper: wrapper);
+  factory DSHighLight.large({required String title, String? subTitle, String? description, Widget? leadingWidget}) =>
+      DSHighLight._(
+        size: .large,
+        title: title,
+        subTitle: subTitle,
+        description: description,
+        leadingWidget: leadingWidget,
+      );
 
-  factory DSHighLight.medium({required String title, String? subTitle, String? description, DSWrapper? wrapper}) =>
-      DSHighLight._(size: .medium, title: title, subTitle: subTitle, description: description, wrapper: wrapper);
+  factory DSHighLight.medium({required String title, String? subTitle, String? description, Widget? leadingWidget}) =>
+      DSHighLight._(
+        size: .medium,
+        title: title,
+        subTitle: subTitle,
+        description: description,
+        leadingWidget: leadingWidget,
+      );
 
-  factory DSHighLight.small({required String title, String? subTitle, String? description, DSWrapper? wrapper}) =>
-      DSHighLight._(size: .small, title: title, subTitle: subTitle, description: description, wrapper: wrapper);
+  factory DSHighLight.small({required String title, String? subTitle, String? description, Widget? leadingWidget}) =>
+      DSHighLight._(
+        size: .small,
+        title: title,
+        subTitle: subTitle,
+        description: description,
+        leadingWidget: leadingWidget,
+      );
 
-  factory DSHighLight.xSmall({required String title, String? subTitle, String? description, DSWrapper? wrapper}) =>
-      DSHighLight._(size: .xSmall, title: title, subTitle: subTitle, description: description, wrapper: wrapper);
+  factory DSHighLight.xSmall({required String title, String? subTitle, String? description, Widget? leadingWidget}) =>
+      DSHighLight._(
+        size: .xSmall,
+        title: title,
+        subTitle: subTitle,
+        description: description,
+        leadingWidget: leadingWidget,
+      );
 
   final DSHighLightSize size;
   final String title;
   final String? subTitle;
   final String? description;
-  final DSWrapper? wrapper;
+  final Widget? leadingWidget;
 
   @override
   State<DSHighLight> createState() => _DSHighLightState();
@@ -101,7 +125,7 @@ class _DSHighLightState extends State<DSHighLight> {
         child: Column(
           spacing: gap,
           children: [
-            ?widget.wrapper,
+            ?widget.leadingWidget,
             Column(
               spacing: context.componentGap.xxSmall,
               children: [

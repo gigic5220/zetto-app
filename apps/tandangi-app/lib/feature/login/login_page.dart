@@ -6,7 +6,6 @@ import 'package:design_system/extenstion.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tandangi/feature/components/common_bottom_padding.dart';
 import 'package:tandangi/feature/login/controller/login_provider.dart';
 import 'package:tandangi/gen/assets.gen.dart';
 

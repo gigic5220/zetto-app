@@ -198,48 +198,51 @@ class _ResponseView<T> extends StatelessWidget {
     final prettyJson = encoder.convert(responseValue.data);
 
     return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 64),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                const Text('Response Time: ', style: TextStyle(fontWeight: FontWeight.bold)),
-                Text(responseTime.toString()),
-              ],
-            ),
-            Row(
-              children: [
-                const Text('Bytes received: ', style: TextStyle(fontWeight: FontWeight.bold)),
-                Text('${responseValue.data.toString().length.toString()} bytes'),
-              ],
-            ),
-            Row(
-              children: [
-                const Text('Content Type: ', style: TextStyle(fontWeight: FontWeight.bold)),
-                Text(responseValue.headers.map['content-type']?.first ?? 'Unknown'),
-              ],
-            ),
-            Row(
-              children: [
-                const Text('Status Code: ', style: TextStyle(fontWeight: FontWeight.bold)),
-                Text(responseValue.statusCode.toString()),
-              ],
-            ),
-            const Text('Headers:', style: TextStyle(fontWeight: FontWeight.bold)),
-            for (final key in headers.keys)
+      child: SelectableRegion(
+        selectionControls: MaterialTextSelectionControls(),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 16, 16, 64),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Icon(Icons.arrow_right, size: 22),
-                  Text('$key: ', style: const TextStyle(fontWeight: FontWeight.bold)),
-                  Flexible(child: SelectableText(headers[key]!.first)),
+                  const Text('Response Time: ', style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text(responseTime.toString()),
                 ],
               ),
-            const Text('Body: ', style: TextStyle(fontWeight: FontWeight.bold)),
-            for (final a in prettyJson.split('\n')) Text(a),
-          ],
+              Row(
+                children: [
+                  const Text('Bytes received: ', style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text('${responseValue.data.toString().length.toString()} bytes'),
+                ],
+              ),
+              Row(
+                children: [
+                  const Text('Content Type: ', style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text(responseValue.headers.map['content-type']?.first ?? 'Unknown'),
+                ],
+              ),
+              Row(
+                children: [
+                  const Text('Status Code: ', style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text(responseValue.statusCode.toString()),
+                ],
+              ),
+              const Text('Headers:', style: TextStyle(fontWeight: FontWeight.bold)),
+              for (final key in headers.keys)
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Icon(Icons.arrow_right, size: 22),
+                    Text('$key: ', style: const TextStyle(fontWeight: FontWeight.bold)),
+                    Flexible(child: SelectableText(headers[key]!.first)),
+                  ],
+                ),
+              const Text('Body: ', style: TextStyle(fontWeight: FontWeight.bold)),
+              for (final a in prettyJson.split('\n')) Text(a),
+            ],
+          ),
         ),
       ),
     );

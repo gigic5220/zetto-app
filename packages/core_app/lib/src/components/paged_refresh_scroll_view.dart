@@ -137,6 +137,7 @@ class _PagedRefreshScrollViewState extends State<PagedRefreshScrollView> {
   Widget _buildScrollWidget() {
     return CustomScrollView(
       controller: _scrollController,
+      physics: const AlwaysScrollableScrollPhysics(),
       slivers: [
         if (widget.grid != null) SliverPadding(padding: widget.padding ?? EdgeInsets.zero, sliver: widget.grid!),
         if (widget.list != null) SliverPadding(padding: widget.padding ?? EdgeInsets.zero, sliver: widget.list!),

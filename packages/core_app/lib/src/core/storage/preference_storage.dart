@@ -72,4 +72,8 @@ class PreferenceStorage {
   Future<bool> contains(String key) {
     return _storage.containsKey(key: key, iOptions: _getIOSOptions(), aOptions: _getAndroidOptions());
   }
+
+  Future<Map<String, String>> readAll() {
+    return _storage.readAll(iOptions: _getIOSOptions(), aOptions: _getAndroidOptions());
+  }
 }

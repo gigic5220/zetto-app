@@ -19,6 +19,7 @@ dependencies:
   ### Native Dependencies ###
   flutter_secure_storage: ^10.0.0
   sensors_plus: ^7.0.0
+  device_info_plus: ^12.4.0
 
   ### UI Dependencies ###
   design_system:
@@ -32,7 +33,12 @@ dependencies:
 
   ### Utility Dependencies ###
   intl: ^0.20.2
-  inspector: ^3.1.0
+  inspector: ^4.0.0
+  smooth_sheets: ^0.17.0
+  package_info_plus: ^9.0.1
+  version: ^3.0.2
+  device_marketing_names: ^1.1.7
+  uuid: ^4.5.3
 
 dev_dependencies:
   flutter_test:
