@@ -18,12 +18,6 @@ platform :ios do
 
   desc "Build dev (AdHoc) and upload to Firebase App Distribution"
   lane :dev do
-    firebase_token = ENV['FIREBASE_CLI_TOKEN']
-    project_id = ENV['FIREBASE_PROJECT_ID']
-
-    if firebase_token.nil? || project_id.nil?
-      UI.user_error!("FIREBASE_CLI_TOKEN과 FIREBASE_PROJECT_ID가 필요합니다.")
-    end
 
     build_number = read_build_number_from_pubspec
 

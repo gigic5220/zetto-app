@@ -1,4 +1,4 @@
-git_url("https://github.com/gigic5220/tandangi-app-ios-match")
+git_url("https://github.com/gigic5220/tandangi-app-ios-match-profile")
 storage_mode("git")
 
 username("zetto.labs@gmail.com")

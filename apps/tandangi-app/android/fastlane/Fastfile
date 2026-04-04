@@ -11,12 +11,6 @@ platform :android do
 
     Dotenv.overload(File.expand_path(".env.dev", fastlane_dir))
 
-    firebase_token = ENV["FIREBASE_CLI_TOKEN"]
-    project_id     = ENV["FIREBASE_PROJECT_ID"]
-    if firebase_token.nil? || project_id.nil?
-      UI.user_error!("FIREBASE_CLI_TOKEN과 FIREBASE_PROJECT_ID가 필요합니다.")
-    end
-
     Dir.chdir(project_root) do
       sh("flutter build apk --flavor dev --debug")
     end
@@ -29,11 +23,12 @@ platform :android do
     release_notes = ENV["RELEASE_NOTES"] || "테스트"
 
     firebase_app_distribution(
-      app: ENV["FIREBASE_APP_ID"],
+      app: ENV["FIREBASE_DEV_APP_ID"],
       groups: "zetto",
       release_notes: release_notes,
       apk_path: apk_path,
-      firebase_cli_token: firebase_token
+      service_credentials_file: ENV["FIREBASE_SERVICE_CREDENTIALS"],
+      debug: true
     )
   end
 

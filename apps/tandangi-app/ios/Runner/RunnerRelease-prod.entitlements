@@ -10,8 +10,8 @@
 	</array>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:dynamic-link.zetto.kr</string>
-		<string>applinks:dynamic-link.dev.zetto.kr</string>
+		<string>applinks:dl.zetto.kr</string>
+		<string>applinks:dl.dev.zetto.kr</string>
 	</array>
 </dict>
 </plist>

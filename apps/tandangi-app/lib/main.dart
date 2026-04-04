@@ -1,5 +1,6 @@
 import 'dart:async';
-
+import 'package:package_info_plus/package_info_plus.dart';
+import 'dart:developer' as developer;
 import 'package:chalkdart/chalk.dart';
 import 'package:core_app/core/log/log.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -13,6 +14,11 @@ import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:tandangi/app.dart';
 import 'package:tandangi/core/di/di.dart';
 import 'package:tandangi/flavors.dart';
+
+Future<void> printBundleId() async {
+  final info = await PackageInfo.fromPlatform();
+  developer.log('bundleId: ${info.packageName}');
+}
 
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -59,10 +65,12 @@ Future<void> main() async {
       );
 
       // For apple platforms, make sure the APNS token is available before making any FCM plugin API calls
-      final apnsToken = await messaging.getAPNSToken();
-      if (apnsToken != null) {
-        //talker.info('APNS token: $apnsToken');
-      }
+      // final apnsToken = await messaging.getAPNSToken();
+      // print('APNS token: $apnsToken');
+      // if (apnsToken != null) {
+      //   print('APNS token: $apnsToken');
+      //   //talker.info('APNS token: $apnsToken');
+      // }
       messaging.onTokenRefresh
           .listen((fcmToken) {
             // TODO: If necessary send token to application server.
@@ -85,18 +93,18 @@ Future<void> main() async {
         }
       });
 
-      final fcmToken = await messaging.getToken();
+      //final fcmToken = await messaging.getToken();
       //talker.info('FCM token: $fcmToken');
       // release + 기기: 터미널에 안 보이면 별도 터미널에서 `flutter logs` 실행
       // ignore: avoid_print
-      print('[FCM] token=$fcmToken');
+      //print('[FCM] token=$fcmToken');
       FirebaseMessaging.onBackgroundMessage(
         _firebaseMessagingBackgroundHandler,
       );
       await SystemChrome.setPreferredOrientations([
         DeviceOrientation.portraitUp,
       ]);
-
+      printBundleId();
       runApp(
         ProviderScope(child: const App(), retry: (retryCount, error) => null),
       );

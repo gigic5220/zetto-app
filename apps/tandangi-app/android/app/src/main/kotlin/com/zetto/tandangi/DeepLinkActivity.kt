@@ -1,4 +1,4 @@
-package com.closerai.yoonseul
+package com.zetto.tandangi
 
 import android.app.Activity
 import android.content.Intent
