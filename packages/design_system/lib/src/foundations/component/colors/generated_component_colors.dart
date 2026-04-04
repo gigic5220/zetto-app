@@ -659,3 +659,47 @@ class BannerFillColors {
   final Color brand;
   final Color warning;
 }
+
+@immutable
+class BookMarkFillColors {
+  const BookMarkFillColors({required this.base, required this.activated, required this.disabled});
+
+  final Color base;
+  final Color activated;
+  final Color disabled;
+}
+
+@immutable
+class BookMarkTextColors {
+  const BookMarkTextColors({required this.base, required this.activated, required this.disabled});
+
+  final Color base;
+  final Color activated;
+  final Color disabled;
+}
+
+@immutable
+class LikeFillColors {
+  const LikeFillColors({required this.base, required this.activated, required this.disabled});
+
+  final Color base;
+  final Color activated;
+  final Color disabled;
+}
+
+@immutable
+class LikeTextColors {
+  const LikeTextColors({required this.base, required this.activated, required this.disabled});
+
+  final Color base;
+  final Color activated;
+  final Color disabled;
+}
+
+@immutable
+class DropDownFillColors {
+  const DropDownFillColors({required this.base, required this.disabled});
+
+  final Color base;
+  final Color disabled;
+}

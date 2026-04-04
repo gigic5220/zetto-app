@@ -93,8 +93,8 @@ Future<void> main() async {
         }
       });
 
-      //final fcmToken = await messaging.getToken();
-      //talker.info('FCM token: $fcmToken');
+      final fcmToken = await messaging.getToken();
+      talker.info('FCM token: $fcmToken');
       // release + 기기: 터미널에 안 보이면 별도 터미널에서 `flutter logs` 실행
       // ignore: avoid_print
       //print('[FCM] token=$fcmToken');

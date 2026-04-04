@@ -44,7 +44,7 @@ class DSTextArea extends StatefulWidget {
   final TextAlign textAlign;
   final void Function({required String text})? onSubmitCallback;
   final void Function({required String text})? onChangeCallback;
-  final String? Function({String? text})? validator;
+  final String? Function(String? text)? validator;
 
   @override
   State<DSTextArea> createState() => _DSTextAreaState();
@@ -182,7 +182,7 @@ class _DSTextAreaState extends State<DSTextArea> {
   String? validator(String? text) {
     if (widget.validator == null) return null;
 
-    errorText = widget.validator?.call(text: text);
+    errorText = widget.validator?.call(text);
 
     if (errorText != null) {
       setState(() {

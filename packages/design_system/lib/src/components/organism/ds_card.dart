@@ -61,7 +61,7 @@ class _DSCardState extends State<DSCard> {
       padding: padding,
       decoration: BoxDecoration(
         color: backgroundColor,
-        border: Border.all(color: borderColor),
+        border: Border.all(color: borderColor, strokeAlign: BorderSide.strokeAlignOutside),
         borderRadius: BorderRadius.circular(borderRadius),
       ),
       child: widget.child,

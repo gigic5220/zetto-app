@@ -1,135 +1,133 @@
 import 'package:flutter/material.dart';
 
 import '../../../components/atoms.dart';
-import '../../../components/ions.dart';
 import '../../extension/context_extension.dart';
 import '../../foundations/component/colors/generated_component_colors.dart';
 
-enum DSListActionSize { large, medium, small }
+enum DSListControlSize { large, medium, small }
 
-enum DSListActionVariant { normal, warning }
-
-class DSListAction extends StatefulWidget {
-  const DSListAction._({
+class DSListControl extends StatefulWidget {
+  const DSListControl._({
     required this.size,
-    required this.variant,
     required this.title,
-    this.onTap,
-    this.leadingWidget,
+    required this.toggleValue,
+    required this.onChanged,
     this.subTitle,
     this.titleBadge,
     this.description,
+    this.leadingWidget,
     this.trailingText,
-    this.trailingUri,
-    this.overrideTrailingWidget,
+    this.trailingWidget,
+    this.onTapTrailing,
     this.isShowPushBadge = false,
   });
 
-  factory DSListAction.large({
+  factory DSListControl.large({
     required String title,
-    required DSListActionVariant variant,
-    VoidCallback? onTap,
+    required bool toggleValue,
+    required Function(bool value) onChanged,
+    VoidCallback? onTapTrailing,
     Widget? leadingWidget,
     String? subTitle,
     Widget? titleBadge,
     String? description,
     String? trailingText,
-    String? trailingUri,
-    Widget? overrideTrailingWidget,
+    Widget? trailingWidget,
     bool isShowPushBadge = false,
-  }) => DSListAction._(
+  }) => DSListControl._(
     size: .large,
-    variant: variant,
-    onTap: onTap,
     title: title,
+    toggleValue: toggleValue,
+    onChanged: onChanged,
     titleBadge: titleBadge,
     subTitle: subTitle,
     description: description,
+    onTapTrailing: onTapTrailing,
     leadingWidget: leadingWidget,
-    trailingUri: trailingUri,
-    overrideTrailingWidget: overrideTrailingWidget,
+    trailingWidget: trailingWidget,
     trailingText: trailingText,
     isShowPushBadge: isShowPushBadge,
   );
 
-  factory DSListAction.medium({
+  factory DSListControl.medium({
     required String title,
-    required DSListActionVariant variant,
-    VoidCallback? onTap,
+    required bool toggleValue,
+    required Function(bool value) onChanged,
+    VoidCallback? onTapTrailing,
     Widget? leadingWidget,
     String? subTitle,
     Widget? titleBadge,
     String? description,
     String? trailingText,
-    String? trailingUri,
-    Widget? overrideTrailingWidget,
+    Widget? trailingWidget,
     bool isShowPushBadge = false,
-  }) => DSListAction._(
+  }) => DSListControl._(
     size: .medium,
-    variant: variant,
-    onTap: onTap,
     title: title,
+    toggleValue: toggleValue,
+    onChanged: onChanged,
     titleBadge: titleBadge,
     subTitle: subTitle,
     description: description,
+    onTapTrailing: onTapTrailing,
     leadingWidget: leadingWidget,
-    trailingUri: trailingUri,
-    overrideTrailingWidget: overrideTrailingWidget,
+    trailingWidget: trailingWidget,
     trailingText: trailingText,
     isShowPushBadge: isShowPushBadge,
   );
 
-  factory DSListAction.small({
+  factory DSListControl.small({
     required String title,
-    required DSListActionVariant variant,
-    VoidCallback? onTap,
+    required bool toggleValue,
+    required Function(bool value) onChanged,
+    VoidCallback? onTapTrailing,
     Widget? leadingWidget,
     String? subTitle,
     Widget? titleBadge,
     String? description,
     String? trailingText,
-    String? trailingUri,
-    Widget? overrideTrailingWidget,
+    Widget? trailingWidget,
     bool isShowPushBadge = false,
-  }) => DSListAction._(
+  }) => DSListControl._(
     size: .small,
-    variant: variant,
-    onTap: onTap,
     title: title,
+    toggleValue: toggleValue,
+    onChanged: onChanged,
     titleBadge: titleBadge,
     subTitle: subTitle,
     description: description,
+    onTapTrailing: onTapTrailing,
     leadingWidget: leadingWidget,
-    trailingUri: trailingUri,
-    overrideTrailingWidget: overrideTrailingWidget,
+    trailingWidget: trailingWidget,
     trailingText: trailingText,
     isShowPushBadge: isShowPushBadge,
   );
 
-  final DSListActionSize size;
-  final DSListActionVariant variant;
-  final VoidCallback? onTap;
-  final Widget? leadingWidget;
+  final DSListControlSize size;
   final String title;
+  final bool toggleValue;
+  final Function(bool value) onChanged;
   final String? subTitle;
   final Widget? titleBadge;
   final String? description;
+  final Widget? leadingWidget;
   final String? trailingText;
-  final String? trailingUri;
-  final Widget? overrideTrailingWidget;
+  final Widget? trailingWidget;
   final bool isShowPushBadge;
+  final VoidCallback? onTapTrailing;
 
   @override
-  State<DSListAction> createState() => _DSListActionState();
+  State<DSListControl> createState() => _DSListControlState();
 }
 
-class _DSListActionState extends State<DSListAction> {
+class _DSListControlState extends State<DSListControl> {
   late DataTextColors dataTextColors;
 
   late TextStyle subTitleTextStyle;
   late TextStyle titleTextStyle;
   late TextStyle descriptionTextStyle;
   late TextStyle trailingTextStyle;
+  late double verticalPadding;
 
   late Color subTitleColor;
   late Color titleColor;
@@ -144,7 +142,7 @@ class _DSListActionState extends State<DSListAction> {
   }
 
   @override
-  void didUpdateWidget(covariant DSListAction oldWidget) {
+  void didUpdateWidget(covariant DSListControl oldWidget) {
     super.didUpdateWidget(oldWidget);
 
     _calculate();
@@ -153,20 +151,10 @@ class _DSListActionState extends State<DSListAction> {
   void _calculate() {
     dataTextColors = context.componentColors.dataText;
 
-    switch (widget.variant) {
-      case .normal:
-        subTitleColor = dataTextColors.tertiary;
-        titleColor = dataTextColors.primary;
-        descriptionColor = dataTextColors.tertiary;
-        trailingTextColor = dataTextColors.tertiary;
-        break;
-      case .warning:
-        subTitleColor = dataTextColors.warning;
-        titleColor = dataTextColors.warning;
-        descriptionColor = dataTextColors.warning;
-        trailingTextColor = dataTextColors.warning;
-        break;
-    }
+    subTitleColor = dataTextColors.tertiary;
+    titleColor = dataTextColors.primary;
+    descriptionColor = dataTextColors.tertiary;
+    trailingTextColor = dataTextColors.tertiary;
 
     switch (widget.size) {
       case .large:
@@ -174,18 +162,21 @@ class _DSListActionState extends State<DSListAction> {
         titleTextStyle = context.textTheme.bodyXLMedium;
         descriptionTextStyle = context.textTheme.bodyMRegular;
         trailingTextStyle = context.textTheme.labelLMedium;
+        verticalPadding = context.componentPadding.xLarge;
         break;
       case .medium:
         subTitleTextStyle = context.textTheme.bodyMRegular;
         titleTextStyle = context.textTheme.bodyLMedium;
         descriptionTextStyle = context.textTheme.bodyMRegular;
         trailingTextStyle = context.textTheme.labelLMedium;
+        verticalPadding = context.componentPadding.xLarge;
         break;
       case .small:
         subTitleTextStyle = context.textTheme.bodySRegular;
         titleTextStyle = context.textTheme.bodyMMedium;
         descriptionTextStyle = context.textTheme.bodySRegular;
         trailingTextStyle = context.textTheme.labelMMedium;
+        verticalPadding = context.componentPadding.xSmall;
         break;
     }
   }
@@ -198,10 +189,12 @@ class _DSListActionState extends State<DSListAction> {
       top: 8,
       right: 0,
       child: GestureDetector(
+        onTap: () {
+          widget.onChanged(!widget.toggleValue);
+        },
         behavior: HitTestBehavior.translucent,
-        onTap: widget.onTap,
         child: Padding(
-          padding: .symmetric(vertical: context.componentPadding.xLarge),
+          padding: .symmetric(vertical: verticalPadding),
           child: Row(
             spacing: context.componentGap.medium,
             children: [
@@ -209,7 +202,7 @@ class _DSListActionState extends State<DSListAction> {
                 child: Row(
                   spacing: context.componentGap.medium,
                   children: [
-                    if (widget.leadingWidget != null) widget.leadingWidget!,
+                    if (widget.leadingWidget != null) ...[IgnorePointer(child: widget.leadingWidget!)],
                     Expanded(
                       child: Column(
                         crossAxisAlignment: .start,
@@ -245,23 +238,29 @@ class _DSListActionState extends State<DSListAction> {
                   ],
                 ),
               ),
-              Row(
-                spacing: context.componentGap.medium,
-                children: [
-                  if (widget.trailingText?.isNotEmpty == true)
-                    Text(
-                      widget.trailingText!,
-                      style: trailingTextStyle.copyWith(color: trailingTextColor),
-                      maxLines: 1,
-                      overflow: .ellipsis,
+              if (widget.trailingWidget != null || widget.trailingText?.isNotEmpty == true)
+                IgnorePointer(
+                  ignoring: widget.onTapTrailing == null,
+                  child: GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                    onTap: () {
+                      widget.onTapTrailing?.call();
+                    },
+                    child: Row(
+                      spacing: context.componentGap.medium,
+                      children: [
+                        if (widget.trailingText?.isNotEmpty == true)
+                          Text(
+                            widget.trailingText!,
+                            style: trailingTextStyle.copyWith(color: trailingTextColor),
+                            maxLines: 1,
+                            overflow: .ellipsis,
+                          ),
+                        ?widget.trailingWidget,
+                      ],
                     ),
-                  if (widget.overrideTrailingWidget != null) ...[
-                    widget.overrideTrailingWidget!,
-                  ] else if (widget.trailingUri != null) ...[
-                    DSWrapper(uri: widget.trailingUri!, view: WrapperView.fix12, svgColor: trailingTextColor),
-                  ],
-                ],
-              ),
+                  ),
+                ),
             ],
           ),
         ),

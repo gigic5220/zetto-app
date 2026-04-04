@@ -74,6 +74,11 @@ class AppComponentColors extends ThemeExtension<AppComponentColors> {
     required this.modalFill,
     required this.modalBorder,
     required this.bannerFill,
+    required this.bookMarkFill,
+    required this.bookMarkText,
+    required this.likeFill,
+    required this.likeText,
+    required this.dropDownFill,
   });
 
   final SolidButtonFillColors solidButtonFill;
@@ -144,6 +149,11 @@ class AppComponentColors extends ThemeExtension<AppComponentColors> {
   final ModalFillColors modalFill;
   final ModalBorderColors modalBorder;
   final BannerFillColors bannerFill;
+  final BookMarkFillColors bookMarkFill;
+  final BookMarkTextColors bookMarkText;
+  final LikeFillColors likeFill;
+  final LikeTextColors likeText;
+  final DropDownFillColors dropDownFill;
   static final AppComponentColors light = AppComponentColors(
     solidButtonFill: SolidButtonFillColors(
       primary: AppSemanticColors.light.brandPrimary,
@@ -397,6 +407,30 @@ class AppComponentColors extends ThemeExtension<AppComponentColors> {
       brand: AppSemanticColors.light.brandSecondary,
       warning: AppSemanticColors.light.fillWarning,
     ),
+    bookMarkFill: BookMarkFillColors(
+      base: AppSemanticColors.light.textTertiary,
+      activated: AppSemanticColors.light.accentYellow,
+      disabled: AppSemanticColors.light.textDisabled,
+    ),
+    bookMarkText: BookMarkTextColors(
+      base: AppSemanticColors.light.textTertiary,
+      activated: AppSemanticColors.light.textPrimary,
+      disabled: AppSemanticColors.light.textDisabled,
+    ),
+    likeFill: LikeFillColors(
+      base: AppSemanticColors.light.textTertiary,
+      activated: AppSemanticColors.light.accentRed,
+      disabled: AppSemanticColors.light.textDisabled,
+    ),
+    likeText: LikeTextColors(
+      base: AppSemanticColors.light.textTertiary,
+      activated: AppSemanticColors.light.textPrimary,
+      disabled: AppSemanticColors.light.textDisabled,
+    ),
+    dropDownFill: DropDownFillColors(
+      base: AppSemanticColors.light.textTertiary,
+      disabled: AppSemanticColors.light.textDisabled,
+    ),
   );
 
   static final AppComponentColors dark = AppComponentColors(
@@ -610,7 +644,7 @@ class AppComponentColors extends ThemeExtension<AppComponentColors> {
     tableFill: TableFillColors(hover: AppSemanticColors.dark.fillSubtle),
     toastFill: ToastFillColors(primary: AppSemanticColors.dark.fillSubtle),
     toastText: ToastTextColors(primary: AppSemanticColors.dark.textPrimary),
-    dividerFill: DividerFillColors(base: AppSemanticColors.dark.fillDefault),
+    dividerFill: DividerFillColors(base: AppSemanticColors.dark.fillSubtle),
     textButton: TextButtonColors(
       primary: AppSemanticColors.dark.brandStrong,
       secondary: AppSemanticColors.dark.textSecondary,
@@ -648,6 +682,30 @@ class AppComponentColors extends ThemeExtension<AppComponentColors> {
       base: AppSemanticColors.dark.fillSubtle,
       brand: AppSemanticColors.dark.brandSecondary,
       warning: AppSemanticColors.dark.fillWarning,
+    ),
+    bookMarkFill: BookMarkFillColors(
+      base: AppSemanticColors.dark.textTertiary,
+      activated: AppSemanticColors.dark.accentYellow,
+      disabled: AppSemanticColors.dark.textDisabled,
+    ),
+    bookMarkText: BookMarkTextColors(
+      base: AppSemanticColors.dark.textTertiary,
+      activated: AppSemanticColors.dark.textPrimary,
+      disabled: AppSemanticColors.dark.textDisabled,
+    ),
+    likeFill: LikeFillColors(
+      base: AppSemanticColors.light.textTertiary,
+      activated: AppSemanticColors.light.accentRed,
+      disabled: AppSemanticColors.light.textDisabled,
+    ),
+    likeText: LikeTextColors(
+      base: AppSemanticColors.light.textTertiary,
+      activated: AppSemanticColors.light.textPrimary,
+      disabled: AppSemanticColors.light.textDisabled,
+    ),
+    dropDownFill: DropDownFillColors(
+      base: AppSemanticColors.light.textTertiary,
+      disabled: AppSemanticColors.light.textDisabled,
     ),
   );
 
@@ -722,6 +780,11 @@ class AppComponentColors extends ThemeExtension<AppComponentColors> {
     ModalFillColors? modalFill,
     ModalBorderColors? modalBorder,
     BannerFillColors? bannerFill,
+    BookMarkFillColors? bookMarkFill,
+    BookMarkTextColors? bookMarkText,
+    LikeFillColors? likeFill,
+    LikeTextColors? likeText,
+    DropDownFillColors? dropDownFill,
   }) {
     return AppComponentColors(
       solidButtonFill: solidButtonFill ?? this.solidButtonFill,
@@ -792,6 +855,11 @@ class AppComponentColors extends ThemeExtension<AppComponentColors> {
       modalFill: modalFill ?? this.modalFill,
       modalBorder: modalBorder ?? this.modalBorder,
       bannerFill: bannerFill ?? this.bannerFill,
+      bookMarkFill: bookMarkFill ?? this.bookMarkFill,
+      bookMarkText: bookMarkText ?? this.bookMarkText,
+      likeFill: likeFill ?? this.likeFill,
+      likeText: likeText ?? this.likeText,
+      dropDownFill: dropDownFill ?? this.dropDownFill,
     );
   }
 
@@ -1130,6 +1198,30 @@ class AppComponentColors extends ThemeExtension<AppComponentColors> {
         base: Color.lerp(bannerFill.base, other.bannerFill.base, t) ?? bannerFill.base,
         brand: Color.lerp(bannerFill.brand, other.bannerFill.brand, t) ?? bannerFill.brand,
         warning: Color.lerp(bannerFill.warning, other.bannerFill.warning, t) ?? bannerFill.warning,
+      ),
+      bookMarkFill: BookMarkFillColors(
+        base: Color.lerp(bookMarkFill.base, other.bookMarkFill.base, t) ?? bookMarkFill.base,
+        activated: Color.lerp(bookMarkFill.activated, other.bookMarkFill.activated, t) ?? bookMarkFill.activated,
+        disabled: Color.lerp(bookMarkFill.disabled, other.bookMarkFill.disabled, t) ?? bookMarkFill.disabled,
+      ),
+      bookMarkText: BookMarkTextColors(
+        base: Color.lerp(bookMarkText.base, other.bookMarkText.base, t) ?? bookMarkText.base,
+        activated: Color.lerp(bookMarkText.activated, other.bookMarkText.activated, t) ?? bookMarkText.activated,
+        disabled: Color.lerp(bookMarkText.disabled, other.bookMarkText.disabled, t) ?? bookMarkText.disabled,
+      ),
+      likeFill: LikeFillColors(
+        base: Color.lerp(likeFill.base, other.likeFill.base, t) ?? likeFill.base,
+        activated: Color.lerp(likeFill.activated, other.likeFill.activated, t) ?? likeFill.activated,
+        disabled: Color.lerp(likeFill.disabled, other.likeFill.disabled, t) ?? likeFill.disabled,
+      ),
+      likeText: LikeTextColors(
+        base: Color.lerp(likeText.base, other.likeText.base, t) ?? likeText.base,
+        activated: Color.lerp(likeText.activated, other.likeText.activated, t) ?? likeText.activated,
+        disabled: Color.lerp(likeText.disabled, other.likeText.disabled, t) ?? likeText.disabled,
+      ),
+      dropDownFill: DropDownFillColors(
+        base: Color.lerp(dropDownFill.base, other.dropDownFill.base, t) ?? dropDownFill.base,
+        disabled: Color.lerp(dropDownFill.disabled, other.dropDownFill.disabled, t) ?? dropDownFill.disabled,
       ),
     );
   }

@@ -23,3 +23,6 @@ export '../src/components/atoms/ds_check_mark.dart';
 export '../src/components/atoms/ds_tooltip_message.dart';
 export '../src/components/atoms/ds_tooltip.dart';
 export '../src/components/atoms/ds_notice.dart';
+export '../src/components/atoms/ds_book_mark.dart';
+export '../src/components/atoms/ds_like.dart';
+export '../src/components/atoms/ds_drop_down.dart';

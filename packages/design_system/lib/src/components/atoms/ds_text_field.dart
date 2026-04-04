@@ -8,6 +8,9 @@ import '../ions/ds_wrapper.dart';
 
 enum DSTextFieldState { normal, error }
 
+/// [text]가 비어 있으면 [message], 아니면 null.
+typedef DSTextFieldValidator = String? Function(String? text);
+
 class DSTextField extends StatefulWidget {
   const DSTextField({
     super.key,
@@ -22,6 +25,7 @@ class DSTextField extends StatefulWidget {
     this.onChangeCallback,
     this.placeholder,
     this.validator,
+    this.externalError,
     this.keyboardType,
     this.inputFormatters,
     this.autoDisposeControllers = true,
@@ -31,7 +35,14 @@ class DSTextField extends StatefulWidget {
     this.isShowTextCounter = false,
     this.textInputAction,
     this.textAlign = TextAlign.start,
+    this.obscureText = false,
   });
+
+  /// 폼 [validator] 밖에서 올린 에러(예: 로그인 API 실패).
+  /// - `null`: 없음
+  /// - `''`: 메시지 없이 경고 보더만
+  /// - 그 외: 보더 + 하단 메시지
+  final String? externalError;
 
   final String? supportingText;
   final String? suffixText;
@@ -40,6 +51,7 @@ class DSTextField extends StatefulWidget {
   final int? maxLength;
   final bool isEnabled;
   final bool autoFocus;
+  final bool obscureText;
   final String? placeholder;
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
@@ -51,8 +63,13 @@ class DSTextField extends StatefulWidget {
   final TextAlign textAlign;
   final void Function({required String text})? onSubmitCallback;
   final void Function({required String text})? onChangeCallback;
-  final String? Function({String? text})? validator;
+  final DSTextFieldValidator? validator;
   final void Function()? onTapClear;
+
+  static String? validateRequired(String? text, {required String message}) {
+    if (text == null || text.isEmpty) return message;
+    return null;
+  }
 
   @override
   State<DSTextField> createState() => _DSTextFieldState();
@@ -65,6 +82,7 @@ class _DSTextFieldState extends State<DSTextField> {
   int textCount = 0;
   String? errorText;
   bool hasFocus = false;
+  bool _externalDismissed = false;
 
   late InputFillColors inputFillColors;
   late InputBorderColors inputBorderColors;
@@ -99,17 +117,15 @@ class _DSTextFieldState extends State<DSTextField> {
     switch (widget.isEnabled) {
       case true:
         backgroundColor = Colors.transparent;
-        borderColor = switch (textfieldState) {
-          DSTextFieldState.normal => hasFocus ? inputBorderColors.focus : inputBorderColors.base,
-          DSTextFieldState.error => inputBorderColors.warning,
-        };
+        final bool externalActive = _isExternalErrorActive;
+        final bool showErrorChrome = textfieldState == DSTextFieldState.error || externalActive;
+        borderColor = showErrorChrome
+            ? inputBorderColors.warning
+            : (hasFocus ? inputBorderColors.focus : inputBorderColors.base);
         textColor = inputTextColors.primary;
         placeholderTextColor = inputTextColors.tertiary;
         suffixTextColor = inputTextColors.primary;
-        supportingTextColor = switch (textfieldState) {
-          DSTextFieldState.normal => inputTextColors.tertiary,
-          DSTextFieldState.error => inputTextColors.warning,
-        };
+        supportingTextColor = showErrorChrome ? inputTextColors.warning : inputTextColors.tertiary;
         break;
       case false:
         backgroundColor = inputFillColors.disabled;
@@ -149,15 +165,29 @@ class _DSTextFieldState extends State<DSTextField> {
     _calculate();
   }
 
+  bool get _isExternalErrorActive =>
+      widget.externalError != null && !_externalDismissed;
+
+  String? get _externalMessage {
+    if (!_isExternalErrorActive) return null;
+    final e = widget.externalError!;
+    return e.isEmpty ? null : e;
+  }
+
   @override
   void didUpdateWidget(covariant DSTextField oldWidget) {
     super.didUpdateWidget(oldWidget);
+    if (widget.externalError != oldWidget.externalError) {
+      _externalDismissed = false;
+    }
     _calculate();
   }
 
   @override
   Widget build(BuildContext context) {
-    final bool isShowSupportingText = errorText?.isNotEmpty == true || (widget.supportingText?.isNotEmpty == true);
+    final String? inlineError = errorText?.isNotEmpty == true ? errorText : null;
+    final String? lineText = inlineError ?? _externalMessage ?? widget.supportingText;
+    final bool isShowSupportingText = lineText?.isNotEmpty == true;
     final bool isShowTextCounter = widget.isShowTextCounter && widget.maxLength != null;
 
     return Column(
@@ -170,7 +200,7 @@ class _DSTextFieldState extends State<DSTextField> {
           Padding(
             padding: const .only(left: 12),
             child: Text(
-              errorText ?? widget.supportingText!,
+              lineText!,
               style: context.textTheme.labelSMedium.copyWith(color: supportingTextColor),
             ),
           ),
@@ -189,9 +219,11 @@ class _DSTextFieldState extends State<DSTextField> {
   String? validator(String? text) {
     if (widget.validator == null) return null;
 
-    errorText = widget.validator?.call(text: text);
+    final String? result = widget.validator?.call(text);
 
-    if (errorText != null) {
+    if (result != null) {
+      // `''`: 폼은 invalid로 두고, 메시지 줄은 숨김(보더만).
+      errorText = result.isEmpty ? null : result;
       setState(() {
         textfieldState = DSTextFieldState.error;
         _calculate();
@@ -228,6 +260,7 @@ class _DSTextFieldState extends State<DSTextField> {
             child: TextFormField(
               textInputAction: widget.textInputAction,
               enabled: widget.isEnabled,
+              obscureText: widget.obscureText,
               textAlign: widget.textAlign,
               controller: textEditingController,
               keyboardType: widget.keyboardType,
@@ -241,6 +274,9 @@ class _DSTextFieldState extends State<DSTextField> {
                 setState(() {
                   errorText = null;
                   textfieldState = DSTextFieldState.normal;
+                  if (widget.externalError != null) {
+                    _externalDismissed = true;
+                  }
                   _calculate();
                 });
                 widget.onChangeCallback?.call(text: text);
@@ -258,6 +294,9 @@ class _DSTextFieldState extends State<DSTextField> {
               ),
               buildCounter: (context, {required currentLength, required isFocused, required maxLength}) {
                 return null;
+              },
+              errorBuilder: (context, error) {
+                return const SizedBox.shrink();
               },
               decoration: InputDecoration(
                 enabledBorder: InputBorder.none,
@@ -295,7 +334,7 @@ class _DSTextFieldState extends State<DSTextField> {
                   ),
                 ),
               ),
-            ] else if (textfieldState == DSTextFieldState.error) ...[
+            ] else if (textfieldState == DSTextFieldState.error || _isExternalErrorActive) ...[
               SizedBox(width: context.componentGap.small),
               Padding(
                 padding: .fromLTRB(

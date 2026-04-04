@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../components/atoms.dart';
 import '../../extension/context_extension.dart';
+import '../../responsive/responsive_type.dart';
 import '../molecules/ds_action.dart';
 
 class DSModal extends StatefulWidget {
@@ -40,17 +41,20 @@ class _DSModalState extends State<DSModal> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        vertical: context.componentPadding.xxxLarge,
-        horizontal: context.componentPadding.xxLarge,
+    final responsiveType = context.responsiveType;
+
+    return Center(
+      child: Container(
+        width: responsiveType == AppResponsiveType.mobile ? double.infinity : 350,
+        margin: EdgeInsets.symmetric(horizontal: context.margin.width),
+        padding: EdgeInsets.all(context.componentPadding.xxxLarge),
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          border: Border.all(color: borderColor, strokeAlign: BorderSide.strokeAlignOutside),
+          borderRadius: BorderRadius.circular(context.componentRadius.xxLarge),
+        ),
+        child: Column(children: [widget.noticeWidget, widget.actionWidget]),
       ),
-      decoration: BoxDecoration(
-        color: backgroundColor,
-        border: Border.all(color: borderColor, strokeAlign: BorderSide.strokeAlignOutside),
-        borderRadius: BorderRadius.circular(context.componentRadius.xxLarge),
-      ),
-      child: Column(children: [widget.noticeWidget, widget.actionWidget]),
     );
   }
 }

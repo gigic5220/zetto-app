@@ -84,7 +84,7 @@ class DSListTitle extends StatefulWidget {
   factory DSListTitle.smallValue({
     required String title,
     VoidCallback? onTapLeading,
-    Widget? wrapper,
+    DSWrapper? wrapper,
     Widget? trailingWidget,
   }) => DSListTitle._(
     size: .small,
@@ -100,7 +100,7 @@ class DSListTitle extends StatefulWidget {
   final String title;
   final DSTextBadge? textBadge;
   final DSIconSolidButton? iconSolidButton;
-  final Widget? wrapper;
+  final DSWrapper? wrapper;
   final String? description;
   final Widget? trailingWidget;
   final VoidCallback? onTapLeading;

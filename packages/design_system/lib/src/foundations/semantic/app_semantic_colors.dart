@@ -12,6 +12,7 @@ class AppSemanticColors extends ThemeExtension<AppSemanticColors> {
     required this.staticBlack,
     required this.accentRed,
     required this.accentBlue,
+    required this.accentYellow,
     required this.bgPage,
     required this.bgSection,
     required this.bgCard,
@@ -54,6 +55,7 @@ class AppSemanticColors extends ThemeExtension<AppSemanticColors> {
 
   final Color accentRed;
   final Color accentBlue;
+  final Color accentYellow;
 
   final Color bgPage;
   final Color bgSection;
@@ -99,6 +101,7 @@ class AppSemanticColors extends ThemeExtension<AppSemanticColors> {
     staticBlack: AppColors.neutral10,
     accentRed: AppColors.red50,
     accentBlue: AppColors.blue50,
+    accentYellow: AppColors.yellow60,
     bgPage: AppColors.neutral100,
     bgSection: AppColors.neutral95,
     bgCard: AppColors.neutral100,
@@ -140,6 +143,7 @@ class AppSemanticColors extends ThemeExtension<AppSemanticColors> {
     staticBlack: AppColors.neutral10,
     accentRed: AppColors.red50,
     accentBlue: AppColors.blue70,
+    accentYellow: AppColors.yellow60,
     bgPage: AppColors.neutral10,
     bgSection: AppColors.neutral15,
     bgCard: AppColors.neutral10,
@@ -182,6 +186,7 @@ class AppSemanticColors extends ThemeExtension<AppSemanticColors> {
     Color? staticBlack,
     Color? accentRed,
     Color? accentBlue,
+    Color? accentYellow,
     Color? bgPage,
     Color? bgSection,
     Color? bgCard,
@@ -224,6 +229,7 @@ class AppSemanticColors extends ThemeExtension<AppSemanticColors> {
       staticBlack: staticBlack ?? this.staticBlack,
       accentRed: accentRed ?? this.accentRed,
       accentBlue: accentBlue ?? this.accentBlue,
+      accentYellow: accentYellow ?? this.accentYellow,
       bgPage: bgPage ?? this.bgPage,
       bgSection: bgSection ?? this.bgSection,
       bgCard: bgCard ?? this.bgCard,
@@ -272,6 +278,7 @@ class AppSemanticColors extends ThemeExtension<AppSemanticColors> {
       staticBlack: Color.lerp(staticBlack, other.staticBlack, t) ?? staticBlack,
       accentRed: Color.lerp(accentRed, other.accentRed, t) ?? accentRed,
       accentBlue: Color.lerp(accentBlue, other.accentBlue, t) ?? accentBlue,
+      accentYellow: Color.lerp(accentYellow, other.accentYellow, t) ?? accentYellow,
       bgPage: Color.lerp(bgPage, other.bgPage, t) ?? bgPage,
       bgSection: Color.lerp(bgSection, other.bgSection, t) ?? bgSection,
       bgCard: Color.lerp(bgCard, other.bgCard, t) ?? bgCard,

@@ -17,6 +17,7 @@ class FlavorInfo {
   static String get baseUrl {
     switch (flavor) {
       case Flavor.dev:
+        return 'https://tandangi-api-741098864815.asia-northeast3.run.app';
         return 'http://192.168.0.90:8080';
       case Flavor.prod:
         return 'https://tandangi-api-741098864815.asia-northeast3.run.app';

@@ -6,9 +6,10 @@ import '../../../extenstion.dart';
 import '../../foundations/component/colors/generated_component_colors.dart';
 
 class DSTimePicker extends StatefulWidget {
-  const DSTimePicker({super.key, required this.title, this.onChanged});
+  const DSTimePicker({super.key, required this.title, this.initialDateTime, this.onChanged});
 
   final String title;
+  final DateTime? initialDateTime;
   final Function(TimeOfDay)? onChanged;
 
   @override
@@ -17,7 +18,6 @@ class DSTimePicker extends StatefulWidget {
 
 class _DSTimePickerState extends State<DSTimePicker> {
   final List<String> amPm = ['오전', '오후'];
-  DayPeriod period = DayPeriod.am;
   late Map<int, int> hours;
   late List<int> minutes;
 
@@ -68,16 +68,20 @@ class _DSTimePickerState extends State<DSTimePicker> {
   void initState() {
     super.initState();
 
-    selectedAmPmIndex = amPm.indexOf('오후');
-    amPmController = PageController(initialPage: 1, viewportFraction: 1 / 6);
+    final initial = widget.initialDateTime;
+    final int hour24 = initial?.hour ?? 4;
+    final int minute0 = initial?.minute ?? 0;
+
+    selectedAmPmIndex = hour24 >= 12 ? 1 : 0;
+    amPmController = PageController(initialPage: selectedAmPmIndex, viewportFraction: 1 / 6);
 
     hours = _getHours();
-    selectedHoursKey = 4;
-    hoursController = PageController(initialPage: 4, viewportFraction: 1 / 6);
+    selectedHoursKey = hour24 % 12;
+    hoursController = PageController(initialPage: selectedHoursKey, viewportFraction: 1 / 6);
 
     minutes = List.generate(60, (index) => index);
-    selectedMinutesIndex = 0;
-    minutesController = PageController(initialPage: 0, viewportFraction: 1 / 6);
+    selectedMinutesIndex = minute0;
+    minutesController = PageController(initialPage: selectedMinutesIndex, viewportFraction: 1 / 6);
 
     final hour = hours.values.elementAt(selectedHoursKey) + 12 * selectedAmPmIndex;
     final minute = minutes[selectedMinutesIndex];

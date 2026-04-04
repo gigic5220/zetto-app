@@ -5,11 +5,14 @@ import '../../../components/ions.dart';
 import '../../extension/context_extension.dart';
 import '../../foundations/component/colors/generated_component_colors.dart';
 
+enum DSSelectFieldState { normal, warn }
+
 class DSSelectField extends StatefulWidget {
   const DSSelectField({
     super.key,
     required this.placeholder,
     required this.onTap,
+    this.state = DSSelectFieldState.normal,
     this.text,
     this.textBadge,
     this.trailingUri,
@@ -19,6 +22,7 @@ class DSSelectField extends StatefulWidget {
 
   final String placeholder;
   final void Function() onTap;
+  final DSSelectFieldState state;
   final String? text;
   final DSTextBadge? textBadge;
   final String? trailingUri;
@@ -50,11 +54,13 @@ class _DSSelectFieldState extends State<DSSelectField> {
     switch (widget.isEnabled) {
       case true:
         backgroundColor = Colors.transparent;
-        borderColor = inputBorderColors.base;
+        borderColor = widget.state == DSSelectFieldState.normal ? inputBorderColors.base : inputBorderColors.warning;
         textColor = inputTextColors.primary;
         placeholderTextColor = inputTextColors.tertiary;
         iconColor = inputTextColors.tertiary;
-        supportingTextColor = inputTextColors.tertiary;
+        supportingTextColor = widget.state == DSSelectFieldState.normal
+            ? inputTextColors.tertiary
+            : inputTextColors.warning;
         break;
       case false:
         backgroundColor = inputFillColors.disabled;

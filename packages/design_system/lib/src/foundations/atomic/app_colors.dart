@@ -41,6 +41,17 @@ class AppColors {
   static const Color blue20 = Color(0xFF041860);
   static const Color blue10 = Color(0xFF020B3B);
 
+  static const Color yellow100 = Color(0xFFFFF8E6);
+  static const Color yellow90 = Color(0xFFFFEFC2);
+  static const Color yellow80 = Color(0xFFFFE28A);
+  static const Color yellow70 = Color(0xFFFFD24D);
+  static const Color yellow60 = Color(0xFFFAC720);
+  static const Color yellow50 = Color(0xFFF2BA00);
+  static const Color yellow40 = Color(0xFFC99600);
+  static const Color yellow30 = Color(0xFF9F7400);
+  static const Color yellow20 = Color(0xFF6E4E00);
+  static const Color yellow10 = Color(0xFF4A3300);
+
   static const Color green100 = Color(0xFFF2FBF7);
   static const Color green90 = Color(0xFFE1F5EC);
   static const Color green80 = Color(0xFFA9E3C7);

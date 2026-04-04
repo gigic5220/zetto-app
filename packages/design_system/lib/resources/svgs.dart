@@ -17,4 +17,12 @@ class Svgs {
   static const String icChevronRight = 'packages/design_system/lib/assets/svgs/ic_chevron_right.svg';
   static const String icChevronDown = 'packages/design_system/lib/assets/svgs/ic_chevron_down.svg';
   static const String icChevronUp = 'packages/design_system/lib/assets/svgs/ic_chevron_up.svg';
+  static const String icBookmark = 'packages/design_system/lib/assets/svgs/ic_book_mark.svg';
+  static const String icBookmarkFill = 'packages/design_system/lib/assets/svgs/ic_book_mark_fill.svg';
+  static const String icLike = 'packages/design_system/lib/assets/svgs/ic_like.svg';
+  static const String icLikeFill = 'packages/design_system/lib/assets/svgs/ic_like_fill.svg';
+  static const String icDropDownDown = 'packages/design_system/lib/assets/svgs/ic_drop_down_down.svg';
+  static const String icDropDownUp = 'packages/design_system/lib/assets/svgs/ic_drop_down_up.svg';
+  static const String icDropDownDownFill = 'packages/design_system/lib/assets/svgs/ic_drop_down_down_fill.svg';
+  static const String icDropDownUpFill = 'packages/design_system/lib/assets/svgs/ic_drop_down_up_fill.svg';
 }

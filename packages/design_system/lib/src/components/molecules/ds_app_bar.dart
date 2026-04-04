@@ -250,7 +250,7 @@ class DSAppBarActionWidget extends StatelessWidget {
     this.svgColor,
   });
 
-  final Widget wrapper;
+  final DSWrapper wrapper;
   final bool showPushBadge;
   final FutureOr<void> Function() onTap;
   final Color? svgColor;

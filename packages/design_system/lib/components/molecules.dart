@@ -28,3 +28,4 @@ export '../src/components/molecules/ds_badge_list.dart';
 export '../src/components/molecules/ds_chat_bubble.dart';
 export '../src/components/molecules/ds_key_value_action.dart';
 export '../src/components/molecules/ds_key_value_item.dart';
+export '../src/components/molecules/ds_list_control.dart';

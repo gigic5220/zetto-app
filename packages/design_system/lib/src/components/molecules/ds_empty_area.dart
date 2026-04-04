@@ -10,15 +10,15 @@ class DSEmptyArea extends StatefulWidget {
   const DSEmptyArea({
     super.key,
     required this.type,
-    required this.wrapperUri,
     required this.title,
+    this.wrapperUri,
     this.description,
     this.button,
   });
 
   final DSEmptyAreaType type;
-  final String wrapperUri;
   final String title;
+  final String? wrapperUri;
   final String? description;
   final DSSolidButton? button;
 
@@ -77,8 +77,10 @@ class _DSEmptyAreaState extends State<DSEmptyArea> {
         child: Column(
           crossAxisAlignment: .center,
           children: [
-            DSWrapper(uri: widget.wrapperUri, view: wrapperView),
-            SizedBox(height: gap),
+            if (widget.wrapperUri?.isNotEmpty == true) ...[
+              DSWrapper(uri: widget.wrapperUri!, view: wrapperView),
+              SizedBox(height: gap),
+            ],
             Text(widget.title, style: titleStyle),
             if (widget.description?.isNotEmpty == true) ...[
               SizedBox(height: descriptionGap),

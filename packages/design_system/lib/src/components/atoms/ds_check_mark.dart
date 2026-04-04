@@ -6,10 +6,10 @@ import '../../extension/context_extension.dart';
 import '../../foundations/component/colors/generated_component_colors.dart';
 
 class DSCheckMark extends StatefulWidget {
-  const DSCheckMark({super.key, required this.value, required this.onChanged, this.isEnabled = true});
+  const DSCheckMark({super.key, required this.value, this.onChanged, this.isEnabled = true});
 
   final bool value;
-  final Function(bool value) onChanged;
+  final Function(bool value)? onChanged;
   final bool isEnabled;
 
   @override
@@ -56,7 +56,7 @@ class _DSCheckMarkState extends State<DSCheckMark> {
     return GestureDetector(
       onTap: () {
         if (widget.isEnabled) {
-          widget.onChanged(!widget.value);
+          widget.onChanged?.call(!widget.value);
         }
       },
       behavior: HitTestBehavior.opaque,
