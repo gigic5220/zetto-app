@@ -43,9 +43,10 @@ class Router extends _$Router {
         final currentPath = state.matchedLocation;
         final isLoginRoute = currentPath == '/${LoginPage.routeName}';
         final isSplashRoute = currentPath == '/${SplashPage.routeName}';
+        final isWebViewRoute = currentPath == '/${WebViewPage.routeName}';
 
         // 미로그인인데 로그인·스플래시 페이지가 아닌 곳 → 로그인으로
-        if (!isLoggedIn && !isLoginRoute && !isSplashRoute) {
+        if (!isLoggedIn && !isLoginRoute && !isSplashRoute && !isWebViewRoute) {
           return '/${LoginPage.routeName}';
         }
 

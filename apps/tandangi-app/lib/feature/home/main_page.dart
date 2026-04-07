@@ -47,7 +47,6 @@ class _HomePageState extends State<HomePage> {
       final res = await AiApi(
         FlavorInfo.baseUrl,
       ).analyzeImage(imagePath: picked.path);
-      print('res: $res');
       setState(() => _result = res);
     } catch (e) {
       setState(() => _error = e.toString());

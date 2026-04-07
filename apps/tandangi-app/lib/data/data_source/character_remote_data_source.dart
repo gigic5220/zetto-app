@@ -24,4 +24,9 @@ class CharacterRemoteDataSourceImpl implements CharacterRemoteDataSource {
   Future<void> postUserCharacter({required int characterId}) async {
     await _dio.post('/api/user/characters/$characterId');
   }
+
+  @override
+  Future<void> putUserCharacter({required int characterId}) async {
+    await _dio.put('/api/user/characters/$characterId');
+  }
 }

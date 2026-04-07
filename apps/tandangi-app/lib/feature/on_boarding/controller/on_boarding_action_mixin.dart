@@ -10,6 +10,12 @@ mixin OnBoardingActionMixin {
 
     switch (currentStep) {
       case OnBoardingStep.character:
+        final currentCarouselSliderIndex = ref.read(
+          _currentCarouselSliderIndexProvider,
+        );
+        final characters = await ref.read(_charactersProvider.future);
+        final selectedCharacter = characters[currentCarouselSliderIndex];
+        ref.read(_selectedCharacterProvider.notifier).set(selectedCharacter);
         currentOnBoardingStepProvider.set(OnBoardingStep.characterName);
         break;
       case OnBoardingStep.characterName:
@@ -19,22 +25,29 @@ mixin OnBoardingActionMixin {
         currentOnBoardingStepProvider.set(OnBoardingStep.age);
         break;
       case OnBoardingStep.age:
-        final onBoardingInfo = ref.read(_onboardingInfoProvider);
-        if (onBoardingInfo.characterId == null ||
-            !onBoardingInfo.characterName.isExist ||
-            onBoardingInfo.genderEnum == null ||
-            onBoardingInfo.age == null ||
-            onBoardingInfo.height == null ||
-            onBoardingInfo.weight == null) {
+        final selectedCharacter = ref.read(_selectedCharacterProvider);
+        final characterName = ref.read(_characterNameProvider);
+        final genderEnum = ref.read(_genderEnumProvider);
+        final age = ref.read(_ageProvider);
+        final height = ref.read(_heightProvider);
+        final weight = ref.read(_weightProvider);
+        if (selectedCharacter == null ||
+            !characterName.isExist ||
+            genderEnum == null ||
+            age == null ||
+            height == null ||
+            weight == null) {
           return;
         }
 
+        return;
+
         await getIt<UserRepository>().putOnboarding(
-          characterId: onBoardingInfo.characterId!,
-          gender: onBoardingInfo.genderEnum.toString(),
-          age: onBoardingInfo.age!,
-          height: onBoardingInfo.height!,
-          weight: onBoardingInfo.weight!,
+          selectedCharacter: selectedCharacter,
+          gender: genderEnum.toString(),
+          age: age,
+          height: height,
+          weight: weight,
         );
 
         ref.invalidate(meProvider);
@@ -70,28 +83,35 @@ mixin OnBoardingActionMixin {
     }
   }
 
-  void setCurrentCharacterIndex(WidgetRef ref, {required int index}) {
-    ref.read(_currentCharacterIndexProvider.notifier).set(index);
+  void setCurrentCarouselSliderIndex(WidgetRef ref, {required int index}) {
+    ref.read(_currentCarouselSliderIndexProvider.notifier).set(index);
   }
 
-  void setCharacterId(WidgetRef ref, {required int characterId}) {
-    ref.read(_onboardingInfoProvider.notifier).setCharacterId(characterId);
+  void setSelectedCharacter(
+    WidgetRef ref, {
+    required CharacterEntity selectedCharacter,
+  }) {
+    ref.read(_selectedCharacterProvider.notifier).set(selectedCharacter);
   }
 
   void setCharacterName(WidgetRef ref, {required String characterName}) {
-    ref.read(_onboardingInfoProvider.notifier).setCharacterName(characterName);
+    ref.read(_characterNameProvider.notifier).set(characterName);
   }
 
   void setGenderEnum(WidgetRef ref, {required GenderEnum genderEnum}) {
-    ref.read(_onboardingInfoProvider.notifier).setGenderEnum(genderEnum);
+    ref.read(_genderEnumProvider.notifier).set(genderEnum);
   }
 
-  void setAge(WidgetRef ref, {required int age}) {
-    ref.read(_onboardingInfoProvider.notifier).setAge(age);
+  void setAge(WidgetRef ref, {required int? age}) {
+    ref.read(_ageProvider.notifier).set(age);
   }
 
-  void setHeight(WidgetRef ref, {required double height}) {
-    ref.read(_onboardingInfoProvider.notifier).setHeight(height);
+  void setWeight(WidgetRef ref, {required int? weight}) {
+    ref.read(_weightProvider.notifier).set(weight);
+  }
+
+  void setHeight(WidgetRef ref, {required int? height}) {
+    ref.read(_heightProvider.notifier).set(height);
   }
 
   //   final result = await getIt<UserRepository>().putOnboarding(

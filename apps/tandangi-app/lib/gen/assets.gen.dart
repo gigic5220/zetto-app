@@ -69,6 +69,12 @@ class $AssetsSvgsGen {
   String get circleQuestionMarkBubble =>
       'assets/svgs/circle_question_mark_bubble.svg';
 
+  /// File path: assets/svgs/ic_arrow_left.svg
+  String get icArrowLeft => 'assets/svgs/ic_arrow_left.svg';
+
+  /// File path: assets/svgs/ic_arrow_right.svg
+  String get icArrowRight => 'assets/svgs/ic_arrow_right.svg';
+
   /// File path: assets/svgs/ic_back.svg
   String get icBack => 'assets/svgs/ic_back.svg';
 
@@ -120,6 +126,8 @@ class $AssetsSvgsGen {
     chevronLeft,
     chevronRight,
     circleQuestionMarkBubble,
+    icArrowLeft,
+    icArrowRight,
     icBack,
     icBangFill,
     icCheckmark,

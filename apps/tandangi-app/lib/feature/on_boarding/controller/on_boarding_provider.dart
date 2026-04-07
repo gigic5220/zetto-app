@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -19,42 +20,6 @@ part 'on_boarding_state_mixin.dart';
 
 enum OnBoardingStep { character, characterName, info, age }
 
-class OnBoardingInfo {
-  const OnBoardingInfo({
-    this.characterId,
-    this.characterName,
-    this.genderEnum,
-    this.age,
-    this.height,
-    this.weight,
-  });
-
-  final int? characterId;
-  final String? characterName;
-  final GenderEnum? genderEnum;
-  final int? age;
-  final double? height;
-  final double? weight;
-
-  OnBoardingInfo copyWith({
-    int? characterId,
-    String? characterName,
-    GenderEnum? genderEnum,
-    int? age,
-    double? height,
-    double? weight,
-  }) {
-    return OnBoardingInfo(
-      characterId: characterId ?? this.characterId,
-      characterName: characterName ?? this.characterName,
-      genderEnum: genderEnum ?? this.genderEnum,
-      age: age ?? this.age,
-      height: height ?? this.height,
-      weight: weight ?? this.weight,
-    );
-  }
-}
-
 @riverpod
 class _CurrentOnBoardingStep extends _$CurrentOnBoardingStep {
   @override
@@ -68,7 +33,7 @@ class _CurrentOnBoardingStep extends _$CurrentOnBoardingStep {
 }
 
 @riverpod
-class _CurrentCharacterIndex extends _$CurrentCharacterIndex {
+class _CurrentCarouselSliderIndex extends _$CurrentCarouselSliderIndex {
   @override
   int build() {
     return 0;
@@ -88,33 +53,73 @@ class _Characters extends _$Characters {
 }
 
 @riverpod
-class _OnboardingInfo extends _$OnboardingInfo {
+class _SelectedCharacter extends _$SelectedCharacter {
   @override
-  OnBoardingInfo build() {
-    return OnBoardingInfo();
+  CharacterEntity? build() {
+    return null;
   }
 
-  void setCharacterId(int characterId) {
-    state = state.copyWith(characterId: characterId);
+  void set(CharacterEntity selectedCharacter) {
+    state = selectedCharacter;
+  }
+}
+
+@riverpod
+class _CharacterName extends _$CharacterName {
+  @override
+  String build() {
+    return '';
   }
 
-  void setCharacterName(String characterName) {
-    state = state.copyWith(characterName: characterName);
+  void set(String characterName) {
+    state = characterName;
+  }
+}
+
+@riverpod
+class _Height extends _$Height {
+  @override
+  int? build() {
+    return null;
   }
 
-  void setGenderEnum(GenderEnum genderEnum) {
-    state = state.copyWith(genderEnum: genderEnum);
+  void set(int? height) {
+    state = height;
+  }
+}
+
+@riverpod
+class _Weight extends _$Weight {
+  @override
+  int? build() {
+    return null;
   }
 
-  void setAge(int age) {
-    state = state.copyWith(age: age);
+  void set(int? weight) {
+    state = weight;
+  }
+}
+
+@riverpod
+class _GenderEnum extends _$GenderEnum {
+  @override
+  GenderEnum? build() {
+    return GenderEnum.female;
   }
 
-  void setHeight(double height) {
-    state = state.copyWith(height: height);
+  void set(GenderEnum genderEnum) {
+    state = genderEnum;
+  }
+}
+
+@riverpod
+class _Age extends _$Age {
+  @override
+  int? build() {
+    return null;
   }
 
-  void setWeight(double weight) {
-    state = state.copyWith(weight: weight);
+  void set(int? age) {
+    state = age;
   }
 }

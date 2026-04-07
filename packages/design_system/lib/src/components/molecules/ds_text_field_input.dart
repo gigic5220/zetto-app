@@ -10,18 +10,18 @@ enum DSTextFieldInputType { single, horizontalDouble, verticalDouble, button, ve
 class DSTextFieldInput extends StatefulWidget {
   const DSTextFieldInput._({
     required this.type,
-    required this.label,
+    this.label,
     required this.textField,
     this.additionalTextField,
     this.button,
   });
 
-  factory DSTextFieldInput.single({required String label, required DSTextField textField}) {
+  factory DSTextFieldInput.single({String? label, required DSTextField textField}) {
     return DSTextFieldInput._(type: DSTextFieldInputType.single, label: label, textField: textField);
   }
 
   factory DSTextFieldInput.horizontalDouble({
-    required String label,
+    String? label,
     required DSTextField textField,
     required DSTextField additionalTextField,
   }) {
@@ -77,7 +77,7 @@ class DSTextFieldInput extends StatefulWidget {
   }
 
   final DSTextFieldInputType type;
-  final String label;
+  final String? label;
   final DSTextField textField;
   final DSTextField? additionalTextField;
   final Widget? button;
@@ -122,10 +122,11 @@ class _DSTextFieldInputState extends State<DSTextFieldInput> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Padding(
-            padding: labelPadding,
-            child: Text(widget.label, style: labelStyle),
-          ),
+          if (widget.label?.isNotEmpty == true)
+            Padding(
+              padding: labelPadding,
+              child: Text(widget.label!, style: labelStyle),
+            ),
           SizedBox(height: labelGap),
           switch (widget.type) {
             .single => _singleWidget(),

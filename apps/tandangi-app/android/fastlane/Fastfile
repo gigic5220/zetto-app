@@ -22,12 +22,15 @@ platform :android do
 
     release_notes = ENV["RELEASE_NOTES"] || "테스트"
 
+    cred = ENV["FIREBASE_SERVICE_CREDENTIALS"]
+    cred_path = cred && !cred.empty? ? File.expand_path(cred, fastlane_dir) : nil
+
     firebase_app_distribution(
       app: ENV["FIREBASE_DEV_APP_ID"],
       groups: "zetto",
       release_notes: release_notes,
       apk_path: apk_path,
-      service_credentials_file: ENV["FIREBASE_SERVICE_CREDENTIALS"],
+      service_credentials_file: cred_path,
       debug: true
     )
   end

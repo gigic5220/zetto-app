@@ -1,7 +1,7 @@
 BR_FLAGS ?=
 
-.PHONY: br
-br:
+.PHONY: gen
+gen:
 	dart run build_runner build $(BR_FLAGS)
 
 .PHONY: fd
@@ -17,4 +17,6 @@ fp:
 .PHONY: fda
 fda:
 	(cd android && fastlane dev)
+fpa:
+	(cd android && fastlane prod)
 

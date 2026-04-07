@@ -50,11 +50,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "527744918361-psct79sdtf04fflut9kqopsg9hf8o1pg.apps.googleusercontent.com",
+          "client_id": "527744918361-bsnobgfplfk8d8fumlcn8sbai6rhs35r.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.zetto.tandangi.dev",
-            "certificate_hash": "776fa308d4283a25168630876e5604dfb20d283e"
+            "certificate_hash": "9bf9b2acda6a4844309fe5da924196a967698d80"
           }
         },
         {

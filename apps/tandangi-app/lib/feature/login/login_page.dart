@@ -1,7 +1,9 @@
 import 'dart:io';
 
+import 'package:design_system/components/atoms.dart';
 import 'package:design_system/components/common.dart';
 import 'package:design_system/components/ions.dart';
+import 'package:design_system/components/molecules.dart';
 import 'package:design_system/extenstion.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +52,7 @@ class _LoginPageState extends ConsumerState<LoginPage>
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
-            const SizedBox(height: 24),
+            const SizedBox(height: 56),
             const Spacer(),
             Align(
               alignment: Alignment.centerLeft,
@@ -163,36 +165,30 @@ class _LoginPageState extends ConsumerState<LoginPage>
               onTap: () async => await onPressedGoogleLoginButton(ref),
             ),
             const SizedBox(height: 8),
-            Text.rich(
-              TextSpan(
-                style: context.textTheme.labelSMedium.copyWith(
-                  color: context.semanticColors.textTertiary,
-                ),
-                children: [
-                  const TextSpan(text: '로그인함으로써 '),
-                  TextSpan(
-                    text: 'zetto.labs 이용약관 및',
-                    style: context.textTheme.labelSMedium.copyWith(
-                      color: context.semanticColors.textTertiary,
-                      decoration: TextDecoration.underline,
-                      decorationColor: context.semanticColors.textTertiary,
-                    ),
-                    recognizer: termsOfServiceRecognizer,
-                  ),
-                  const TextSpan(text: ' 및\n'),
-                  TextSpan(
-                    text: '개인정보처리방침',
-                    style: context.textTheme.labelSMedium.copyWith(
-                      color: context.semanticColors.textTertiary,
-                      decoration: TextDecoration.underline,
-                      decorationColor: context.semanticColors.textTertiary,
-                    ),
-                    recognizer: privacyPolicyRecognizer,
-                  ),
-                  const TextSpan(text: '에 동의합니다.'),
-                ],
+            Text(
+              '로그인함으로써 이용약관 및 개인정보처리방침에 동의합니다.',
+              style: context.textTheme.labelSMedium.copyWith(
+                color: context.semanticColors.textTertiary,
               ),
-              textAlign: TextAlign.center,
+            ),
+            DSTextAction.horizontal(
+              isExpanded: false,
+              buttons: [
+                DSTextButton(
+                  variant: DSTextButtonVariant.primary,
+                  text: '이용약관',
+                  onTap: () {
+                    onTapTermsOfService(ref);
+                  },
+                ),
+                DSTextButton(
+                  variant: DSTextButtonVariant.primary,
+                  text: '개인정보처리방침',
+                  onTap: () {
+                    onTapPrivacyPolicy(ref);
+                  },
+                ),
+              ],
             ),
             CommonBottomPadding(),
           ],

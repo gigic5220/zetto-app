@@ -9,8 +9,8 @@ abstract class UserRemoteDataSource {
     required int characterId,
     required String gender,
     required int age,
-    required double height,
-    required double weight,
+    required int height,
+    required int weight,
   });
 }
 
@@ -34,8 +34,8 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   Future<Response<dynamic>> putMe({
     required int age,
     required String gender,
-    required double height,
-    required double weight,
+    required int height,
+    required int weight,
   }) async {
     return await _dio.put(
       '/api/user',
@@ -48,8 +48,8 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     required int characterId,
     required String gender,
     required int age,
-    required double height,
-    required double weight,
+    required int height,
+    required int weight,
   }) async {
     final response = await _dio.put(
       '/api/user/onboarding',

@@ -4,9 +4,9 @@ import '../../extension/context_extension.dart';
 import '../atoms/ds_segmented_control.dart';
 
 class DSSegmentedInput extends StatefulWidget {
-  const DSSegmentedInput({super.key, required this.label, required this.segmentedInput});
+  const DSSegmentedInput({super.key, this.label, required this.segmentedInput});
 
-  final String label;
+  final String? label;
   final DSSegmentedControl segmentedInput;
 
   @override
@@ -48,10 +48,11 @@ class _DSSegmentedInputState extends State<DSSegmentedInput> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         spacing: labelGap,
         children: [
-          Padding(
-            padding: labelPadding,
-            child: Text(widget.label, style: labelStyle),
-          ),
+          if (widget.label?.isNotEmpty == true)
+            Padding(
+              padding: labelPadding,
+              child: Text(widget.label!, style: labelStyle),
+            ),
           widget.segmentedInput,
         ],
       ),

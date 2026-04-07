@@ -151,28 +151,24 @@ class _DSIconSolidButtonState extends State<DSIconSolidButton> {
     switch (widget.size) {
       case DSIconSolidButtonSize.large:
         wrapperView = WrapperView.fix20;
-        borderRadius = .circular(context.componentRadius.large);
         padding = .all(context.componentPadding.xLarge + 3);
         loadingDimension = 20;
         loadingStrokeWidth = 3;
         break;
       case DSIconSolidButtonSize.medium:
         wrapperView = WrapperView.fix20;
-        borderRadius = .circular(context.componentRadius.large);
         padding = .all(context.componentPadding.xLarge + 1);
         loadingDimension = 20;
         loadingStrokeWidth = 3;
         break;
       case DSIconSolidButtonSize.small:
         wrapperView = WrapperView.fix16;
-        borderRadius = .circular(context.componentRadius.medium);
         padding = .all(context.componentPadding.large + 1);
         loadingDimension = 12;
         loadingStrokeWidth = 2;
         break;
       case DSIconSolidButtonSize.xSmall:
         wrapperView = WrapperView.fix12;
-        borderRadius = .circular(context.componentRadius.small);
         padding = .all(context.componentPadding.xSmall + 3);
         loadingDimension = 12;
         loadingStrokeWidth = 2;
@@ -212,7 +208,10 @@ class _DSIconSolidButtonState extends State<DSIconSolidButton> {
             }
           : null,
       child: Container(
-        decoration: BoxDecoration(borderRadius: borderRadius, color: backgroundColor),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(context.componentRadius.max),
+          color: backgroundColor,
+        ),
         padding: padding,
         child: Stack(
           alignment: Alignment.center,

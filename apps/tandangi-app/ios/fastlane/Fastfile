@@ -63,6 +63,9 @@ platform :ios do
 
   desc "Build prod (App Store) and upload to TestFlight"
   lane :prod do
+    require "dotenv"
+    Dotenv.overload(File.expand_path(".env.prod", __dir__))
+
     build_number = read_build_number_from_pubspec
 
     match(

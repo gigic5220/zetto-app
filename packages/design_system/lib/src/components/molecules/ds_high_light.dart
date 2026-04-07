@@ -135,12 +135,14 @@ class _DSHighLightState extends State<DSHighLight> {
                     style: subTitleTextStyle.copyWith(color: subTitleColor),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
                   ),
                 Text(
                   widget.title,
                   style: titleTextStyle.copyWith(color: titleColor),
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
                 ),
                 if (widget.description?.isNotEmpty == true)
                   Text(widget.description!, style: descriptionTextStyle.copyWith(color: descriptionColor)),
