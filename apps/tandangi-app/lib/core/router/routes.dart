@@ -7,7 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 import 'package:tandangi/core/di/di.dart';
-import 'package:tandangi/feature/home/main_page.dart';
+import 'package:tandangi/feature/home/home_page.dart';
 import 'package:tandangi/feature/login/login_page.dart';
 import 'package:tandangi/feature/on_boarding/on_boarding_page.dart';
 import 'package:tandangi/feature/splash/splash_page.dart';

@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'package:tandangi/api/ai.dart';
-import 'package:tandangi/flavors.dart';
+import 'package:tandangi/core/di/di.dart';
+import 'package:tandangi/domain/entity/food_analyze_result_entity.dart';
+import 'package:tandangi/domain/repository/food_analyze_repository.dart';
 
 Future<void> signOut() async {
   await FirebaseAuth.instance.signOut();
@@ -23,7 +24,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   bool _loading = false;
   String? _error;
-  Map<String, dynamic>? _result;
+  FoodAnalyzeResultEntity? _result;
 
   Future<void> _handleLogout() async {
     await signOut();
@@ -44,9 +45,9 @@ class _HomePageState extends State<HomePage> {
     });
 
     try {
-      final res = await AiApi(
-        FlavorInfo.baseUrl,
-      ).analyzeImage(imagePath: picked.path);
+      final res = await getIt<FoodAnalyzeRepository>().analyzeImage(
+        imagePath: picked.path,
+      );
       setState(() => _result = res);
     } catch (e) {
       setState(() => _error = e.toString());
@@ -107,16 +108,14 @@ class _HomePageState extends State<HomePage> {
 class _AnalysisResultCard extends StatelessWidget {
   const _AnalysisResultCard({required this.result});
 
-  final Map<String, dynamic> result;
+  final FoodAnalyzeResultEntity result;
 
   @override
   Widget build(BuildContext context) {
-    final main = (result['main'] as List?)?.join(', ') ?? '-';
-    final sides = (result['sides'] as List?)?.cast<String>() ?? [];
-    final nutrients =
-        (result['final']?['nutrients'] as Map?)?.cast<String, dynamic>() ?? {};
-    final assumptions =
-        (result['vision']?['assumptions'] as List?)?.cast<String>() ?? [];
+    final main = result.main.isEmpty ? '-' : result.main.join(', ');
+    final sides = result.sides;
+    final nutrients = result.nutrients;
+    final assumptions = result.visionAssumptions;
 
     return Card(
       elevation: 3,

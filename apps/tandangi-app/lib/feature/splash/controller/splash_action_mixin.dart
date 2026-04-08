@@ -17,7 +17,7 @@ import 'package:tandangi/domain/repository/user_repository.dart';
 import 'package:tandangi/feature/controller/common_provider.dart';
 import 'package:tandangi/feature/login/login_page.dart';
 import 'package:tandangi/feature/on_boarding/on_boarding_page.dart';
-import 'package:tandangi/feature/home/main_page.dart';
+import 'package:tandangi/feature/home/home_page.dart';
 import 'package:tandangi/util/extension/string_extension.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:version/version.dart';
