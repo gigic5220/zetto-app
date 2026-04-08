@@ -30,20 +30,7 @@ class _OnBoardingPageState extends ConsumerState<OnBoardingPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: DSAppBar.page(
-        text: '',
-        showBackButton: true,
-        actionWidgetList: [
-          DSSolidButton.small(
-            variant: DSSolidButtonVariant.primary,
-            onTap: () async {
-              await FirebaseAuth.instance.signOut();
-              await GoogleSignIn.instance.signOut();
-            },
-            text: '로그아웃',
-          ),
-        ],
-      ),
+      appBar: DSAppBar.page(text: '', showBackButton: true),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(

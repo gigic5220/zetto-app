@@ -15,7 +15,7 @@ class CharacterRepositoryImpl implements CharacterRepository {
   }
 
   @override
-  Future<void> postUserCharacter({required int characterId}) async {
-    await _dataSource.postUserCharacter(characterId: characterId);
+  Future<void> putUserCharacter({required int characterId}) async {
+    await _dataSource.putUserCharacter(characterId: characterId);
   }
 }

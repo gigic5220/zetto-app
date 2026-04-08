@@ -1,11 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:tandangi/data/dto/onboarding_response_dto.dart';
 import 'package:tandangi/data/dto/user_response_dto.dart';
 
 abstract class UserRemoteDataSource {
   Future<UserResponseDto> getMe();
   Future<void> postMe();
-  Future<OnboardingResponseDto> putOnboarding({
+  Future<void> putOnboarding({
     required int characterId,
     required String gender,
     required int age,
@@ -44,14 +43,14 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   }
 
   @override
-  Future<OnboardingResponseDto> putOnboarding({
+  Future<void> putOnboarding({
     required int characterId,
     required String gender,
     required int age,
     required int height,
     required int weight,
   }) async {
-    final response = await _dio.put(
+    await _dio.put(
       '/api/user/onboarding',
       data: {
         'characterId': characterId,
@@ -60,9 +59,6 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         'height': height,
         'weight': weight,
       },
-    );
-    return OnboardingResponseDto.fromJson(
-      response.data as Map<String, dynamic>,
     );
   }
 }

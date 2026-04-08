@@ -1,9 +1,8 @@
 import 'package:tandangi/data/data_source/user_remote_data_source.dart';
-import 'package:tandangi/data/mapper/onboarding_mapper.dart';
 import 'package:tandangi/data/mapper/user_mapper.dart';
 import 'package:tandangi/domain/entity/character_entity.dart';
-import 'package:tandangi/domain/entity/onboarding_result_entity.dart';
 import 'package:tandangi/domain/entity/user_entity.dart';
+import 'package:tandangi/domain/enum/gender_enum.dart';
 import 'package:tandangi/domain/repository/user_repository.dart';
 
 class UserRepositoryImpl implements UserRepository {
@@ -22,20 +21,19 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<OnboardingResultEntity> putOnboarding({
+  Future<void> putOnboarding({
     required CharacterEntity selectedCharacter,
-    required String gender,
+    required GenderEnum genderEnum,
     required int age,
     required int height,
     required int weight,
   }) async {
-    final response = await remote.putOnboarding(
+    await remote.putOnboarding(
       characterId: selectedCharacter.id,
-      gender: gender,
+      gender: genderEnum.name,
       age: age,
       height: height,
       weight: weight,
     );
-    return OnboardingMapper.toOnboardingResultEntity(response);
   }
 }

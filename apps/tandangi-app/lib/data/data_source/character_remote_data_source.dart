@@ -3,7 +3,7 @@ import 'package:tandangi/data/dto/character_dto.dart';
 
 abstract class CharacterRemoteDataSource {
   Future<List<CharacterDto>> getCharacters();
-  Future<void> postUserCharacter({required int characterId});
+  Future<void> putUserCharacter({required int characterId});
 }
 
 class CharacterRemoteDataSourceImpl implements CharacterRemoteDataSource {
@@ -21,12 +21,7 @@ class CharacterRemoteDataSourceImpl implements CharacterRemoteDataSource {
   }
 
   @override
-  Future<void> postUserCharacter({required int characterId}) async {
-    await _dio.post('/api/user/characters/$characterId');
-  }
-
-  @override
   Future<void> putUserCharacter({required int characterId}) async {
-    await _dio.put('/api/user/characters/$characterId');
+    await _dio.put('/api/characters/user/$characterId');
   }
 }

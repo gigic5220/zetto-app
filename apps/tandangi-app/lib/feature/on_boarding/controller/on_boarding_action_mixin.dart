@@ -40,11 +40,9 @@ mixin OnBoardingActionMixin {
           return;
         }
 
-        return;
-
         await getIt<UserRepository>().putOnboarding(
           selectedCharacter: selectedCharacter,
-          gender: genderEnum.toString(),
+          genderEnum: genderEnum,
           age: age,
           height: height,
           weight: weight,
@@ -113,12 +111,4 @@ mixin OnBoardingActionMixin {
   void setHeight(WidgetRef ref, {required int? height}) {
     ref.read(_heightProvider.notifier).set(height);
   }
-
-  //   final result = await getIt<UserRepository>().putOnboarding(
-  //   characterId: 1,
-  //   gender: 'male',
-  //   age: 25,
-  //   height: 175.0,
-  //   weight: 70.0,
-  // );
 }
