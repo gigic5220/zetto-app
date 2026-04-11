@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'dart:developer' as developer;
 import 'package:chalkdart/chalk.dart';
-import 'package:core_app/core/log/log.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +10,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
+import 'package:talker_flutter/talker_flutter.dart';
 import 'package:tandangi/app.dart';
 import 'package:tandangi/core/di/di.dart';
+import 'package:tandangi/core/log/talker_riverpod_observer.dart';
 import 'package:tandangi/flavors.dart';
 
 Future<void> printBundleId() async {
@@ -94,7 +95,7 @@ Future<void> main() async {
       });
 
       final fcmToken = await messaging.getToken();
-      talker.info('FCM token: $fcmToken');
+      getIt<Talker>().info('FCM token: $fcmToken');
       // release + 기기: 터미널에 안 보이면 별도 터미널에서 `flutter logs` 실행
       // ignore: avoid_print
       //print('[FCM] token=$fcmToken');
@@ -106,11 +107,19 @@ Future<void> main() async {
       ]);
       printBundleId();
       runApp(
-        ProviderScope(child: const App(), retry: (retryCount, error) => null),
+        ProviderScope(
+          observers: [TalkerRiverpodObserver()],
+          retry: (retryCount, error) => null,
+          child: const App(),
+        ),
       );
     },
     (exception, stackTrace) {
-      talker.error('Unhandled error: $exception', exception, stackTrace);
+      getIt<Talker>().error(
+        'Unhandled error: $exception',
+        exception,
+        stackTrace,
+      );
     },
   );
 }

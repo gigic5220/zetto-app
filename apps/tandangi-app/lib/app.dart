@@ -53,10 +53,10 @@ class _AppState extends ConsumerState<App> {
                 : Brightness.light;
 
             final SystemUiOverlayStyle overlayStyle = SystemUiOverlayStyle(
-              statusBarColor: semantic.bgPage,
+              statusBarColor: semantic.bgSection,
               statusBarIconBrightness: iconBrightness,
               statusBarBrightness: statusBarBrightness,
-              systemNavigationBarColor: semantic.bgPage,
+              systemNavigationBarColor: semantic.bgSection,
               systemNavigationBarDividerColor: semantic.borderSubtle,
               systemNavigationBarIconBrightness: iconBrightness,
             );

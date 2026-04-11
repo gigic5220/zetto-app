@@ -39,7 +39,7 @@ abstract final class AppTheme {
       onSecondary: semanticColors.textInverse,
       error: errorColor,
       onError: onErrorColor,
-      surface: semanticColors.bgPage,
+      surface: semanticColors.bgSection,
       onSurface: semanticColors.textPrimary,
       outline: semanticColors.borderDefault,
     );
@@ -53,10 +53,10 @@ abstract final class AppTheme {
       fontFamily: 'Pretendard',
       useMaterial3: true,
       brightness: brightness,
-      scaffoldBackgroundColor: semanticColors.bgPage,
+      scaffoldBackgroundColor: semanticColors.bgSection,
       colorScheme: scheme,
       appBarTheme: AppBarTheme(
-        backgroundColor: semanticColors.bgPage,
+        backgroundColor: semanticColors.bgSection,
         foregroundColor: semanticColors.textPrimary,
         elevation: 0,
         scrolledUnderElevation: 0,
@@ -86,10 +86,10 @@ abstract final class AppTheme {
     final Brightness statusBarBrightness = isDark ? Brightness.dark : Brightness.light;
 
     return SystemUiOverlayStyle(
-      statusBarColor: semanticColors.bgPage,
+      statusBarColor: semanticColors.bgSection,
       statusBarIconBrightness: iconBrightness,
       statusBarBrightness: statusBarBrightness,
-      systemNavigationBarColor: semanticColors.bgPage,
+      systemNavigationBarColor: semanticColors.bgSection,
       systemNavigationBarDividerColor: semanticColors.borderSubtle,
       systemNavigationBarIconBrightness: iconBrightness,
     );

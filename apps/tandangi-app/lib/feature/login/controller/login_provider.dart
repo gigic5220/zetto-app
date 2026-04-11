@@ -15,7 +15,7 @@ import 'package:tandangi/domain/repository/user_repository.dart';
 import 'package:tandangi/feature/controller/common_provider.dart';
 import 'package:tandangi/feature/on_boarding/on_boarding_page.dart';
 import 'package:tandangi/feature/web_view/web_view_page.dart';
-import 'package:tandangi/feature/home/home_page.dart';
+import 'package:tandangi/feature/main/home/home_page.dart';
 import 'package:tandangi/flavors.dart';
 
 part 'login_action_mixin.dart';

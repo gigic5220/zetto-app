@@ -81,6 +81,9 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/ic_bang_fill.svg
   String get icBangFill => 'assets/svgs/ic_bang_fill.svg';
 
+  /// File path: assets/svgs/ic_camera_fill.svg
+  String get icCameraFill => 'assets/svgs/ic_camera_fill.svg';
+
   /// File path: assets/svgs/ic_checkmark.svg
   String get icCheckmark => 'assets/svgs/ic_checkmark.svg';
 
@@ -101,6 +104,12 @@ class $AssetsSvgsGen {
 
   /// File path: assets/svgs/ic_minus.svg
   String get icMinus => 'assets/svgs/ic_minus.svg';
+
+  /// File path: assets/svgs/ic_pencil_fill.svg
+  String get icPencilFill => 'assets/svgs/ic_pencil_fill.svg';
+
+  /// File path: assets/svgs/ic_question_fill.svg
+  String get icQuestionFill => 'assets/svgs/ic_question_fill.svg';
 
   /// File path: assets/svgs/ic_reading_glass.svg
   String get icReadingGlass => 'assets/svgs/ic_reading_glass.svg';
@@ -130,6 +139,7 @@ class $AssetsSvgsGen {
     icArrowRight,
     icBack,
     icBangFill,
+    icCameraFill,
     icCheckmark,
     icChevronRight,
     icCircleXFill,
@@ -137,6 +147,8 @@ class $AssetsSvgsGen {
     icDropdownDownFill,
     icDropdownUpFill,
     icMinus,
+    icPencilFill,
+    icQuestionFill,
     icReadingGlass,
     icX,
     logoApple,

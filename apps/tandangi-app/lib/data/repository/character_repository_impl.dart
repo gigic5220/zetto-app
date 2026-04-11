@@ -1,6 +1,7 @@
 import 'package:tandangi/data/data_source/character_remote_data_source.dart';
 import 'package:tandangi/data/mapper/character_mapper.dart';
 import 'package:tandangi/domain/entity/character_entity.dart';
+import 'package:tandangi/domain/entity/user_character_detail_entity.dart';
 import 'package:tandangi/domain/repository/character_repository.dart';
 
 class CharacterRepositoryImpl implements CharacterRepository {
@@ -17,5 +18,11 @@ class CharacterRepositoryImpl implements CharacterRepository {
   @override
   Future<void> putUserCharacter({required int characterId}) async {
     await _dataSource.putUserCharacter(characterId: characterId);
+  }
+
+  @override
+  Future<UserCharacterDetailEntity> getUserCharacterDetail() async {
+    final dto = await _dataSource.getUserCharacterDetail();
+    return CharacterMapper.toUserCharacterDetailEntity(dto);
   }
 }

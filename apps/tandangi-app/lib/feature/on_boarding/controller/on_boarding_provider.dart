@@ -10,7 +10,7 @@ import 'package:tandangi/domain/enum/gender_enum.dart';
 import 'package:tandangi/domain/repository/character_repository.dart';
 import 'package:tandangi/domain/repository/user_repository.dart';
 import 'package:tandangi/feature/controller/common_provider.dart';
-import 'package:tandangi/feature/home/home_page.dart';
+import 'package:tandangi/feature/main/home/home_page.dart';
 import 'package:tandangi/feature/login/login_page.dart';
 import 'package:tandangi/util/extension/string_extension.dart';
 

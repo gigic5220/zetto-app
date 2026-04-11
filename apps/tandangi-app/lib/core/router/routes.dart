@@ -7,8 +7,9 @@ import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 import 'package:tandangi/core/di/di.dart';
-import 'package:tandangi/feature/home/home_page.dart';
+import 'package:tandangi/feature/main/home/home_page.dart';
 import 'package:tandangi/feature/login/login_page.dart';
+import 'package:tandangi/feature/main/main_page.dart';
 import 'package:tandangi/feature/on_boarding/on_boarding_page.dart';
 import 'package:tandangi/feature/splash/splash_page.dart';
 import 'package:tandangi/feature/web_view/web_view_page.dart';
@@ -81,64 +82,66 @@ class Router extends _$Router {
             child: const OnBoardingPage(),
           ),
         ),
-        GoRoute(
-          name: HomePage.routeName,
-          path: '/${HomePage.routeName}',
-          pageBuilder: (context, state) => buildPageWithDefaultTransition(
-            context: context,
-            state: state,
-            child: const HomePage(),
+        StatefulShellRoute.indexedStack(
+          pageBuilder: (context, state, navigationShell) => NoTransitionPage(
+            child: MainPage(navigationShell: navigationShell),
           ),
-        ),
-        GoRoute(
-          name: WebViewPage.routeName,
-          path: '/${WebViewPage.routeName}',
-          pageBuilder: (context, state) => buildPageWithDefaultTransition(
-            context: context,
-            state: state,
-            child: WebViewPage(
-              url: state.uri.queryParameters['url'] ?? '',
-              title: state.uri.queryParameters['title'] ?? '',
+          branches: [
+            StatefulShellBranch(
+              navigatorKey: ref.watch(shellNavigationKeyProvider),
+              routes: [
+                GoRoute(
+                  name: HomePage.routeName,
+                  path: '/home',
+                  pageBuilder: (context, state) =>
+                      NoTransitionPage(child: HomePage()),
+                ),
+              ],
             ),
-          ),
+            // StatefulShellBranch(
+            //   navigatorKey: ref.watch(shellNavigationKeyProvider),
+            //   routes: [
+            //     GoRoute(
+            //       name: Tab1Page.routeName,
+            //       path: '/tab1',
+            //       pageBuilder: (context, state) =>
+            //           NoTransitionPage(child: Tab1Page()),
+            //     ),
+            //   ],
+            // ),
+            // StatefulShellBranch(
+            //   routes: [
+            //     GoRoute(
+            //       name: TestPage.routeName,
+            //       path: '/tab2',
+            //       pageBuilder: (context, state) =>
+            //           NoTransitionPage(child: TestPage()),
+            //     ),
+            //   ],
+            // ),
+            // StatefulShellBranch(
+            //   routes: [
+            //     GoRoute(
+            //       name: Tab3Page.routeName,
+            //       path: '/tab3',
+            //       pageBuilder: (context, state) =>
+            //           NoTransitionPage(child: Tab3Page()),
+            //     ),
+            //   ],
+            // ),
+          ],
         ),
-        // StatefulShellRoute.indexedStack(
-        //   pageBuilder: (context, state, navigationShell) => NoTransitionPage(
-        //     child: MainPage(navigationShell: navigationShell),
+        // GoRoute(
+        //   name: WebViewPage.routeName,
+        //   path: '/${WebViewPage.routeName}',
+        //   pageBuilder: (context, state) => buildPageWithDefaultTransition(
+        //     context: context,
+        //     state: state,
+        //     child: WebViewPage(
+        //       url: state.uri.queryParameters['url'] ?? '',
+        //       title: state.uri.queryParameters['title'] ?? '',
+        //     ),
         //   ),
-        //   branches: [
-        //     StatefulShellBranch(
-        //       navigatorKey: ref.watch(shellNavigationKeyProvider),
-        //       routes: [
-        //         GoRoute(
-        //           name: Tab1Page.routeName,
-        //           path: '/tab1',
-        //           pageBuilder: (context, state) =>
-        //               NoTransitionPage(child: Tab1Page()),
-        //         ),
-        //       ],
-        //     ),
-        //     StatefulShellBranch(
-        //       routes: [
-        //         GoRoute(
-        //           name: TestPage.routeName,
-        //           path: '/tab2',
-        //           pageBuilder: (context, state) =>
-        //               NoTransitionPage(child: TestPage()),
-        //         ),
-        //       ],
-        //     ),
-        //     StatefulShellBranch(
-        //       routes: [
-        //         GoRoute(
-        //           name: Tab3Page.routeName,
-        //           path: '/tab3',
-        //           pageBuilder: (context, state) =>
-        //               NoTransitionPage(child: Tab3Page()),
-        //         ),
-        //       ],
-        //     ),
-        //   ],
         // ),
       ],
     );

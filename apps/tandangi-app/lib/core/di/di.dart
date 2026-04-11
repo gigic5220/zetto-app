@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart' show debugPrint;
 import 'package:get_it/get_it.dart';
 import 'package:talker_dio_logger/talker_dio_logger_interceptor.dart';
 import 'package:talker_dio_logger/talker_dio_logger_settings.dart';
@@ -24,6 +25,21 @@ import 'package:tandangi/flavors.dart';
 
 final getIt = GetIt.instance;
 
+/// Logcat/IDE single-line limits: split by newline, then chunk very long lines.
+void _talkerChunkedConsoleOutput(String message) {
+  const maxChunk = 3500;
+  for (final line in message.split('\n')) {
+    if (line.length <= maxChunk) {
+      debugPrint(line);
+      continue;
+    }
+    for (var i = 0; i < line.length; i += maxChunk) {
+      final end = (i + maxChunk > line.length) ? line.length : i + maxChunk;
+      debugPrint(line.substring(i, end));
+    }
+  }
+}
+
 void initDI() {
   // 중복 등록 방지
   if (getIt.isRegistered<Dio>()) return;
@@ -36,10 +52,8 @@ void initDI() {
       maxHistoryItems: 1000,
     ),
     logger: TalkerLogger(
-      output: (message) {
-        // ignore: avoid_print
-        print(message);
-      },
+      settings: TalkerLoggerSettings(maxLineWidth: 200),
+      output: _talkerChunkedConsoleOutput,
     ),
   );
   getIt.registerLazySingleton<Talker>(() => talker);
