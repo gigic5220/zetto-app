@@ -1,19 +1,29 @@
 import 'dart:io';
 
+import 'package:design_system/components/molecules.dart';
 import 'package:design_system/extenstion.dart';
 import 'package:flutter/material.dart';
 import 'package:inspector/inspector.dart';
 
+import '../../../core/utils/utils.dart';
 import 'dev_tools.dart';
+import 'plugin/dev_tools_plugin.dart';
 import 'util/shake_detector.dart';
 import 'view/dev_tools_page.dart';
 
 class DevToolsOverlay extends StatefulWidget {
-  const DevToolsOverlay({super.key, required this.navigatorKey, required this.child, this.initialShowDevTools = true});
+  const DevToolsOverlay({
+    super.key,
+    required this.navigatorKey,
+    required this.child,
+    this.initialShowDevTools = true,
+    this.plugins,
+  });
 
   final GlobalKey<NavigatorState> navigatorKey;
   final Widget child;
   final bool initialShowDevTools;
+  final List<DevToolsPlugin>? plugins;
 
   @override
   State<DevToolsOverlay> createState() => _DevToolsOverlayState();
@@ -43,7 +53,7 @@ class _DevToolsOverlayState extends State<DevToolsOverlay> {
     if (Platform.isAndroid || Platform.isIOS) {
       _shakeDetector = ShakeDetector.autoStart(
         onPhoneShake: _showDevTools,
-        shakeThresholdGravity: 1.4,
+        shakeThresholdGravity: 1.3,
         shakeSlopTimeMS: 200,
         shakeCountResetTime: 3000,
         shakeDetectCount: 3,
@@ -90,6 +100,10 @@ class _DevToolsOverlayState extends State<DevToolsOverlay> {
     setState(() {
       _isShowDevTools = !_isShowDevTools;
     });
+
+    if (!_isShowDevTools) {
+      ToastUtils.showToast(context, (context) => DSToast(type: .info, text: '폰을 흔들면 다시 표시됩니다.'));
+    }
   }
 
   @override
@@ -154,7 +168,9 @@ class _DevToolsOverlayState extends State<DevToolsOverlay> {
                     _hideDevTools();
                     await Navigator.push(
                       devTools.context!,
-                      MaterialPageRoute(builder: (context) => DevToolsPage(devTools: devTools)),
+                      MaterialPageRoute(
+                        builder: (context) => DevToolsPage(devTools: devTools, plugins: widget.plugins),
+                      ),
                     );
                     _showDevTools();
                   },
