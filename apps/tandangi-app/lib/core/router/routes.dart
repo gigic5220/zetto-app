@@ -10,7 +10,9 @@ import 'package:tandangi/core/di/di.dart';
 import 'package:tandangi/feature/main/home/home_page.dart';
 import 'package:tandangi/feature/login/login_page.dart';
 import 'package:tandangi/feature/main/main_page.dart';
+import 'package:tandangi/feature/main/report/report_page.dart';
 import 'package:tandangi/feature/on_boarding/on_boarding_page.dart';
+import 'package:tandangi/feature/photo_upload/photo_upload_page.dart';
 import 'package:tandangi/feature/splash/splash_page.dart';
 import 'package:tandangi/feature/web_view/web_view_page.dart';
 
@@ -98,6 +100,17 @@ class Router extends _$Router {
                 ),
               ],
             ),
+            StatefulShellBranch(
+              //navigatorKey: ref.watch(shellNavigationKeyProvider),
+              routes: [
+                GoRoute(
+                  name: ReportPage.routeName,
+                  path: '/report',
+                  pageBuilder: (context, state) =>
+                      NoTransitionPage(child: ReportPage()),
+                ),
+              ],
+            ),
             // StatefulShellBranch(
             //   navigatorKey: ref.watch(shellNavigationKeyProvider),
             //   routes: [
@@ -131,18 +144,27 @@ class Router extends _$Router {
             // ),
           ],
         ),
-        // GoRoute(
-        //   name: WebViewPage.routeName,
-        //   path: '/${WebViewPage.routeName}',
-        //   pageBuilder: (context, state) => buildPageWithDefaultTransition(
-        //     context: context,
-        //     state: state,
-        //     child: WebViewPage(
-        //       url: state.uri.queryParameters['url'] ?? '',
-        //       title: state.uri.queryParameters['title'] ?? '',
-        //     ),
-        //   ),
-        // ),
+        GoRoute(
+          name: PhotoUploadPage.routeName,
+          path: '/${PhotoUploadPage.routeName}',
+          pageBuilder: (context, state) => buildPageWithDefaultTransition(
+            context: context,
+            state: state,
+            child: const PhotoUploadPage(),
+          ),
+        ),
+        GoRoute(
+          name: WebViewPage.routeName,
+          path: '/${WebViewPage.routeName}',
+          pageBuilder: (context, state) => buildPageWithDefaultTransition(
+            context: context,
+            state: state,
+            child: WebViewPage(
+              url: state.uri.queryParameters['url'] ?? '',
+              title: state.uri.queryParameters['title'] ?? '',
+            ),
+          ),
+        ),
       ],
     );
   }

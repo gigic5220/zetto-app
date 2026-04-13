@@ -4,6 +4,8 @@ import 'package:tandangi/data/dto/analyze_response_dto.dart';
 abstract class FoodAnalyzeRemoteDataSource {
   Future<AnalyzeResponseDto> analyze({
     required String imagePath,
+    required String imageStoragePath,
+    required String imageDownloadUrl,
     String? prompt,
   });
 }
@@ -16,13 +18,14 @@ class FoodAnalyzeRemoteDataSourceImpl implements FoodAnalyzeRemoteDataSource {
   @override
   Future<AnalyzeResponseDto> analyze({
     required String imagePath,
+    required String imageStoragePath,
+    required String imageDownloadUrl,
     String? prompt,
   }) async {
     final formData = FormData.fromMap({
-      'image': await MultipartFile.fromFile(
-        imagePath,
-        filename: 'image.jpg',
-      ),
+      'image': await MultipartFile.fromFile(imagePath, filename: 'image.jpg'),
+      'imageStoragePath': imageStoragePath,
+      'imageDownloadUrl': imageDownloadUrl,
       if (prompt != null && prompt.isNotEmpty) 'prompt': prompt,
     });
 

@@ -10,22 +10,25 @@ class MainPage extends StatefulWidget {
   State<MainPage> createState() => _MainPageState();
 }
 
-class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin {
+class _MainPageState extends State<MainPage>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _moveAnimation;
 
   Animation<double> createMoveAnimation(double begin, double end) {
-    return Tween<double>(
-      begin: begin,
-      end: end,
-    ).animate(CurvedAnimation(parent: _animationController, curve: Curves.easeOutQuad));
+    return Tween<double>(begin: begin, end: end).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeOutQuad),
+    );
   }
 
   @override
   void initState() {
     super.initState();
 
-    _animationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 300));
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
     _moveAnimation = createMoveAnimation(0, 0);
   }
 
@@ -45,7 +48,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: '탭1'),
           BottomNavigationBarItem(icon: Icon(Icons.folder_open), label: '탭2'),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: '탭3'),
+          //BottomNavigationBarItem(icon: Icon(Icons.settings), label: '탭3'),
         ],
         currentIndex: widget.navigationShell.currentIndex,
         onTap: (index) {

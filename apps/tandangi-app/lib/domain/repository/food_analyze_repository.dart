@@ -4,6 +4,8 @@ abstract class FoodAnalyzeRepository {
   /// `POST /api/ai/analyze` (multipart: image, optional prompt)
   Future<FoodAnalyzeResultEntity> analyzeImage({
     required String imagePath,
+    required String imageStoragePath,
+    required String imageDownloadUrl,
     String? prompt,
   });
 }

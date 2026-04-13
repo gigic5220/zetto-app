@@ -12,12 +12,19 @@ class FoodAnalyzeRepositoryImpl implements FoodAnalyzeRepository {
   @override
   Future<FoodAnalyzeResultEntity> analyzeImage({
     required String imagePath,
+    required String imageStoragePath,
+    required String imageDownloadUrl,
     String? prompt,
   }) async {
     if (FirebaseAuth.instance.currentUser == null) {
       throw StateError('Not logged in');
     }
-    final dto = await _remote.analyze(imagePath: imagePath, prompt: prompt);
+    final dto = await _remote.analyze(
+      imagePath: imagePath,
+      imageStoragePath: imageStoragePath,
+      imageDownloadUrl: imageDownloadUrl,
+      prompt: prompt,
+    );
     return FoodAnalyzeMapper.toEntity(dto);
   }
 }

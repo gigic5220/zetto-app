@@ -6,8 +6,10 @@ import 'package:design_system/extenstion.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tandangi/feature/main/home/controller/home_provider.dart';
+import 'package:tandangi/feature/photo_upload/photo_upload_page.dart';
 import 'package:tandangi/gen/assets.gen.dart';
 
 Future<void> signOut() async {
@@ -26,40 +28,6 @@ class HomePage extends ConsumerStatefulWidget {
 
 class _HomePageState extends ConsumerState<HomePage>
     with HomeStateMixin, HomeActionMixin {
-  // bool _loading = false;
-  // String? _error;
-  // FoodAnalyzeResultEntity? _result;
-
-  // Future<void> _handleLogout() async {
-  //   await signOut();
-  // }
-
-  // Future<void> _pickAndAnalyze() async {
-  //   final XFile? picked = await ImagePicker().pickImage(
-  //     source: ImageSource.gallery,
-  //     imageQuality: 85,
-  //     maxWidth: 1280,
-  //   );
-  //   if (picked == null) return;
-
-  //   setState(() {
-  //     _loading = true;
-  //     _error = null;
-  //     _result = null;
-  //   });
-
-  //   try {
-  //     final res = await getIt<FoodAnalyzeRepository>().analyzeImage(
-  //       imagePath: picked.path,
-  //     );
-  //     setState(() => _result = res);
-  //   } catch (e) {
-  //     setState(() => _error = e.toString());
-  //   } finally {
-  //     if (mounted) setState(() => _loading = false);
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -304,7 +272,9 @@ class _HomePageState extends ConsumerState<HomePage>
                             text:
                                 '${userCharacterDetail.userCharacter.characterName} 밥 먹이기',
                             variant: DSSolidButtonVariant.primary,
-                            onTap: () {},
+                            onTap: () {
+                              context.pushNamed(PhotoUploadPage.routeName);
+                            },
                             leadingUri: Assets.svgs.icCameraFill,
                           ),
                         ],
