@@ -5,7 +5,7 @@ import '../../../components/ions.dart';
 import '../../extension/context_extension.dart';
 import '../../foundations/component/colors/generated_component_colors.dart';
 
-enum DSListTitleSize { large, medium, small }
+enum DSListTitleSize { large, medium, small, xSmall }
 
 enum DSListTitleType { normal, value }
 
@@ -95,6 +95,9 @@ class DSListTitle extends StatefulWidget {
     trailingWidget: trailingWidget,
   );
 
+  factory DSListTitle.xSmall({required String title, Widget? trailingWidget}) =>
+      DSListTitle._(size: .xSmall, type: .normal, title: title, trailingWidget: trailingWidget);
+
   final DSListTitleSize size;
   final DSListTitleType type;
   final String title;
@@ -119,8 +122,10 @@ class _DSListTitleState extends State<DSListTitle> {
   late Color descriptionColor;
 
   late EdgeInsets padding;
-  late double minHeight;
   late double titleGap;
+
+  double minHeight = 0.0;
+  double maxHeight = double.infinity;
 
   @override
   void didChangeDependencies() {
@@ -164,13 +169,21 @@ class _DSListTitleState extends State<DSListTitle> {
         titleTextStyle = context.textTheme.listTitleSMedium;
         descriptionTextStyle = context.textTheme.bodyMRegular;
         break;
+      case .xSmall:
+        maxHeight = 32;
+        padding = .symmetric(vertical: context.componentPadding.medium);
+        titleGap = context.componentGap.xxSmall;
+        titleTextStyle = context.textTheme.labelSMedium;
+        titleColor = dataTextColors.secondary;
+        descriptionTextStyle = context.textTheme.bodyMRegular;
+        break;
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: BoxConstraints(minHeight: minHeight),
+      constraints: BoxConstraints(minHeight: minHeight, maxHeight: maxHeight),
       padding: padding,
       child: Row(
         spacing: context.componentGap.medium,

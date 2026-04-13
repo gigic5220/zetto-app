@@ -4,7 +4,7 @@ import '../../../components/atoms.dart';
 import '../../extension/context_extension.dart';
 import '../../foundations/component/colors/generated_component_colors.dart';
 
-enum DSListItemSize { large, medium, small }
+enum DSListItemSize { large, medium, small, xSmall }
 
 enum DSListItemVariant { normal, warning }
 
@@ -91,6 +91,24 @@ class DSListItem extends StatefulWidget {
     isShowPushBadge: isShowPushBadge,
   );
 
+  factory DSListItem.xSmall({
+    required String title,
+    required DSListItemVariant variant,
+    Widget? leadingWidget,
+    Widget? titleBadge,
+    String? trailingText,
+    Widget? trailingBadge,
+  }) => DSListItem._(
+    size: .xSmall,
+    title: title,
+    variant: variant,
+    leadingWidget: leadingWidget,
+    titleBadge: titleBadge,
+    trailingText: trailingText,
+    trailingBadge: trailingBadge,
+    isShowPushBadge: false,
+  );
+
   final DSListItemSize size;
   final DSListItemVariant variant;
   final String title;
@@ -139,7 +157,7 @@ class _DSListItemState extends State<DSListItem> {
     switch (widget.variant) {
       case .normal:
         subTitleColor = dataTextColors.tertiary;
-        titleColor = dataTextColors.primary;
+        titleColor = widget.size != .xSmall ? dataTextColors.primary : dataTextColors.tertiary;
         descriptionColor = dataTextColors.tertiary;
         trailingColor = dataTextColors.tertiary;
         break;
@@ -168,6 +186,10 @@ class _DSListItemState extends State<DSListItem> {
         subTitleTextStyle = context.textTheme.bodySRegular;
         titleTextStyle = context.textTheme.bodyMMedium;
         descriptionTextStyle = context.textTheme.bodySRegular;
+        trailingTextStyle = context.textTheme.labelMMedium;
+        break;
+      case .xSmall:
+        titleTextStyle = context.textTheme.bodyMMedium;
         trailingTextStyle = context.textTheme.labelMMedium;
         break;
     }

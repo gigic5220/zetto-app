@@ -15,10 +15,11 @@ class DSCategoryItem {
 }
 
 class DSCategory extends StatefulWidget {
-  const DSCategory({super.key, required this.items, required this.tabController, this.onTap});
+  const DSCategory({super.key, required this.items, required this.tabController, this.padding, this.onTap});
 
   final List<DSCategoryItem> items;
   final TabController? tabController;
+  final EdgeInsetsGeometry? padding;
   final Function(int index)? onTap;
 
   @override
@@ -66,6 +67,7 @@ class _DSCategoryState extends State<DSCategory> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return TabBar(
       controller: tabController,
+      padding: widget.padding,
       tabAlignment: .start,
       isScrollable: true,
       tabs: widget.items
@@ -126,7 +128,6 @@ class _DSCategoryState extends State<DSCategory> with TickerProviderStateMixin {
       ),
       indicatorPadding: .symmetric(horizontal: gap / 2),
       labelPadding: .symmetric(horizontal: gap / 2),
-      padding: .zero,
       labelStyle: textStyle,
       unselectedLabelStyle: textStyle,
       labelColor: categoryTextColors.activated,

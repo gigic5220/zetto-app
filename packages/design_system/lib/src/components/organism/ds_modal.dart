@@ -53,7 +53,7 @@ class _DSModalState extends State<DSModal> {
           border: Border.all(color: borderColor, strokeAlign: BorderSide.strokeAlignOutside),
           borderRadius: BorderRadius.circular(context.componentRadius.xxLarge),
         ),
-        child: Column(children: [widget.noticeWidget, widget.actionWidget]),
+        child: Column(mainAxisSize: MainAxisSize.min, children: [widget.noticeWidget, widget.actionWidget]),
       ),
     );
   }
