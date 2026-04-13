@@ -1,11 +1,13 @@
+import 'package:tandangi/core/developer/plugins/user_info_plugin.dart';
 import 'package:core_app/core/dev_tools.dart';
 import 'package:core_app/core/theme/theme.dart';
+import 'package:core_app/route/route.dart';
 import 'package:design_system/responsive.dart';
 import 'package:design_system/theme/theme.dart';
+import 'package:tandangi/core/router/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tandangi/core/router/routes.dart';
 
 import 'flavors.dart';
 
@@ -24,6 +26,8 @@ class _AppState extends ConsumerState<App> {
     super.initState();
     _themeModeNotifier = AppThemeModeNotifier();
     _themeModeNotifier.load();
+
+    GoRouterWatcher.instance.initialize(ref.read(routerProvider));
   }
 
   @override
@@ -53,20 +57,28 @@ class _AppState extends ConsumerState<App> {
                 : Brightness.light;
 
             final SystemUiOverlayStyle overlayStyle = SystemUiOverlayStyle(
-              statusBarColor: semantic.bgSection,
+              statusBarColor: semantic.bgPage,
               statusBarIconBrightness: iconBrightness,
               statusBarBrightness: statusBarBrightness,
-              systemNavigationBarColor: semantic.bgSection,
+              systemNavigationBarColor: semantic.bgPage,
               systemNavigationBarDividerColor: semantic.borderSubtle,
               systemNavigationBarIconBrightness: iconBrightness,
             );
 
-            return DevToolsOverlay(
-              navigatorKey: ref.read(rootNavigationKeyProvider),
-              child: AnnotatedRegion<SystemUiOverlayStyle>(
-                value: overlayStyle,
-                child: child ?? const SizedBox.shrink(),
-              ),
+            return Overlay(
+              initialEntries: [
+                OverlayEntry(
+                  builder: (context) => DevToolsOverlay(
+                    navigatorKey: ref.read(rootNavigationKeyProvider),
+                    initialShowDevTools: FlavorInfo.flavor == Flavor.dev,
+                    plugins: [UserInfoPlugin()],
+                    child: AnnotatedRegion<SystemUiOverlayStyle>(
+                      value: overlayStyle,
+                      child: Scaffold(body: child ?? const SizedBox.shrink()),
+                    ),
+                  ),
+                ),
+              ],
             );
           },
           routerConfig: ref.watch(routerProvider),
