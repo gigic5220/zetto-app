@@ -7,12 +7,13 @@ import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 import 'package:tandangi/core/di/di.dart';
+import 'package:tandangi/feature/analyze_report/analyze_report_page.dart';
 import 'package:tandangi/feature/main/home/home_page.dart';
 import 'package:tandangi/feature/login/login_page.dart';
 import 'package:tandangi/feature/main/main_page.dart';
 import 'package:tandangi/feature/main/report/report_page.dart';
 import 'package:tandangi/feature/on_boarding/on_boarding_page.dart';
-import 'package:tandangi/feature/photo_upload/photo_upload_page.dart';
+import 'package:tandangi/feature/select_food_photo/select_food_photo_page.dart';
 import 'package:tandangi/feature/splash/splash_page.dart';
 import 'package:tandangi/feature/web_view/web_view_page.dart';
 
@@ -145,12 +146,21 @@ class Router extends _$Router {
           ],
         ),
         GoRoute(
-          name: PhotoUploadPage.routeName,
-          path: '/${PhotoUploadPage.routeName}',
+          name: SelectFoodPhotoPage.routeName,
+          path: '/${SelectFoodPhotoPage.routeName}',
           pageBuilder: (context, state) => buildPageWithDefaultTransition(
             context: context,
             state: state,
-            child: const PhotoUploadPage(),
+            child: const SelectFoodPhotoPage(),
+          ),
+        ),
+        GoRoute(
+          name: AnalyzeReportPage.routeName,
+          path: '/${AnalyzeReportPage.routeName}',
+          pageBuilder: (context, state) => buildPageWithDefaultTransition(
+            context: context,
+            state: state,
+            child: const AnalyzeReportPage(),
           ),
         ),
         GoRoute(

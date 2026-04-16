@@ -18,8 +18,8 @@ class FlavorInfo {
     switch (flavor) {
       case Flavor.dev:
         //return 'https://tandangi-api-741098864815.asia-northeast3.run.app';
-        //return 'http://192.168.2.40:8080';
-        return 'http://192.168.0.90:8080';
+        return 'http://192.168.0.206:8080';
+      //return 'http://192.168.0.96:8080';
 
       case Flavor.prod:
         return 'https://tandangi-api-741098864815.asia-northeast3.run.app';

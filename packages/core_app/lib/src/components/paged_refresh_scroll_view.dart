@@ -8,8 +8,8 @@ class PagedRefreshScrollView extends StatefulWidget {
     required this.indicatorHeight,
     required this.indicatorBuilder,
     required this.loadMoreIndicator,
-    required this.onRefresh,
     required this.onLoadMore,
+    this.onRefresh,
     this.grid,
     this.list,
     this.scrollController,
@@ -22,7 +22,7 @@ class PagedRefreshScrollView extends StatefulWidget {
     required double indicatorHeight,
     required Widget Function(IndicatorStateChange? state) indicatorBuilder,
     required Widget loadMoreIndicator,
-    required Future<void> Function() onRefresh,
+    required Future<void> Function()? onRefresh,
     required Future<void> Function() onLoadMore,
     ScrollController? scrollController,
     EdgeInsets? padding,
@@ -46,7 +46,7 @@ class PagedRefreshScrollView extends StatefulWidget {
     required double indicatorHeight,
     required Widget Function(IndicatorStateChange? state) indicatorBuilder,
     required Widget loadMoreIndicator,
-    required Future<void> Function() onRefresh,
+    required Future<void> Function()? onRefresh,
     required Future<void> Function() onLoadMore,
     ScrollController? scrollController,
     EdgeInsets? padding,
@@ -74,7 +74,7 @@ class PagedRefreshScrollView extends StatefulWidget {
   final double indicatorHeight;
   final Widget Function(IndicatorStateChange? state) indicatorBuilder;
   final Widget loadMoreIndicator;
-  final Future<void> Function() onRefresh;
+  final Future<void> Function()? onRefresh;
   final Future<void> Function() onLoadMore;
 
   @override
@@ -126,12 +126,15 @@ class _PagedRefreshScrollViewState extends State<PagedRefreshScrollView> {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshScrollView(
-      indicatorHeight: widget.indicatorHeight,
-      indicatorBuilder: widget.indicatorBuilder,
-      onRefresh: widget.onRefresh,
-      child: _buildScrollWidget(),
-    );
+    return switch (widget.onRefresh != null) {
+      true => RefreshScrollView(
+        indicatorHeight: widget.indicatorHeight,
+        indicatorBuilder: widget.indicatorBuilder,
+        onRefresh: widget.onRefresh!,
+        child: _buildScrollWidget(),
+      ),
+      false => _buildScrollWidget(),
+    };
   }
 
   Widget _buildScrollWidget() {

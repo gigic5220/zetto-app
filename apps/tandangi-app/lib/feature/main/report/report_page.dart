@@ -37,7 +37,7 @@ class _ReportPageState extends ConsumerState<ReportPage>
                 variant: DSSolidButtonVariant.primary,
                 text: '분석하기',
                 onTap: () async {
-                  await onTapFoodAnalyze(ref);
+                  //await onTapFoodAnalyze(ref);
                 },
               ),
               SizedBox(height: context.componentGap.large),

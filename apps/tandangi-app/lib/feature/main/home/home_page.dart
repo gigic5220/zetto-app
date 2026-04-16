@@ -9,7 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tandangi/feature/main/home/controller/home_provider.dart';
-import 'package:tandangi/feature/photo_upload/photo_upload_page.dart';
+import 'package:tandangi/feature/select_food_photo/select_food_photo_page.dart';
 import 'package:tandangi/gen/assets.gen.dart';
 
 Future<void> signOut() async {
@@ -273,7 +273,7 @@ class _HomePageState extends ConsumerState<HomePage>
                                 '${userCharacterDetail.userCharacter.characterName} 밥 먹이기',
                             variant: DSSolidButtonVariant.primary,
                             onTap: () {
-                              context.pushNamed(PhotoUploadPage.routeName);
+                              context.pushNamed(SelectFoodPhotoPage.routeName);
                             },
                             leadingUri: Assets.svgs.icCameraFill,
                           ),

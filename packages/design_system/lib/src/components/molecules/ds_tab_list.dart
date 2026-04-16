@@ -40,7 +40,6 @@ class _DSTabListState extends State<DSTabList> with TickerProviderStateMixin {
   late TabTextColors tabTextColors;
 
   late TextStyle textStyle;
-  late double bottomPadding;
 
   @override
   void initState() {
@@ -69,61 +68,57 @@ class _DSTabListState extends State<DSTabList> with TickerProviderStateMixin {
 
     textStyle = context.textTheme.labelLMedium;
     widget.isScrollable ? 20 : 0;
-    bottomPadding = context.componentPadding.xLarge;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: .only(bottom: bottomPadding),
-      child: TabBar(
-        padding: .symmetric(horizontal: widget.horizontalPadding ?? 0),
-        controller: tabController,
-        tabAlignment: widget.isScrollable ? .start : .fill,
-        isScrollable: widget.isScrollable,
-        tabs: widget.items
-            .map(
-              (item) => Padding(
-                padding: .all(context.componentPadding.xLarge),
-                child: DSPushBadge.position(
-                  isShow: item.showPushBadge,
-                  right: -8,
-                  top: 0,
-                  size: .small,
-                  child: Row(
-                    mainAxisSize: .min,
-                    spacing: context.componentGap.xxSmall,
-                    children: [
-                      if (item.iconUri != null)
-                        Builder(
-                          builder: (context) {
-                            final DefaultTextStyle parent = DefaultTextStyle.of(context);
-                            return DSWrapper(uri: item.iconUri!, view: WrapperView.fix12, svgColor: parent.style.color);
-                          },
-                        ),
-                      Text(item.text),
-                      ?item.textBadge,
-                    ],
-                  ),
+    return TabBar(
+      padding: .symmetric(horizontal: widget.horizontalPadding ?? 0),
+      controller: tabController,
+      tabAlignment: widget.isScrollable ? .start : .fill,
+      isScrollable: widget.isScrollable,
+      tabs: widget.items
+          .map(
+            (item) => Padding(
+              padding: .all(context.componentPadding.xLarge),
+              child: DSPushBadge.position(
+                isShow: item.showPushBadge,
+                right: -8,
+                top: 0,
+                size: .small,
+                child: Row(
+                  mainAxisSize: .min,
+                  spacing: context.componentGap.xxSmall,
+                  children: [
+                    if (item.iconUri != null)
+                      Builder(
+                        builder: (context) {
+                          final DefaultTextStyle parent = DefaultTextStyle.of(context);
+                          return DSWrapper(uri: item.iconUri!, view: WrapperView.fix12, svgColor: parent.style.color);
+                        },
+                      ),
+                    Text(item.text),
+                    ?item.textBadge,
+                  ],
                 ),
               ),
-            )
-            .toList(),
-        indicatorSize: .tab,
-        indicatorWeight: 0,
-        dividerHeight: 0,
-        dividerColor: Colors.transparent,
-        indicator: BoxDecoration(
-          border: Border(bottom: BorderSide(color: tabBorderColors.activated, width: 2)),
-        ),
-        indicatorPadding: .zero,
-        labelPadding: .zero,
-        labelStyle: textStyle,
-        unselectedLabelStyle: textStyle,
-        labelColor: tabTextColors.activated,
-        unselectedLabelColor: tabTextColors.base,
-        onTap: (index) => widget.onTap?.call(index),
+            ),
+          )
+          .toList(),
+      indicatorSize: .tab,
+      indicatorWeight: 0,
+      dividerHeight: 0,
+      dividerColor: Colors.transparent,
+      indicator: BoxDecoration(
+        border: Border(bottom: BorderSide(color: tabBorderColors.activated, width: 2)),
       ),
+      indicatorPadding: .zero,
+      labelPadding: .zero,
+      labelStyle: textStyle,
+      unselectedLabelStyle: textStyle,
+      labelColor: tabTextColors.activated,
+      unselectedLabelColor: tabTextColors.base,
+      onTap: (index) => widget.onTap?.call(index),
     );
   }
 }
