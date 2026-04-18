@@ -10,6 +10,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tandangi/feature/main/home/controller/home_provider.dart';
 import 'package:tandangi/feature/select_food_photo/select_food_photo_page.dart';
+import 'package:tandangi/feature/shop/shop_page.dart';
 import 'package:tandangi/gen/assets.gen.dart';
 
 Future<void> signOut() async {
@@ -31,7 +32,18 @@ class _HomePageState extends ConsumerState<HomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: DSAppBar.logo(logoUri: 'assets/images/logo.png'),
+      appBar: DSAppBar.logo(
+        logoUri: 'assets/images/logo.png',
+        actionWidgetList: [
+          DSSolidButton.medium(
+            text: '테스트',
+            onTap: () {
+              context.pushNamed(ShopPage.routeName);
+            },
+            variant: .primary,
+          ),
+        ],
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: context.margin.width),
         child: Stack(

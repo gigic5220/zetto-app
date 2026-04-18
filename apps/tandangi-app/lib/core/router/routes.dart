@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:talker_flutter/talker_flutter.dart';
@@ -14,6 +13,7 @@ import 'package:tandangi/feature/main/main_page.dart';
 import 'package:tandangi/feature/main/report/report_page.dart';
 import 'package:tandangi/feature/on_boarding/on_boarding_page.dart';
 import 'package:tandangi/feature/select_food_photo/select_food_photo_page.dart';
+import 'package:tandangi/feature/shop/shop_page.dart';
 import 'package:tandangi/feature/splash/splash_page.dart';
 import 'package:tandangi/feature/web_view/web_view_page.dart';
 
@@ -34,7 +34,8 @@ class Router extends _$Router {
   @override
   GoRouter build() {
     return GoRouter(
-      initialLocation: '/${SplashPage.routeName}',
+      //initialLocation: '/${SplashPage.routeName}',
+      initialLocation: '/${ShopPage.routeName}',
       observers: [TalkerRouteObserver(getIt<Talker>())],
       debugLogDiagnostics: true,
       overridePlatformDefaultLocation: true,
@@ -42,21 +43,21 @@ class Router extends _$Router {
       refreshListenable: _GoRouterRefreshStream(
         FirebaseAuth.instance.authStateChanges(),
       ),
-      redirect: (context, state) {
-        final isLoggedIn = FirebaseAuth.instance.currentUser != null;
-        final currentPath = state.matchedLocation;
-        final isLoginRoute = currentPath == '/${LoginPage.routeName}';
-        final isSplashRoute = currentPath == '/${SplashPage.routeName}';
-        final isWebViewRoute = currentPath == '/${WebViewPage.routeName}';
+      // redirect: (context, state) {
+      //   final isLoggedIn = FirebaseAuth.instance.currentUser != null;
+      //   final currentPath = state.matchedLocation;
+      //   final isLoginRoute = currentPath == '/${LoginPage.routeName}';
+      //   final isSplashRoute = currentPath == '/${SplashPage.routeName}';
+      //   final isWebViewRoute = currentPath == '/${WebViewPage.routeName}';
 
-        // 미로그인인데 로그인·스플래시 페이지가 아닌 곳 → 로그인으로
-        if (!isLoggedIn && !isLoginRoute && !isSplashRoute && !isWebViewRoute) {
-          return '/${LoginPage.routeName}';
-        }
+      //   // 미로그인인데 로그인·스플래시 페이지가 아닌 곳 → 로그인으로
+      //   if (!isLoggedIn && !isLoginRoute && !isSplashRoute && !isWebViewRoute) {
+      //     return '/${LoginPage.routeName}';
+      //   }
 
-        // 그 외엔 현재 위치 유지
-        return null;
-      },
+      //   // 그 외엔 현재 위치 유지
+      //   return null;
+      // },
       routes: [
         GoRoute(
           name: SplashPage.routeName,
@@ -161,6 +162,15 @@ class Router extends _$Router {
             context: context,
             state: state,
             child: const AnalyzeReportPage(),
+          ),
+        ),
+        GoRoute(
+          name: ShopPage.routeName,
+          path: '/${ShopPage.routeName}',
+          pageBuilder: (context, state) => buildPageWithDefaultTransition(
+            context: context,
+            state: state,
+            child: const ShopPage(),
           ),
         ),
         GoRoute(

@@ -10,6 +10,7 @@ abstract class UserRemoteDataSource {
     required int age,
     required int height,
     required int weight,
+    required String physicalActivityLevel,
   });
 }
 
@@ -49,6 +50,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     required int age,
     required int height,
     required int weight,
+    required String physicalActivityLevel,
   }) async {
     await _dio.put(
       '/api/user/onboarding',
@@ -58,6 +60,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         'age': age,
         'height': height,
         'weight': weight,
+        'physicalActivityLevel': physicalActivityLevel,
       },
     );
   }

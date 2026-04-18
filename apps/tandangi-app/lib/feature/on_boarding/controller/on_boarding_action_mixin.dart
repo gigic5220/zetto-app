@@ -46,6 +46,7 @@ mixin OnBoardingActionMixin {
           age: age,
           height: height,
           weight: weight,
+          physicalActivityLevelEnum: PhysicalActivityLevelEnum.sedentary,
         );
 
         ref.invalidate(meProvider);

@@ -5,6 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tandangi/core/di/di.dart';
 import 'package:tandangi/domain/entity/character_entity.dart';
+import 'package:tandangi/domain/enum/physical_activity_level_enum.dart';
 import 'package:tandangi/domain/enum/gender_enum.dart';
 import 'package:tandangi/domain/repository/character_repository.dart';
 import 'package:tandangi/domain/repository/user_repository.dart';

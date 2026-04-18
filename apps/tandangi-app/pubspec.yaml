@@ -3,7 +3,7 @@ description: "A new Flutter project."
 
 publish_to: 'none'
 
-version: 1.0.0+3
+version: 1.0.0+4
 
 environment:
   sdk: ^3.11.0
@@ -63,6 +63,9 @@ dependencies:
   photo_manager: ^3.9.0
   photo_manager_image_provider: ^2.2.0
   custom_refresh_indicator: ^4.0.1
+  in_app_purchase: ^3.2.3
+  in_app_purchase_android: ^0.4.0+10
+  in_app_purchase_storekit: ^0.4.8+1
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -1,5 +1,6 @@
 import 'package:tandangi/domain/entity/character_entity.dart';
 import 'package:tandangi/domain/entity/user_entity.dart';
+import 'package:tandangi/domain/enum/physical_activity_level_enum.dart';
 import 'package:tandangi/domain/enum/gender_enum.dart';
 
 abstract class UserRepository {
@@ -11,5 +12,6 @@ abstract class UserRepository {
     required int age,
     required int height,
     required int weight,
+    required PhysicalActivityLevelEnum physicalActivityLevelEnum,
   });
 }

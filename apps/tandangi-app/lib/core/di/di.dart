@@ -9,17 +9,20 @@ import 'package:tandangi/data/data_source/app_version_remote_data_source.dart';
 import 'package:tandangi/data/data_source/auth_remote_data_source.dart';
 import 'package:tandangi/data/data_source/character_remote_data_source.dart';
 import 'package:tandangi/data/data_source/food_analyze_remote_data_source.dart';
+import 'package:tandangi/data/data_source/product_remote_data_source.dart';
 import 'package:tandangi/data/data_source/user_remote_data_source.dart';
 import 'package:tandangi/data/repository/app_version_repository_impl.dart';
 import 'package:tandangi/data/repository/auth_repository_impl.dart';
 import 'package:tandangi/data/repository/character_repository_impl.dart';
 import 'package:tandangi/data/repository/food_analyze_repository_impl.dart';
+import 'package:tandangi/data/repository/product_repository_impl.dart';
 import 'package:tandangi/data/repository/user_repository_impl.dart';
 import 'package:tandangi/domain/repository/app_version_repository.dart';
 import 'package:tandangi/domain/repository/auth_repository.dart';
 import 'package:tandangi/domain/repository/character_repository.dart';
 import 'package:tandangi/domain/repository/food_analyze_repository.dart';
 import 'package:tandangi/util/secured_storage/secured_storage.dart';
+import 'package:tandangi/domain/repository/product_repository.dart';
 import 'package:tandangi/domain/repository/user_repository.dart';
 import 'package:tandangi/flavors.dart';
 
@@ -112,6 +115,10 @@ void initDI() {
     () => FoodAnalyzeRemoteDataSourceImpl(getIt<Dio>()),
   );
 
+  getIt.registerLazySingleton<ProductRemoteDataSource>(
+    () => ProductRemoteDataSourceImpl(getIt<Dio>()),
+  );
+
   // ─────────────────────────────────────────────
   // 3) Data: Repositories
   // ─────────────────────────────────────────────
@@ -133,6 +140,10 @@ void initDI() {
 
   getIt.registerLazySingleton<FoodAnalyzeRepository>(
     () => FoodAnalyzeRepositoryImpl(getIt<FoodAnalyzeRemoteDataSource>()),
+  );
+
+  getIt.registerLazySingleton<ProductRepository>(
+    () => ProductRepositoryImpl(getIt<ProductRemoteDataSource>()),
   );
 
   // ─────────────────────────────────────────────
