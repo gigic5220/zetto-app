@@ -10,6 +10,7 @@ import 'package:tandangi/feature/analyze_report/analyze_report_page.dart';
 import 'package:tandangi/feature/main/home/home_page.dart';
 import 'package:tandangi/feature/login/login_page.dart';
 import 'package:tandangi/feature/main/main_page.dart';
+import 'package:tandangi/feature/main/my/my_page.dart';
 import 'package:tandangi/feature/main/report/report_page.dart';
 import 'package:tandangi/feature/on_boarding/on_boarding_page.dart';
 import 'package:tandangi/feature/select_food_photo/select_food_photo_page.dart';
@@ -34,8 +35,8 @@ class Router extends _$Router {
   @override
   GoRouter build() {
     return GoRouter(
-      //initialLocation: '/${SplashPage.routeName}',
-      initialLocation: '/${ShopPage.routeName}',
+      initialLocation: '/${SplashPage.routeName}',
+      //initialLocation: '/${ShopPage.routeName}',
       observers: [TalkerRouteObserver(getIt<Talker>())],
       debugLogDiagnostics: true,
       overridePlatformDefaultLocation: true,
@@ -43,21 +44,21 @@ class Router extends _$Router {
       refreshListenable: _GoRouterRefreshStream(
         FirebaseAuth.instance.authStateChanges(),
       ),
-      // redirect: (context, state) {
-      //   final isLoggedIn = FirebaseAuth.instance.currentUser != null;
-      //   final currentPath = state.matchedLocation;
-      //   final isLoginRoute = currentPath == '/${LoginPage.routeName}';
-      //   final isSplashRoute = currentPath == '/${SplashPage.routeName}';
-      //   final isWebViewRoute = currentPath == '/${WebViewPage.routeName}';
+      redirect: (context, state) {
+        final isLoggedIn = FirebaseAuth.instance.currentUser != null;
+        final currentPath = state.matchedLocation;
+        final isLoginRoute = currentPath == '/${LoginPage.routeName}';
+        final isSplashRoute = currentPath == '/${SplashPage.routeName}';
+        final isWebViewRoute = currentPath == '/${WebViewPage.routeName}';
 
-      //   // 미로그인인데 로그인·스플래시 페이지가 아닌 곳 → 로그인으로
-      //   if (!isLoggedIn && !isLoginRoute && !isSplashRoute && !isWebViewRoute) {
-      //     return '/${LoginPage.routeName}';
-      //   }
+        // 미로그인인데 로그인·스플래시 페이지가 아닌 곳 → 로그인으로
+        if (!isLoggedIn && !isLoginRoute && !isSplashRoute && !isWebViewRoute) {
+          return '/${LoginPage.routeName}';
+        }
 
-      //   // 그 외엔 현재 위치 유지
-      //   return null;
-      // },
+        // 그 외엔 현재 위치 유지
+        return null;
+      },
       routes: [
         GoRoute(
           name: SplashPage.routeName,
@@ -110,6 +111,17 @@ class Router extends _$Router {
                   path: '/report',
                   pageBuilder: (context, state) =>
                       NoTransitionPage(child: ReportPage()),
+                ),
+              ],
+            ),
+            StatefulShellBranch(
+              //navigatorKey: ref.watch(shellNavigationKeyProvider),
+              routes: [
+                GoRoute(
+                  name: MyPage.routeName,
+                  path: '/my',
+                  pageBuilder: (context, state) =>
+                      NoTransitionPage(child: MyPage()),
                 ),
               ],
             ),

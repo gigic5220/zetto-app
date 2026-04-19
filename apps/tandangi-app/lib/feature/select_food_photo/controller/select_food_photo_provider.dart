@@ -132,4 +132,8 @@ class _SelectedAlbumAsset extends _$SelectedAlbumAsset {
   AssetEntity? build() {
     return null;
   }
+
+  void set(AssetEntity? value) {
+    state = value;
+  }
 }

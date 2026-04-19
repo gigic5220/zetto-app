@@ -366,4 +366,14 @@ mixin SelectFoodPhotoActionMixin {
     if (file == null) return;
     await _analyze(path: file.path);
   }
+
+  void onTapPhoto(WidgetRef ref, {required AssetEntity asset}) async {
+    //ref.read(_selectedAlbumAssetProvider.notifier).set;
+
+    //final file = await selectedAlbumAsset.file;
+    //if (file == null) return;
+    final test = await asset.file;
+    if (test == null) return;
+    await _analyze(path: test.path);
+  }
 }

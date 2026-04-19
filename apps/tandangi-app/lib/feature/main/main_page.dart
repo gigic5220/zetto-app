@@ -48,7 +48,7 @@ class _MainPageState extends State<MainPage>
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: '탭1'),
           BottomNavigationBarItem(icon: Icon(Icons.folder_open), label: '탭2'),
-          //BottomNavigationBarItem(icon: Icon(Icons.settings), label: '탭3'),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: '탭3'),
         ],
         currentIndex: widget.navigationShell.currentIndex,
         onTap: (index) {

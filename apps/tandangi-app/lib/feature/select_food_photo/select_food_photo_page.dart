@@ -207,15 +207,22 @@ class _SelectFoodPhotoPageState extends ConsumerState<SelectFoodPhotoPage>
                                 mainAxisSpacing: 1,
                               ),
                           itemCount: albumAssets.length,
-                          itemBuilder: (context, index) => Container(
-                            color: context.semanticColors.brandSecondary,
-                            child: Image(
-                              image: AssetEntityImageProvider(
-                                albumAssets[index],
-                                isOriginal: false,
-                                thumbnailSize: const ThumbnailSize.square(300),
+                          itemBuilder: (context, index) => GestureDetector(
+                            onTap: () {
+                              onTapPhoto(ref, asset: albumAssets[index]);
+                            },
+                            child: Container(
+                              color: context.semanticColors.brandSecondary,
+                              child: Image(
+                                image: AssetEntityImageProvider(
+                                  albumAssets[index],
+                                  isOriginal: false,
+                                  thumbnailSize: const ThumbnailSize.square(
+                                    300,
+                                  ),
+                                ),
+                                fit: BoxFit.cover,
                               ),
-                              fit: BoxFit.cover,
                             ),
                           ),
                         ),
