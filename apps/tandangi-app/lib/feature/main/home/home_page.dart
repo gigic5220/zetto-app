@@ -169,126 +169,151 @@ class _HomePageState extends ConsumerState<HomePage>
                   0,
                 ),
                 color: context.semanticColors.bgCard,
-                child: Column(
-                  children: [
-                    DSViewTitle.large(title: '오늘의 {최대여섯글자}'),
-                    Row(
-                      spacing: context.componentGap.medium,
-                      children: [
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            vertical: context.componentPadding.xxLarge,
-                            horizontal: context.componentPadding.xLarge,
-                          ),
-                          decoration: BoxDecoration(
-                            color: context.semanticColors.bgCard,
-                            borderRadius: BorderRadius.circular(
-                              context.componentRadius.xLarge,
+                child: Consumer(
+                  builder: (context, ref, child) {
+                    final userCharacterDetail = watchUserCharacterDetail(ref);
+                    final todayNutritionSummary = watchTodayNutritionSummary(
+                      ref,
+                    );
+                    return AsyncWidget.combine2(
+                      first: userCharacterDetail,
+                      second: todayNutritionSummary,
+                      builder: (userCharacterDetail, todayNutritionSummary) {
+                        return Column(
+                          children: [
+                            DSViewTitle.large(
+                              title:
+                                  '오늘의 ${userCharacterDetail.userCharacter.characterName}',
                             ),
-                          ),
-                          child: Column(
-                            spacing: context.componentGap.medium,
-                            children: [
-                              Row(
-                                spacing: 4,
-                                children: [
-                                  Text(
-                                    '탄단지 점수',
-                                    style: context.textTheme.bodyLMedium
-                                        .copyWith(
-                                          color: context
-                                              .semanticColors
-                                              .textTertiary,
-                                        ),
-                                  ),
-                                  Text(
-                                    '100점',
-                                    style: context.textTheme.bodyMMedium
-                                        .copyWith(
-                                          color: context
-                                              .semanticColors
-                                              .textPrimary,
-                                        ),
-                                  ),
-                                  DSWrapper(
-                                    uri: Assets.svgs.icQuestionFill,
-                                    view: WrapperView.fix12,
-                                    svgColor:
-                                        context.semanticColors.textTertiary,
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                spacing: 8,
-                                children: [
-                                  _buildNutritionBar(),
-                                  _buildNutritionBar(),
-                                  _buildNutritionBar(),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                              vertical: context.componentPadding.xxLarge,
-                              horizontal: context.componentPadding.xLarge,
-                            ),
-                            decoration: BoxDecoration(
-                              color: context.semanticColors.bgCard,
-                              borderRadius: BorderRadius.circular(
-                                context.componentRadius.xLarge,
-                              ),
-                            ),
-                            child: Column(
+                            Row(
                               spacing: context.componentGap.medium,
                               children: [
-                                Row(
-                                  spacing: 4,
-                                  children: [
-                                    Text(
-                                      '단짠 점수',
-                                      style: context.textTheme.bodyLMedium
-                                          .copyWith(
-                                            color: context
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                    vertical: context.componentPadding.xxLarge,
+                                    horizontal: context.componentPadding.xLarge,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: context.semanticColors.bgCard,
+                                    borderRadius: BorderRadius.circular(
+                                      context.componentRadius.xLarge,
+                                    ),
+                                  ),
+                                  child: Column(
+                                    spacing: context.componentGap.medium,
+                                    children: [
+                                      Row(
+                                        spacing: 4,
+                                        children: [
+                                          Text(
+                                            '탄단지 점수',
+                                            style: context.textTheme.bodyLMedium
+                                                .copyWith(
+                                                  color: context
+                                                      .semanticColors
+                                                      .textTertiary,
+                                                ),
+                                          ),
+                                          Text(
+                                            '100점',
+                                            style: context.textTheme.bodyMMedium
+                                                .copyWith(
+                                                  color: context
+                                                      .semanticColors
+                                                      .textPrimary,
+                                                ),
+                                          ),
+                                          DSWrapper(
+                                            uri: Assets.svgs.icQuestionFill,
+                                            view: WrapperView.fix12,
+                                            svgColor: context
                                                 .semanticColors
                                                 .textTertiary,
                                           ),
-                                    ),
-                                    Text(
-                                      '23점',
-                                      style: context.textTheme.bodyMMedium
-                                          .copyWith(
-                                            color: context
-                                                .semanticColors
-                                                .textPrimary,
-                                          ),
-                                    ),
-                                    DSWrapper(
-                                      uri: Assets.svgs.icQuestionFill,
-                                      view: WrapperView.fix12,
-                                      svgColor:
-                                          context.semanticColors.textTertiary,
-                                    ),
-                                  ],
+                                        ],
+                                      ),
+                                      Row(
+                                        spacing: 8,
+                                        children: [
+                                          _buildNutritionBar(),
+                                          _buildNutritionBar(),
+                                          _buildNutritionBar(),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  spacing: 8,
-                                  children: [
-                                    _buildNutritionBar(),
-                                    _buildNutritionBar(),
-                                  ],
+                                Expanded(
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                      vertical:
+                                          context.componentPadding.xxLarge,
+                                      horizontal:
+                                          context.componentPadding.xLarge,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: context.semanticColors.bgCard,
+                                      borderRadius: BorderRadius.circular(
+                                        context.componentRadius.xLarge,
+                                      ),
+                                    ),
+                                    child: Column(
+                                      spacing: context.componentGap.medium,
+                                      children: [
+                                        Row(
+                                          spacing: 4,
+                                          children: [
+                                            Text(
+                                              '단짠 점수',
+                                              style: context
+                                                  .textTheme
+                                                  .bodyLMedium
+                                                  .copyWith(
+                                                    color: context
+                                                        .semanticColors
+                                                        .textTertiary,
+                                                  ),
+                                            ),
+                                            Text(
+                                              '23점',
+                                              style: context
+                                                  .textTheme
+                                                  .bodyMMedium
+                                                  .copyWith(
+                                                    color: context
+                                                        .semanticColors
+                                                        .textPrimary,
+                                                  ),
+                                            ),
+                                            DSWrapper(
+                                              uri: Assets.svgs.icQuestionFill,
+                                              view: WrapperView.fix12,
+                                              svgColor: context
+                                                  .semanticColors
+                                                  .textTertiary,
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          spacing: 8,
+                                          children: [
+                                            _buildNutritionBar(),
+                                            _buildNutritionBar(),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                          ],
+                        );
+                      },
+                    );
+                  },
                 ),
               ),
             ],

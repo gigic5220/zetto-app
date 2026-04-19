@@ -14,7 +14,9 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tandangi/core/di/di.dart';
+import 'package:tandangi/domain/entity/today_nutrition_summary_entity.dart';
 import 'package:tandangi/domain/repository/food_analyze_repository.dart';
+import 'package:tandangi/domain/repository/nutrition_repository.dart';
 import 'package:tandangi/flavors.dart';
 import 'package:path/path.dart' as p;
 

@@ -6,4 +6,10 @@ mixin HomeStateMixin {
   ) {
     return ref.watch(_userCharacterDetailProvider);
   }
+
+  AsyncValue<TodayNutritionSummaryEntity> watchTodayNutritionSummary(
+    WidgetRef ref,
+  ) {
+    return ref.watch(_todayNutritionSummaryProvider);
+  }
 }
