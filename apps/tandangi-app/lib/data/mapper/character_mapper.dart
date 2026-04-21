@@ -26,6 +26,7 @@ class CharacterMapper {
         userId: dto.userCharacter.userId,
         characterId: dto.userCharacter.characterId,
         characterName: dto.userCharacter.characterName,
+        characterOriginName: dto.userCharacter.characterOriginName,
       ),
       userCharacterState: UserCharacterStateRowEntity(
         id: dto.userCharacterState.id,

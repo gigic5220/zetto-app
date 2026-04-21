@@ -2,14 +2,17 @@ import 'package:design_system/components/atoms.dart';
 import 'package:design_system/components/molecules.dart';
 import 'package:design_system/extenstion.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tandangi/feature/main/report/controller/report_provider.dart';
 import 'package:tandangi/feature/main/report/widgets/food_analyze_result_panel.dart';
 
 class ReportPage extends ConsumerStatefulWidget {
-  const ReportPage({super.key});
+  const ReportPage({super.key, required this.selectedPhoto});
 
   static const String routeName = 'report';
+
+  final XFile selectedPhoto;
 
   @override
   ConsumerState<ReportPage> createState() => _ReportPageState();

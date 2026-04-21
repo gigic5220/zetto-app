@@ -44,6 +44,10 @@ class AppSemanticColors extends ThemeExtension<AppSemanticColors> {
     required this.layerDefault,
     required this.layerSubtle,
     required this.layerStrong,
+    required this.chartCarbohydrate,
+    required this.chartProtein,
+    required this.chartFat,
+    required this.chartWarning,
   });
 
   final Color brandPrimary;
@@ -93,6 +97,11 @@ class AppSemanticColors extends ThemeExtension<AppSemanticColors> {
   final Color layerSubtle;
   final Color layerStrong;
 
+  final Color chartCarbohydrate;
+  final Color chartProtein;
+  final Color chartFat;
+  final Color chartWarning;
+
   static const AppSemanticColors light = AppSemanticColors(
     brandPrimary: AppColors.neutral15,
     brandSecondary: AppColors.neutral90,
@@ -133,6 +142,10 @@ class AppSemanticColors extends ThemeExtension<AppSemanticColors> {
     layerDefault: AppColors.opacity48,
     layerSubtle: AppColors.opacity32,
     layerStrong: AppColors.opacity64,
+    chartCarbohydrate: AppColors.chartCarbohydrate,
+    chartProtein: AppColors.chartProtein,
+    chartFat: AppColors.chartFat,
+    chartWarning: AppColors.red50,
   );
 
   static const AppSemanticColors dark = AppSemanticColors(
@@ -175,6 +188,10 @@ class AppSemanticColors extends ThemeExtension<AppSemanticColors> {
     layerDefault: AppColors.opacity64,
     layerSubtle: AppColors.opacity48,
     layerStrong: AppColors.opacity64,
+    chartCarbohydrate: AppColors.chartCarbohydrate,
+    chartProtein: AppColors.chartProtein,
+    chartFat: AppColors.chartFat,
+    chartWarning: AppColors.red50,
   );
 
   @override
@@ -220,6 +237,10 @@ class AppSemanticColors extends ThemeExtension<AppSemanticColors> {
     Color? layerDefault,
     Color? layerSubtle,
     Color? layerStrong,
+    Color? chartCarbohydrate,
+    Color? chartProtein,
+    Color? chartFat,
+    Color? chartWarning,
   }) {
     return AppSemanticColors(
       brandPrimary: brandPrimary ?? this.brandPrimary,
@@ -261,6 +282,10 @@ class AppSemanticColors extends ThemeExtension<AppSemanticColors> {
       layerDefault: layerDefault ?? this.layerDefault,
       layerSubtle: layerSubtle ?? this.layerSubtle,
       layerStrong: layerStrong ?? this.layerStrong,
+      chartCarbohydrate: chartCarbohydrate ?? this.chartCarbohydrate,
+      chartProtein: chartProtein ?? this.chartProtein,
+      chartFat: chartFat ?? this.chartFat,
+      chartWarning: chartWarning ?? this.chartWarning,
     );
   }
 
@@ -310,6 +335,10 @@ class AppSemanticColors extends ThemeExtension<AppSemanticColors> {
       layerDefault: Color.lerp(layerDefault, other.layerDefault, t) ?? layerDefault,
       layerSubtle: Color.lerp(layerSubtle, other.layerSubtle, t) ?? layerSubtle,
       layerStrong: Color.lerp(layerStrong, other.layerStrong, t) ?? layerStrong,
+      chartCarbohydrate: Color.lerp(chartCarbohydrate, other.chartCarbohydrate, t) ?? chartCarbohydrate,
+      chartProtein: Color.lerp(chartProtein, other.chartProtein, t) ?? chartProtein,
+      chartFat: Color.lerp(chartFat, other.chartFat, t) ?? chartFat,
+      chartWarning: Color.lerp(chartWarning, other.chartWarning, t) ?? chartWarning,
     );
   }
 }

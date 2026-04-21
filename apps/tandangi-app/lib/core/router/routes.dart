@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:talker_flutter/talker_flutter.dart';
@@ -103,17 +104,18 @@ class Router extends _$Router {
                 ),
               ],
             ),
-            StatefulShellBranch(
-              //navigatorKey: ref.watch(shellNavigationKeyProvider),
-              routes: [
-                GoRoute(
-                  name: ReportPage.routeName,
-                  path: '/report',
-                  pageBuilder: (context, state) =>
-                      NoTransitionPage(child: ReportPage()),
-                ),
-              ],
-            ),
+            // StatefulShellBranch(
+            //   navigatorKey: ref.watch(shellNavigationKeyProvider),
+            //   routes: [
+            //     GoRoute(
+            //       name: ReportPage.routeName,
+            //       path: '/report',
+            //       pageBuilder: (context, state) => NoTransitionPage(
+            //         child: ReportPage(xFile: state.extra as XFile),
+            //       ),
+            //     ),
+            //   ],
+            // ),
             StatefulShellBranch(
               //navigatorKey: ref.watch(shellNavigationKeyProvider),
               routes: [
@@ -157,6 +159,15 @@ class Router extends _$Router {
             //   ],
             // ),
           ],
+        ),
+        GoRoute(
+          name: ReportPage.routeName,
+          path: '/${ReportPage.routeName}',
+          pageBuilder: (context, state) => buildPageWithDefaultTransition(
+            context: context,
+            state: state,
+            child: ReportPage(selectedPhoto: state.extra as XFile),
+          ),
         ),
         GoRoute(
           name: SelectFoodPhotoPage.routeName,

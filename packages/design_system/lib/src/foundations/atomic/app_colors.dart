@@ -94,4 +94,8 @@ class AppColors {
   static const Color opacity12 = Color.from(alpha: 0.12, red: 0x12 / 255, green: 0x12 / 255, blue: 0x12 / 255);
   static const Color opacity8 = Color.from(alpha: 0.08, red: 0x12 / 255, green: 0x12 / 255, blue: 0x12 / 255);
   static const Color opacity0 = Color.from(alpha: 0.00, red: 0x12 / 255, green: 0x12 / 255, blue: 0x12 / 255);
+
+  static const Color chartCarbohydrate = Color(0xFF853730);
+  static const Color chartProtein = Color(0xFFFFCD00);
+  static const Color chartFat = Color(0xFF93D200);
 }

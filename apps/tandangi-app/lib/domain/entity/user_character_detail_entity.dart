@@ -22,6 +22,7 @@ abstract class UserCharacterSectionEntity with _$UserCharacterSectionEntity {
     required int userId,
     required int characterId,
     required String characterName,
+    required String characterOriginName,
   }) = _UserCharacterSectionEntity;
 }
 

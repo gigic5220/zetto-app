@@ -27,6 +27,7 @@ abstract class UserCharacterSectionDto with _$UserCharacterSectionDto {
     required int userId,
     required int characterId,
     required String characterName,
+    required String characterOriginName,
   }) = _UserCharacterSectionDto;
 
   factory UserCharacterSectionDto.fromJson(Map<String, Object?> json) =>

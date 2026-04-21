@@ -325,7 +325,7 @@ $UserCharacterStateRowEntityCopyWith<$Res> get userCharacterState {
 /// @nodoc
 mixin _$UserCharacterSectionEntity {
 
- int? get id; int get userId; int get characterId; String get characterName;
+ int? get id; int get userId; int get characterId; String get characterName; String get characterOriginName;
 /// Create a copy of UserCharacterSectionEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -336,16 +336,16 @@ $UserCharacterSectionEntityCopyWith<UserCharacterSectionEntity> get copyWith => 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserCharacterSectionEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.characterId, characterId) || other.characterId == characterId)&&(identical(other.characterName, characterName) || other.characterName == characterName));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserCharacterSectionEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.characterId, characterId) || other.characterId == characterId)&&(identical(other.characterName, characterName) || other.characterName == characterName)&&(identical(other.characterOriginName, characterOriginName) || other.characterOriginName == characterOriginName));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,userId,characterId,characterName);
+int get hashCode => Object.hash(runtimeType,id,userId,characterId,characterName,characterOriginName);
 
 @override
 String toString() {
-  return 'UserCharacterSectionEntity(id: $id, userId: $userId, characterId: $characterId, characterName: $characterName)';
+  return 'UserCharacterSectionEntity(id: $id, userId: $userId, characterId: $characterId, characterName: $characterName, characterOriginName: $characterOriginName)';
 }
 
 
@@ -356,7 +356,7 @@ abstract mixin class $UserCharacterSectionEntityCopyWith<$Res>  {
   factory $UserCharacterSectionEntityCopyWith(UserCharacterSectionEntity value, $Res Function(UserCharacterSectionEntity) _then) = _$UserCharacterSectionEntityCopyWithImpl;
 @useResult
 $Res call({
- int? id, int userId, int characterId, String characterName
+ int? id, int userId, int characterId, String characterName, String characterOriginName
 });
 
 
@@ -373,12 +373,13 @@ class _$UserCharacterSectionEntityCopyWithImpl<$Res>
 
 /// Create a copy of UserCharacterSectionEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? userId = null,Object? characterId = null,Object? characterName = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? userId = null,Object? characterId = null,Object? characterName = null,Object? characterOriginName = null,}) {
   return _then(_self.copyWith(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as int,characterId: null == characterId ? _self.characterId : characterId // ignore: cast_nullable_to_non_nullable
 as int,characterName: null == characterName ? _self.characterName : characterName // ignore: cast_nullable_to_non_nullable
+as String,characterOriginName: null == characterOriginName ? _self.characterOriginName : characterOriginName // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -464,10 +465,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id,  int userId,  int characterId,  String characterName)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id,  int userId,  int characterId,  String characterName,  String characterOriginName)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _UserCharacterSectionEntity() when $default != null:
-return $default(_that.id,_that.userId,_that.characterId,_that.characterName);case _:
+return $default(_that.id,_that.userId,_that.characterId,_that.characterName,_that.characterOriginName);case _:
   return orElse();
 
 }
@@ -485,10 +486,10 @@ return $default(_that.id,_that.userId,_that.characterId,_that.characterName);cas
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id,  int userId,  int characterId,  String characterName)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id,  int userId,  int characterId,  String characterName,  String characterOriginName)  $default,) {final _that = this;
 switch (_that) {
 case _UserCharacterSectionEntity():
-return $default(_that.id,_that.userId,_that.characterId,_that.characterName);case _:
+return $default(_that.id,_that.userId,_that.characterId,_that.characterName,_that.characterOriginName);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -505,10 +506,10 @@ return $default(_that.id,_that.userId,_that.characterId,_that.characterName);cas
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id,  int userId,  int characterId,  String characterName)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id,  int userId,  int characterId,  String characterName,  String characterOriginName)?  $default,) {final _that = this;
 switch (_that) {
 case _UserCharacterSectionEntity() when $default != null:
-return $default(_that.id,_that.userId,_that.characterId,_that.characterName);case _:
+return $default(_that.id,_that.userId,_that.characterId,_that.characterName,_that.characterOriginName);case _:
   return null;
 
 }
@@ -520,13 +521,14 @@ return $default(_that.id,_that.userId,_that.characterId,_that.characterName);cas
 
 
 class _UserCharacterSectionEntity implements UserCharacterSectionEntity {
-  const _UserCharacterSectionEntity({this.id, required this.userId, required this.characterId, required this.characterName});
+  const _UserCharacterSectionEntity({this.id, required this.userId, required this.characterId, required this.characterName, required this.characterOriginName});
   
 
 @override final  int? id;
 @override final  int userId;
 @override final  int characterId;
 @override final  String characterName;
+@override final  String characterOriginName;
 
 /// Create a copy of UserCharacterSectionEntity
 /// with the given fields replaced by the non-null parameter values.
@@ -538,16 +540,16 @@ _$UserCharacterSectionEntityCopyWith<_UserCharacterSectionEntity> get copyWith =
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserCharacterSectionEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.characterId, characterId) || other.characterId == characterId)&&(identical(other.characterName, characterName) || other.characterName == characterName));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserCharacterSectionEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.characterId, characterId) || other.characterId == characterId)&&(identical(other.characterName, characterName) || other.characterName == characterName)&&(identical(other.characterOriginName, characterOriginName) || other.characterOriginName == characterOriginName));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,userId,characterId,characterName);
+int get hashCode => Object.hash(runtimeType,id,userId,characterId,characterName,characterOriginName);
 
 @override
 String toString() {
-  return 'UserCharacterSectionEntity(id: $id, userId: $userId, characterId: $characterId, characterName: $characterName)';
+  return 'UserCharacterSectionEntity(id: $id, userId: $userId, characterId: $characterId, characterName: $characterName, characterOriginName: $characterOriginName)';
 }
 
 
@@ -558,7 +560,7 @@ abstract mixin class _$UserCharacterSectionEntityCopyWith<$Res> implements $User
   factory _$UserCharacterSectionEntityCopyWith(_UserCharacterSectionEntity value, $Res Function(_UserCharacterSectionEntity) _then) = __$UserCharacterSectionEntityCopyWithImpl;
 @override @useResult
 $Res call({
- int? id, int userId, int characterId, String characterName
+ int? id, int userId, int characterId, String characterName, String characterOriginName
 });
 
 
@@ -575,12 +577,13 @@ class __$UserCharacterSectionEntityCopyWithImpl<$Res>
 
 /// Create a copy of UserCharacterSectionEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? userId = null,Object? characterId = null,Object? characterName = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? userId = null,Object? characterId = null,Object? characterName = null,Object? characterOriginName = null,}) {
   return _then(_UserCharacterSectionEntity(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as int,characterId: null == characterId ? _self.characterId : characterId // ignore: cast_nullable_to_non_nullable
 as int,characterName: null == characterName ? _self.characterName : characterName // ignore: cast_nullable_to_non_nullable
+as String,characterOriginName: null == characterOriginName ? _self.characterOriginName : characterOriginName // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

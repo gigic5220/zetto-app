@@ -14,6 +14,9 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/avocado.png
+  AssetGenImage get avocado => const AssetGenImage('assets/images/avocado.png');
+
   /// File path: assets/images/circle_check_green.png
   AssetGenImage get circleCheckGreen =>
       const AssetGenImage('assets/images/circle_check_green.png');
@@ -21,6 +24,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/circle_x.png
   AssetGenImage get circleX =>
       const AssetGenImage('assets/images/circle_x.png');
+
+  /// File path: assets/images/egg.png
+  AssetGenImage get egg => const AssetGenImage('assets/images/egg.png');
 
   /// File path: assets/images/exclamation.png
   AssetGenImage get exclamation =>
@@ -37,18 +43,25 @@ class $AssetsImagesGen {
   AssetGenImage get logoText =>
       const AssetGenImage('assets/images/logo_text.png');
 
+  /// File path: assets/images/sweet_potato.png
+  AssetGenImage get sweetPotato =>
+      const AssetGenImage('assets/images/sweet_potato.png');
+
   /// File path: assets/images/test_character_1.png
   AssetGenImage get testCharacter1 =>
       const AssetGenImage('assets/images/test_character_1.png');
 
   /// List of all assets
   List<AssetGenImage> get values => [
+    avocado,
     circleCheckGreen,
     circleX,
+    egg,
     exclamation,
     logo,
     logoSubText,
     logoText,
+    sweetPotato,
     testCharacter1,
   ];
 }
