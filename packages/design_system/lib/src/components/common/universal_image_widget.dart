@@ -24,9 +24,8 @@ class UniversalImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final imageExtension = uri.split('.').last;
+    final imageExtension = uri.split('.').last.split('?').first;
     final isUrl = isValidUrl;
-
     return switch (imageExtension) {
       'svg' when isUrl => SvgPicture.network(
         uri,

@@ -121,6 +121,12 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/ic_pencil_fill.svg
   String get icPencilFill => 'assets/svgs/ic_pencil_fill.svg';
 
+  /// File path: assets/svgs/ic_photo_fill.svg
+  String get icPhotoFill => 'assets/svgs/ic_photo_fill.svg';
+
+  /// File path: assets/svgs/ic_plus.svg
+  String get icPlus => 'assets/svgs/ic_plus.svg';
+
   /// File path: assets/svgs/ic_question_fill.svg
   String get icQuestionFill => 'assets/svgs/ic_question_fill.svg';
 
@@ -161,6 +167,8 @@ class $AssetsSvgsGen {
     icDropdownUpFill,
     icMinus,
     icPencilFill,
+    icPhotoFill,
+    icPlus,
     icQuestionFill,
     icReadingGlass,
     icX,

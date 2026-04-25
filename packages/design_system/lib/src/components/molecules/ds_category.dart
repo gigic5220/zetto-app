@@ -67,7 +67,7 @@ class _DSCategoryState extends State<DSCategory> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return TabBar(
       controller: tabController,
-      padding: widget.padding,
+      padding: widget.padding ?? EdgeInsets.symmetric(vertical: context.componentPadding.medium),
       tabAlignment: .start,
       isScrollable: true,
       tabs: widget.items

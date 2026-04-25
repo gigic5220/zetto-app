@@ -13,6 +13,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:tandangi/domain/enum/nutrition_type_enum.dart';
 import 'package:tandangi/feature/main/home/controller/home_provider.dart';
 import 'package:tandangi/feature/shop/shop_page.dart';
 import 'package:tandangi/gen/assets.gen.dart';
@@ -48,349 +49,390 @@ class _HomePageState extends ConsumerState<HomePage>
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          spacing: context.componentGap.medium,
-          children: [
-            Consumer(
-              builder: (context, ref, child) {
-                final userCharacterDetail = watchUserCharacterDetail(ref);
-                return AsyncWidget(
-                  errorBuilder: (error, stackTrace) {
-                    return Center(child: Text(error.toString()));
-                  },
-                  asyncValue: userCharacterDetail,
-                  builder: (userCharacterDetail) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      spacing: context.componentGap.medium,
-                      children: [
-                        Center(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                  vertical: 12,
-                                  horizontal: 16,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: context.semanticColors.fillSubtle,
-                                  borderRadius: BorderRadius.circular(16),
-                                ),
-                                child: Text(
-                                  '테스트',
-                                  style: context.textTheme.bodyMMedium.copyWith(
-                                    color: context.semanticColors.textPrimary,
-                                  ),
-                                ),
-                              ),
-                              Transform.translate(
-                                offset: const Offset(0, -1),
-                                child: CustomPaint(
-                                  size: const Size(14, 10),
-                                  painter: _SpeechBubbleTailPainter(
-                                    color: context.semanticColors.fillSubtle,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Stack(
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              spacing: context.componentGap.medium,
+              children: [
+                Consumer(
+                  builder: (context, ref, child) {
+                    final userCharacterDetail = watchUserCharacterDetail(ref);
+                    return AsyncWidget(
+                      errorBuilder: (error, stackTrace) {
+                        return Center(child: Text(error.toString()));
+                      },
+                      asyncValue: userCharacterDetail,
+                      builder: (userCharacterDetail) {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          spacing: context.componentGap.medium,
                           children: [
-                            DSWrapper(
-                              uri: userCharacterDetail.characterImageUrl,
-                              view: WrapperView(size: 167, ratio: 167 / 213),
-                            ),
-                            Positioned(
-                              top: 0,
-                              right: 10,
-                              child: Center(
-                                child: DSSolidButton.small(
-                                  text: '카메라',
-                                  variant: DSSolidButtonVariant.primary,
-                                  onTap: () {
-                                    onTapFeedCharacter(
-                                      context,
-                                      source: ImageSource.camera,
-                                    );
-                                  },
-                                  leadingUri: Assets.svgs.icCameraFill,
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              top: 50,
-                              right: 10,
-                              child: Center(
-                                child: DSSolidButton.small(
-                                  text: '앨범',
-                                  variant: DSSolidButtonVariant.primary,
-                                  onTap: () {
-                                    onTapFeedCharacter(
-                                      context,
-                                      source: ImageSource.gallery,
-                                    );
-                                  },
-                                  leadingUri: Assets.svgs.icCameraFill,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.symmetric(vertical: 4),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                spacing: 4,
+                            Center(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Text(
-                                    userCharacterDetail
-                                        .userCharacter
-                                        .characterName,
-                                    style: context.textTheme.titleMSemiBold
-                                        .copyWith(
-                                          color: context
-                                              .semanticColors
-                                              .textPrimary,
-                                        ),
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                      vertical: 12,
+                                      horizontal: 16,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: context.semanticColors.fillSubtle,
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                    child: Text(
+                                      '테스트',
+                                      style: context.textTheme.bodyMMedium
+                                          .copyWith(
+                                            color: context
+                                                .semanticColors
+                                                .textPrimary,
+                                          ),
+                                    ),
                                   ),
-                                  DSWrapper(
-                                    uri: Assets.svgs.icPencilFill,
-                                    view: WrapperView.fix16,
-                                    svgColor:
-                                        context.semanticColors.textTertiary,
+                                  Transform.translate(
+                                    offset: const Offset(0, -1),
+                                    child: CustomPaint(
+                                      size: const Size(14, 10),
+                                      painter: _SpeechBubbleTailPainter(
+                                        color:
+                                            context.semanticColors.fillSubtle,
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
-                            DSBadgeList.text(
-                              badges: [
-                                DSTextBadge.medium(
-                                  text: '테스트',
-                                  variant: DSTextBadgeVariant.warning,
-                                  type: DSTextBadgeType.circular,
+                            DSWrapper(
+                              uri: userCharacterDetail.characterImageUrl,
+                              view: WrapperView(size: 167, ratio: 167 / 213),
+                            ),
+                            Column(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 4),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    spacing: 4,
+                                    children: [
+                                      Text(
+                                        userCharacterDetail
+                                            .userCharacter
+                                            .characterName,
+                                        style: context.textTheme.titleMSemiBold
+                                            .copyWith(
+                                              color: context
+                                                  .semanticColors
+                                                  .textPrimary,
+                                            ),
+                                      ),
+                                      DSWrapper(
+                                        uri: Assets.svgs.icPencilFill,
+                                        view: WrapperView.fix16,
+                                        svgColor:
+                                            context.semanticColors.textTertiary,
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                DSTextBadge.medium(
-                                  text: '테스트',
-                                  variant: DSTextBadgeVariant.success,
-                                  type: DSTextBadgeType.circular,
-                                ),
-                                DSTextBadge.medium(
-                                  text: '테스트',
-                                  variant: DSTextBadgeVariant.warning,
-                                  type: DSTextBadgeType.circular,
-                                ),
-                                DSTextBadge.medium(
-                                  text: '테스트',
-                                  variant: DSTextBadgeVariant.warning,
-                                  type: DSTextBadgeType.circular,
+                                DSBadgeList.text(
+                                  badges: [
+                                    DSTextBadge.medium(
+                                      text: '테스트',
+                                      variant: DSTextBadgeVariant.warning,
+                                      type: DSTextBadgeType.circular,
+                                    ),
+                                    DSTextBadge.medium(
+                                      text: '테스트',
+                                      variant: DSTextBadgeVariant.success,
+                                      type: DSTextBadgeType.circular,
+                                    ),
+                                    DSTextBadge.medium(
+                                      text: '테스트',
+                                      variant: DSTextBadgeVariant.warning,
+                                      type: DSTextBadgeType.circular,
+                                    ),
+                                    DSTextBadge.medium(
+                                      text: '테스트',
+                                      variant: DSTextBadgeVariant.warning,
+                                      type: DSTextBadgeType.circular,
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
                           ],
-                        ),
-                      ],
+                        );
+                      },
                     );
                   },
-                );
-              },
-            ),
-            Container(
-              padding: EdgeInsets.fromLTRB(
-                context.margin.width,
-                context.componentPadding.xxLarge,
-                context.margin.width,
-                0,
-              ),
-              color: context.semanticColors.bgCard,
-              child: Consumer(
-                builder: (context, ref, child) {
-                  final userCharacterDetail = watchUserCharacterDetail(ref);
-                  final todayNutritionSummary = watchTodayNutritionSummary(ref);
-                  return AsyncWidget.combine2(
-                    first: userCharacterDetail,
-                    second: todayNutritionSummary,
-                    builder: (userCharacterDetail, todayNutritionSummary) {
-                      return Column(
-                        children: [
-                          DSViewTitle.large(
-                            subTitle:
-                                '오늘의 ${userCharacterDetail.userCharacter.characterName}',
-                            title:
-                                '${todayNutritionSummary.grade}등급 ${userCharacterDetail.userCharacter.characterOriginName}',
-                            description:
-                                '균형이 좋아요! 다만 탄수화물 비율이 조금 높아, 다음 식사는 단백질과 채소 위주로 가볍게 맞춰봐요',
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                              vertical: context.componentPadding.small,
-                            ),
-                            child: Column(
-                              children: [
-                                NutritionRingChart(
-                                  nutritionType: NutritionType.carbohydrate,
-                                  valueText: '16g',
-                                  progress: 0.78,
-                                  progressColor:
-                                      context.semanticColors.chartCarbohydrate,
+                ),
+                Container(
+                  padding: EdgeInsets.fromLTRB(
+                    context.margin.width,
+                    context.componentPadding.xxLarge,
+                    context.margin.width,
+                    0,
+                  ),
+                  color: context.semanticColors.bgCard,
+                  child: Consumer(
+                    builder: (context, ref, child) {
+                      final userCharacterDetail = watchUserCharacterDetail(ref);
+                      final todayNutritionSummary = watchTodayNutritionSummary(
+                        ref,
+                      );
+                      return AsyncWidget.combine2(
+                        first: userCharacterDetail,
+                        second: todayNutritionSummary,
+                        builder: (userCharacterDetail, todayNutritionSummary) {
+                          return Column(
+                            children: [
+                              DSViewTitle.large(
+                                subTitle:
+                                    '오늘의 ${userCharacterDetail.userCharacter.characterName}',
+                                title:
+                                    '${todayNutritionSummary.grade?.value}등급 ${userCharacterDetail.userCharacter.characterOriginName}',
+                                description:
+                                    '균형이 좋아요! 다만 탄수화물 비율이 조금 높아, 다음 식사는 단백질과 채소 위주로 가볍게 맞춰봐요',
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: context.componentPadding.small,
                                 ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  spacing: context.componentGap.xLarge,
+                                child: Column(
                                   children: [
                                     NutritionRingChart(
-                                      nutritionType: NutritionType.protein,
-                                      valueText: '16g',
-                                      progress: 1.1,
-                                      progressColor: context
-                                          .semanticColors
-                                          .chartCarbohydrate,
-                                    ),
-                                    NutritionRingChart(
-                                      nutritionType: NutritionType.fat,
+                                      nutritionType: NutritionType.carbohydrate,
                                       valueText: '16g',
                                       progress: 0.78,
                                       progressColor: context
                                           .semanticColors
                                           .chartCarbohydrate,
                                     ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      spacing: context.componentGap.xLarge,
+                                      children: [
+                                        NutritionRingChart(
+                                          nutritionType: NutritionType.protein,
+                                          valueText: '16g',
+                                          progress: 1.1,
+                                          progressColor: context
+                                              .semanticColors
+                                              .chartCarbohydrate,
+                                        ),
+                                        NutritionRingChart(
+                                          nutritionType: NutritionType.fat,
+                                          valueText: '16g',
+                                          progress: 0.78,
+                                          progressColor: context
+                                              .semanticColors
+                                              .chartCarbohydrate,
+                                        ),
+                                      ],
+                                    ),
                                   ],
                                 ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(height: context.componentGap.medium),
-                          DSListTitle.mediumNormal(title: '단짠 신호'),
-                          Row(
-                            spacing: context.componentGap.small,
-                            children: [
-                              Expanded(
-                                child: Container(
-                                  padding: EdgeInsets.fromLTRB(
-                                    context.componentPadding.xxLarge,
-                                    context.componentPadding.xLarge,
-                                    context.componentPadding.xxLarge,
-                                    context.componentPadding.xSmall,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(
-                                      context.componentRadius.xLarge,
-                                    ),
-                                    border: Border.all(
-                                      color:
-                                          context.semanticColors.borderSubtle,
-                                    ),
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      DSWrapper(
-                                        uri: Assets.images.avocado.path,
-                                        view: WrapperView.fix24,
+                              ),
+                              SizedBox(height: context.componentGap.medium),
+                              DSListTitle.mediumNormal(title: '단짠 신호'),
+                              Row(
+                                spacing: context.componentGap.small,
+                                children: [
+                                  Expanded(
+                                    child: Container(
+                                      padding: EdgeInsets.fromLTRB(
+                                        context.componentPadding.xxLarge,
+                                        context.componentPadding.xLarge,
+                                        context.componentPadding.xxLarge,
+                                        context.componentPadding.xSmall,
                                       ),
-                                      DSListItem.medium(
-                                        variant: .normal,
-                                        title: '당',
-                                        subTitle: '0g',
-                                        titleBadge: DSTextBadge.small(
-                                          text: '좋음',
-                                          variant: DSTextBadgeVariant.success,
-                                          type: DSTextBadgeType.circular,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(
+                                          context.componentRadius.xLarge,
                                         ),
-                                        description: '최대 130g',
+                                        border: Border.all(
+                                          color: context
+                                              .semanticColors
+                                              .borderSubtle,
+                                        ),
                                       ),
-                                    ],
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          DSWrapper(
+                                            uri: Assets.images.avocado.path,
+                                            view: WrapperView.fix24,
+                                          ),
+                                          DSListItem.medium(
+                                            variant: .normal,
+                                            title: '당',
+                                            subTitle: '0g',
+                                            titleBadge: DSTextBadge.small(
+                                              text: '좋음',
+                                              variant:
+                                                  DSTextBadgeVariant.success,
+                                              type: DSTextBadgeType.circular,
+                                            ),
+                                            description: '최대 130g',
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
+                                  Expanded(
+                                    child: Container(
+                                      padding: EdgeInsets.fromLTRB(
+                                        context.componentPadding.xxLarge,
+                                        context.componentPadding.xLarge,
+                                        context.componentPadding.xxLarge,
+                                        context.componentPadding.xSmall,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(
+                                          context.componentRadius.xLarge,
+                                        ),
+                                        border: Border.all(
+                                          color: context
+                                              .semanticColors
+                                              .borderWarning,
+                                        ),
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          DSWrapper(
+                                            uri: Assets.images.avocado.path,
+                                            view: WrapperView.fix24,
+                                          ),
+                                          DSListItem.medium(
+                                            variant: .normal,
+                                            title: '나트륨',
+                                            subTitle: '0mg',
+                                            titleBadge: DSTextBadge.small(
+                                              text: '주의',
+                                              variant:
+                                                  DSTextBadgeVariant.warning,
+                                              type: DSTextBadgeType.circular,
+                                            ),
+                                            description: '최대 130g',
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: context.componentGap.xxxLarge),
+                              DSListTitle.mediumNormal(title: '오늘 먹었어요'),
+                              DSEmptyArea(
+                                type: .section,
+                                title: '아직 먹인 음식이 없어요',
+                                description: '밥을 먹이면 탄단지 그래프가 채워져요',
+                              ),
+                              DSBanner.normal(
+                                listItemWidget: DSListItem.small(
+                                  leadingWidget: DSWrapper(
+                                    uri: Assets.images.avocado.path,
+                                    view: WrapperView.fix52,
+                                  ),
+                                  variant: .normal,
+                                  title: '고등어구이와 동그랑땡',
+                                  description: '탄 12g | 단 12g | 지 23g',
+                                  trailingText: '13시간전',
                                 ),
                               ),
-                              Expanded(
-                                child: Container(
-                                  padding: EdgeInsets.fromLTRB(
-                                    context.componentPadding.xxLarge,
-                                    context.componentPadding.xLarge,
-                                    context.componentPadding.xxLarge,
-                                    context.componentPadding.xSmall,
+                              DSBanner.normal(
+                                listItemWidget: DSListItem.small(
+                                  leadingWidget: DSWrapper(
+                                    uri: Assets.images.avocado.path,
+                                    view: WrapperView.fix52,
                                   ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(
-                                      context.componentRadius.xLarge,
-                                    ),
-                                    border: Border.all(
-                                      color:
-                                          context.semanticColors.borderWarning,
-                                    ),
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      DSWrapper(
-                                        uri: Assets.images.avocado.path,
-                                        view: WrapperView.fix24,
-                                      ),
-                                      DSListItem.medium(
-                                        variant: .normal,
-                                        title: '나트륨',
-                                        subTitle: '0mg',
-                                        titleBadge: DSTextBadge.small(
-                                          text: '주의',
-                                          variant: DSTextBadgeVariant.warning,
-                                          type: DSTextBadgeType.circular,
-                                        ),
-                                        description: '최대 130g',
-                                      ),
-                                    ],
-                                  ),
+                                  variant: .normal,
+                                  title: '고등어구이와 동그랑땡',
+                                  description: '탄 12g | 단 12g | 지 23g',
+                                  trailingText: '13시간전',
                                 ),
                               ),
+                              CommonBottomPadding(),
                             ],
-                          ),
-                          SizedBox(height: context.componentGap.xxxLarge),
-                          DSListTitle.mediumNormal(title: '오늘 먹었어요'),
-                          DSEmptyArea(
-                            type: .section,
-                            title: '아직 먹인 음식이 없어요',
-                            description: '밥을 먹이면 탄단지 그래프가 채워져요',
-                          ),
-                          DSBanner.normal(
-                            listItemWidget: DSListItem.small(
-                              leadingWidget: DSWrapper(
-                                uri: Assets.images.avocado.path,
-                                view: WrapperView.fix52,
-                              ),
-                              variant: .normal,
-                              title: '고등어구이와 동그랑땡',
-                              description: '탄 12g | 단 12g | 지 23g',
-                              trailingText: '13시간전',
-                            ),
-                          ),
-                          DSBanner.normal(
-                            listItemWidget: DSListItem.small(
-                              leadingWidget: DSWrapper(
-                                uri: Assets.images.avocado.path,
-                                view: WrapperView.fix52,
-                              ),
-                              variant: .normal,
-                              title: '고등어구이와 동그랑땡',
-                              description: '탄 12g | 단 12g | 지 23g',
-                              trailingText: '13시간전',
-                            ),
-                          ),
-                          CommonBottomPadding(),
-                        ],
+                          );
+                        },
                       );
                     },
-                  );
-                },
-              ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+          Positioned(
+            bottom: 0,
+            right: 0,
+            child: Consumer(
+              builder: (context, ref, child) {
+                final isShowSelectPhotoButton = watchIsShowSelectPhotoButton(
+                  ref,
+                );
+                return DSFloatingAction.vertical(
+                  actions: [
+                    IgnorePointer(
+                      ignoring: !isShowSelectPhotoButton,
+                      child: AnimatedOpacity(
+                        opacity: isShowSelectPhotoButton ? 1.0 : 0.0,
+                        duration: const Duration(milliseconds: 200),
+                        child: DSOutlinedButton.large(
+                          isShowShadow: true,
+                          leadingUri: Assets.svgs.icPhotoFill,
+                          variant: .primary,
+                          text: '앨범 선택',
+                          onTap: () {
+                            onTapSelectPhoto(
+                              context,
+                              source: ImageSource.gallery,
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                    IgnorePointer(
+                      ignoring: !isShowSelectPhotoButton,
+                      child: AnimatedOpacity(
+                        opacity: isShowSelectPhotoButton ? 1.0 : 0.0,
+                        duration: const Duration(milliseconds: 200),
+                        child: DSSolidButton.large(
+                          isShowShadow: true,
+                          leadingUri: Assets.svgs.icCameraFill,
+                          text: '카메라 촬영',
+                          onTap: () {
+                            onTapSelectPhoto(
+                              context,
+                              source: ImageSource.camera,
+                            );
+                          },
+                          variant: .primary,
+                        ),
+                      ),
+                    ),
+                    DSIconSolidButton.large(
+                      isShowShadow: true,
+                      iconUri: isShowSelectPhotoButton
+                          ? Assets.svgs.icX
+                          : Assets.svgs.icPlus,
+                      onTap: () {
+                        onTapFloating(ref);
+                      },
+                      variant: .secondary,
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -536,7 +578,7 @@ class CircularNutritionPainter extends CustomPainter {
     final radius = (size.width - strokeWidth) / 2;
     final rect = Rect.fromCircle(center: center, radius: radius);
 
-    const startAngle = -math.pi / 2; // 12시 방향 시작
+    const startAngle = -math.pi / 2;
     final sweepAngle = 2 * math.pi * clampedProgress;
 
     final backgroundPaint = Paint()

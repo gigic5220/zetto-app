@@ -21,6 +21,7 @@ class DSOutlinedButton extends StatefulWidget {
     this.leadingUri,
     this.trailingUri,
     this.onTap,
+    this.isShowShadow = false,
   });
 
   factory DSOutlinedButton.large({
@@ -31,6 +32,7 @@ class DSOutlinedButton extends StatefulWidget {
     String? leadingUri,
     String? trailingUri,
     FutureOr<void> Function()? onTap,
+    bool isShowShadow = false,
   }) => DSOutlinedButton._(
     variant: variant,
     size: DSOutlinedButtonSize.large,
@@ -40,6 +42,7 @@ class DSOutlinedButton extends StatefulWidget {
     leadingUri: leadingUri,
     trailingUri: trailingUri,
     onTap: onTap,
+    isShowShadow: isShowShadow,
   );
 
   factory DSOutlinedButton.medium({
@@ -50,6 +53,7 @@ class DSOutlinedButton extends StatefulWidget {
     String? leadingUri,
     String? trailingUri,
     FutureOr<void> Function()? onTap,
+    bool isShowShadow = false,
   }) => DSOutlinedButton._(
     variant: variant,
     size: DSOutlinedButtonSize.medium,
@@ -59,6 +63,7 @@ class DSOutlinedButton extends StatefulWidget {
     leadingUri: leadingUri,
     trailingUri: trailingUri,
     onTap: onTap,
+    isShowShadow: isShowShadow,
   );
 
   factory DSOutlinedButton.small({
@@ -69,6 +74,7 @@ class DSOutlinedButton extends StatefulWidget {
     String? leadingUri,
     String? trailingUri,
     FutureOr<void> Function()? onTap,
+    bool isShowShadow = false,
   }) => DSOutlinedButton._(
     variant: variant,
     size: DSOutlinedButtonSize.small,
@@ -78,6 +84,7 @@ class DSOutlinedButton extends StatefulWidget {
     leadingUri: leadingUri,
     trailingUri: trailingUri,
     onTap: onTap,
+    isShowShadow: isShowShadow,
   );
 
   factory DSOutlinedButton.xSmall({
@@ -88,6 +95,7 @@ class DSOutlinedButton extends StatefulWidget {
     String? leadingUri,
     String? trailingUri,
     FutureOr<void> Function()? onTap,
+    bool isShowShadow = false,
   }) => DSOutlinedButton._(
     variant: variant,
     size: DSOutlinedButtonSize.xSmall,
@@ -97,6 +105,7 @@ class DSOutlinedButton extends StatefulWidget {
     leadingUri: leadingUri,
     trailingUri: trailingUri,
     onTap: onTap,
+    isShowShadow: isShowShadow,
   );
 
   final DSOutlinedButtonVariant variant;
@@ -107,6 +116,7 @@ class DSOutlinedButton extends StatefulWidget {
   final String? leadingUri;
   final String? trailingUri;
   final FutureOr<void> Function()? onTap;
+  final bool isShowShadow;
 
   @override
   State<DSOutlinedButton> createState() => _DSOutlinedButtonState();
@@ -122,7 +132,6 @@ class _DSOutlinedButtonState extends State<DSOutlinedButton> {
   late Color borderColor;
   late Color textColor;
   late WrapperView wrapperView;
-  late BorderRadius borderRadius;
   late EdgeInsets padding;
   late double rowSpacing;
   late TextStyle textStyle;
@@ -166,7 +175,6 @@ class _DSOutlinedButtonState extends State<DSOutlinedButton> {
     switch (widget.size) {
       case DSOutlinedButtonSize.large:
         wrapperView = WrapperView.fix16;
-        borderRadius = .circular(context.componentRadius.large);
         padding = .symmetric(horizontal: context.componentPadding.xxLarge, vertical: context.componentPadding.xLarge);
         rowSpacing = context.componentGap.xSmall;
         textStyle = context.textTheme.buttonLSemiBold;
@@ -175,7 +183,6 @@ class _DSOutlinedButtonState extends State<DSOutlinedButton> {
         break;
       case DSOutlinedButtonSize.medium:
         wrapperView = WrapperView.fix12;
-        borderRadius = .circular(context.componentRadius.large);
         padding = .symmetric(horizontal: context.componentPadding.xLarge, vertical: context.componentPadding.xLarge);
         rowSpacing = context.componentGap.xxSmall;
         textStyle = context.textTheme.buttonMSemiBold;
@@ -184,7 +191,6 @@ class _DSOutlinedButtonState extends State<DSOutlinedButton> {
         break;
       case DSOutlinedButtonSize.small:
         wrapperView = WrapperView.fix12;
-        borderRadius = .circular(context.componentRadius.medium);
         padding = .symmetric(horizontal: context.componentPadding.large, vertical: context.componentPadding.large);
         rowSpacing = context.componentGap.xxSmall;
         textStyle = context.textTheme.buttonSSemiBold;
@@ -193,7 +199,6 @@ class _DSOutlinedButtonState extends State<DSOutlinedButton> {
         break;
       case DSOutlinedButtonSize.xSmall:
         wrapperView = WrapperView.fix10;
-        borderRadius = .circular(context.componentRadius.small);
         padding = .symmetric(horizontal: context.componentPadding.small, vertical: context.componentPadding.xSmall);
         rowSpacing = context.componentGap.xxxSmall;
         textStyle = context.textTheme.buttonSSemiBold;
@@ -238,9 +243,19 @@ class _DSOutlinedButtonState extends State<DSOutlinedButton> {
           : null,
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: borderRadius,
+          borderRadius: .circular(context.componentRadius.max),
           color: backgroundColor,
           border: Border.all(color: borderColor, strokeAlign: BorderSide.strokeAlignOutside),
+          boxShadow: widget.isShowShadow
+              ? [
+                  BoxShadow(
+                    offset: const Offset(0, 4),
+                    blurRadius: 8,
+                    spreadRadius: 0,
+                    color: Color(0xFF121212).withValues(alpha: 0.12),
+                  ),
+                ]
+              : null,
         ),
         padding: padding,
         child: Stack(

@@ -19,6 +19,7 @@ class DSIconSolidButton extends StatefulWidget {
     this.isLoading = false,
     this.isEnabled = true,
     this.onTap,
+    this.isShowShadow = false,
   });
 
   factory DSIconSolidButton.large({
@@ -27,6 +28,7 @@ class DSIconSolidButton extends StatefulWidget {
     bool isLoading = false,
     bool isEnabled = true,
     FutureOr<void> Function()? onTap,
+    bool isShowShadow = false,
   }) => DSIconSolidButton._(
     variant: variant,
     size: DSIconSolidButtonSize.large,
@@ -34,6 +36,7 @@ class DSIconSolidButton extends StatefulWidget {
     isLoading: isLoading,
     isEnabled: isEnabled,
     onTap: onTap,
+    isShowShadow: isShowShadow,
   );
 
   factory DSIconSolidButton.medium({
@@ -42,6 +45,7 @@ class DSIconSolidButton extends StatefulWidget {
     bool isLoading = false,
     bool isEnabled = true,
     FutureOr<void> Function()? onTap,
+    bool isShowShadow = false,
   }) => DSIconSolidButton._(
     variant: variant,
     size: DSIconSolidButtonSize.medium,
@@ -49,6 +53,7 @@ class DSIconSolidButton extends StatefulWidget {
     isLoading: isLoading,
     isEnabled: isEnabled,
     onTap: onTap,
+    isShowShadow: isShowShadow,
   );
 
   factory DSIconSolidButton.small({
@@ -57,6 +62,7 @@ class DSIconSolidButton extends StatefulWidget {
     bool isLoading = false,
     bool isEnabled = true,
     FutureOr<void> Function()? onTap,
+    bool isShowShadow = false,
   }) => DSIconSolidButton._(
     variant: variant,
     size: DSIconSolidButtonSize.small,
@@ -64,6 +70,7 @@ class DSIconSolidButton extends StatefulWidget {
     isLoading: isLoading,
     isEnabled: isEnabled,
     onTap: onTap,
+    isShowShadow: isShowShadow,
   );
 
   factory DSIconSolidButton.xSmall({
@@ -72,6 +79,7 @@ class DSIconSolidButton extends StatefulWidget {
     bool isLoading = false,
     bool isEnabled = true,
     FutureOr<void> Function()? onTap,
+    bool isShowShadow = false,
   }) => DSIconSolidButton._(
     variant: variant,
     size: DSIconSolidButtonSize.xSmall,
@@ -79,6 +87,7 @@ class DSIconSolidButton extends StatefulWidget {
     isLoading: isLoading,
     isEnabled: isEnabled,
     onTap: onTap,
+    isShowShadow: isShowShadow,
   );
 
   final DSIconSolidButtonVariant variant;
@@ -87,6 +96,7 @@ class DSIconSolidButton extends StatefulWidget {
   final bool isLoading;
   final bool isEnabled;
   final FutureOr<void> Function()? onTap;
+  final bool isShowShadow;
 
   @override
   State<DSIconSolidButton> createState() => _DSIconSolidButtonState();
@@ -211,6 +221,16 @@ class _DSIconSolidButtonState extends State<DSIconSolidButton> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(context.componentRadius.max),
           color: backgroundColor,
+          boxShadow: widget.isShowShadow
+              ? [
+                  BoxShadow(
+                    offset: const Offset(0, 4),
+                    blurRadius: 8,
+                    spreadRadius: 0,
+                    color: Color(0xFF121212).withValues(alpha: 0.12),
+                  ),
+                ]
+              : null,
         ),
         padding: padding,
         child: Stack(

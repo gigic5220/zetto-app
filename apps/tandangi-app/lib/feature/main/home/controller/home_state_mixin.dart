@@ -12,4 +12,8 @@ mixin HomeStateMixin {
   ) {
     return ref.watch(_todayNutritionSummaryProvider);
   }
+
+  bool watchIsShowSelectPhotoButton(WidgetRef ref) {
+    return ref.watch(_isShowSelectPhotoButtonProvider);
+  }
 }

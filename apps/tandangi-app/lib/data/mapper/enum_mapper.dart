@@ -2,6 +2,7 @@
 import 'package:tandangi/domain/enum/gender_enum.dart';
 import 'package:tandangi/domain/enum/nutrition_grade_enum.dart';
 import 'package:tandangi/domain/enum/nutrition_status_enum.dart';
+import 'package:tandangi/domain/enum/nutrition_threshhold_status_enum.dart';
 import 'package:tandangi/domain/enum/user_status_enum.dart';
 
 class EnumMapper {
@@ -19,5 +20,11 @@ class EnumMapper {
 
   static NutritionStatusEnum toNutritionStatusEnum(String key) {
     return NutritionStatusEnum.fromStringKey(key);
+  }
+
+  static NutritionThresholdStatusEnum toNutritionThresholdStatusEnum(
+    String? key,
+  ) {
+    return NutritionThresholdStatusEnum.fromStringKey(key);
   }
 }

@@ -21,6 +21,7 @@ class DSSolidButton extends StatefulWidget {
     this.leadingUri,
     this.trailingUri,
     this.onTap,
+    this.isShowShadow = false,
   });
 
   factory DSSolidButton.large({
@@ -31,6 +32,7 @@ class DSSolidButton extends StatefulWidget {
     String? leadingUri,
     String? trailingUri,
     FutureOr<void> Function()? onTap,
+    bool isShowShadow = false,
   }) => DSSolidButton._(
     variant: variant,
     size: DSSolidButtonSize.large,
@@ -40,6 +42,7 @@ class DSSolidButton extends StatefulWidget {
     leadingUri: leadingUri,
     trailingUri: trailingUri,
     onTap: onTap,
+    isShowShadow: isShowShadow,
   );
 
   factory DSSolidButton.medium({
@@ -50,6 +53,7 @@ class DSSolidButton extends StatefulWidget {
     String? leadingUri,
     String? trailingUri,
     FutureOr<void> Function()? onTap,
+    bool isShowShadow = false,
   }) => DSSolidButton._(
     variant: variant,
     size: DSSolidButtonSize.medium,
@@ -59,6 +63,7 @@ class DSSolidButton extends StatefulWidget {
     leadingUri: leadingUri,
     trailingUri: trailingUri,
     onTap: onTap,
+    isShowShadow: isShowShadow,
   );
 
   factory DSSolidButton.small({
@@ -69,6 +74,7 @@ class DSSolidButton extends StatefulWidget {
     String? leadingUri,
     String? trailingUri,
     FutureOr<void> Function()? onTap,
+    bool isShowShadow = false,
   }) => DSSolidButton._(
     variant: variant,
     size: DSSolidButtonSize.small,
@@ -78,6 +84,7 @@ class DSSolidButton extends StatefulWidget {
     leadingUri: leadingUri,
     trailingUri: trailingUri,
     onTap: onTap,
+    isShowShadow: isShowShadow,
   );
 
   factory DSSolidButton.xSmall({
@@ -88,6 +95,7 @@ class DSSolidButton extends StatefulWidget {
     String? leadingUri,
     String? trailingUri,
     FutureOr<void> Function()? onTap,
+    bool isShowShadow = false,
   }) => DSSolidButton._(
     variant: variant,
     size: DSSolidButtonSize.xSmall,
@@ -97,6 +105,7 @@ class DSSolidButton extends StatefulWidget {
     leadingUri: leadingUri,
     trailingUri: trailingUri,
     onTap: onTap,
+    isShowShadow: isShowShadow,
   );
 
   final DSSolidButtonVariant variant;
@@ -107,6 +116,7 @@ class DSSolidButton extends StatefulWidget {
   final String? leadingUri;
   final String? trailingUri;
   final FutureOr<void> Function()? onTap;
+  final bool isShowShadow;
 
   @override
   State<DSSolidButton> createState() => _DSSolidButtonState();
@@ -232,7 +242,20 @@ class _DSSolidButtonState extends State<DSSolidButton> {
             }
           : null,
       child: Container(
-        decoration: BoxDecoration(borderRadius: .circular(999), color: backgroundColor),
+        decoration: BoxDecoration(
+          borderRadius: .circular(999),
+          color: backgroundColor,
+          boxShadow: widget.isShowShadow
+              ? [
+                  BoxShadow(
+                    offset: const Offset(0, 4),
+                    blurRadius: 8,
+                    spreadRadius: 0,
+                    color: Color(0xFF121212).withValues(alpha: 0.12),
+                  ),
+                ]
+              : null,
+        ),
         padding: padding,
         child: Stack(
           alignment: Alignment.center,

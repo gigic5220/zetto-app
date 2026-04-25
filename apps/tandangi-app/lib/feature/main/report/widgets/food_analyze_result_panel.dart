@@ -2,7 +2,7 @@ import 'package:design_system/extenstion.dart';
 import 'package:flutter/material.dart';
 import 'package:tandangi/domain/entity/food_analyze_result_entity.dart';
 
-/// [FoodAnalyzeResultEntity]: per-dish nutrients, vision, final totals.
+/// [FoodAnalyzeResultEntity]: per-dish nutrients and nutrition comparison.
 class FoodAnalyzeResultPanel extends StatelessWidget {
   const FoodAnalyzeResultPanel({super.key, required this.result});
 
@@ -27,56 +27,74 @@ class FoodAnalyzeResultPanel extends StatelessWidget {
   }
 
   static String _formatNutrientCell(dynamic raw) {
-    if (raw == null) return '—';
-    if (raw is Map) {
-      final v = raw['value'];
-      final u = raw['unit'];
-      final range = raw['range'];
-      final buf = StringBuffer();
-      if (v != null && u != null) {
-        buf.write('${_formatNum(v)} $u');
-      } else if (v != null) {
-        buf.write(_formatNum(v));
-      } else {
-        return raw.toString();
-      }
-      if (range is List && range.length >= 2) {
-        buf.write(' (${_formatNum(range[0])} ~ ${_formatNum(range[1])})');
-      }
-      return buf.toString();
+    if (raw == null || raw is! NutrientValueEntity) return '—';
+    final v = raw.value;
+    final u = raw.unit;
+    final range = raw.range;
+    final buf = StringBuffer();
+    if (v != null && u != null) {
+      buf.write('${_formatNum(v)} $u');
+    } else if (v != null) {
+      buf.write(_formatNum(v));
+    } else {
+      return '—';
     }
-    return raw.toString();
+    if (range.length >= 2) {
+      buf.write(' (${_formatNum(range[0])} ~ ${_formatNum(range[1])})');
+    }
+    return buf.toString();
   }
 
   static String _nutrientTitle(String key) =>
       _nutrientLabels[key] ?? key.replaceAll('_', ' ');
 
-  List<Widget> _visionBlocks(BuildContext context, FoodVisionEntity v) {
-    final gap = SizedBox(height: context.componentGap.large);
+  static String _formatDateTime(DateTime dateTime) {
+    final y = dateTime.year.toString().padLeft(4, '0');
+    final m = dateTime.month.toString().padLeft(2, '0');
+    final d = dateTime.day.toString().padLeft(2, '0');
+    final hh = dateTime.hour.toString().padLeft(2, '0');
+    final mm = dateTime.minute.toString().padLeft(2, '0');
+    return '$y.$m.$d $hh:$mm';
+  }
+
+  static String _formatPercent(double? percent) {
+    if (percent == null) return '—';
+    return '${percent.toStringAsFixed(percent % 1 == 0 ? 0 : 1)}%';
+  }
+
+  static String _formatGram(num? value) {
+    if (value == null) return '—';
+    return '${_formatNum(value)}g';
+  }
+
+  static String _formatMilligram(num? value) {
+    if (value == null) return '—';
+    return '${_formatNum(value)}mg';
+  }
+
+  static Map<String, NutrientValueEntity> _nutrientsToMap(
+    DishNutrientsEntity? nutrients,
+  ) {
+    if (nutrients == null) return const {};
+    return {
+      if (nutrients.kcal != null) 'kcal': nutrients.kcal!,
+      if (nutrients.carbohydrate != null) 'carb_g': nutrients.carbohydrate!,
+      if (nutrients.protein != null) 'protein_g': nutrients.protein!,
+      if (nutrients.fat != null) 'fat_g': nutrients.fat!,
+      if (nutrients.sugar != null) 'sugar_g': nutrients.sugar!,
+      if (nutrients.sodium != null) 'sodium_mg': nutrients.sodium!,
+    };
+  }
+
+  List<Widget> _nutritionComparisonBlocks(
+    BuildContext context,
+    NutritionComparisonEntity comparison,
+  ) {
     return [
-      gap,
+      SizedBox(height: context.componentGap.large),
       _Section(
-        title: '\uc2dc\uc5ed \uc7ac\ub8cc (visible)',
-        child: _ChipList(items: v.visibleIngredients),
-      ),
-      gap,
-      _Section(
-        title: '\uac00\uc815 \uc7ac\ub8cc (assumed)',
-        child: _ChipList(items: v.assumedIngredients),
-      ),
-      gap,
-      _Section(
-        title: '\ube44\uc804 \ucd94\uc815 \ud569\uc0b0 (estimated_total)',
-        child: _NutrientsTable(
-          nutrients: v.estimatedTotalNutrients,
-          titleForKey: _nutrientTitle,
-          formatValue: _formatNutrientCell,
-        ),
-      ),
-      gap,
-      _Section(
-        title: '\ube44\uc804 \uac00\uc815 (assumptions)',
-        child: _BulletList(items: v.assumptions),
+        title: '영양 비교',
+        child: _NutritionComparisonSummary(comparison: comparison),
       ),
     ];
   }
@@ -85,7 +103,7 @@ class FoodAnalyzeResultPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     final radius = context.componentRadius.medium;
     final gap = context.componentGap.large;
-    final vision = result.vision;
+    final nutritionComparison = result.nutritionComparison;
 
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -98,6 +116,15 @@ class FoodAnalyzeResultPanel extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            if (result.createdAt != null) ...[
+              Text(
+                '분석 시각 ${_formatDateTime(result.createdAt!)}',
+                style: context.textTheme.bodyMMedium.copyWith(
+                  color: context.semanticColors.textSecondary,
+                ),
+              ),
+              SizedBox(height: gap),
+            ],
             _Section(
               title: '\uba54\uc778',
               child: _FoodItemsList(
@@ -124,33 +151,156 @@ class FoodAnalyzeResultPanel extends StatelessWidget {
                 formatNutrient: _formatNutrientCell,
               ),
             ),
-            if (vision != null) ..._visionBlocks(context, vision),
-            SizedBox(height: gap),
-            _Section(
-              title: '\ucd5c\uc885 \uc601\uc591 (final)',
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  if (result.finalSource != null &&
-                      result.finalSource!.isNotEmpty) ...[
-                    Text(
-                      'source: ${result.finalSource}',
-                      style: context.textTheme.bodyMMedium.copyWith(
-                        color: context.semanticColors.textSecondary,
-                      ),
-                    ),
-                    SizedBox(height: context.componentGap.small),
-                  ],
-                  _NutrientsTable(
-                    nutrients: result.finalNutrients,
-                    titleForKey: _nutrientTitle,
-                    formatValue: _formatNutrientCell,
-                  ),
-                ],
-              ),
-            ),
+            if (nutritionComparison != null)
+              ..._nutritionComparisonBlocks(context, nutritionComparison),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _NutritionComparisonSummary extends StatelessWidget {
+  const _NutritionComparisonSummary({required this.comparison});
+
+  final NutritionComparisonEntity comparison;
+
+  @override
+  Widget build(BuildContext context) {
+    final items = <_ComparisonSummaryItem>[
+      if (comparison.kcal != null)
+        _ComparisonSummaryItem(
+          title: '칼로리',
+          detail:
+              '${FoodAnalyzeResultPanel._formatNum(comparison.kcal!.intakeKcal)}kcal / '
+              '${FoodAnalyzeResultPanel._formatNum(comparison.kcal!.dailyTargetKcal)}kcal '
+              '(${FoodAnalyzeResultPanel._formatPercent(comparison.kcal!.percent)})',
+        ),
+      if (comparison.carbohydrate != null)
+        _ComparisonSummaryItem(
+          title: '탄수화물',
+          detail:
+              '${FoodAnalyzeResultPanel._formatGram(comparison.carbohydrate!.intakeG)} / '
+              '${FoodAnalyzeResultPanel._formatGram(comparison.carbohydrate!.dailyTargetG)} '
+              '(${FoodAnalyzeResultPanel._formatPercent(comparison.carbohydrate!.percent)})',
+        ),
+      if (comparison.protein != null)
+        _ComparisonSummaryItem(
+          title: '단백질',
+          detail:
+              '${FoodAnalyzeResultPanel._formatGram(comparison.protein!.intakeG)} / '
+              '${FoodAnalyzeResultPanel._formatGram(comparison.protein!.dailyTargetG)} '
+              '(${FoodAnalyzeResultPanel._formatPercent(comparison.protein!.percent)})',
+        ),
+      if (comparison.fat != null)
+        _ComparisonSummaryItem(
+          title: '지방',
+          detail:
+              '${FoodAnalyzeResultPanel._formatGram(comparison.fat!.intakeG)} / '
+              '${FoodAnalyzeResultPanel._formatGram(comparison.fat!.dailyTargetG)} '
+              '(${FoodAnalyzeResultPanel._formatPercent(comparison.fat!.percent)})',
+        ),
+      if (comparison.sugar != null)
+        _ComparisonSummaryItem(
+          title: '당',
+          detail:
+              '${FoodAnalyzeResultPanel._formatGram(comparison.sugar!.intakeG)} / '
+              '최대 ${FoodAnalyzeResultPanel._formatGram(comparison.sugar!.maxG)}',
+          statusLabel: comparison.sugar!.statusEnum?.value,
+        ),
+      if (comparison.sodium != null)
+        _ComparisonSummaryItem(
+          title: '나트륨',
+          detail:
+              '${FoodAnalyzeResultPanel._formatMilligram(comparison.sodium!.intakeMg)} / '
+              '충분 ${FoodAnalyzeResultPanel._formatMilligram(comparison.sodium!.adequateMg)}, '
+              '감축 ${FoodAnalyzeResultPanel._formatMilligram(comparison.sodium!.riskReductionMg)}',
+          statusLabel: comparison.sodium!.statusEnum?.value,
+        ),
+    ];
+
+    if (items.isEmpty) {
+      return Text(
+        '내용 없음',
+        style: context.textTheme.bodyMMedium.copyWith(
+          color: context.semanticColors.textTertiary,
+        ),
+      );
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        for (var i = 0; i < items.length; i++) ...[
+          if (i > 0) SizedBox(height: context.componentGap.small),
+          _ComparisonSummaryRow(item: items[i]),
+        ],
+      ],
+    );
+  }
+}
+
+class _ComparisonSummaryItem {
+  const _ComparisonSummaryItem({
+    required this.title,
+    required this.detail,
+    this.statusLabel,
+  });
+
+  final String title;
+  final String detail;
+  final String? statusLabel;
+}
+
+class _ComparisonSummaryRow extends StatelessWidget {
+  const _ComparisonSummaryRow({required this.item});
+
+  final _ComparisonSummaryItem item;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      decoration: BoxDecoration(
+        color: context.semanticColors.fillDefault,
+        borderRadius: BorderRadius.circular(context.componentRadius.small),
+        border: Border.all(color: context.semanticColors.borderSubtle),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  item.title,
+                  style: context.textTheme.titleSSemiBold.copyWith(
+                    color: context.semanticColors.textPrimary,
+                  ),
+                ),
+                SizedBox(height: context.componentGap.xSmall),
+                Text(
+                  item.detail,
+                  style: context.textTheme.bodyMMedium.copyWith(
+                    color: context.semanticColors.textSecondary,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          if (item.statusLabel != null && item.statusLabel!.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.only(left: 12),
+              child: Text(
+                item.statusLabel!,
+                style: context.textTheme.bodyMMedium.copyWith(
+                  color: context.semanticColors.textPrimary,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+        ],
       ),
     );
   }
@@ -192,7 +342,9 @@ class _FoodItemsList extends StatelessWidget {
           ),
           SizedBox(height: context.componentGap.small),
           _NutrientsTable(
-            nutrients: items[i].nutrients,
+            nutrients: FoodAnalyzeResultPanel._nutrientsToMap(
+              items[i].nutrients,
+            ),
             titleForKey: nutrientTitle,
             formatValue: formatNutrient,
           ),
@@ -226,96 +378,6 @@ class _Section extends StatelessWidget {
   }
 }
 
-class _ChipList extends StatelessWidget {
-  const _ChipList({required this.items});
-
-  final List<String> items;
-
-  @override
-  Widget build(BuildContext context) {
-    if (items.isEmpty) {
-      return Text(
-        '\ub0b4\uc6a9 \uc5c6\uc74c',
-        style: context.textTheme.bodyMMedium.copyWith(
-          color: context.semanticColors.textTertiary,
-        ),
-      );
-    }
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: items
-          .map(
-            (e) => Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              decoration: BoxDecoration(
-                color: context.semanticColors.fillDefault,
-                borderRadius: BorderRadius.circular(
-                  context.componentRadius.small,
-                ),
-                border: Border.all(color: context.semanticColors.borderSubtle),
-              ),
-              child: Text(
-                e,
-                style: context.textTheme.bodyMMedium.copyWith(
-                  color: context.semanticColors.textPrimary,
-                ),
-              ),
-            ),
-          )
-          .toList(),
-    );
-  }
-}
-
-class _BulletList extends StatelessWidget {
-  const _BulletList({required this.items});
-
-  final List<String> items;
-
-  @override
-  Widget build(BuildContext context) {
-    if (items.isEmpty) {
-      return Text(
-        '\ub0b4\uc6a9 \uc5c6\uc74c',
-        style: context.textTheme.bodyMMedium.copyWith(
-          color: context.semanticColors.textTertiary,
-        ),
-      );
-    }
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: items
-          .map(
-            (line) => Padding(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '\u2022 ',
-                    style: context.textTheme.bodyMMedium.copyWith(
-                      color: context.semanticColors.textSecondary,
-                    ),
-                  ),
-                  Expanded(
-                    child: Text(
-                      line,
-                      style: context.textTheme.bodyMMedium.copyWith(
-                        color: context.semanticColors.textPrimary,
-                        height: 1.4,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          )
-          .toList(),
-    );
-  }
-}
-
 class _NutrientsTable extends StatelessWidget {
   const _NutrientsTable({
     required this.nutrients,
@@ -323,7 +385,7 @@ class _NutrientsTable extends StatelessWidget {
     required this.formatValue,
   });
 
-  final Map<String, dynamic> nutrients;
+  final Map<String, NutrientValueEntity> nutrients;
   final String Function(String key) titleForKey;
   final String Function(dynamic raw) formatValue;
 
