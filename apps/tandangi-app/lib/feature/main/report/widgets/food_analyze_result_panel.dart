@@ -73,22 +73,21 @@ class FoodAnalyzeResultPanel extends StatelessWidget {
   }
 
   static Map<String, NutrientValueEntity> _nutrientsToMap(
-    DishNutrientsEntity? nutrients,
+    AnalyzedFoodItemEntity item,
   ) {
-    if (nutrients == null) return const {};
     return {
-      if (nutrients.kcal != null) 'kcal': nutrients.kcal!,
-      if (nutrients.carbohydrate != null) 'carb_g': nutrients.carbohydrate!,
-      if (nutrients.protein != null) 'protein_g': nutrients.protein!,
-      if (nutrients.fat != null) 'fat_g': nutrients.fat!,
-      if (nutrients.sugar != null) 'sugar_g': nutrients.sugar!,
-      if (nutrients.sodium != null) 'sodium_mg': nutrients.sodium!,
+      if (item.kcal != null) 'kcal': item.kcal!,
+      if (item.carbohydrate != null) 'carb_g': item.carbohydrate!,
+      if (item.protein != null) 'protein_g': item.protein!,
+      if (item.fat != null) 'fat_g': item.fat!,
+      if (item.sugar != null) 'sugar_g': item.sugar!,
+      if (item.sodium != null) 'sodium_mg': item.sodium!,
     };
   }
 
   List<Widget> _nutritionComparisonBlocks(
     BuildContext context,
-    NutritionComparisonEntity comparison,
+    AnalysisNutritionInfoEntity comparison,
   ) {
     return [
       SizedBox(height: context.componentGap.large),
@@ -103,7 +102,7 @@ class FoodAnalyzeResultPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     final radius = context.componentRadius.medium;
     final gap = context.componentGap.large;
-    final nutritionComparison = result.nutritionComparison;
+    final analysisNutritionInfo = result.analysisNutritionInfo;
 
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -151,8 +150,8 @@ class FoodAnalyzeResultPanel extends StatelessWidget {
                 formatNutrient: _formatNutrientCell,
               ),
             ),
-            if (nutritionComparison != null)
-              ..._nutritionComparisonBlocks(context, nutritionComparison),
+            if (analysisNutritionInfo != null)
+              ..._nutritionComparisonBlocks(context, analysisNutritionInfo),
           ],
         ),
       ),
@@ -163,7 +162,7 @@ class FoodAnalyzeResultPanel extends StatelessWidget {
 class _NutritionComparisonSummary extends StatelessWidget {
   const _NutritionComparisonSummary({required this.comparison});
 
-  final NutritionComparisonEntity comparison;
+  final AnalysisNutritionInfoEntity comparison;
 
   @override
   Widget build(BuildContext context) {
@@ -172,50 +171,50 @@ class _NutritionComparisonSummary extends StatelessWidget {
         _ComparisonSummaryItem(
           title: '칼로리',
           detail:
-              '${FoodAnalyzeResultPanel._formatNum(comparison.kcal!.intakeKcal)}kcal / '
-              '${FoodAnalyzeResultPanel._formatNum(comparison.kcal!.dailyTargetKcal)}kcal '
+              '${FoodAnalyzeResultPanel._formatNum(comparison.kcal!.intake)}kcal / '
+              '${FoodAnalyzeResultPanel._formatNum(comparison.kcal!.target)}kcal '
               '(${FoodAnalyzeResultPanel._formatPercent(comparison.kcal!.percent)})',
         ),
       if (comparison.carbohydrate != null)
         _ComparisonSummaryItem(
           title: '탄수화물',
           detail:
-              '${FoodAnalyzeResultPanel._formatGram(comparison.carbohydrate!.intakeG)} / '
-              '${FoodAnalyzeResultPanel._formatGram(comparison.carbohydrate!.dailyTargetG)} '
+              '${FoodAnalyzeResultPanel._formatGram(comparison.carbohydrate!.intake)} / '
+              '${FoodAnalyzeResultPanel._formatGram(comparison.carbohydrate!.target)} '
               '(${FoodAnalyzeResultPanel._formatPercent(comparison.carbohydrate!.percent)})',
         ),
       if (comparison.protein != null)
         _ComparisonSummaryItem(
           title: '단백질',
           detail:
-              '${FoodAnalyzeResultPanel._formatGram(comparison.protein!.intakeG)} / '
-              '${FoodAnalyzeResultPanel._formatGram(comparison.protein!.dailyTargetG)} '
+              '${FoodAnalyzeResultPanel._formatGram(comparison.protein!.intake)} / '
+              '${FoodAnalyzeResultPanel._formatGram(comparison.protein!.target)} '
               '(${FoodAnalyzeResultPanel._formatPercent(comparison.protein!.percent)})',
         ),
       if (comparison.fat != null)
         _ComparisonSummaryItem(
           title: '지방',
           detail:
-              '${FoodAnalyzeResultPanel._formatGram(comparison.fat!.intakeG)} / '
-              '${FoodAnalyzeResultPanel._formatGram(comparison.fat!.dailyTargetG)} '
+              '${FoodAnalyzeResultPanel._formatGram(comparison.fat!.intake)} / '
+              '${FoodAnalyzeResultPanel._formatGram(comparison.fat!.target)} '
               '(${FoodAnalyzeResultPanel._formatPercent(comparison.fat!.percent)})',
         ),
       if (comparison.sugar != null)
         _ComparisonSummaryItem(
           title: '당',
           detail:
-              '${FoodAnalyzeResultPanel._formatGram(comparison.sugar!.intakeG)} / '
-              '최대 ${FoodAnalyzeResultPanel._formatGram(comparison.sugar!.maxG)}',
-          statusLabel: comparison.sugar!.statusEnum?.value,
+              '${FoodAnalyzeResultPanel._formatGram(comparison.sugar!.intake)} / '
+              '최대 ${FoodAnalyzeResultPanel._formatGram(comparison.sugar!.max)}',
+          statusLabel: comparison.sugar!.status?.value,
         ),
       if (comparison.sodium != null)
         _ComparisonSummaryItem(
           title: '나트륨',
           detail:
-              '${FoodAnalyzeResultPanel._formatMilligram(comparison.sodium!.intakeMg)} / '
-              '충분 ${FoodAnalyzeResultPanel._formatMilligram(comparison.sodium!.adequateMg)}, '
-              '감축 ${FoodAnalyzeResultPanel._formatMilligram(comparison.sodium!.riskReductionMg)}',
-          statusLabel: comparison.sodium!.statusEnum?.value,
+              '${FoodAnalyzeResultPanel._formatMilligram(comparison.sodium!.intake)} / '
+              '충분 ${FoodAnalyzeResultPanel._formatMilligram(comparison.sodium!.adequate)}, '
+              '감축 ${FoodAnalyzeResultPanel._formatMilligram(comparison.sodium!.riskReduction)}',
+          statusLabel: comparison.sodium!.status?.value,
         ),
     ];
 
@@ -342,9 +341,7 @@ class _FoodItemsList extends StatelessWidget {
           ),
           SizedBox(height: context.componentGap.small),
           _NutrientsTable(
-            nutrients: FoodAnalyzeResultPanel._nutrientsToMap(
-              items[i].nutrients,
-            ),
+            nutrients: FoodAnalyzeResultPanel._nutrientsToMap(items[i]),
             titleForKey: nutrientTitle,
             formatValue: formatNutrient,
           ),

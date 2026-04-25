@@ -13,7 +13,7 @@ class FoodAnalyzeRepositoryImpl implements FoodAnalyzeRepository {
   final FoodAnalyzeRemoteDataSource _remote;
 
   @override
-  Future<FoodAnalyzeResultEntity> analyzeImage({
+  Future<FoodAnalyzeResultEntity> postFoodAnalysis({
     required String imagePath,
     required bool includeWatermark,
     String? prompt,
@@ -21,7 +21,7 @@ class FoodAnalyzeRepositoryImpl implements FoodAnalyzeRepository {
     if (FirebaseAuth.instance.currentUser == null) {
       throw StateError('Not logged in');
     }
-    final dto = await _remote.analyze(
+    final dto = await _remote.postFoodAnalysis(
       imagePath: imagePath,
       includeWatermark: includeWatermark,
       prompt: prompt,
@@ -30,12 +30,12 @@ class FoodAnalyzeRepositoryImpl implements FoodAnalyzeRepository {
   }
 
   @override
-  Future<PagedListEntity<FoodAnalyzeResultEntity>> getFoodAnalyses({
+  Future<PagedListEntity<FoodAnalyzeResultEntity>> getFoodAnalysises({
     int? page,
     int? size,
     List<String>? sort,
   }) async {
-    final paged = await _remote.getFoodAnalyses(
+    final paged = await _remote.getFoodAnalysises(
       dto: CommonPagingRequestDto(page: page, size: size, sort: sort),
     );
 

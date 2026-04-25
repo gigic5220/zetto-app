@@ -51,7 +51,7 @@ class _FoodAnalyzeResult extends _$FoodAnalyzeResult {
   Future<FoodAnalyzeResultEntity> build() async {
     final File selectedPhoto = ref.read(initialSelectedPhotoProvider);
     final bool includeWatermark = ref.read(initialIncludeWatermarkProvider);
-    return await getIt<FoodAnalyzeRepository>().analyzeImage(
+    return await getIt<FoodAnalyzeRepository>().postFoodAnalysis(
       imagePath: selectedPhoto.path,
       includeWatermark: includeWatermark,
     );

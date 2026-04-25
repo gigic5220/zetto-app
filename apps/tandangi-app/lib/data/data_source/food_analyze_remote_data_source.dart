@@ -4,17 +4,17 @@ import 'package:tandangi/data/dto/food_analyze_result_dto.dart';
 import 'package:tandangi/data/dto/paged_list_response_dto.dart';
 
 abstract class FoodAnalyzeRemoteDataSource {
-  Future<FoodAnalyzeResultDto> analyze({
+  Future<FoodAnalysisDto> postFoodAnalysis({
     required String imagePath,
     required bool includeWatermark,
     String? prompt,
   });
 
-  Future<PagedListResponseDto<FoodAnalyzeResultDto>> getFoodAnalyses({
+  Future<PagedListResponseDto<FoodAnalysisDto>> getFoodAnalysises({
     required CommonPagingRequestDto dto,
   });
 
-  Future<FoodAnalyzeResultDto> getFoodAnalysis({required int foodAnalysisId});
+  Future<FoodAnalysisDto> getFoodAnalysis({required int foodAnalysisId});
 }
 
 class FoodAnalyzeRemoteDataSourceImpl implements FoodAnalyzeRemoteDataSource {
@@ -23,7 +23,7 @@ class FoodAnalyzeRemoteDataSourceImpl implements FoodAnalyzeRemoteDataSource {
   final Dio _dio;
 
   @override
-  Future<FoodAnalyzeResultDto> analyze({
+  Future<FoodAnalysisDto> postFoodAnalysis({
     required String imagePath,
     required bool includeWatermark,
     String? prompt,
@@ -35,7 +35,7 @@ class FoodAnalyzeRemoteDataSourceImpl implements FoodAnalyzeRemoteDataSource {
     });
 
     final response = await _dio.post<Map<String, dynamic>>(
-      '/api/ai/analyze',
+      '/api/food-analysis',
       data: formData,
       options: Options(
         sendTimeout: const Duration(minutes: 2),
@@ -45,47 +45,45 @@ class FoodAnalyzeRemoteDataSourceImpl implements FoodAnalyzeRemoteDataSource {
 
     final data = response.data;
     if (data == null) {
-      throw StateError('Empty response from /api/ai/analyze');
+      throw StateError('Empty response from /api/food-analysis');
     }
-    return FoodAnalyzeResultDto.fromJson(data);
+    return FoodAnalysisDto.fromJson(data);
   }
 
   @override
-  Future<PagedListResponseDto<FoodAnalyzeResultDto>> getFoodAnalyses({
+  Future<PagedListResponseDto<FoodAnalysisDto>> getFoodAnalysises({
     required CommonPagingRequestDto dto,
   }) async {
     final response = await _dio.get(
-      '/api/food-analyses',
+      '/api/food-analysis',
       queryParameters: dto.toQueryParameters(),
     );
 
     final raw = response.data;
     if (raw is! Map) {
-      throw StateError('Invalid response from /api/food-analyses');
+      throw StateError('Invalid response from /api/food-analysis');
     }
 
-    return PagedListResponseDto<FoodAnalyzeResultDto>.fromJson(
+    return PagedListResponseDto<FoodAnalysisDto>.fromJson(
       Map<String, dynamic>.from(raw),
       (json) =>
-          FoodAnalyzeResultDto.fromJson(Map<String, Object?>.from(json as Map)),
+          FoodAnalysisDto.fromJson(Map<String, Object?>.from(json as Map)),
     );
   }
 
   @override
-  Future<FoodAnalyzeResultDto> getFoodAnalysis({
-    required int foodAnalysisId,
-  }) async {
+  Future<FoodAnalysisDto> getFoodAnalysis({required int foodAnalysisId}) async {
     final response = await _dio.get<Map<String, dynamic>>(
-      '/api/food-analyses/$foodAnalysisId',
+      '/api/food-analysis/$foodAnalysisId',
     );
 
     final data = response.data;
     if (data == null) {
       throw StateError(
-        'Empty response from /api/food-analyses/$foodAnalysisId',
+        'Empty response from /api/food-analysis/$foodAnalysisId',
       );
     }
 
-    return FoodAnalyzeResultDto.fromJson(data);
+    return FoodAnalysisDto.fromJson(data);
   }
 }

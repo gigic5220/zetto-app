@@ -3,122 +3,96 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'food_analyze_result_dto.freezed.dart';
 part 'food_analyze_result_dto.g.dart';
 
-/// `/api/ai/analyze`, `/api/food-analyses`, `/api/food-analyses/{id}`
 @freezed
-abstract class FoodAnalyzeResultDto with _$FoodAnalyzeResultDto {
-  const factory FoodAnalyzeResultDto({
-    List<AnalyzedFoodItemDto>? main,
-    List<AnalyzedFoodItemDto>? sides,
-    List<AnalyzedFoodItemDto>? others,
+abstract class FoodAnalysisDto with _$FoodAnalysisDto {
+  const factory FoodAnalysisDto({
+    List<AnalysisFoodItemDto>? mainFoodItems,
+    List<AnalysisFoodItemDto>? sideFoodItems,
+    List<AnalysisFoodItemDto>? otherFoodItems,
     List<String>? assumptions,
     String? foodImageUrl,
-    NutritionComparisonDto? nutritionComparison,
+    AnalysisNutritionInfoDto? analysisNutritionInfo,
     DateTime? createdAt,
-  }) = _FoodAnalyzeResultDto;
+  }) = _FoodAnalysisDto;
 
-  factory FoodAnalyzeResultDto.fromJson(Map<String, Object?> json) =>
-      _$FoodAnalyzeResultDtoFromJson(json);
+  factory FoodAnalysisDto.fromJson(Map<String, Object?> json) =>
+      _$FoodAnalysisDtoFromJson(json);
 }
 
 @freezed
-abstract class AnalyzedFoodItemDto with _$AnalyzedFoodItemDto {
-  const factory AnalyzedFoodItemDto({
+abstract class AnalysisFoodItemDto with _$AnalysisFoodItemDto {
+  const factory AnalysisFoodItemDto({
     required int id,
     String? name,
-    DishNutrientsDto? nutrients,
-  }) = _AnalyzedFoodItemDto;
+    FoodNutritionInfoDto? kcal,
+    FoodNutritionInfoDto? carbohydrate,
+    FoodNutritionInfoDto? protein,
+    FoodNutritionInfoDto? fat,
+    FoodNutritionInfoDto? sugar,
+    FoodNutritionInfoDto? sodium,
+  }) = _AnalysisFoodItemDto;
 
-  factory AnalyzedFoodItemDto.fromJson(Map<String, Object?> json) =>
-      _$AnalyzedFoodItemDtoFromJson(json);
+  factory AnalysisFoodItemDto.fromJson(Map<String, Object?> json) =>
+      _$AnalysisFoodItemDtoFromJson(json);
 }
 
 @freezed
-abstract class DishNutrientsDto with _$DishNutrientsDto {
-  const factory DishNutrientsDto({
-    NutrientValueDto? kcal,
-    NutrientValueDto? carbG,
-    NutrientValueDto? proteinG,
-    NutrientValueDto? fatG,
-    NutrientValueDto? sugarG,
-    NutrientValueDto? sodiumMg,
-  }) = _DishNutrientsDto;
-
-  factory DishNutrientsDto.fromJson(Map<String, Object?> json) =>
-      _$DishNutrientsDtoFromJson(json);
-}
-
-@freezed
-abstract class NutrientValueDto with _$NutrientValueDto {
-  const factory NutrientValueDto({
+abstract class FoodNutritionInfoDto with _$FoodNutritionInfoDto {
+  const factory FoodNutritionInfoDto({
     double? value,
     List<double>? range,
     String? unit,
-  }) = _NutrientValueDto;
+  }) = _FoodNutritionInfoDto;
 
-  factory NutrientValueDto.fromJson(Map<String, Object?> json) =>
-      _$NutrientValueDtoFromJson(json);
+  factory FoodNutritionInfoDto.fromJson(Map<String, Object?> json) =>
+      _$FoodNutritionInfoDtoFromJson(json);
 }
 
 @freezed
-abstract class NutritionComparisonDto with _$NutritionComparisonDto {
-  const factory NutritionComparisonDto({
-    KcalComparisonDto? kcal,
-    MacronutrientComparisonDto? carbohydrate,
-    MacronutrientComparisonDto? protein,
-    MacronutrientComparisonDto? fat,
-    SugarComparisonDto? sugar,
-    SodiumComparisonDto? sodium,
-  }) = _NutritionComparisonDto;
+abstract class AnalysisNutritionInfoDto with _$AnalysisNutritionInfoDto {
+  const factory AnalysisNutritionInfoDto({
+    NutrientInfoDto? kcal,
+    NutrientInfoDto? carbohydrate,
+    NutrientInfoDto? protein,
+    NutrientInfoDto? fat,
+    SugarInfoDto? sugar,
+    SodiumInfoDto? sodium,
+  }) = _AnalysisNutritionInfoDto;
 
-  factory NutritionComparisonDto.fromJson(Map<String, Object?> json) =>
-      _$NutritionComparisonDtoFromJson(json);
+  factory AnalysisNutritionInfoDto.fromJson(Map<String, Object?> json) =>
+      _$AnalysisNutritionInfoDtoFromJson(json);
 }
 
 @freezed
-abstract class KcalComparisonDto with _$KcalComparisonDto {
-  const factory KcalComparisonDto({
-    double? intakeKcal,
-    int? dailyTargetKcal,
+abstract class NutrientInfoDto with _$NutrientInfoDto {
+  const factory NutrientInfoDto({
+    double? intake,
+    int? target,
     double? percent,
-  }) = _KcalComparisonDto;
+  }) = _NutrientInfoDto;
 
-  factory KcalComparisonDto.fromJson(Map<String, Object?> json) =>
-      _$KcalComparisonDtoFromJson(json);
+  factory NutrientInfoDto.fromJson(Map<String, Object?> json) =>
+      _$NutrientInfoDtoFromJson(json);
 }
 
 @freezed
-abstract class MacronutrientComparisonDto with _$MacronutrientComparisonDto {
-  const factory MacronutrientComparisonDto({
-    double? intakeG,
-    int? dailyTargetG,
-    double? percent,
-  }) = _MacronutrientComparisonDto;
+abstract class SugarInfoDto with _$SugarInfoDto {
+  const factory SugarInfoDto({double? intake, int? max, String? statusCode}) =
+      _SugarInfoDto;
 
-  factory MacronutrientComparisonDto.fromJson(Map<String, Object?> json) =>
-      _$MacronutrientComparisonDtoFromJson(json);
+  factory SugarInfoDto.fromJson(Map<String, Object?> json) =>
+      _$SugarInfoDtoFromJson(json);
 }
 
 @freezed
-abstract class SugarComparisonDto with _$SugarComparisonDto {
-  const factory SugarComparisonDto({
-    double? intakeG,
-    int? maxG,
+abstract class SodiumInfoDto with _$SodiumInfoDto {
+  const factory SodiumInfoDto({
+    double? intake,
+    int? adequate,
+    int? riskReduction,
     String? statusCode,
-  }) = _SugarComparisonDto;
+  }) = _SodiumInfoDto;
 
-  factory SugarComparisonDto.fromJson(Map<String, Object?> json) =>
-      _$SugarComparisonDtoFromJson(json);
-}
-
-@freezed
-abstract class SodiumComparisonDto with _$SodiumComparisonDto {
-  const factory SodiumComparisonDto({
-    double? intakeMg,
-    int? adequateMg,
-    int? riskReductionMg,
-    String? statusCode,
-  }) = _SodiumComparisonDto;
-
-  factory SodiumComparisonDto.fromJson(Map<String, Object?> json) =>
-      _$SodiumComparisonDtoFromJson(json);
+  factory SodiumInfoDto.fromJson(Map<String, Object?> json) =>
+      _$SodiumInfoDtoFromJson(json);
 }

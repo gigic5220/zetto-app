@@ -3,20 +3,20 @@ import 'package:tandangi/data/mapper/enum_mapper.dart';
 import 'package:tandangi/domain/entity/food_analyze_result_entity.dart';
 
 class FoodAnalyzeMapper {
-  static FoodAnalyzeResultEntity toEntity(FoodAnalyzeResultDto dto) {
+  static FoodAnalyzeResultEntity toEntity(FoodAnalysisDto dto) {
     return FoodAnalyzeResultEntity(
-      main: _mapItems(dto.main),
-      sides: _mapItems(dto.sides),
-      others: _mapItems(dto.others),
+      main: _mapItems(dto.mainFoodItems),
+      sides: _mapItems(dto.sideFoodItems),
+      others: _mapItems(dto.otherFoodItems),
       assumptions: dto.assumptions ?? const [],
       foodImageUrl: dto.foodImageUrl ?? '',
       createdAt: dto.createdAt,
-      nutritionComparison: _mapNutritionComparison(dto.nutritionComparison),
+      analysisNutritionInfo: _mapAnalysisNutritionInfo(dto.analysisNutritionInfo),
     );
   }
 
   static List<AnalyzedFoodItemEntity> _mapItems(
-    List<AnalyzedFoodItemDto>? list,
+    List<AnalysisFoodItemDto>? list,
   ) {
     if (list == null) return const [];
     return list
@@ -24,25 +24,18 @@ class FoodAnalyzeMapper {
           (e) => AnalyzedFoodItemEntity(
             id: e.id,
             name: e.name ?? '',
-            nutrients: _mapDishNutrients(e.nutrients),
+            kcal: _mapNutrientValue(e.kcal),
+            carbohydrate: _mapNutrientValue(e.carbohydrate),
+            protein: _mapNutrientValue(e.protein),
+            fat: _mapNutrientValue(e.fat),
+            sugar: _mapNutrientValue(e.sugar),
+            sodium: _mapNutrientValue(e.sodium),
           ),
         )
         .toList();
   }
 
-  static DishNutrientsEntity? _mapDishNutrients(DishNutrientsDto? dto) {
-    if (dto == null) return null;
-    return DishNutrientsEntity(
-      kcal: _mapNutrientValue(dto.kcal),
-      carbohydrate: _mapNutrientValue(dto.carbG),
-      protein: _mapNutrientValue(dto.proteinG),
-      fat: _mapNutrientValue(dto.fatG),
-      sugar: _mapNutrientValue(dto.sugarG),
-      sodium: _mapNutrientValue(dto.sodiumMg),
-    );
-  }
-
-  static NutrientValueEntity? _mapNutrientValue(NutrientValueDto? dto) {
+  static NutrientValueEntity? _mapNutrientValue(FoodNutritionInfoDto? dto) {
     if (dto == null) return null;
     return NutrientValueEntity(
       value: dto.value,
@@ -51,58 +44,45 @@ class FoodAnalyzeMapper {
     );
   }
 
-  static NutritionComparisonEntity? _mapNutritionComparison(
-    NutritionComparisonDto? dto,
+  static AnalysisNutritionInfoEntity? _mapAnalysisNutritionInfo(
+    AnalysisNutritionInfoDto? dto,
   ) {
     if (dto == null) return null;
-    return NutritionComparisonEntity(
-      kcal: _mapKcalComparison(dto.kcal),
-      carbohydrate: _mapMacronutrientComparison(dto.carbohydrate),
-      protein: _mapMacronutrientComparison(dto.protein),
-      fat: _mapMacronutrientComparison(dto.fat),
-      sugar: _mapSugarComparison(dto.sugar),
-      sodium: _mapSodiumComparison(dto.sodium),
+    return AnalysisNutritionInfoEntity(
+      kcal: _mapNutrientInfo(dto.kcal),
+      carbohydrate: _mapNutrientInfo(dto.carbohydrate),
+      protein: _mapNutrientInfo(dto.protein),
+      fat: _mapNutrientInfo(dto.fat),
+      sugar: _mapSugarInfo(dto.sugar),
+      sodium: _mapSodiumInfo(dto.sodium),
     );
   }
 
-  static KcalComparisonEntity? _mapKcalComparison(KcalComparisonDto? dto) {
+  static NutrientInfoEntity? _mapNutrientInfo(NutrientInfoDto? dto) {
     if (dto == null) return null;
-    return KcalComparisonEntity(
-      intakeKcal: dto.intakeKcal,
-      dailyTargetKcal: dto.dailyTargetKcal,
+    return NutrientInfoEntity(
+      intake: dto.intake,
+      target: dto.target,
       percent: dto.percent,
     );
   }
 
-  static MacronutrientComparisonEntity? _mapMacronutrientComparison(
-    MacronutrientComparisonDto? dto,
-  ) {
+  static SugarInfoEntity? _mapSugarInfo(SugarInfoDto? dto) {
     if (dto == null) return null;
-    return MacronutrientComparisonEntity(
-      intakeG: dto.intakeG,
-      dailyTargetG: dto.dailyTargetG,
-      percent: dto.percent,
+    return SugarInfoEntity(
+      intake: dto.intake,
+      max: dto.max,
+      status: EnumMapper.toNutritionThresholdStatusEnum(dto.statusCode),
     );
   }
 
-  static SugarComparisonEntity? _mapSugarComparison(SugarComparisonDto? dto) {
+  static SodiumInfoEntity? _mapSodiumInfo(SodiumInfoDto? dto) {
     if (dto == null) return null;
-    return SugarComparisonEntity(
-      intakeG: dto.intakeG,
-      maxG: dto.maxG,
-      statusEnum: EnumMapper.toNutritionThresholdStatusEnum(dto.statusCode),
-    );
-  }
-
-  static SodiumComparisonEntity? _mapSodiumComparison(
-    SodiumComparisonDto? dto,
-  ) {
-    if (dto == null) return null;
-    return SodiumComparisonEntity(
-      intakeMg: dto.intakeMg,
-      adequateMg: dto.adequateMg,
-      riskReductionMg: dto.riskReductionMg,
-      statusEnum: EnumMapper.toNutritionThresholdStatusEnum(dto.statusCode),
+    return SodiumInfoEntity(
+      intake: dto.intake,
+      adequate: dto.adequate,
+      riskReduction: dto.riskReduction,
+      status: EnumMapper.toNutritionThresholdStatusEnum(dto.statusCode),
     );
   }
 }

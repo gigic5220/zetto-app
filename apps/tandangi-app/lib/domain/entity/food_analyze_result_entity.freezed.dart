@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AnalyzedFoodItemEntity {
 
- int get id; String get name; DishNutrientsEntity? get nutrients;
+ int get id; String get name; NutrientValueEntity? get kcal; NutrientValueEntity? get carbohydrate; NutrientValueEntity? get protein; NutrientValueEntity? get fat; NutrientValueEntity? get sugar; NutrientValueEntity? get sodium;
 /// Create a copy of AnalyzedFoodItemEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $AnalyzedFoodItemEntityCopyWith<AnalyzedFoodItemEntity> get copyWith => _$Analyz
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AnalyzedFoodItemEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.nutrients, nutrients) || other.nutrients == nutrients));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AnalyzedFoodItemEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.kcal, kcal) || other.kcal == kcal)&&(identical(other.carbohydrate, carbohydrate) || other.carbohydrate == carbohydrate)&&(identical(other.protein, protein) || other.protein == protein)&&(identical(other.fat, fat) || other.fat == fat)&&(identical(other.sugar, sugar) || other.sugar == sugar)&&(identical(other.sodium, sodium) || other.sodium == sodium));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,nutrients);
+int get hashCode => Object.hash(runtimeType,id,name,kcal,carbohydrate,protein,fat,sugar,sodium);
 
 @override
 String toString() {
-  return 'AnalyzedFoodItemEntity(id: $id, name: $name, nutrients: $nutrients)';
+  return 'AnalyzedFoodItemEntity(id: $id, name: $name, kcal: $kcal, carbohydrate: $carbohydrate, protein: $protein, fat: $fat, sugar: $sugar, sodium: $sodium)';
 }
 
 
@@ -48,11 +48,11 @@ abstract mixin class $AnalyzedFoodItemEntityCopyWith<$Res>  {
   factory $AnalyzedFoodItemEntityCopyWith(AnalyzedFoodItemEntity value, $Res Function(AnalyzedFoodItemEntity) _then) = _$AnalyzedFoodItemEntityCopyWithImpl;
 @useResult
 $Res call({
- int id, String name, DishNutrientsEntity? nutrients
+ int id, String name, NutrientValueEntity? kcal, NutrientValueEntity? carbohydrate, NutrientValueEntity? protein, NutrientValueEntity? fat, NutrientValueEntity? sugar, NutrientValueEntity? sodium
 });
 
 
-$DishNutrientsEntityCopyWith<$Res>? get nutrients;
+$NutrientValueEntityCopyWith<$Res>? get kcal;$NutrientValueEntityCopyWith<$Res>? get carbohydrate;$NutrientValueEntityCopyWith<$Res>? get protein;$NutrientValueEntityCopyWith<$Res>? get fat;$NutrientValueEntityCopyWith<$Res>? get sugar;$NutrientValueEntityCopyWith<$Res>? get sodium;
 
 }
 /// @nodoc
@@ -65,25 +65,90 @@ class _$AnalyzedFoodItemEntityCopyWithImpl<$Res>
 
 /// Create a copy of AnalyzedFoodItemEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? nutrients = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? kcal = freezed,Object? carbohydrate = freezed,Object? protein = freezed,Object? fat = freezed,Object? sugar = freezed,Object? sodium = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,nutrients: freezed == nutrients ? _self.nutrients : nutrients // ignore: cast_nullable_to_non_nullable
-as DishNutrientsEntity?,
+as String,kcal: freezed == kcal ? _self.kcal : kcal // ignore: cast_nullable_to_non_nullable
+as NutrientValueEntity?,carbohydrate: freezed == carbohydrate ? _self.carbohydrate : carbohydrate // ignore: cast_nullable_to_non_nullable
+as NutrientValueEntity?,protein: freezed == protein ? _self.protein : protein // ignore: cast_nullable_to_non_nullable
+as NutrientValueEntity?,fat: freezed == fat ? _self.fat : fat // ignore: cast_nullable_to_non_nullable
+as NutrientValueEntity?,sugar: freezed == sugar ? _self.sugar : sugar // ignore: cast_nullable_to_non_nullable
+as NutrientValueEntity?,sodium: freezed == sodium ? _self.sodium : sodium // ignore: cast_nullable_to_non_nullable
+as NutrientValueEntity?,
   ));
 }
 /// Create a copy of AnalyzedFoodItemEntity
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$DishNutrientsEntityCopyWith<$Res>? get nutrients {
-    if (_self.nutrients == null) {
+$NutrientValueEntityCopyWith<$Res>? get kcal {
+    if (_self.kcal == null) {
     return null;
   }
 
-  return $DishNutrientsEntityCopyWith<$Res>(_self.nutrients!, (value) {
-    return _then(_self.copyWith(nutrients: value));
+  return $NutrientValueEntityCopyWith<$Res>(_self.kcal!, (value) {
+    return _then(_self.copyWith(kcal: value));
+  });
+}/// Create a copy of AnalyzedFoodItemEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$NutrientValueEntityCopyWith<$Res>? get carbohydrate {
+    if (_self.carbohydrate == null) {
+    return null;
+  }
+
+  return $NutrientValueEntityCopyWith<$Res>(_self.carbohydrate!, (value) {
+    return _then(_self.copyWith(carbohydrate: value));
+  });
+}/// Create a copy of AnalyzedFoodItemEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$NutrientValueEntityCopyWith<$Res>? get protein {
+    if (_self.protein == null) {
+    return null;
+  }
+
+  return $NutrientValueEntityCopyWith<$Res>(_self.protein!, (value) {
+    return _then(_self.copyWith(protein: value));
+  });
+}/// Create a copy of AnalyzedFoodItemEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$NutrientValueEntityCopyWith<$Res>? get fat {
+    if (_self.fat == null) {
+    return null;
+  }
+
+  return $NutrientValueEntityCopyWith<$Res>(_self.fat!, (value) {
+    return _then(_self.copyWith(fat: value));
+  });
+}/// Create a copy of AnalyzedFoodItemEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$NutrientValueEntityCopyWith<$Res>? get sugar {
+    if (_self.sugar == null) {
+    return null;
+  }
+
+  return $NutrientValueEntityCopyWith<$Res>(_self.sugar!, (value) {
+    return _then(_self.copyWith(sugar: value));
+  });
+}/// Create a copy of AnalyzedFoodItemEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$NutrientValueEntityCopyWith<$Res>? get sodium {
+    if (_self.sodium == null) {
+    return null;
+  }
+
+  return $NutrientValueEntityCopyWith<$Res>(_self.sodium!, (value) {
+    return _then(_self.copyWith(sodium: value));
   });
 }
 }
@@ -167,10 +232,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String name,  DishNutrientsEntity? nutrients)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String name,  NutrientValueEntity? kcal,  NutrientValueEntity? carbohydrate,  NutrientValueEntity? protein,  NutrientValueEntity? fat,  NutrientValueEntity? sugar,  NutrientValueEntity? sodium)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AnalyzedFoodItemEntity() when $default != null:
-return $default(_that.id,_that.name,_that.nutrients);case _:
+return $default(_that.id,_that.name,_that.kcal,_that.carbohydrate,_that.protein,_that.fat,_that.sugar,_that.sodium);case _:
   return orElse();
 
 }
@@ -188,10 +253,10 @@ return $default(_that.id,_that.name,_that.nutrients);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String name,  DishNutrientsEntity? nutrients)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String name,  NutrientValueEntity? kcal,  NutrientValueEntity? carbohydrate,  NutrientValueEntity? protein,  NutrientValueEntity? fat,  NutrientValueEntity? sugar,  NutrientValueEntity? sodium)  $default,) {final _that = this;
 switch (_that) {
 case _AnalyzedFoodItemEntity():
-return $default(_that.id,_that.name,_that.nutrients);case _:
+return $default(_that.id,_that.name,_that.kcal,_that.carbohydrate,_that.protein,_that.fat,_that.sugar,_that.sodium);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -208,10 +273,10 @@ return $default(_that.id,_that.name,_that.nutrients);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String name,  DishNutrientsEntity? nutrients)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String name,  NutrientValueEntity? kcal,  NutrientValueEntity? carbohydrate,  NutrientValueEntity? protein,  NutrientValueEntity? fat,  NutrientValueEntity? sugar,  NutrientValueEntity? sodium)?  $default,) {final _that = this;
 switch (_that) {
 case _AnalyzedFoodItemEntity() when $default != null:
-return $default(_that.id,_that.name,_that.nutrients);case _:
+return $default(_that.id,_that.name,_that.kcal,_that.carbohydrate,_that.protein,_that.fat,_that.sugar,_that.sodium);case _:
   return null;
 
 }
@@ -223,12 +288,17 @@ return $default(_that.id,_that.name,_that.nutrients);case _:
 @JsonSerializable()
 
 class _AnalyzedFoodItemEntity implements AnalyzedFoodItemEntity {
-  const _AnalyzedFoodItemEntity({required this.id, this.name = '', this.nutrients});
+  const _AnalyzedFoodItemEntity({required this.id, this.name = '', this.kcal, this.carbohydrate, this.protein, this.fat, this.sugar, this.sodium});
   factory _AnalyzedFoodItemEntity.fromJson(Map<String, dynamic> json) => _$AnalyzedFoodItemEntityFromJson(json);
 
 @override final  int id;
 @override@JsonKey() final  String name;
-@override final  DishNutrientsEntity? nutrients;
+@override final  NutrientValueEntity? kcal;
+@override final  NutrientValueEntity? carbohydrate;
+@override final  NutrientValueEntity? protein;
+@override final  NutrientValueEntity? fat;
+@override final  NutrientValueEntity? sugar;
+@override final  NutrientValueEntity? sodium;
 
 /// Create a copy of AnalyzedFoodItemEntity
 /// with the given fields replaced by the non-null parameter values.
@@ -243,16 +313,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AnalyzedFoodItemEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.nutrients, nutrients) || other.nutrients == nutrients));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AnalyzedFoodItemEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.kcal, kcal) || other.kcal == kcal)&&(identical(other.carbohydrate, carbohydrate) || other.carbohydrate == carbohydrate)&&(identical(other.protein, protein) || other.protein == protein)&&(identical(other.fat, fat) || other.fat == fat)&&(identical(other.sugar, sugar) || other.sugar == sugar)&&(identical(other.sodium, sodium) || other.sodium == sodium));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,nutrients);
+int get hashCode => Object.hash(runtimeType,id,name,kcal,carbohydrate,protein,fat,sugar,sodium);
 
 @override
 String toString() {
-  return 'AnalyzedFoodItemEntity(id: $id, name: $name, nutrients: $nutrients)';
+  return 'AnalyzedFoodItemEntity(id: $id, name: $name, kcal: $kcal, carbohydrate: $carbohydrate, protein: $protein, fat: $fat, sugar: $sugar, sodium: $sodium)';
 }
 
 
@@ -263,11 +333,11 @@ abstract mixin class _$AnalyzedFoodItemEntityCopyWith<$Res> implements $Analyzed
   factory _$AnalyzedFoodItemEntityCopyWith(_AnalyzedFoodItemEntity value, $Res Function(_AnalyzedFoodItemEntity) _then) = __$AnalyzedFoodItemEntityCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String name, DishNutrientsEntity? nutrients
+ int id, String name, NutrientValueEntity? kcal, NutrientValueEntity? carbohydrate, NutrientValueEntity? protein, NutrientValueEntity? fat, NutrientValueEntity? sugar, NutrientValueEntity? sodium
 });
 
 
-@override $DishNutrientsEntityCopyWith<$Res>? get nutrients;
+@override $NutrientValueEntityCopyWith<$Res>? get kcal;@override $NutrientValueEntityCopyWith<$Res>? get carbohydrate;@override $NutrientValueEntityCopyWith<$Res>? get protein;@override $NutrientValueEntityCopyWith<$Res>? get fat;@override $NutrientValueEntityCopyWith<$Res>? get sugar;@override $NutrientValueEntityCopyWith<$Res>? get sodium;
 
 }
 /// @nodoc
@@ -280,12 +350,17 @@ class __$AnalyzedFoodItemEntityCopyWithImpl<$Res>
 
 /// Create a copy of AnalyzedFoodItemEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? nutrients = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? kcal = freezed,Object? carbohydrate = freezed,Object? protein = freezed,Object? fat = freezed,Object? sugar = freezed,Object? sodium = freezed,}) {
   return _then(_AnalyzedFoodItemEntity(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,nutrients: freezed == nutrients ? _self.nutrients : nutrients // ignore: cast_nullable_to_non_nullable
-as DishNutrientsEntity?,
+as String,kcal: freezed == kcal ? _self.kcal : kcal // ignore: cast_nullable_to_non_nullable
+as NutrientValueEntity?,carbohydrate: freezed == carbohydrate ? _self.carbohydrate : carbohydrate // ignore: cast_nullable_to_non_nullable
+as NutrientValueEntity?,protein: freezed == protein ? _self.protein : protein // ignore: cast_nullable_to_non_nullable
+as NutrientValueEntity?,fat: freezed == fat ? _self.fat : fat // ignore: cast_nullable_to_non_nullable
+as NutrientValueEntity?,sugar: freezed == sugar ? _self.sugar : sugar // ignore: cast_nullable_to_non_nullable
+as NutrientValueEntity?,sodium: freezed == sodium ? _self.sodium : sodium // ignore: cast_nullable_to_non_nullable
+as NutrientValueEntity?,
   ));
 }
 
@@ -293,86 +368,6 @@ as DishNutrientsEntity?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$DishNutrientsEntityCopyWith<$Res>? get nutrients {
-    if (_self.nutrients == null) {
-    return null;
-  }
-
-  return $DishNutrientsEntityCopyWith<$Res>(_self.nutrients!, (value) {
-    return _then(_self.copyWith(nutrients: value));
-  });
-}
-}
-
-
-/// @nodoc
-mixin _$DishNutrientsEntity {
-
- NutrientValueEntity? get kcal; NutrientValueEntity? get carbohydrate; NutrientValueEntity? get protein; NutrientValueEntity? get fat; NutrientValueEntity? get sugar; NutrientValueEntity? get sodium;
-/// Create a copy of DishNutrientsEntity
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$DishNutrientsEntityCopyWith<DishNutrientsEntity> get copyWith => _$DishNutrientsEntityCopyWithImpl<DishNutrientsEntity>(this as DishNutrientsEntity, _$identity);
-
-  /// Serializes this DishNutrientsEntity to a JSON map.
-  Map<String, dynamic> toJson();
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DishNutrientsEntity&&(identical(other.kcal, kcal) || other.kcal == kcal)&&(identical(other.carbohydrate, carbohydrate) || other.carbohydrate == carbohydrate)&&(identical(other.protein, protein) || other.protein == protein)&&(identical(other.fat, fat) || other.fat == fat)&&(identical(other.sugar, sugar) || other.sugar == sugar)&&(identical(other.sodium, sodium) || other.sodium == sodium));
-}
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,kcal,carbohydrate,protein,fat,sugar,sodium);
-
-@override
-String toString() {
-  return 'DishNutrientsEntity(kcal: $kcal, carbohydrate: $carbohydrate, protein: $protein, fat: $fat, sugar: $sugar, sodium: $sodium)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class $DishNutrientsEntityCopyWith<$Res>  {
-  factory $DishNutrientsEntityCopyWith(DishNutrientsEntity value, $Res Function(DishNutrientsEntity) _then) = _$DishNutrientsEntityCopyWithImpl;
-@useResult
-$Res call({
- NutrientValueEntity? kcal, NutrientValueEntity? carbohydrate, NutrientValueEntity? protein, NutrientValueEntity? fat, NutrientValueEntity? sugar, NutrientValueEntity? sodium
-});
-
-
-$NutrientValueEntityCopyWith<$Res>? get kcal;$NutrientValueEntityCopyWith<$Res>? get carbohydrate;$NutrientValueEntityCopyWith<$Res>? get protein;$NutrientValueEntityCopyWith<$Res>? get fat;$NutrientValueEntityCopyWith<$Res>? get sugar;$NutrientValueEntityCopyWith<$Res>? get sodium;
-
-}
-/// @nodoc
-class _$DishNutrientsEntityCopyWithImpl<$Res>
-    implements $DishNutrientsEntityCopyWith<$Res> {
-  _$DishNutrientsEntityCopyWithImpl(this._self, this._then);
-
-  final DishNutrientsEntity _self;
-  final $Res Function(DishNutrientsEntity) _then;
-
-/// Create a copy of DishNutrientsEntity
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? kcal = freezed,Object? carbohydrate = freezed,Object? protein = freezed,Object? fat = freezed,Object? sugar = freezed,Object? sodium = freezed,}) {
-  return _then(_self.copyWith(
-kcal: freezed == kcal ? _self.kcal : kcal // ignore: cast_nullable_to_non_nullable
-as NutrientValueEntity?,carbohydrate: freezed == carbohydrate ? _self.carbohydrate : carbohydrate // ignore: cast_nullable_to_non_nullable
-as NutrientValueEntity?,protein: freezed == protein ? _self.protein : protein // ignore: cast_nullable_to_non_nullable
-as NutrientValueEntity?,fat: freezed == fat ? _self.fat : fat // ignore: cast_nullable_to_non_nullable
-as NutrientValueEntity?,sugar: freezed == sugar ? _self.sugar : sugar // ignore: cast_nullable_to_non_nullable
-as NutrientValueEntity?,sodium: freezed == sodium ? _self.sodium : sodium // ignore: cast_nullable_to_non_nullable
-as NutrientValueEntity?,
-  ));
-}
-/// Create a copy of DishNutrientsEntity
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
 $NutrientValueEntityCopyWith<$Res>? get kcal {
     if (_self.kcal == null) {
     return null;
@@ -381,7 +376,7 @@ $NutrientValueEntityCopyWith<$Res>? get kcal {
   return $NutrientValueEntityCopyWith<$Res>(_self.kcal!, (value) {
     return _then(_self.copyWith(kcal: value));
   });
-}/// Create a copy of DishNutrientsEntity
+}/// Create a copy of AnalyzedFoodItemEntity
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -393,7 +388,7 @@ $NutrientValueEntityCopyWith<$Res>? get carbohydrate {
   return $NutrientValueEntityCopyWith<$Res>(_self.carbohydrate!, (value) {
     return _then(_self.copyWith(carbohydrate: value));
   });
-}/// Create a copy of DishNutrientsEntity
+}/// Create a copy of AnalyzedFoodItemEntity
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -405,7 +400,7 @@ $NutrientValueEntityCopyWith<$Res>? get protein {
   return $NutrientValueEntityCopyWith<$Res>(_self.protein!, (value) {
     return _then(_self.copyWith(protein: value));
   });
-}/// Create a copy of DishNutrientsEntity
+}/// Create a copy of AnalyzedFoodItemEntity
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -417,7 +412,7 @@ $NutrientValueEntityCopyWith<$Res>? get fat {
   return $NutrientValueEntityCopyWith<$Res>(_self.fat!, (value) {
     return _then(_self.copyWith(fat: value));
   });
-}/// Create a copy of DishNutrientsEntity
+}/// Create a copy of AnalyzedFoodItemEntity
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -429,289 +424,7 @@ $NutrientValueEntityCopyWith<$Res>? get sugar {
   return $NutrientValueEntityCopyWith<$Res>(_self.sugar!, (value) {
     return _then(_self.copyWith(sugar: value));
   });
-}/// Create a copy of DishNutrientsEntity
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$NutrientValueEntityCopyWith<$Res>? get sodium {
-    if (_self.sodium == null) {
-    return null;
-  }
-
-  return $NutrientValueEntityCopyWith<$Res>(_self.sodium!, (value) {
-    return _then(_self.copyWith(sodium: value));
-  });
-}
-}
-
-
-/// Adds pattern-matching-related methods to [DishNutrientsEntity].
-extension DishNutrientsEntityPatterns on DishNutrientsEntity {
-/// A variant of `map` that fallback to returning `orElse`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _DishNutrientsEntity value)?  $default,{required TResult orElse(),}){
-final _that = this;
-switch (_that) {
-case _DishNutrientsEntity() when $default != null:
-return $default(_that);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// Callbacks receives the raw object, upcasted.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case final Subclass2 value:
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _DishNutrientsEntity value)  $default,){
-final _that = this;
-switch (_that) {
-case _DishNutrientsEntity():
-return $default(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `map` that fallback to returning `null`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _DishNutrientsEntity value)?  $default,){
-final _that = this;
-switch (_that) {
-case _DishNutrientsEntity() when $default != null:
-return $default(_that);case _:
-  return null;
-
-}
-}
-/// A variant of `when` that fallback to an `orElse` callback.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( NutrientValueEntity? kcal,  NutrientValueEntity? carbohydrate,  NutrientValueEntity? protein,  NutrientValueEntity? fat,  NutrientValueEntity? sugar,  NutrientValueEntity? sodium)?  $default,{required TResult orElse(),}) {final _that = this;
-switch (_that) {
-case _DishNutrientsEntity() when $default != null:
-return $default(_that.kcal,_that.carbohydrate,_that.protein,_that.fat,_that.sugar,_that.sodium);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// As opposed to `map`, this offers destructuring.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case Subclass2(:final field2):
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( NutrientValueEntity? kcal,  NutrientValueEntity? carbohydrate,  NutrientValueEntity? protein,  NutrientValueEntity? fat,  NutrientValueEntity? sugar,  NutrientValueEntity? sodium)  $default,) {final _that = this;
-switch (_that) {
-case _DishNutrientsEntity():
-return $default(_that.kcal,_that.carbohydrate,_that.protein,_that.fat,_that.sugar,_that.sodium);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `when` that fallback to returning `null`
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( NutrientValueEntity? kcal,  NutrientValueEntity? carbohydrate,  NutrientValueEntity? protein,  NutrientValueEntity? fat,  NutrientValueEntity? sugar,  NutrientValueEntity? sodium)?  $default,) {final _that = this;
-switch (_that) {
-case _DishNutrientsEntity() when $default != null:
-return $default(_that.kcal,_that.carbohydrate,_that.protein,_that.fat,_that.sugar,_that.sodium);case _:
-  return null;
-
-}
-}
-
-}
-
-/// @nodoc
-@JsonSerializable()
-
-class _DishNutrientsEntity implements DishNutrientsEntity {
-  const _DishNutrientsEntity({this.kcal, this.carbohydrate, this.protein, this.fat, this.sugar, this.sodium});
-  factory _DishNutrientsEntity.fromJson(Map<String, dynamic> json) => _$DishNutrientsEntityFromJson(json);
-
-@override final  NutrientValueEntity? kcal;
-@override final  NutrientValueEntity? carbohydrate;
-@override final  NutrientValueEntity? protein;
-@override final  NutrientValueEntity? fat;
-@override final  NutrientValueEntity? sugar;
-@override final  NutrientValueEntity? sodium;
-
-/// Create a copy of DishNutrientsEntity
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$DishNutrientsEntityCopyWith<_DishNutrientsEntity> get copyWith => __$DishNutrientsEntityCopyWithImpl<_DishNutrientsEntity>(this, _$identity);
-
-@override
-Map<String, dynamic> toJson() {
-  return _$DishNutrientsEntityToJson(this, );
-}
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DishNutrientsEntity&&(identical(other.kcal, kcal) || other.kcal == kcal)&&(identical(other.carbohydrate, carbohydrate) || other.carbohydrate == carbohydrate)&&(identical(other.protein, protein) || other.protein == protein)&&(identical(other.fat, fat) || other.fat == fat)&&(identical(other.sugar, sugar) || other.sugar == sugar)&&(identical(other.sodium, sodium) || other.sodium == sodium));
-}
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,kcal,carbohydrate,protein,fat,sugar,sodium);
-
-@override
-String toString() {
-  return 'DishNutrientsEntity(kcal: $kcal, carbohydrate: $carbohydrate, protein: $protein, fat: $fat, sugar: $sugar, sodium: $sodium)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class _$DishNutrientsEntityCopyWith<$Res> implements $DishNutrientsEntityCopyWith<$Res> {
-  factory _$DishNutrientsEntityCopyWith(_DishNutrientsEntity value, $Res Function(_DishNutrientsEntity) _then) = __$DishNutrientsEntityCopyWithImpl;
-@override @useResult
-$Res call({
- NutrientValueEntity? kcal, NutrientValueEntity? carbohydrate, NutrientValueEntity? protein, NutrientValueEntity? fat, NutrientValueEntity? sugar, NutrientValueEntity? sodium
-});
-
-
-@override $NutrientValueEntityCopyWith<$Res>? get kcal;@override $NutrientValueEntityCopyWith<$Res>? get carbohydrate;@override $NutrientValueEntityCopyWith<$Res>? get protein;@override $NutrientValueEntityCopyWith<$Res>? get fat;@override $NutrientValueEntityCopyWith<$Res>? get sugar;@override $NutrientValueEntityCopyWith<$Res>? get sodium;
-
-}
-/// @nodoc
-class __$DishNutrientsEntityCopyWithImpl<$Res>
-    implements _$DishNutrientsEntityCopyWith<$Res> {
-  __$DishNutrientsEntityCopyWithImpl(this._self, this._then);
-
-  final _DishNutrientsEntity _self;
-  final $Res Function(_DishNutrientsEntity) _then;
-
-/// Create a copy of DishNutrientsEntity
-/// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? kcal = freezed,Object? carbohydrate = freezed,Object? protein = freezed,Object? fat = freezed,Object? sugar = freezed,Object? sodium = freezed,}) {
-  return _then(_DishNutrientsEntity(
-kcal: freezed == kcal ? _self.kcal : kcal // ignore: cast_nullable_to_non_nullable
-as NutrientValueEntity?,carbohydrate: freezed == carbohydrate ? _self.carbohydrate : carbohydrate // ignore: cast_nullable_to_non_nullable
-as NutrientValueEntity?,protein: freezed == protein ? _self.protein : protein // ignore: cast_nullable_to_non_nullable
-as NutrientValueEntity?,fat: freezed == fat ? _self.fat : fat // ignore: cast_nullable_to_non_nullable
-as NutrientValueEntity?,sugar: freezed == sugar ? _self.sugar : sugar // ignore: cast_nullable_to_non_nullable
-as NutrientValueEntity?,sodium: freezed == sodium ? _self.sodium : sodium // ignore: cast_nullable_to_non_nullable
-as NutrientValueEntity?,
-  ));
-}
-
-/// Create a copy of DishNutrientsEntity
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$NutrientValueEntityCopyWith<$Res>? get kcal {
-    if (_self.kcal == null) {
-    return null;
-  }
-
-  return $NutrientValueEntityCopyWith<$Res>(_self.kcal!, (value) {
-    return _then(_self.copyWith(kcal: value));
-  });
-}/// Create a copy of DishNutrientsEntity
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$NutrientValueEntityCopyWith<$Res>? get carbohydrate {
-    if (_self.carbohydrate == null) {
-    return null;
-  }
-
-  return $NutrientValueEntityCopyWith<$Res>(_self.carbohydrate!, (value) {
-    return _then(_self.copyWith(carbohydrate: value));
-  });
-}/// Create a copy of DishNutrientsEntity
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$NutrientValueEntityCopyWith<$Res>? get protein {
-    if (_self.protein == null) {
-    return null;
-  }
-
-  return $NutrientValueEntityCopyWith<$Res>(_self.protein!, (value) {
-    return _then(_self.copyWith(protein: value));
-  });
-}/// Create a copy of DishNutrientsEntity
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$NutrientValueEntityCopyWith<$Res>? get fat {
-    if (_self.fat == null) {
-    return null;
-  }
-
-  return $NutrientValueEntityCopyWith<$Res>(_self.fat!, (value) {
-    return _then(_self.copyWith(fat: value));
-  });
-}/// Create a copy of DishNutrientsEntity
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$NutrientValueEntityCopyWith<$Res>? get sugar {
-    if (_self.sugar == null) {
-    return null;
-  }
-
-  return $NutrientValueEntityCopyWith<$Res>(_self.sugar!, (value) {
-    return _then(_self.copyWith(sugar: value));
-  });
-}/// Create a copy of DishNutrientsEntity
+}/// Create a copy of AnalyzedFoodItemEntity
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -1005,7 +718,7 @@ as String?,
 /// @nodoc
 mixin _$FoodAnalyzeResultEntity {
 
- List<AnalyzedFoodItemEntity> get main; List<AnalyzedFoodItemEntity> get sides; List<AnalyzedFoodItemEntity> get others; List<String> get assumptions; String get foodImageUrl; DateTime? get createdAt; NutritionComparisonEntity? get nutritionComparison;
+ List<AnalyzedFoodItemEntity> get main; List<AnalyzedFoodItemEntity> get sides; List<AnalyzedFoodItemEntity> get others; List<String> get assumptions; String get foodImageUrl; DateTime? get createdAt; AnalysisNutritionInfoEntity? get analysisNutritionInfo;
 /// Create a copy of FoodAnalyzeResultEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1018,16 +731,16 @@ $FoodAnalyzeResultEntityCopyWith<FoodAnalyzeResultEntity> get copyWith => _$Food
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is FoodAnalyzeResultEntity&&const DeepCollectionEquality().equals(other.main, main)&&const DeepCollectionEquality().equals(other.sides, sides)&&const DeepCollectionEquality().equals(other.others, others)&&const DeepCollectionEquality().equals(other.assumptions, assumptions)&&(identical(other.foodImageUrl, foodImageUrl) || other.foodImageUrl == foodImageUrl)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.nutritionComparison, nutritionComparison) || other.nutritionComparison == nutritionComparison));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FoodAnalyzeResultEntity&&const DeepCollectionEquality().equals(other.main, main)&&const DeepCollectionEquality().equals(other.sides, sides)&&const DeepCollectionEquality().equals(other.others, others)&&const DeepCollectionEquality().equals(other.assumptions, assumptions)&&(identical(other.foodImageUrl, foodImageUrl) || other.foodImageUrl == foodImageUrl)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.analysisNutritionInfo, analysisNutritionInfo) || other.analysisNutritionInfo == analysisNutritionInfo));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(main),const DeepCollectionEquality().hash(sides),const DeepCollectionEquality().hash(others),const DeepCollectionEquality().hash(assumptions),foodImageUrl,createdAt,nutritionComparison);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(main),const DeepCollectionEquality().hash(sides),const DeepCollectionEquality().hash(others),const DeepCollectionEquality().hash(assumptions),foodImageUrl,createdAt,analysisNutritionInfo);
 
 @override
 String toString() {
-  return 'FoodAnalyzeResultEntity(main: $main, sides: $sides, others: $others, assumptions: $assumptions, foodImageUrl: $foodImageUrl, createdAt: $createdAt, nutritionComparison: $nutritionComparison)';
+  return 'FoodAnalyzeResultEntity(main: $main, sides: $sides, others: $others, assumptions: $assumptions, foodImageUrl: $foodImageUrl, createdAt: $createdAt, analysisNutritionInfo: $analysisNutritionInfo)';
 }
 
 
@@ -1038,11 +751,11 @@ abstract mixin class $FoodAnalyzeResultEntityCopyWith<$Res>  {
   factory $FoodAnalyzeResultEntityCopyWith(FoodAnalyzeResultEntity value, $Res Function(FoodAnalyzeResultEntity) _then) = _$FoodAnalyzeResultEntityCopyWithImpl;
 @useResult
 $Res call({
- List<AnalyzedFoodItemEntity> main, List<AnalyzedFoodItemEntity> sides, List<AnalyzedFoodItemEntity> others, List<String> assumptions, String foodImageUrl, DateTime? createdAt, NutritionComparisonEntity? nutritionComparison
+ List<AnalyzedFoodItemEntity> main, List<AnalyzedFoodItemEntity> sides, List<AnalyzedFoodItemEntity> others, List<String> assumptions, String foodImageUrl, DateTime? createdAt, AnalysisNutritionInfoEntity? analysisNutritionInfo
 });
 
 
-$NutritionComparisonEntityCopyWith<$Res>? get nutritionComparison;
+$AnalysisNutritionInfoEntityCopyWith<$Res>? get analysisNutritionInfo;
 
 }
 /// @nodoc
@@ -1055,7 +768,7 @@ class _$FoodAnalyzeResultEntityCopyWithImpl<$Res>
 
 /// Create a copy of FoodAnalyzeResultEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? main = null,Object? sides = null,Object? others = null,Object? assumptions = null,Object? foodImageUrl = null,Object? createdAt = freezed,Object? nutritionComparison = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? main = null,Object? sides = null,Object? others = null,Object? assumptions = null,Object? foodImageUrl = null,Object? createdAt = freezed,Object? analysisNutritionInfo = freezed,}) {
   return _then(_self.copyWith(
 main: null == main ? _self.main : main // ignore: cast_nullable_to_non_nullable
 as List<AnalyzedFoodItemEntity>,sides: null == sides ? _self.sides : sides // ignore: cast_nullable_to_non_nullable
@@ -1063,21 +776,21 @@ as List<AnalyzedFoodItemEntity>,others: null == others ? _self.others : others /
 as List<AnalyzedFoodItemEntity>,assumptions: null == assumptions ? _self.assumptions : assumptions // ignore: cast_nullable_to_non_nullable
 as List<String>,foodImageUrl: null == foodImageUrl ? _self.foodImageUrl : foodImageUrl // ignore: cast_nullable_to_non_nullable
 as String,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,nutritionComparison: freezed == nutritionComparison ? _self.nutritionComparison : nutritionComparison // ignore: cast_nullable_to_non_nullable
-as NutritionComparisonEntity?,
+as DateTime?,analysisNutritionInfo: freezed == analysisNutritionInfo ? _self.analysisNutritionInfo : analysisNutritionInfo // ignore: cast_nullable_to_non_nullable
+as AnalysisNutritionInfoEntity?,
   ));
 }
 /// Create a copy of FoodAnalyzeResultEntity
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$NutritionComparisonEntityCopyWith<$Res>? get nutritionComparison {
-    if (_self.nutritionComparison == null) {
+$AnalysisNutritionInfoEntityCopyWith<$Res>? get analysisNutritionInfo {
+    if (_self.analysisNutritionInfo == null) {
     return null;
   }
 
-  return $NutritionComparisonEntityCopyWith<$Res>(_self.nutritionComparison!, (value) {
-    return _then(_self.copyWith(nutritionComparison: value));
+  return $AnalysisNutritionInfoEntityCopyWith<$Res>(_self.analysisNutritionInfo!, (value) {
+    return _then(_self.copyWith(analysisNutritionInfo: value));
   });
 }
 }
@@ -1161,10 +874,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<AnalyzedFoodItemEntity> main,  List<AnalyzedFoodItemEntity> sides,  List<AnalyzedFoodItemEntity> others,  List<String> assumptions,  String foodImageUrl,  DateTime? createdAt,  NutritionComparisonEntity? nutritionComparison)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<AnalyzedFoodItemEntity> main,  List<AnalyzedFoodItemEntity> sides,  List<AnalyzedFoodItemEntity> others,  List<String> assumptions,  String foodImageUrl,  DateTime? createdAt,  AnalysisNutritionInfoEntity? analysisNutritionInfo)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _FoodAnalyzeResultEntity() when $default != null:
-return $default(_that.main,_that.sides,_that.others,_that.assumptions,_that.foodImageUrl,_that.createdAt,_that.nutritionComparison);case _:
+return $default(_that.main,_that.sides,_that.others,_that.assumptions,_that.foodImageUrl,_that.createdAt,_that.analysisNutritionInfo);case _:
   return orElse();
 
 }
@@ -1182,10 +895,10 @@ return $default(_that.main,_that.sides,_that.others,_that.assumptions,_that.food
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<AnalyzedFoodItemEntity> main,  List<AnalyzedFoodItemEntity> sides,  List<AnalyzedFoodItemEntity> others,  List<String> assumptions,  String foodImageUrl,  DateTime? createdAt,  NutritionComparisonEntity? nutritionComparison)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<AnalyzedFoodItemEntity> main,  List<AnalyzedFoodItemEntity> sides,  List<AnalyzedFoodItemEntity> others,  List<String> assumptions,  String foodImageUrl,  DateTime? createdAt,  AnalysisNutritionInfoEntity? analysisNutritionInfo)  $default,) {final _that = this;
 switch (_that) {
 case _FoodAnalyzeResultEntity():
-return $default(_that.main,_that.sides,_that.others,_that.assumptions,_that.foodImageUrl,_that.createdAt,_that.nutritionComparison);case _:
+return $default(_that.main,_that.sides,_that.others,_that.assumptions,_that.foodImageUrl,_that.createdAt,_that.analysisNutritionInfo);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -1202,10 +915,10 @@ return $default(_that.main,_that.sides,_that.others,_that.assumptions,_that.food
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<AnalyzedFoodItemEntity> main,  List<AnalyzedFoodItemEntity> sides,  List<AnalyzedFoodItemEntity> others,  List<String> assumptions,  String foodImageUrl,  DateTime? createdAt,  NutritionComparisonEntity? nutritionComparison)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<AnalyzedFoodItemEntity> main,  List<AnalyzedFoodItemEntity> sides,  List<AnalyzedFoodItemEntity> others,  List<String> assumptions,  String foodImageUrl,  DateTime? createdAt,  AnalysisNutritionInfoEntity? analysisNutritionInfo)?  $default,) {final _that = this;
 switch (_that) {
 case _FoodAnalyzeResultEntity() when $default != null:
-return $default(_that.main,_that.sides,_that.others,_that.assumptions,_that.foodImageUrl,_that.createdAt,_that.nutritionComparison);case _:
+return $default(_that.main,_that.sides,_that.others,_that.assumptions,_that.foodImageUrl,_that.createdAt,_that.analysisNutritionInfo);case _:
   return null;
 
 }
@@ -1217,7 +930,7 @@ return $default(_that.main,_that.sides,_that.others,_that.assumptions,_that.food
 @JsonSerializable()
 
 class _FoodAnalyzeResultEntity implements FoodAnalyzeResultEntity {
-  const _FoodAnalyzeResultEntity({final  List<AnalyzedFoodItemEntity> main = const <AnalyzedFoodItemEntity>[], final  List<AnalyzedFoodItemEntity> sides = const <AnalyzedFoodItemEntity>[], final  List<AnalyzedFoodItemEntity> others = const <AnalyzedFoodItemEntity>[], final  List<String> assumptions = const <String>[], this.foodImageUrl = '', this.createdAt, this.nutritionComparison}): _main = main,_sides = sides,_others = others,_assumptions = assumptions;
+  const _FoodAnalyzeResultEntity({final  List<AnalyzedFoodItemEntity> main = const <AnalyzedFoodItemEntity>[], final  List<AnalyzedFoodItemEntity> sides = const <AnalyzedFoodItemEntity>[], final  List<AnalyzedFoodItemEntity> others = const <AnalyzedFoodItemEntity>[], final  List<String> assumptions = const <String>[], this.foodImageUrl = '', this.createdAt, this.analysisNutritionInfo}): _main = main,_sides = sides,_others = others,_assumptions = assumptions;
   factory _FoodAnalyzeResultEntity.fromJson(Map<String, dynamic> json) => _$FoodAnalyzeResultEntityFromJson(json);
 
  final  List<AnalyzedFoodItemEntity> _main;
@@ -1250,7 +963,7 @@ class _FoodAnalyzeResultEntity implements FoodAnalyzeResultEntity {
 
 @override@JsonKey() final  String foodImageUrl;
 @override final  DateTime? createdAt;
-@override final  NutritionComparisonEntity? nutritionComparison;
+@override final  AnalysisNutritionInfoEntity? analysisNutritionInfo;
 
 /// Create a copy of FoodAnalyzeResultEntity
 /// with the given fields replaced by the non-null parameter values.
@@ -1265,16 +978,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FoodAnalyzeResultEntity&&const DeepCollectionEquality().equals(other._main, _main)&&const DeepCollectionEquality().equals(other._sides, _sides)&&const DeepCollectionEquality().equals(other._others, _others)&&const DeepCollectionEquality().equals(other._assumptions, _assumptions)&&(identical(other.foodImageUrl, foodImageUrl) || other.foodImageUrl == foodImageUrl)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.nutritionComparison, nutritionComparison) || other.nutritionComparison == nutritionComparison));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FoodAnalyzeResultEntity&&const DeepCollectionEquality().equals(other._main, _main)&&const DeepCollectionEquality().equals(other._sides, _sides)&&const DeepCollectionEquality().equals(other._others, _others)&&const DeepCollectionEquality().equals(other._assumptions, _assumptions)&&(identical(other.foodImageUrl, foodImageUrl) || other.foodImageUrl == foodImageUrl)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.analysisNutritionInfo, analysisNutritionInfo) || other.analysisNutritionInfo == analysisNutritionInfo));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_main),const DeepCollectionEquality().hash(_sides),const DeepCollectionEquality().hash(_others),const DeepCollectionEquality().hash(_assumptions),foodImageUrl,createdAt,nutritionComparison);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_main),const DeepCollectionEquality().hash(_sides),const DeepCollectionEquality().hash(_others),const DeepCollectionEquality().hash(_assumptions),foodImageUrl,createdAt,analysisNutritionInfo);
 
 @override
 String toString() {
-  return 'FoodAnalyzeResultEntity(main: $main, sides: $sides, others: $others, assumptions: $assumptions, foodImageUrl: $foodImageUrl, createdAt: $createdAt, nutritionComparison: $nutritionComparison)';
+  return 'FoodAnalyzeResultEntity(main: $main, sides: $sides, others: $others, assumptions: $assumptions, foodImageUrl: $foodImageUrl, createdAt: $createdAt, analysisNutritionInfo: $analysisNutritionInfo)';
 }
 
 
@@ -1285,11 +998,11 @@ abstract mixin class _$FoodAnalyzeResultEntityCopyWith<$Res> implements $FoodAna
   factory _$FoodAnalyzeResultEntityCopyWith(_FoodAnalyzeResultEntity value, $Res Function(_FoodAnalyzeResultEntity) _then) = __$FoodAnalyzeResultEntityCopyWithImpl;
 @override @useResult
 $Res call({
- List<AnalyzedFoodItemEntity> main, List<AnalyzedFoodItemEntity> sides, List<AnalyzedFoodItemEntity> others, List<String> assumptions, String foodImageUrl, DateTime? createdAt, NutritionComparisonEntity? nutritionComparison
+ List<AnalyzedFoodItemEntity> main, List<AnalyzedFoodItemEntity> sides, List<AnalyzedFoodItemEntity> others, List<String> assumptions, String foodImageUrl, DateTime? createdAt, AnalysisNutritionInfoEntity? analysisNutritionInfo
 });
 
 
-@override $NutritionComparisonEntityCopyWith<$Res>? get nutritionComparison;
+@override $AnalysisNutritionInfoEntityCopyWith<$Res>? get analysisNutritionInfo;
 
 }
 /// @nodoc
@@ -1302,7 +1015,7 @@ class __$FoodAnalyzeResultEntityCopyWithImpl<$Res>
 
 /// Create a copy of FoodAnalyzeResultEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? main = null,Object? sides = null,Object? others = null,Object? assumptions = null,Object? foodImageUrl = null,Object? createdAt = freezed,Object? nutritionComparison = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? main = null,Object? sides = null,Object? others = null,Object? assumptions = null,Object? foodImageUrl = null,Object? createdAt = freezed,Object? analysisNutritionInfo = freezed,}) {
   return _then(_FoodAnalyzeResultEntity(
 main: null == main ? _self._main : main // ignore: cast_nullable_to_non_nullable
 as List<AnalyzedFoodItemEntity>,sides: null == sides ? _self._sides : sides // ignore: cast_nullable_to_non_nullable
@@ -1310,8 +1023,8 @@ as List<AnalyzedFoodItemEntity>,others: null == others ? _self._others : others 
 as List<AnalyzedFoodItemEntity>,assumptions: null == assumptions ? _self._assumptions : assumptions // ignore: cast_nullable_to_non_nullable
 as List<String>,foodImageUrl: null == foodImageUrl ? _self.foodImageUrl : foodImageUrl // ignore: cast_nullable_to_non_nullable
 as String,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,nutritionComparison: freezed == nutritionComparison ? _self.nutritionComparison : nutritionComparison // ignore: cast_nullable_to_non_nullable
-as NutritionComparisonEntity?,
+as DateTime?,analysisNutritionInfo: freezed == analysisNutritionInfo ? _self.analysisNutritionInfo : analysisNutritionInfo // ignore: cast_nullable_to_non_nullable
+as AnalysisNutritionInfoEntity?,
   ));
 }
 
@@ -1319,35 +1032,35 @@ as NutritionComparisonEntity?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$NutritionComparisonEntityCopyWith<$Res>? get nutritionComparison {
-    if (_self.nutritionComparison == null) {
+$AnalysisNutritionInfoEntityCopyWith<$Res>? get analysisNutritionInfo {
+    if (_self.analysisNutritionInfo == null) {
     return null;
   }
 
-  return $NutritionComparisonEntityCopyWith<$Res>(_self.nutritionComparison!, (value) {
-    return _then(_self.copyWith(nutritionComparison: value));
+  return $AnalysisNutritionInfoEntityCopyWith<$Res>(_self.analysisNutritionInfo!, (value) {
+    return _then(_self.copyWith(analysisNutritionInfo: value));
   });
 }
 }
 
 
 /// @nodoc
-mixin _$NutritionComparisonEntity {
+mixin _$AnalysisNutritionInfoEntity {
 
- KcalComparisonEntity? get kcal; MacronutrientComparisonEntity? get carbohydrate; MacronutrientComparisonEntity? get protein; MacronutrientComparisonEntity? get fat; SugarComparisonEntity? get sugar; SodiumComparisonEntity? get sodium;
-/// Create a copy of NutritionComparisonEntity
+ NutrientInfoEntity? get kcal; NutrientInfoEntity? get carbohydrate; NutrientInfoEntity? get protein; NutrientInfoEntity? get fat; SugarInfoEntity? get sugar; SodiumInfoEntity? get sodium;
+/// Create a copy of AnalysisNutritionInfoEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$NutritionComparisonEntityCopyWith<NutritionComparisonEntity> get copyWith => _$NutritionComparisonEntityCopyWithImpl<NutritionComparisonEntity>(this as NutritionComparisonEntity, _$identity);
+$AnalysisNutritionInfoEntityCopyWith<AnalysisNutritionInfoEntity> get copyWith => _$AnalysisNutritionInfoEntityCopyWithImpl<AnalysisNutritionInfoEntity>(this as AnalysisNutritionInfoEntity, _$identity);
 
-  /// Serializes this NutritionComparisonEntity to a JSON map.
+  /// Serializes this AnalysisNutritionInfoEntity to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NutritionComparisonEntity&&(identical(other.kcal, kcal) || other.kcal == kcal)&&(identical(other.carbohydrate, carbohydrate) || other.carbohydrate == carbohydrate)&&(identical(other.protein, protein) || other.protein == protein)&&(identical(other.fat, fat) || other.fat == fat)&&(identical(other.sugar, sugar) || other.sugar == sugar)&&(identical(other.sodium, sodium) || other.sodium == sodium));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AnalysisNutritionInfoEntity&&(identical(other.kcal, kcal) || other.kcal == kcal)&&(identical(other.carbohydrate, carbohydrate) || other.carbohydrate == carbohydrate)&&(identical(other.protein, protein) || other.protein == protein)&&(identical(other.fat, fat) || other.fat == fat)&&(identical(other.sugar, sugar) || other.sugar == sugar)&&(identical(other.sodium, sodium) || other.sodium == sodium));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1356,123 +1069,123 @@ int get hashCode => Object.hash(runtimeType,kcal,carbohydrate,protein,fat,sugar,
 
 @override
 String toString() {
-  return 'NutritionComparisonEntity(kcal: $kcal, carbohydrate: $carbohydrate, protein: $protein, fat: $fat, sugar: $sugar, sodium: $sodium)';
+  return 'AnalysisNutritionInfoEntity(kcal: $kcal, carbohydrate: $carbohydrate, protein: $protein, fat: $fat, sugar: $sugar, sodium: $sodium)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $NutritionComparisonEntityCopyWith<$Res>  {
-  factory $NutritionComparisonEntityCopyWith(NutritionComparisonEntity value, $Res Function(NutritionComparisonEntity) _then) = _$NutritionComparisonEntityCopyWithImpl;
+abstract mixin class $AnalysisNutritionInfoEntityCopyWith<$Res>  {
+  factory $AnalysisNutritionInfoEntityCopyWith(AnalysisNutritionInfoEntity value, $Res Function(AnalysisNutritionInfoEntity) _then) = _$AnalysisNutritionInfoEntityCopyWithImpl;
 @useResult
 $Res call({
- KcalComparisonEntity? kcal, MacronutrientComparisonEntity? carbohydrate, MacronutrientComparisonEntity? protein, MacronutrientComparisonEntity? fat, SugarComparisonEntity? sugar, SodiumComparisonEntity? sodium
+ NutrientInfoEntity? kcal, NutrientInfoEntity? carbohydrate, NutrientInfoEntity? protein, NutrientInfoEntity? fat, SugarInfoEntity? sugar, SodiumInfoEntity? sodium
 });
 
 
-$KcalComparisonEntityCopyWith<$Res>? get kcal;$MacronutrientComparisonEntityCopyWith<$Res>? get carbohydrate;$MacronutrientComparisonEntityCopyWith<$Res>? get protein;$MacronutrientComparisonEntityCopyWith<$Res>? get fat;$SugarComparisonEntityCopyWith<$Res>? get sugar;$SodiumComparisonEntityCopyWith<$Res>? get sodium;
+$NutrientInfoEntityCopyWith<$Res>? get kcal;$NutrientInfoEntityCopyWith<$Res>? get carbohydrate;$NutrientInfoEntityCopyWith<$Res>? get protein;$NutrientInfoEntityCopyWith<$Res>? get fat;$SugarInfoEntityCopyWith<$Res>? get sugar;$SodiumInfoEntityCopyWith<$Res>? get sodium;
 
 }
 /// @nodoc
-class _$NutritionComparisonEntityCopyWithImpl<$Res>
-    implements $NutritionComparisonEntityCopyWith<$Res> {
-  _$NutritionComparisonEntityCopyWithImpl(this._self, this._then);
+class _$AnalysisNutritionInfoEntityCopyWithImpl<$Res>
+    implements $AnalysisNutritionInfoEntityCopyWith<$Res> {
+  _$AnalysisNutritionInfoEntityCopyWithImpl(this._self, this._then);
 
-  final NutritionComparisonEntity _self;
-  final $Res Function(NutritionComparisonEntity) _then;
+  final AnalysisNutritionInfoEntity _self;
+  final $Res Function(AnalysisNutritionInfoEntity) _then;
 
-/// Create a copy of NutritionComparisonEntity
+/// Create a copy of AnalysisNutritionInfoEntity
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? kcal = freezed,Object? carbohydrate = freezed,Object? protein = freezed,Object? fat = freezed,Object? sugar = freezed,Object? sodium = freezed,}) {
   return _then(_self.copyWith(
 kcal: freezed == kcal ? _self.kcal : kcal // ignore: cast_nullable_to_non_nullable
-as KcalComparisonEntity?,carbohydrate: freezed == carbohydrate ? _self.carbohydrate : carbohydrate // ignore: cast_nullable_to_non_nullable
-as MacronutrientComparisonEntity?,protein: freezed == protein ? _self.protein : protein // ignore: cast_nullable_to_non_nullable
-as MacronutrientComparisonEntity?,fat: freezed == fat ? _self.fat : fat // ignore: cast_nullable_to_non_nullable
-as MacronutrientComparisonEntity?,sugar: freezed == sugar ? _self.sugar : sugar // ignore: cast_nullable_to_non_nullable
-as SugarComparisonEntity?,sodium: freezed == sodium ? _self.sodium : sodium // ignore: cast_nullable_to_non_nullable
-as SodiumComparisonEntity?,
+as NutrientInfoEntity?,carbohydrate: freezed == carbohydrate ? _self.carbohydrate : carbohydrate // ignore: cast_nullable_to_non_nullable
+as NutrientInfoEntity?,protein: freezed == protein ? _self.protein : protein // ignore: cast_nullable_to_non_nullable
+as NutrientInfoEntity?,fat: freezed == fat ? _self.fat : fat // ignore: cast_nullable_to_non_nullable
+as NutrientInfoEntity?,sugar: freezed == sugar ? _self.sugar : sugar // ignore: cast_nullable_to_non_nullable
+as SugarInfoEntity?,sodium: freezed == sodium ? _self.sodium : sodium // ignore: cast_nullable_to_non_nullable
+as SodiumInfoEntity?,
   ));
 }
-/// Create a copy of NutritionComparisonEntity
+/// Create a copy of AnalysisNutritionInfoEntity
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$KcalComparisonEntityCopyWith<$Res>? get kcal {
+$NutrientInfoEntityCopyWith<$Res>? get kcal {
     if (_self.kcal == null) {
     return null;
   }
 
-  return $KcalComparisonEntityCopyWith<$Res>(_self.kcal!, (value) {
+  return $NutrientInfoEntityCopyWith<$Res>(_self.kcal!, (value) {
     return _then(_self.copyWith(kcal: value));
   });
-}/// Create a copy of NutritionComparisonEntity
+}/// Create a copy of AnalysisNutritionInfoEntity
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$MacronutrientComparisonEntityCopyWith<$Res>? get carbohydrate {
+$NutrientInfoEntityCopyWith<$Res>? get carbohydrate {
     if (_self.carbohydrate == null) {
     return null;
   }
 
-  return $MacronutrientComparisonEntityCopyWith<$Res>(_self.carbohydrate!, (value) {
+  return $NutrientInfoEntityCopyWith<$Res>(_self.carbohydrate!, (value) {
     return _then(_self.copyWith(carbohydrate: value));
   });
-}/// Create a copy of NutritionComparisonEntity
+}/// Create a copy of AnalysisNutritionInfoEntity
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$MacronutrientComparisonEntityCopyWith<$Res>? get protein {
+$NutrientInfoEntityCopyWith<$Res>? get protein {
     if (_self.protein == null) {
     return null;
   }
 
-  return $MacronutrientComparisonEntityCopyWith<$Res>(_self.protein!, (value) {
+  return $NutrientInfoEntityCopyWith<$Res>(_self.protein!, (value) {
     return _then(_self.copyWith(protein: value));
   });
-}/// Create a copy of NutritionComparisonEntity
+}/// Create a copy of AnalysisNutritionInfoEntity
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$MacronutrientComparisonEntityCopyWith<$Res>? get fat {
+$NutrientInfoEntityCopyWith<$Res>? get fat {
     if (_self.fat == null) {
     return null;
   }
 
-  return $MacronutrientComparisonEntityCopyWith<$Res>(_self.fat!, (value) {
+  return $NutrientInfoEntityCopyWith<$Res>(_self.fat!, (value) {
     return _then(_self.copyWith(fat: value));
   });
-}/// Create a copy of NutritionComparisonEntity
+}/// Create a copy of AnalysisNutritionInfoEntity
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$SugarComparisonEntityCopyWith<$Res>? get sugar {
+$SugarInfoEntityCopyWith<$Res>? get sugar {
     if (_self.sugar == null) {
     return null;
   }
 
-  return $SugarComparisonEntityCopyWith<$Res>(_self.sugar!, (value) {
+  return $SugarInfoEntityCopyWith<$Res>(_self.sugar!, (value) {
     return _then(_self.copyWith(sugar: value));
   });
-}/// Create a copy of NutritionComparisonEntity
+}/// Create a copy of AnalysisNutritionInfoEntity
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$SodiumComparisonEntityCopyWith<$Res>? get sodium {
+$SodiumInfoEntityCopyWith<$Res>? get sodium {
     if (_self.sodium == null) {
     return null;
   }
 
-  return $SodiumComparisonEntityCopyWith<$Res>(_self.sodium!, (value) {
+  return $SodiumInfoEntityCopyWith<$Res>(_self.sodium!, (value) {
     return _then(_self.copyWith(sodium: value));
   });
 }
 }
 
 
-/// Adds pattern-matching-related methods to [NutritionComparisonEntity].
-extension NutritionComparisonEntityPatterns on NutritionComparisonEntity {
+/// Adds pattern-matching-related methods to [AnalysisNutritionInfoEntity].
+extension AnalysisNutritionInfoEntityPatterns on AnalysisNutritionInfoEntity {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -1485,10 +1198,10 @@ extension NutritionComparisonEntityPatterns on NutritionComparisonEntity {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _NutritionComparisonEntity value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _AnalysisNutritionInfoEntity value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _NutritionComparisonEntity() when $default != null:
+case _AnalysisNutritionInfoEntity() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -1507,10 +1220,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _NutritionComparisonEntity value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _AnalysisNutritionInfoEntity value)  $default,){
 final _that = this;
 switch (_that) {
-case _NutritionComparisonEntity():
+case _AnalysisNutritionInfoEntity():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -1528,10 +1241,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _NutritionComparisonEntity value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _AnalysisNutritionInfoEntity value)?  $default,){
 final _that = this;
 switch (_that) {
-case _NutritionComparisonEntity() when $default != null:
+case _AnalysisNutritionInfoEntity() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -1549,9 +1262,9 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( KcalComparisonEntity? kcal,  MacronutrientComparisonEntity? carbohydrate,  MacronutrientComparisonEntity? protein,  MacronutrientComparisonEntity? fat,  SugarComparisonEntity? sugar,  SodiumComparisonEntity? sodium)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( NutrientInfoEntity? kcal,  NutrientInfoEntity? carbohydrate,  NutrientInfoEntity? protein,  NutrientInfoEntity? fat,  SugarInfoEntity? sugar,  SodiumInfoEntity? sodium)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _NutritionComparisonEntity() when $default != null:
+case _AnalysisNutritionInfoEntity() when $default != null:
 return $default(_that.kcal,_that.carbohydrate,_that.protein,_that.fat,_that.sugar,_that.sodium);case _:
   return orElse();
 
@@ -1570,9 +1283,9 @@ return $default(_that.kcal,_that.carbohydrate,_that.protein,_that.fat,_that.suga
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( KcalComparisonEntity? kcal,  MacronutrientComparisonEntity? carbohydrate,  MacronutrientComparisonEntity? protein,  MacronutrientComparisonEntity? fat,  SugarComparisonEntity? sugar,  SodiumComparisonEntity? sodium)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( NutrientInfoEntity? kcal,  NutrientInfoEntity? carbohydrate,  NutrientInfoEntity? protein,  NutrientInfoEntity? fat,  SugarInfoEntity? sugar,  SodiumInfoEntity? sodium)  $default,) {final _that = this;
 switch (_that) {
-case _NutritionComparisonEntity():
+case _AnalysisNutritionInfoEntity():
 return $default(_that.kcal,_that.carbohydrate,_that.protein,_that.fat,_that.sugar,_that.sodium);case _:
   throw StateError('Unexpected subclass');
 
@@ -1590,9 +1303,9 @@ return $default(_that.kcal,_that.carbohydrate,_that.protein,_that.fat,_that.suga
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( KcalComparisonEntity? kcal,  MacronutrientComparisonEntity? carbohydrate,  MacronutrientComparisonEntity? protein,  MacronutrientComparisonEntity? fat,  SugarComparisonEntity? sugar,  SodiumComparisonEntity? sodium)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( NutrientInfoEntity? kcal,  NutrientInfoEntity? carbohydrate,  NutrientInfoEntity? protein,  NutrientInfoEntity? fat,  SugarInfoEntity? sugar,  SodiumInfoEntity? sodium)?  $default,) {final _that = this;
 switch (_that) {
-case _NutritionComparisonEntity() when $default != null:
+case _AnalysisNutritionInfoEntity() when $default != null:
 return $default(_that.kcal,_that.carbohydrate,_that.protein,_that.fat,_that.sugar,_that.sodium);case _:
   return null;
 
@@ -1604,31 +1317,31 @@ return $default(_that.kcal,_that.carbohydrate,_that.protein,_that.fat,_that.suga
 /// @nodoc
 @JsonSerializable()
 
-class _NutritionComparisonEntity implements NutritionComparisonEntity {
-  const _NutritionComparisonEntity({this.kcal, this.carbohydrate, this.protein, this.fat, this.sugar, this.sodium});
-  factory _NutritionComparisonEntity.fromJson(Map<String, dynamic> json) => _$NutritionComparisonEntityFromJson(json);
+class _AnalysisNutritionInfoEntity implements AnalysisNutritionInfoEntity {
+  const _AnalysisNutritionInfoEntity({this.kcal, this.carbohydrate, this.protein, this.fat, this.sugar, this.sodium});
+  factory _AnalysisNutritionInfoEntity.fromJson(Map<String, dynamic> json) => _$AnalysisNutritionInfoEntityFromJson(json);
 
-@override final  KcalComparisonEntity? kcal;
-@override final  MacronutrientComparisonEntity? carbohydrate;
-@override final  MacronutrientComparisonEntity? protein;
-@override final  MacronutrientComparisonEntity? fat;
-@override final  SugarComparisonEntity? sugar;
-@override final  SodiumComparisonEntity? sodium;
+@override final  NutrientInfoEntity? kcal;
+@override final  NutrientInfoEntity? carbohydrate;
+@override final  NutrientInfoEntity? protein;
+@override final  NutrientInfoEntity? fat;
+@override final  SugarInfoEntity? sugar;
+@override final  SodiumInfoEntity? sodium;
 
-/// Create a copy of NutritionComparisonEntity
+/// Create a copy of AnalysisNutritionInfoEntity
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$NutritionComparisonEntityCopyWith<_NutritionComparisonEntity> get copyWith => __$NutritionComparisonEntityCopyWithImpl<_NutritionComparisonEntity>(this, _$identity);
+_$AnalysisNutritionInfoEntityCopyWith<_AnalysisNutritionInfoEntity> get copyWith => __$AnalysisNutritionInfoEntityCopyWithImpl<_AnalysisNutritionInfoEntity>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$NutritionComparisonEntityToJson(this, );
+  return _$AnalysisNutritionInfoEntityToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NutritionComparisonEntity&&(identical(other.kcal, kcal) || other.kcal == kcal)&&(identical(other.carbohydrate, carbohydrate) || other.carbohydrate == carbohydrate)&&(identical(other.protein, protein) || other.protein == protein)&&(identical(other.fat, fat) || other.fat == fat)&&(identical(other.sugar, sugar) || other.sugar == sugar)&&(identical(other.sodium, sodium) || other.sodium == sodium));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AnalysisNutritionInfoEntity&&(identical(other.kcal, kcal) || other.kcal == kcal)&&(identical(other.carbohydrate, carbohydrate) || other.carbohydrate == carbohydrate)&&(identical(other.protein, protein) || other.protein == protein)&&(identical(other.fat, fat) || other.fat == fat)&&(identical(other.sugar, sugar) || other.sugar == sugar)&&(identical(other.sodium, sodium) || other.sodium == sodium));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1637,116 +1350,116 @@ int get hashCode => Object.hash(runtimeType,kcal,carbohydrate,protein,fat,sugar,
 
 @override
 String toString() {
-  return 'NutritionComparisonEntity(kcal: $kcal, carbohydrate: $carbohydrate, protein: $protein, fat: $fat, sugar: $sugar, sodium: $sodium)';
+  return 'AnalysisNutritionInfoEntity(kcal: $kcal, carbohydrate: $carbohydrate, protein: $protein, fat: $fat, sugar: $sugar, sodium: $sodium)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$NutritionComparisonEntityCopyWith<$Res> implements $NutritionComparisonEntityCopyWith<$Res> {
-  factory _$NutritionComparisonEntityCopyWith(_NutritionComparisonEntity value, $Res Function(_NutritionComparisonEntity) _then) = __$NutritionComparisonEntityCopyWithImpl;
+abstract mixin class _$AnalysisNutritionInfoEntityCopyWith<$Res> implements $AnalysisNutritionInfoEntityCopyWith<$Res> {
+  factory _$AnalysisNutritionInfoEntityCopyWith(_AnalysisNutritionInfoEntity value, $Res Function(_AnalysisNutritionInfoEntity) _then) = __$AnalysisNutritionInfoEntityCopyWithImpl;
 @override @useResult
 $Res call({
- KcalComparisonEntity? kcal, MacronutrientComparisonEntity? carbohydrate, MacronutrientComparisonEntity? protein, MacronutrientComparisonEntity? fat, SugarComparisonEntity? sugar, SodiumComparisonEntity? sodium
+ NutrientInfoEntity? kcal, NutrientInfoEntity? carbohydrate, NutrientInfoEntity? protein, NutrientInfoEntity? fat, SugarInfoEntity? sugar, SodiumInfoEntity? sodium
 });
 
 
-@override $KcalComparisonEntityCopyWith<$Res>? get kcal;@override $MacronutrientComparisonEntityCopyWith<$Res>? get carbohydrate;@override $MacronutrientComparisonEntityCopyWith<$Res>? get protein;@override $MacronutrientComparisonEntityCopyWith<$Res>? get fat;@override $SugarComparisonEntityCopyWith<$Res>? get sugar;@override $SodiumComparisonEntityCopyWith<$Res>? get sodium;
+@override $NutrientInfoEntityCopyWith<$Res>? get kcal;@override $NutrientInfoEntityCopyWith<$Res>? get carbohydrate;@override $NutrientInfoEntityCopyWith<$Res>? get protein;@override $NutrientInfoEntityCopyWith<$Res>? get fat;@override $SugarInfoEntityCopyWith<$Res>? get sugar;@override $SodiumInfoEntityCopyWith<$Res>? get sodium;
 
 }
 /// @nodoc
-class __$NutritionComparisonEntityCopyWithImpl<$Res>
-    implements _$NutritionComparisonEntityCopyWith<$Res> {
-  __$NutritionComparisonEntityCopyWithImpl(this._self, this._then);
+class __$AnalysisNutritionInfoEntityCopyWithImpl<$Res>
+    implements _$AnalysisNutritionInfoEntityCopyWith<$Res> {
+  __$AnalysisNutritionInfoEntityCopyWithImpl(this._self, this._then);
 
-  final _NutritionComparisonEntity _self;
-  final $Res Function(_NutritionComparisonEntity) _then;
+  final _AnalysisNutritionInfoEntity _self;
+  final $Res Function(_AnalysisNutritionInfoEntity) _then;
 
-/// Create a copy of NutritionComparisonEntity
+/// Create a copy of AnalysisNutritionInfoEntity
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? kcal = freezed,Object? carbohydrate = freezed,Object? protein = freezed,Object? fat = freezed,Object? sugar = freezed,Object? sodium = freezed,}) {
-  return _then(_NutritionComparisonEntity(
+  return _then(_AnalysisNutritionInfoEntity(
 kcal: freezed == kcal ? _self.kcal : kcal // ignore: cast_nullable_to_non_nullable
-as KcalComparisonEntity?,carbohydrate: freezed == carbohydrate ? _self.carbohydrate : carbohydrate // ignore: cast_nullable_to_non_nullable
-as MacronutrientComparisonEntity?,protein: freezed == protein ? _self.protein : protein // ignore: cast_nullable_to_non_nullable
-as MacronutrientComparisonEntity?,fat: freezed == fat ? _self.fat : fat // ignore: cast_nullable_to_non_nullable
-as MacronutrientComparisonEntity?,sugar: freezed == sugar ? _self.sugar : sugar // ignore: cast_nullable_to_non_nullable
-as SugarComparisonEntity?,sodium: freezed == sodium ? _self.sodium : sodium // ignore: cast_nullable_to_non_nullable
-as SodiumComparisonEntity?,
+as NutrientInfoEntity?,carbohydrate: freezed == carbohydrate ? _self.carbohydrate : carbohydrate // ignore: cast_nullable_to_non_nullable
+as NutrientInfoEntity?,protein: freezed == protein ? _self.protein : protein // ignore: cast_nullable_to_non_nullable
+as NutrientInfoEntity?,fat: freezed == fat ? _self.fat : fat // ignore: cast_nullable_to_non_nullable
+as NutrientInfoEntity?,sugar: freezed == sugar ? _self.sugar : sugar // ignore: cast_nullable_to_non_nullable
+as SugarInfoEntity?,sodium: freezed == sodium ? _self.sodium : sodium // ignore: cast_nullable_to_non_nullable
+as SodiumInfoEntity?,
   ));
 }
 
-/// Create a copy of NutritionComparisonEntity
+/// Create a copy of AnalysisNutritionInfoEntity
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$KcalComparisonEntityCopyWith<$Res>? get kcal {
+$NutrientInfoEntityCopyWith<$Res>? get kcal {
     if (_self.kcal == null) {
     return null;
   }
 
-  return $KcalComparisonEntityCopyWith<$Res>(_self.kcal!, (value) {
+  return $NutrientInfoEntityCopyWith<$Res>(_self.kcal!, (value) {
     return _then(_self.copyWith(kcal: value));
   });
-}/// Create a copy of NutritionComparisonEntity
+}/// Create a copy of AnalysisNutritionInfoEntity
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$MacronutrientComparisonEntityCopyWith<$Res>? get carbohydrate {
+$NutrientInfoEntityCopyWith<$Res>? get carbohydrate {
     if (_self.carbohydrate == null) {
     return null;
   }
 
-  return $MacronutrientComparisonEntityCopyWith<$Res>(_self.carbohydrate!, (value) {
+  return $NutrientInfoEntityCopyWith<$Res>(_self.carbohydrate!, (value) {
     return _then(_self.copyWith(carbohydrate: value));
   });
-}/// Create a copy of NutritionComparisonEntity
+}/// Create a copy of AnalysisNutritionInfoEntity
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$MacronutrientComparisonEntityCopyWith<$Res>? get protein {
+$NutrientInfoEntityCopyWith<$Res>? get protein {
     if (_self.protein == null) {
     return null;
   }
 
-  return $MacronutrientComparisonEntityCopyWith<$Res>(_self.protein!, (value) {
+  return $NutrientInfoEntityCopyWith<$Res>(_self.protein!, (value) {
     return _then(_self.copyWith(protein: value));
   });
-}/// Create a copy of NutritionComparisonEntity
+}/// Create a copy of AnalysisNutritionInfoEntity
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$MacronutrientComparisonEntityCopyWith<$Res>? get fat {
+$NutrientInfoEntityCopyWith<$Res>? get fat {
     if (_self.fat == null) {
     return null;
   }
 
-  return $MacronutrientComparisonEntityCopyWith<$Res>(_self.fat!, (value) {
+  return $NutrientInfoEntityCopyWith<$Res>(_self.fat!, (value) {
     return _then(_self.copyWith(fat: value));
   });
-}/// Create a copy of NutritionComparisonEntity
+}/// Create a copy of AnalysisNutritionInfoEntity
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$SugarComparisonEntityCopyWith<$Res>? get sugar {
+$SugarInfoEntityCopyWith<$Res>? get sugar {
     if (_self.sugar == null) {
     return null;
   }
 
-  return $SugarComparisonEntityCopyWith<$Res>(_self.sugar!, (value) {
+  return $SugarInfoEntityCopyWith<$Res>(_self.sugar!, (value) {
     return _then(_self.copyWith(sugar: value));
   });
-}/// Create a copy of NutritionComparisonEntity
+}/// Create a copy of AnalysisNutritionInfoEntity
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$SodiumComparisonEntityCopyWith<$Res>? get sodium {
+$SodiumInfoEntityCopyWith<$Res>? get sodium {
     if (_self.sodium == null) {
     return null;
   }
 
-  return $SodiumComparisonEntityCopyWith<$Res>(_self.sodium!, (value) {
+  return $SodiumInfoEntityCopyWith<$Res>(_self.sodium!, (value) {
     return _then(_self.copyWith(sodium: value));
   });
 }
@@ -1754,42 +1467,42 @@ $SodiumComparisonEntityCopyWith<$Res>? get sodium {
 
 
 /// @nodoc
-mixin _$KcalComparisonEntity {
+mixin _$NutrientInfoEntity {
 
- double? get intakeKcal; int? get dailyTargetKcal; double? get percent;
-/// Create a copy of KcalComparisonEntity
+ double? get intake; int? get target; double? get percent;
+/// Create a copy of NutrientInfoEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$KcalComparisonEntityCopyWith<KcalComparisonEntity> get copyWith => _$KcalComparisonEntityCopyWithImpl<KcalComparisonEntity>(this as KcalComparisonEntity, _$identity);
+$NutrientInfoEntityCopyWith<NutrientInfoEntity> get copyWith => _$NutrientInfoEntityCopyWithImpl<NutrientInfoEntity>(this as NutrientInfoEntity, _$identity);
 
-  /// Serializes this KcalComparisonEntity to a JSON map.
+  /// Serializes this NutrientInfoEntity to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is KcalComparisonEntity&&(identical(other.intakeKcal, intakeKcal) || other.intakeKcal == intakeKcal)&&(identical(other.dailyTargetKcal, dailyTargetKcal) || other.dailyTargetKcal == dailyTargetKcal)&&(identical(other.percent, percent) || other.percent == percent));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is NutrientInfoEntity&&(identical(other.intake, intake) || other.intake == intake)&&(identical(other.target, target) || other.target == target)&&(identical(other.percent, percent) || other.percent == percent));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,intakeKcal,dailyTargetKcal,percent);
+int get hashCode => Object.hash(runtimeType,intake,target,percent);
 
 @override
 String toString() {
-  return 'KcalComparisonEntity(intakeKcal: $intakeKcal, dailyTargetKcal: $dailyTargetKcal, percent: $percent)';
+  return 'NutrientInfoEntity(intake: $intake, target: $target, percent: $percent)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $KcalComparisonEntityCopyWith<$Res>  {
-  factory $KcalComparisonEntityCopyWith(KcalComparisonEntity value, $Res Function(KcalComparisonEntity) _then) = _$KcalComparisonEntityCopyWithImpl;
+abstract mixin class $NutrientInfoEntityCopyWith<$Res>  {
+  factory $NutrientInfoEntityCopyWith(NutrientInfoEntity value, $Res Function(NutrientInfoEntity) _then) = _$NutrientInfoEntityCopyWithImpl;
 @useResult
 $Res call({
- double? intakeKcal, int? dailyTargetKcal, double? percent
+ double? intake, int? target, double? percent
 });
 
 
@@ -1797,19 +1510,19 @@ $Res call({
 
 }
 /// @nodoc
-class _$KcalComparisonEntityCopyWithImpl<$Res>
-    implements $KcalComparisonEntityCopyWith<$Res> {
-  _$KcalComparisonEntityCopyWithImpl(this._self, this._then);
+class _$NutrientInfoEntityCopyWithImpl<$Res>
+    implements $NutrientInfoEntityCopyWith<$Res> {
+  _$NutrientInfoEntityCopyWithImpl(this._self, this._then);
 
-  final KcalComparisonEntity _self;
-  final $Res Function(KcalComparisonEntity) _then;
+  final NutrientInfoEntity _self;
+  final $Res Function(NutrientInfoEntity) _then;
 
-/// Create a copy of KcalComparisonEntity
+/// Create a copy of NutrientInfoEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? intakeKcal = freezed,Object? dailyTargetKcal = freezed,Object? percent = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? intake = freezed,Object? target = freezed,Object? percent = freezed,}) {
   return _then(_self.copyWith(
-intakeKcal: freezed == intakeKcal ? _self.intakeKcal : intakeKcal // ignore: cast_nullable_to_non_nullable
-as double?,dailyTargetKcal: freezed == dailyTargetKcal ? _self.dailyTargetKcal : dailyTargetKcal // ignore: cast_nullable_to_non_nullable
+intake: freezed == intake ? _self.intake : intake // ignore: cast_nullable_to_non_nullable
+as double?,target: freezed == target ? _self.target : target // ignore: cast_nullable_to_non_nullable
 as int?,percent: freezed == percent ? _self.percent : percent // ignore: cast_nullable_to_non_nullable
 as double?,
   ));
@@ -1818,8 +1531,8 @@ as double?,
 }
 
 
-/// Adds pattern-matching-related methods to [KcalComparisonEntity].
-extension KcalComparisonEntityPatterns on KcalComparisonEntity {
+/// Adds pattern-matching-related methods to [NutrientInfoEntity].
+extension NutrientInfoEntityPatterns on NutrientInfoEntity {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -1832,10 +1545,10 @@ extension KcalComparisonEntityPatterns on KcalComparisonEntity {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _KcalComparisonEntity value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _NutrientInfoEntity value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _KcalComparisonEntity() when $default != null:
+case _NutrientInfoEntity() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -1854,10 +1567,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _KcalComparisonEntity value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _NutrientInfoEntity value)  $default,){
 final _that = this;
 switch (_that) {
-case _KcalComparisonEntity():
+case _NutrientInfoEntity():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -1875,10 +1588,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _KcalComparisonEntity value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _NutrientInfoEntity value)?  $default,){
 final _that = this;
 switch (_that) {
-case _KcalComparisonEntity() when $default != null:
+case _NutrientInfoEntity() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -1896,10 +1609,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( double? intakeKcal,  int? dailyTargetKcal,  double? percent)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( double? intake,  int? target,  double? percent)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _KcalComparisonEntity() when $default != null:
-return $default(_that.intakeKcal,_that.dailyTargetKcal,_that.percent);case _:
+case _NutrientInfoEntity() when $default != null:
+return $default(_that.intake,_that.target,_that.percent);case _:
   return orElse();
 
 }
@@ -1917,10 +1630,10 @@ return $default(_that.intakeKcal,_that.dailyTargetKcal,_that.percent);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( double? intakeKcal,  int? dailyTargetKcal,  double? percent)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( double? intake,  int? target,  double? percent)  $default,) {final _that = this;
 switch (_that) {
-case _KcalComparisonEntity():
-return $default(_that.intakeKcal,_that.dailyTargetKcal,_that.percent);case _:
+case _NutrientInfoEntity():
+return $default(_that.intake,_that.target,_that.percent);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -1937,10 +1650,10 @@ return $default(_that.intakeKcal,_that.dailyTargetKcal,_that.percent);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( double? intakeKcal,  int? dailyTargetKcal,  double? percent)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( double? intake,  int? target,  double? percent)?  $default,) {final _that = this;
 switch (_that) {
-case _KcalComparisonEntity() when $default != null:
-return $default(_that.intakeKcal,_that.dailyTargetKcal,_that.percent);case _:
+case _NutrientInfoEntity() when $default != null:
+return $default(_that.intake,_that.target,_that.percent);case _:
   return null;
 
 }
@@ -1951,48 +1664,48 @@ return $default(_that.intakeKcal,_that.dailyTargetKcal,_that.percent);case _:
 /// @nodoc
 @JsonSerializable()
 
-class _KcalComparisonEntity implements KcalComparisonEntity {
-  const _KcalComparisonEntity({this.intakeKcal, this.dailyTargetKcal, this.percent});
-  factory _KcalComparisonEntity.fromJson(Map<String, dynamic> json) => _$KcalComparisonEntityFromJson(json);
+class _NutrientInfoEntity implements NutrientInfoEntity {
+  const _NutrientInfoEntity({this.intake, this.target, this.percent});
+  factory _NutrientInfoEntity.fromJson(Map<String, dynamic> json) => _$NutrientInfoEntityFromJson(json);
 
-@override final  double? intakeKcal;
-@override final  int? dailyTargetKcal;
+@override final  double? intake;
+@override final  int? target;
 @override final  double? percent;
 
-/// Create a copy of KcalComparisonEntity
+/// Create a copy of NutrientInfoEntity
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$KcalComparisonEntityCopyWith<_KcalComparisonEntity> get copyWith => __$KcalComparisonEntityCopyWithImpl<_KcalComparisonEntity>(this, _$identity);
+_$NutrientInfoEntityCopyWith<_NutrientInfoEntity> get copyWith => __$NutrientInfoEntityCopyWithImpl<_NutrientInfoEntity>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$KcalComparisonEntityToJson(this, );
+  return _$NutrientInfoEntityToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _KcalComparisonEntity&&(identical(other.intakeKcal, intakeKcal) || other.intakeKcal == intakeKcal)&&(identical(other.dailyTargetKcal, dailyTargetKcal) || other.dailyTargetKcal == dailyTargetKcal)&&(identical(other.percent, percent) || other.percent == percent));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NutrientInfoEntity&&(identical(other.intake, intake) || other.intake == intake)&&(identical(other.target, target) || other.target == target)&&(identical(other.percent, percent) || other.percent == percent));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,intakeKcal,dailyTargetKcal,percent);
+int get hashCode => Object.hash(runtimeType,intake,target,percent);
 
 @override
 String toString() {
-  return 'KcalComparisonEntity(intakeKcal: $intakeKcal, dailyTargetKcal: $dailyTargetKcal, percent: $percent)';
+  return 'NutrientInfoEntity(intake: $intake, target: $target, percent: $percent)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$KcalComparisonEntityCopyWith<$Res> implements $KcalComparisonEntityCopyWith<$Res> {
-  factory _$KcalComparisonEntityCopyWith(_KcalComparisonEntity value, $Res Function(_KcalComparisonEntity) _then) = __$KcalComparisonEntityCopyWithImpl;
+abstract mixin class _$NutrientInfoEntityCopyWith<$Res> implements $NutrientInfoEntityCopyWith<$Res> {
+  factory _$NutrientInfoEntityCopyWith(_NutrientInfoEntity value, $Res Function(_NutrientInfoEntity) _then) = __$NutrientInfoEntityCopyWithImpl;
 @override @useResult
 $Res call({
- double? intakeKcal, int? dailyTargetKcal, double? percent
+ double? intake, int? target, double? percent
 });
 
 
@@ -2000,19 +1713,19 @@ $Res call({
 
 }
 /// @nodoc
-class __$KcalComparisonEntityCopyWithImpl<$Res>
-    implements _$KcalComparisonEntityCopyWith<$Res> {
-  __$KcalComparisonEntityCopyWithImpl(this._self, this._then);
+class __$NutrientInfoEntityCopyWithImpl<$Res>
+    implements _$NutrientInfoEntityCopyWith<$Res> {
+  __$NutrientInfoEntityCopyWithImpl(this._self, this._then);
 
-  final _KcalComparisonEntity _self;
-  final $Res Function(_KcalComparisonEntity) _then;
+  final _NutrientInfoEntity _self;
+  final $Res Function(_NutrientInfoEntity) _then;
 
-/// Create a copy of KcalComparisonEntity
+/// Create a copy of NutrientInfoEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? intakeKcal = freezed,Object? dailyTargetKcal = freezed,Object? percent = freezed,}) {
-  return _then(_KcalComparisonEntity(
-intakeKcal: freezed == intakeKcal ? _self.intakeKcal : intakeKcal // ignore: cast_nullable_to_non_nullable
-as double?,dailyTargetKcal: freezed == dailyTargetKcal ? _self.dailyTargetKcal : dailyTargetKcal // ignore: cast_nullable_to_non_nullable
+@override @pragma('vm:prefer-inline') $Res call({Object? intake = freezed,Object? target = freezed,Object? percent = freezed,}) {
+  return _then(_NutrientInfoEntity(
+intake: freezed == intake ? _self.intake : intake // ignore: cast_nullable_to_non_nullable
+as double?,target: freezed == target ? _self.target : target // ignore: cast_nullable_to_non_nullable
 as int?,percent: freezed == percent ? _self.percent : percent // ignore: cast_nullable_to_non_nullable
 as double?,
   ));
@@ -2023,42 +1736,42 @@ as double?,
 
 
 /// @nodoc
-mixin _$MacronutrientComparisonEntity {
+mixin _$SugarInfoEntity {
 
- double? get intakeG; int? get dailyTargetG; double? get percent;
-/// Create a copy of MacronutrientComparisonEntity
+ double? get intake; int? get max; NutritionThresholdStatusEnum? get status;
+/// Create a copy of SugarInfoEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$MacronutrientComparisonEntityCopyWith<MacronutrientComparisonEntity> get copyWith => _$MacronutrientComparisonEntityCopyWithImpl<MacronutrientComparisonEntity>(this as MacronutrientComparisonEntity, _$identity);
+$SugarInfoEntityCopyWith<SugarInfoEntity> get copyWith => _$SugarInfoEntityCopyWithImpl<SugarInfoEntity>(this as SugarInfoEntity, _$identity);
 
-  /// Serializes this MacronutrientComparisonEntity to a JSON map.
+  /// Serializes this SugarInfoEntity to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MacronutrientComparisonEntity&&(identical(other.intakeG, intakeG) || other.intakeG == intakeG)&&(identical(other.dailyTargetG, dailyTargetG) || other.dailyTargetG == dailyTargetG)&&(identical(other.percent, percent) || other.percent == percent));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SugarInfoEntity&&(identical(other.intake, intake) || other.intake == intake)&&(identical(other.max, max) || other.max == max)&&(identical(other.status, status) || other.status == status));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,intakeG,dailyTargetG,percent);
+int get hashCode => Object.hash(runtimeType,intake,max,status);
 
 @override
 String toString() {
-  return 'MacronutrientComparisonEntity(intakeG: $intakeG, dailyTargetG: $dailyTargetG, percent: $percent)';
+  return 'SugarInfoEntity(intake: $intake, max: $max, status: $status)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $MacronutrientComparisonEntityCopyWith<$Res>  {
-  factory $MacronutrientComparisonEntityCopyWith(MacronutrientComparisonEntity value, $Res Function(MacronutrientComparisonEntity) _then) = _$MacronutrientComparisonEntityCopyWithImpl;
+abstract mixin class $SugarInfoEntityCopyWith<$Res>  {
+  factory $SugarInfoEntityCopyWith(SugarInfoEntity value, $Res Function(SugarInfoEntity) _then) = _$SugarInfoEntityCopyWithImpl;
 @useResult
 $Res call({
- double? intakeG, int? dailyTargetG, double? percent
+ double? intake, int? max, NutritionThresholdStatusEnum? status
 });
 
 
@@ -2066,29 +1779,29 @@ $Res call({
 
 }
 /// @nodoc
-class _$MacronutrientComparisonEntityCopyWithImpl<$Res>
-    implements $MacronutrientComparisonEntityCopyWith<$Res> {
-  _$MacronutrientComparisonEntityCopyWithImpl(this._self, this._then);
+class _$SugarInfoEntityCopyWithImpl<$Res>
+    implements $SugarInfoEntityCopyWith<$Res> {
+  _$SugarInfoEntityCopyWithImpl(this._self, this._then);
 
-  final MacronutrientComparisonEntity _self;
-  final $Res Function(MacronutrientComparisonEntity) _then;
+  final SugarInfoEntity _self;
+  final $Res Function(SugarInfoEntity) _then;
 
-/// Create a copy of MacronutrientComparisonEntity
+/// Create a copy of SugarInfoEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? intakeG = freezed,Object? dailyTargetG = freezed,Object? percent = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? intake = freezed,Object? max = freezed,Object? status = freezed,}) {
   return _then(_self.copyWith(
-intakeG: freezed == intakeG ? _self.intakeG : intakeG // ignore: cast_nullable_to_non_nullable
-as double?,dailyTargetG: freezed == dailyTargetG ? _self.dailyTargetG : dailyTargetG // ignore: cast_nullable_to_non_nullable
-as int?,percent: freezed == percent ? _self.percent : percent // ignore: cast_nullable_to_non_nullable
-as double?,
+intake: freezed == intake ? _self.intake : intake // ignore: cast_nullable_to_non_nullable
+as double?,max: freezed == max ? _self.max : max // ignore: cast_nullable_to_non_nullable
+as int?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as NutritionThresholdStatusEnum?,
   ));
 }
 
 }
 
 
-/// Adds pattern-matching-related methods to [MacronutrientComparisonEntity].
-extension MacronutrientComparisonEntityPatterns on MacronutrientComparisonEntity {
+/// Adds pattern-matching-related methods to [SugarInfoEntity].
+extension SugarInfoEntityPatterns on SugarInfoEntity {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -2101,10 +1814,10 @@ extension MacronutrientComparisonEntityPatterns on MacronutrientComparisonEntity
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _MacronutrientComparisonEntity value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SugarInfoEntity value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _MacronutrientComparisonEntity() when $default != null:
+case _SugarInfoEntity() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -2123,10 +1836,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _MacronutrientComparisonEntity value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SugarInfoEntity value)  $default,){
 final _that = this;
 switch (_that) {
-case _MacronutrientComparisonEntity():
+case _SugarInfoEntity():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -2144,10 +1857,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _MacronutrientComparisonEntity value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SugarInfoEntity value)?  $default,){
 final _that = this;
 switch (_that) {
-case _MacronutrientComparisonEntity() when $default != null:
+case _SugarInfoEntity() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -2165,10 +1878,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( double? intakeG,  int? dailyTargetG,  double? percent)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( double? intake,  int? max,  NutritionThresholdStatusEnum? status)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _MacronutrientComparisonEntity() when $default != null:
-return $default(_that.intakeG,_that.dailyTargetG,_that.percent);case _:
+case _SugarInfoEntity() when $default != null:
+return $default(_that.intake,_that.max,_that.status);case _:
   return orElse();
 
 }
@@ -2186,10 +1899,10 @@ return $default(_that.intakeG,_that.dailyTargetG,_that.percent);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( double? intakeG,  int? dailyTargetG,  double? percent)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( double? intake,  int? max,  NutritionThresholdStatusEnum? status)  $default,) {final _that = this;
 switch (_that) {
-case _MacronutrientComparisonEntity():
-return $default(_that.intakeG,_that.dailyTargetG,_that.percent);case _:
+case _SugarInfoEntity():
+return $default(_that.intake,_that.max,_that.status);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -2206,10 +1919,10 @@ return $default(_that.intakeG,_that.dailyTargetG,_that.percent);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( double? intakeG,  int? dailyTargetG,  double? percent)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( double? intake,  int? max,  NutritionThresholdStatusEnum? status)?  $default,) {final _that = this;
 switch (_that) {
-case _MacronutrientComparisonEntity() when $default != null:
-return $default(_that.intakeG,_that.dailyTargetG,_that.percent);case _:
+case _SugarInfoEntity() when $default != null:
+return $default(_that.intake,_that.max,_that.status);case _:
   return null;
 
 }
@@ -2220,48 +1933,48 @@ return $default(_that.intakeG,_that.dailyTargetG,_that.percent);case _:
 /// @nodoc
 @JsonSerializable()
 
-class _MacronutrientComparisonEntity implements MacronutrientComparisonEntity {
-  const _MacronutrientComparisonEntity({this.intakeG, this.dailyTargetG, this.percent});
-  factory _MacronutrientComparisonEntity.fromJson(Map<String, dynamic> json) => _$MacronutrientComparisonEntityFromJson(json);
+class _SugarInfoEntity implements SugarInfoEntity {
+  const _SugarInfoEntity({this.intake, this.max, this.status});
+  factory _SugarInfoEntity.fromJson(Map<String, dynamic> json) => _$SugarInfoEntityFromJson(json);
 
-@override final  double? intakeG;
-@override final  int? dailyTargetG;
-@override final  double? percent;
+@override final  double? intake;
+@override final  int? max;
+@override final  NutritionThresholdStatusEnum? status;
 
-/// Create a copy of MacronutrientComparisonEntity
+/// Create a copy of SugarInfoEntity
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$MacronutrientComparisonEntityCopyWith<_MacronutrientComparisonEntity> get copyWith => __$MacronutrientComparisonEntityCopyWithImpl<_MacronutrientComparisonEntity>(this, _$identity);
+_$SugarInfoEntityCopyWith<_SugarInfoEntity> get copyWith => __$SugarInfoEntityCopyWithImpl<_SugarInfoEntity>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$MacronutrientComparisonEntityToJson(this, );
+  return _$SugarInfoEntityToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MacronutrientComparisonEntity&&(identical(other.intakeG, intakeG) || other.intakeG == intakeG)&&(identical(other.dailyTargetG, dailyTargetG) || other.dailyTargetG == dailyTargetG)&&(identical(other.percent, percent) || other.percent == percent));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SugarInfoEntity&&(identical(other.intake, intake) || other.intake == intake)&&(identical(other.max, max) || other.max == max)&&(identical(other.status, status) || other.status == status));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,intakeG,dailyTargetG,percent);
+int get hashCode => Object.hash(runtimeType,intake,max,status);
 
 @override
 String toString() {
-  return 'MacronutrientComparisonEntity(intakeG: $intakeG, dailyTargetG: $dailyTargetG, percent: $percent)';
+  return 'SugarInfoEntity(intake: $intake, max: $max, status: $status)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$MacronutrientComparisonEntityCopyWith<$Res> implements $MacronutrientComparisonEntityCopyWith<$Res> {
-  factory _$MacronutrientComparisonEntityCopyWith(_MacronutrientComparisonEntity value, $Res Function(_MacronutrientComparisonEntity) _then) = __$MacronutrientComparisonEntityCopyWithImpl;
+abstract mixin class _$SugarInfoEntityCopyWith<$Res> implements $SugarInfoEntityCopyWith<$Res> {
+  factory _$SugarInfoEntityCopyWith(_SugarInfoEntity value, $Res Function(_SugarInfoEntity) _then) = __$SugarInfoEntityCopyWithImpl;
 @override @useResult
 $Res call({
- double? intakeG, int? dailyTargetG, double? percent
+ double? intake, int? max, NutritionThresholdStatusEnum? status
 });
 
 
@@ -2269,21 +1982,21 @@ $Res call({
 
 }
 /// @nodoc
-class __$MacronutrientComparisonEntityCopyWithImpl<$Res>
-    implements _$MacronutrientComparisonEntityCopyWith<$Res> {
-  __$MacronutrientComparisonEntityCopyWithImpl(this._self, this._then);
+class __$SugarInfoEntityCopyWithImpl<$Res>
+    implements _$SugarInfoEntityCopyWith<$Res> {
+  __$SugarInfoEntityCopyWithImpl(this._self, this._then);
 
-  final _MacronutrientComparisonEntity _self;
-  final $Res Function(_MacronutrientComparisonEntity) _then;
+  final _SugarInfoEntity _self;
+  final $Res Function(_SugarInfoEntity) _then;
 
-/// Create a copy of MacronutrientComparisonEntity
+/// Create a copy of SugarInfoEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? intakeG = freezed,Object? dailyTargetG = freezed,Object? percent = freezed,}) {
-  return _then(_MacronutrientComparisonEntity(
-intakeG: freezed == intakeG ? _self.intakeG : intakeG // ignore: cast_nullable_to_non_nullable
-as double?,dailyTargetG: freezed == dailyTargetG ? _self.dailyTargetG : dailyTargetG // ignore: cast_nullable_to_non_nullable
-as int?,percent: freezed == percent ? _self.percent : percent // ignore: cast_nullable_to_non_nullable
-as double?,
+@override @pragma('vm:prefer-inline') $Res call({Object? intake = freezed,Object? max = freezed,Object? status = freezed,}) {
+  return _then(_SugarInfoEntity(
+intake: freezed == intake ? _self.intake : intake // ignore: cast_nullable_to_non_nullable
+as double?,max: freezed == max ? _self.max : max // ignore: cast_nullable_to_non_nullable
+as int?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as NutritionThresholdStatusEnum?,
   ));
 }
 
@@ -2292,42 +2005,42 @@ as double?,
 
 
 /// @nodoc
-mixin _$SugarComparisonEntity {
+mixin _$SodiumInfoEntity {
 
- double? get intakeG; int? get maxG; NutritionThresholdStatusEnum? get statusEnum;
-/// Create a copy of SugarComparisonEntity
+ double? get intake; int? get adequate; int? get riskReduction; NutritionThresholdStatusEnum? get status;
+/// Create a copy of SodiumInfoEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$SugarComparisonEntityCopyWith<SugarComparisonEntity> get copyWith => _$SugarComparisonEntityCopyWithImpl<SugarComparisonEntity>(this as SugarComparisonEntity, _$identity);
+$SodiumInfoEntityCopyWith<SodiumInfoEntity> get copyWith => _$SodiumInfoEntityCopyWithImpl<SodiumInfoEntity>(this as SodiumInfoEntity, _$identity);
 
-  /// Serializes this SugarComparisonEntity to a JSON map.
+  /// Serializes this SodiumInfoEntity to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SugarComparisonEntity&&(identical(other.intakeG, intakeG) || other.intakeG == intakeG)&&(identical(other.maxG, maxG) || other.maxG == maxG)&&(identical(other.statusEnum, statusEnum) || other.statusEnum == statusEnum));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SodiumInfoEntity&&(identical(other.intake, intake) || other.intake == intake)&&(identical(other.adequate, adequate) || other.adequate == adequate)&&(identical(other.riskReduction, riskReduction) || other.riskReduction == riskReduction)&&(identical(other.status, status) || other.status == status));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,intakeG,maxG,statusEnum);
+int get hashCode => Object.hash(runtimeType,intake,adequate,riskReduction,status);
 
 @override
 String toString() {
-  return 'SugarComparisonEntity(intakeG: $intakeG, maxG: $maxG, statusEnum: $statusEnum)';
+  return 'SodiumInfoEntity(intake: $intake, adequate: $adequate, riskReduction: $riskReduction, status: $status)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $SugarComparisonEntityCopyWith<$Res>  {
-  factory $SugarComparisonEntityCopyWith(SugarComparisonEntity value, $Res Function(SugarComparisonEntity) _then) = _$SugarComparisonEntityCopyWithImpl;
+abstract mixin class $SodiumInfoEntityCopyWith<$Res>  {
+  factory $SodiumInfoEntityCopyWith(SodiumInfoEntity value, $Res Function(SodiumInfoEntity) _then) = _$SodiumInfoEntityCopyWithImpl;
 @useResult
 $Res call({
- double? intakeG, int? maxG, NutritionThresholdStatusEnum? statusEnum
+ double? intake, int? adequate, int? riskReduction, NutritionThresholdStatusEnum? status
 });
 
 
@@ -2335,20 +2048,21 @@ $Res call({
 
 }
 /// @nodoc
-class _$SugarComparisonEntityCopyWithImpl<$Res>
-    implements $SugarComparisonEntityCopyWith<$Res> {
-  _$SugarComparisonEntityCopyWithImpl(this._self, this._then);
+class _$SodiumInfoEntityCopyWithImpl<$Res>
+    implements $SodiumInfoEntityCopyWith<$Res> {
+  _$SodiumInfoEntityCopyWithImpl(this._self, this._then);
 
-  final SugarComparisonEntity _self;
-  final $Res Function(SugarComparisonEntity) _then;
+  final SodiumInfoEntity _self;
+  final $Res Function(SodiumInfoEntity) _then;
 
-/// Create a copy of SugarComparisonEntity
+/// Create a copy of SodiumInfoEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? intakeG = freezed,Object? maxG = freezed,Object? statusEnum = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? intake = freezed,Object? adequate = freezed,Object? riskReduction = freezed,Object? status = freezed,}) {
   return _then(_self.copyWith(
-intakeG: freezed == intakeG ? _self.intakeG : intakeG // ignore: cast_nullable_to_non_nullable
-as double?,maxG: freezed == maxG ? _self.maxG : maxG // ignore: cast_nullable_to_non_nullable
-as int?,statusEnum: freezed == statusEnum ? _self.statusEnum : statusEnum // ignore: cast_nullable_to_non_nullable
+intake: freezed == intake ? _self.intake : intake // ignore: cast_nullable_to_non_nullable
+as double?,adequate: freezed == adequate ? _self.adequate : adequate // ignore: cast_nullable_to_non_nullable
+as int?,riskReduction: freezed == riskReduction ? _self.riskReduction : riskReduction // ignore: cast_nullable_to_non_nullable
+as int?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as NutritionThresholdStatusEnum?,
   ));
 }
@@ -2356,8 +2070,8 @@ as NutritionThresholdStatusEnum?,
 }
 
 
-/// Adds pattern-matching-related methods to [SugarComparisonEntity].
-extension SugarComparisonEntityPatterns on SugarComparisonEntity {
+/// Adds pattern-matching-related methods to [SodiumInfoEntity].
+extension SodiumInfoEntityPatterns on SodiumInfoEntity {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -2370,10 +2084,10 @@ extension SugarComparisonEntityPatterns on SugarComparisonEntity {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SugarComparisonEntity value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SodiumInfoEntity value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _SugarComparisonEntity() when $default != null:
+case _SodiumInfoEntity() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -2392,10 +2106,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SugarComparisonEntity value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SodiumInfoEntity value)  $default,){
 final _that = this;
 switch (_that) {
-case _SugarComparisonEntity():
+case _SodiumInfoEntity():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -2413,10 +2127,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SugarComparisonEntity value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SodiumInfoEntity value)?  $default,){
 final _that = this;
 switch (_that) {
-case _SugarComparisonEntity() when $default != null:
+case _SodiumInfoEntity() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -2434,10 +2148,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( double? intakeG,  int? maxG,  NutritionThresholdStatusEnum? statusEnum)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( double? intake,  int? adequate,  int? riskReduction,  NutritionThresholdStatusEnum? status)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _SugarComparisonEntity() when $default != null:
-return $default(_that.intakeG,_that.maxG,_that.statusEnum);case _:
+case _SodiumInfoEntity() when $default != null:
+return $default(_that.intake,_that.adequate,_that.riskReduction,_that.status);case _:
   return orElse();
 
 }
@@ -2455,10 +2169,10 @@ return $default(_that.intakeG,_that.maxG,_that.statusEnum);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( double? intakeG,  int? maxG,  NutritionThresholdStatusEnum? statusEnum)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( double? intake,  int? adequate,  int? riskReduction,  NutritionThresholdStatusEnum? status)  $default,) {final _that = this;
 switch (_that) {
-case _SugarComparisonEntity():
-return $default(_that.intakeG,_that.maxG,_that.statusEnum);case _:
+case _SodiumInfoEntity():
+return $default(_that.intake,_that.adequate,_that.riskReduction,_that.status);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -2475,10 +2189,10 @@ return $default(_that.intakeG,_that.maxG,_that.statusEnum);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( double? intakeG,  int? maxG,  NutritionThresholdStatusEnum? statusEnum)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( double? intake,  int? adequate,  int? riskReduction,  NutritionThresholdStatusEnum? status)?  $default,) {final _that = this;
 switch (_that) {
-case _SugarComparisonEntity() when $default != null:
-return $default(_that.intakeG,_that.maxG,_that.statusEnum);case _:
+case _SodiumInfoEntity() when $default != null:
+return $default(_that.intake,_that.adequate,_that.riskReduction,_that.status);case _:
   return null;
 
 }
@@ -2489,48 +2203,49 @@ return $default(_that.intakeG,_that.maxG,_that.statusEnum);case _:
 /// @nodoc
 @JsonSerializable()
 
-class _SugarComparisonEntity implements SugarComparisonEntity {
-  const _SugarComparisonEntity({this.intakeG, this.maxG, this.statusEnum});
-  factory _SugarComparisonEntity.fromJson(Map<String, dynamic> json) => _$SugarComparisonEntityFromJson(json);
+class _SodiumInfoEntity implements SodiumInfoEntity {
+  const _SodiumInfoEntity({this.intake, this.adequate, this.riskReduction, this.status});
+  factory _SodiumInfoEntity.fromJson(Map<String, dynamic> json) => _$SodiumInfoEntityFromJson(json);
 
-@override final  double? intakeG;
-@override final  int? maxG;
-@override final  NutritionThresholdStatusEnum? statusEnum;
+@override final  double? intake;
+@override final  int? adequate;
+@override final  int? riskReduction;
+@override final  NutritionThresholdStatusEnum? status;
 
-/// Create a copy of SugarComparisonEntity
+/// Create a copy of SodiumInfoEntity
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$SugarComparisonEntityCopyWith<_SugarComparisonEntity> get copyWith => __$SugarComparisonEntityCopyWithImpl<_SugarComparisonEntity>(this, _$identity);
+_$SodiumInfoEntityCopyWith<_SodiumInfoEntity> get copyWith => __$SodiumInfoEntityCopyWithImpl<_SodiumInfoEntity>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$SugarComparisonEntityToJson(this, );
+  return _$SodiumInfoEntityToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SugarComparisonEntity&&(identical(other.intakeG, intakeG) || other.intakeG == intakeG)&&(identical(other.maxG, maxG) || other.maxG == maxG)&&(identical(other.statusEnum, statusEnum) || other.statusEnum == statusEnum));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SodiumInfoEntity&&(identical(other.intake, intake) || other.intake == intake)&&(identical(other.adequate, adequate) || other.adequate == adequate)&&(identical(other.riskReduction, riskReduction) || other.riskReduction == riskReduction)&&(identical(other.status, status) || other.status == status));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,intakeG,maxG,statusEnum);
+int get hashCode => Object.hash(runtimeType,intake,adequate,riskReduction,status);
 
 @override
 String toString() {
-  return 'SugarComparisonEntity(intakeG: $intakeG, maxG: $maxG, statusEnum: $statusEnum)';
+  return 'SodiumInfoEntity(intake: $intake, adequate: $adequate, riskReduction: $riskReduction, status: $status)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$SugarComparisonEntityCopyWith<$Res> implements $SugarComparisonEntityCopyWith<$Res> {
-  factory _$SugarComparisonEntityCopyWith(_SugarComparisonEntity value, $Res Function(_SugarComparisonEntity) _then) = __$SugarComparisonEntityCopyWithImpl;
+abstract mixin class _$SodiumInfoEntityCopyWith<$Res> implements $SodiumInfoEntityCopyWith<$Res> {
+  factory _$SodiumInfoEntityCopyWith(_SodiumInfoEntity value, $Res Function(_SodiumInfoEntity) _then) = __$SodiumInfoEntityCopyWithImpl;
 @override @useResult
 $Res call({
- double? intakeG, int? maxG, NutritionThresholdStatusEnum? statusEnum
+ double? intake, int? adequate, int? riskReduction, NutritionThresholdStatusEnum? status
 });
 
 
@@ -2538,292 +2253,21 @@ $Res call({
 
 }
 /// @nodoc
-class __$SugarComparisonEntityCopyWithImpl<$Res>
-    implements _$SugarComparisonEntityCopyWith<$Res> {
-  __$SugarComparisonEntityCopyWithImpl(this._self, this._then);
+class __$SodiumInfoEntityCopyWithImpl<$Res>
+    implements _$SodiumInfoEntityCopyWith<$Res> {
+  __$SodiumInfoEntityCopyWithImpl(this._self, this._then);
 
-  final _SugarComparisonEntity _self;
-  final $Res Function(_SugarComparisonEntity) _then;
+  final _SodiumInfoEntity _self;
+  final $Res Function(_SodiumInfoEntity) _then;
 
-/// Create a copy of SugarComparisonEntity
+/// Create a copy of SodiumInfoEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? intakeG = freezed,Object? maxG = freezed,Object? statusEnum = freezed,}) {
-  return _then(_SugarComparisonEntity(
-intakeG: freezed == intakeG ? _self.intakeG : intakeG // ignore: cast_nullable_to_non_nullable
-as double?,maxG: freezed == maxG ? _self.maxG : maxG // ignore: cast_nullable_to_non_nullable
-as int?,statusEnum: freezed == statusEnum ? _self.statusEnum : statusEnum // ignore: cast_nullable_to_non_nullable
-as NutritionThresholdStatusEnum?,
-  ));
-}
-
-
-}
-
-
-/// @nodoc
-mixin _$SodiumComparisonEntity {
-
- double? get intakeMg; int? get adequateMg; int? get riskReductionMg; NutritionThresholdStatusEnum? get statusEnum;
-/// Create a copy of SodiumComparisonEntity
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$SodiumComparisonEntityCopyWith<SodiumComparisonEntity> get copyWith => _$SodiumComparisonEntityCopyWithImpl<SodiumComparisonEntity>(this as SodiumComparisonEntity, _$identity);
-
-  /// Serializes this SodiumComparisonEntity to a JSON map.
-  Map<String, dynamic> toJson();
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SodiumComparisonEntity&&(identical(other.intakeMg, intakeMg) || other.intakeMg == intakeMg)&&(identical(other.adequateMg, adequateMg) || other.adequateMg == adequateMg)&&(identical(other.riskReductionMg, riskReductionMg) || other.riskReductionMg == riskReductionMg)&&(identical(other.statusEnum, statusEnum) || other.statusEnum == statusEnum));
-}
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,intakeMg,adequateMg,riskReductionMg,statusEnum);
-
-@override
-String toString() {
-  return 'SodiumComparisonEntity(intakeMg: $intakeMg, adequateMg: $adequateMg, riskReductionMg: $riskReductionMg, statusEnum: $statusEnum)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class $SodiumComparisonEntityCopyWith<$Res>  {
-  factory $SodiumComparisonEntityCopyWith(SodiumComparisonEntity value, $Res Function(SodiumComparisonEntity) _then) = _$SodiumComparisonEntityCopyWithImpl;
-@useResult
-$Res call({
- double? intakeMg, int? adequateMg, int? riskReductionMg, NutritionThresholdStatusEnum? statusEnum
-});
-
-
-
-
-}
-/// @nodoc
-class _$SodiumComparisonEntityCopyWithImpl<$Res>
-    implements $SodiumComparisonEntityCopyWith<$Res> {
-  _$SodiumComparisonEntityCopyWithImpl(this._self, this._then);
-
-  final SodiumComparisonEntity _self;
-  final $Res Function(SodiumComparisonEntity) _then;
-
-/// Create a copy of SodiumComparisonEntity
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? intakeMg = freezed,Object? adequateMg = freezed,Object? riskReductionMg = freezed,Object? statusEnum = freezed,}) {
-  return _then(_self.copyWith(
-intakeMg: freezed == intakeMg ? _self.intakeMg : intakeMg // ignore: cast_nullable_to_non_nullable
-as double?,adequateMg: freezed == adequateMg ? _self.adequateMg : adequateMg // ignore: cast_nullable_to_non_nullable
-as int?,riskReductionMg: freezed == riskReductionMg ? _self.riskReductionMg : riskReductionMg // ignore: cast_nullable_to_non_nullable
-as int?,statusEnum: freezed == statusEnum ? _self.statusEnum : statusEnum // ignore: cast_nullable_to_non_nullable
-as NutritionThresholdStatusEnum?,
-  ));
-}
-
-}
-
-
-/// Adds pattern-matching-related methods to [SodiumComparisonEntity].
-extension SodiumComparisonEntityPatterns on SodiumComparisonEntity {
-/// A variant of `map` that fallback to returning `orElse`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SodiumComparisonEntity value)?  $default,{required TResult orElse(),}){
-final _that = this;
-switch (_that) {
-case _SodiumComparisonEntity() when $default != null:
-return $default(_that);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// Callbacks receives the raw object, upcasted.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case final Subclass2 value:
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SodiumComparisonEntity value)  $default,){
-final _that = this;
-switch (_that) {
-case _SodiumComparisonEntity():
-return $default(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `map` that fallback to returning `null`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SodiumComparisonEntity value)?  $default,){
-final _that = this;
-switch (_that) {
-case _SodiumComparisonEntity() when $default != null:
-return $default(_that);case _:
-  return null;
-
-}
-}
-/// A variant of `when` that fallback to an `orElse` callback.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( double? intakeMg,  int? adequateMg,  int? riskReductionMg,  NutritionThresholdStatusEnum? statusEnum)?  $default,{required TResult orElse(),}) {final _that = this;
-switch (_that) {
-case _SodiumComparisonEntity() when $default != null:
-return $default(_that.intakeMg,_that.adequateMg,_that.riskReductionMg,_that.statusEnum);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// As opposed to `map`, this offers destructuring.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case Subclass2(:final field2):
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( double? intakeMg,  int? adequateMg,  int? riskReductionMg,  NutritionThresholdStatusEnum? statusEnum)  $default,) {final _that = this;
-switch (_that) {
-case _SodiumComparisonEntity():
-return $default(_that.intakeMg,_that.adequateMg,_that.riskReductionMg,_that.statusEnum);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `when` that fallback to returning `null`
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( double? intakeMg,  int? adequateMg,  int? riskReductionMg,  NutritionThresholdStatusEnum? statusEnum)?  $default,) {final _that = this;
-switch (_that) {
-case _SodiumComparisonEntity() when $default != null:
-return $default(_that.intakeMg,_that.adequateMg,_that.riskReductionMg,_that.statusEnum);case _:
-  return null;
-
-}
-}
-
-}
-
-/// @nodoc
-@JsonSerializable()
-
-class _SodiumComparisonEntity implements SodiumComparisonEntity {
-  const _SodiumComparisonEntity({this.intakeMg, this.adequateMg, this.riskReductionMg, this.statusEnum});
-  factory _SodiumComparisonEntity.fromJson(Map<String, dynamic> json) => _$SodiumComparisonEntityFromJson(json);
-
-@override final  double? intakeMg;
-@override final  int? adequateMg;
-@override final  int? riskReductionMg;
-@override final  NutritionThresholdStatusEnum? statusEnum;
-
-/// Create a copy of SodiumComparisonEntity
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$SodiumComparisonEntityCopyWith<_SodiumComparisonEntity> get copyWith => __$SodiumComparisonEntityCopyWithImpl<_SodiumComparisonEntity>(this, _$identity);
-
-@override
-Map<String, dynamic> toJson() {
-  return _$SodiumComparisonEntityToJson(this, );
-}
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SodiumComparisonEntity&&(identical(other.intakeMg, intakeMg) || other.intakeMg == intakeMg)&&(identical(other.adequateMg, adequateMg) || other.adequateMg == adequateMg)&&(identical(other.riskReductionMg, riskReductionMg) || other.riskReductionMg == riskReductionMg)&&(identical(other.statusEnum, statusEnum) || other.statusEnum == statusEnum));
-}
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,intakeMg,adequateMg,riskReductionMg,statusEnum);
-
-@override
-String toString() {
-  return 'SodiumComparisonEntity(intakeMg: $intakeMg, adequateMg: $adequateMg, riskReductionMg: $riskReductionMg, statusEnum: $statusEnum)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class _$SodiumComparisonEntityCopyWith<$Res> implements $SodiumComparisonEntityCopyWith<$Res> {
-  factory _$SodiumComparisonEntityCopyWith(_SodiumComparisonEntity value, $Res Function(_SodiumComparisonEntity) _then) = __$SodiumComparisonEntityCopyWithImpl;
-@override @useResult
-$Res call({
- double? intakeMg, int? adequateMg, int? riskReductionMg, NutritionThresholdStatusEnum? statusEnum
-});
-
-
-
-
-}
-/// @nodoc
-class __$SodiumComparisonEntityCopyWithImpl<$Res>
-    implements _$SodiumComparisonEntityCopyWith<$Res> {
-  __$SodiumComparisonEntityCopyWithImpl(this._self, this._then);
-
-  final _SodiumComparisonEntity _self;
-  final $Res Function(_SodiumComparisonEntity) _then;
-
-/// Create a copy of SodiumComparisonEntity
-/// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? intakeMg = freezed,Object? adequateMg = freezed,Object? riskReductionMg = freezed,Object? statusEnum = freezed,}) {
-  return _then(_SodiumComparisonEntity(
-intakeMg: freezed == intakeMg ? _self.intakeMg : intakeMg // ignore: cast_nullable_to_non_nullable
-as double?,adequateMg: freezed == adequateMg ? _self.adequateMg : adequateMg // ignore: cast_nullable_to_non_nullable
-as int?,riskReductionMg: freezed == riskReductionMg ? _self.riskReductionMg : riskReductionMg // ignore: cast_nullable_to_non_nullable
-as int?,statusEnum: freezed == statusEnum ? _self.statusEnum : statusEnum // ignore: cast_nullable_to_non_nullable
+@override @pragma('vm:prefer-inline') $Res call({Object? intake = freezed,Object? adequate = freezed,Object? riskReduction = freezed,Object? status = freezed,}) {
+  return _then(_SodiumInfoEntity(
+intake: freezed == intake ? _self.intake : intake // ignore: cast_nullable_to_non_nullable
+as double?,adequate: freezed == adequate ? _self.adequate : adequate // ignore: cast_nullable_to_non_nullable
+as int?,riskReduction: freezed == riskReduction ? _self.riskReduction : riskReduction // ignore: cast_nullable_to_non_nullable
+as int?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as NutritionThresholdStatusEnum?,
   ));
 }

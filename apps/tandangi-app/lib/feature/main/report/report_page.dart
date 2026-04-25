@@ -43,23 +43,30 @@ class _ReportPageState extends ConsumerState<ReportPage>
     return '${createdAt.month}월 ${createdAt.day}일 | $period $hour12:$minute';
   }
 
-  String _formatSelectedFoodKcal(AnalyzedFoodItemEntity? foodItem) {
-    final kcal = foodItem?.nutrients?.kcal;
-    final value = kcal?.value;
-    final unit = kcal?.unit ?? 'kcal';
-    if (value == null) return '';
-
-    final formatted = value == value.roundToDouble()
-        ? value.toInt().toString()
-        : value.toString();
-    return '$formatted$unit';
-  }
-
   AnalyzedFoodItemEntity? _pickMainFood(FoodAnalyzeResultEntity result) {
     if (result.main.isNotEmpty) return result.main.first;
     if (result.sides.isNotEmpty) return result.sides.first;
     if (result.others.isNotEmpty) return result.others.first;
     return null;
+  }
+
+  String _formatNumber(num? value) {
+    if (value == null) return '-';
+    final doubleValue = value.toDouble();
+    if (doubleValue == doubleValue.roundToDouble()) {
+      return doubleValue.toInt().toString();
+    }
+    return doubleValue.toString();
+  }
+
+  String _formatValueWithUnit(num? value, String unit) {
+    if (value == null) return '-';
+    return '${_formatNumber(value)}$unit';
+  }
+
+  String _formatPercent(double? value) {
+    if (value == null) return '-';
+    return '${_formatNumber(value)}%';
   }
 
   @override
@@ -103,6 +110,51 @@ class _ReportPageState extends ConsumerState<ReportPage>
                   ...foodAnalyzeResult.sides,
                   ...foodAnalyzeResult.others,
                 ];
+                final analysisNutritionInfo =
+                    foodAnalyzeResult.analysisNutritionInfo;
+                final carbohydrateInfo = analysisNutritionInfo?.carbohydrate;
+                final proteinInfo = analysisNutritionInfo?.protein;
+                final fatInfo = analysisNutritionInfo?.fat;
+                final sugarInfo = analysisNutritionInfo?.sugar;
+                final sodiumInfo = analysisNutritionInfo?.sodium;
+                final mainNutritionWidgets = <Widget>[
+                  if (carbohydrateInfo != null)
+                    Expanded(
+                      child: _buildMainNutritionBoxWidget(
+                        nutritionType: NutritionType.carbohydrate,
+                        nutrientInfoEntity: carbohydrateInfo,
+                      ),
+                    ),
+                  if (proteinInfo != null)
+                    Expanded(
+                      child: _buildMainNutritionBoxWidget(
+                        nutritionType: NutritionType.protein,
+                        nutrientInfoEntity: proteinInfo,
+                      ),
+                    ),
+                  if (fatInfo != null)
+                    Expanded(
+                      child: _buildMainNutritionBoxWidget(
+                        nutritionType: NutritionType.fat,
+                        nutrientInfoEntity: fatInfo,
+                      ),
+                    ),
+                ];
+                final detailNutritionWidgets = <Widget>[
+                  if (sugarInfo != null)
+                    Expanded(
+                      child: _buildSugarNutritionBoxWidget(
+                        sugarInfoEntity: sugarInfo,
+                      ),
+                    ),
+                  if (sodiumInfo != null)
+                    Expanded(
+                      child: _buildSodiumNutritionBoxWidget(
+                        sodiumInfoEntity: sodiumInfo,
+                      ),
+                    ),
+                ];
+                final kcalIntake = analysisNutritionInfo?.kcal?.intake;
                 return SingleChildScrollView(
                   child: Column(
                     children: [
@@ -133,8 +185,7 @@ class _ReportPageState extends ConsumerState<ReportPage>
                               title: mainFood?.name ?? '',
                               description: '이번 식단의 영양 구성은?',
                             ),
-                            if (foodAnalyzeResult.nutritionComparison !=
-                                null) ...[
+                            if (mainNutritionWidgets.isNotEmpty) ...[
                               Container(
                                 padding: EdgeInsets.symmetric(
                                   horizontal: context.componentPadding.xSmall,
@@ -148,74 +199,32 @@ class _ReportPageState extends ConsumerState<ReportPage>
                                     color: context.semanticColors.borderSubtle,
                                   ),
                                 ),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: _buildMainNutritionBoxWidget(
-                                        nutritionType:
-                                            NutritionType.carbohydrate,
-                                        macronutrientComparisonEntity:
-                                            foodAnalyzeResult
-                                                .nutritionComparison!
-                                                .carbohydrate!,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: _buildMainNutritionBoxWidget(
-                                        nutritionType: NutritionType.protein,
-                                        macronutrientComparisonEntity:
-                                            foodAnalyzeResult
-                                                .nutritionComparison!
-                                                .protein!,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: _buildMainNutritionBoxWidget(
-                                        nutritionType: NutritionType.fat,
-                                        macronutrientComparisonEntity:
-                                            foodAnalyzeResult
-                                                .nutritionComparison!
-                                                .fat!,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                child: Row(children: mainNutritionWidgets),
                               ),
                             ],
-                            SizedBox(height: context.componentGap.small),
-                            Row(
-                              spacing: context.componentGap.small,
-                              children: [
-                                Expanded(
-                                  child: _buildSugarNutritionBoxWidget(
-                                    sugarComparisonEntity: foodAnalyzeResult
-                                        .nutritionComparison!
-                                        .sugar!,
-                                  ),
-                                ),
-                                Expanded(
-                                  child: _buildSodiumNutritionBoxWidget(
-                                    sodiumComparisonEntity: foodAnalyzeResult
-                                        .nutritionComparison!
-                                        .sodium!,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: context.componentGap.small),
-                            DSBanner.normal(
-                              listItemWidget: DSListItem.small(
-                                leadingWidget: DSWrapper(
-                                  uri: Assets.svgs.icReadingGlass,
-                                  view: WrapperView.fix16,
-                                ),
-                                variant: .normal,
-                                title:
-                                    '식단 칼로리 ${foodAnalyzeResult.nutritionComparison!.kcal?.intakeKcal}kcal',
-                                description:
-                                    '균형은 좋아요 다만 이번 식단은 탄수화물 비율이 조금 높아, 다음 식사는 단백질과 채소 위주로 가볍게 맞춰봐요',
+                            if (detailNutritionWidgets.isNotEmpty)
+                              SizedBox(height: context.componentGap.small),
+                            if (detailNutritionWidgets.isNotEmpty)
+                              Row(
+                                spacing: context.componentGap.small,
+                                children: detailNutritionWidgets,
                               ),
-                            ),
+                            if (kcalIntake != null)
+                              SizedBox(height: context.componentGap.small),
+                            if (kcalIntake != null)
+                              DSBanner.normal(
+                                listItemWidget: DSListItem.small(
+                                  leadingWidget: DSWrapper(
+                                    uri: Assets.svgs.icReadingGlass,
+                                    view: WrapperView.fix16,
+                                  ),
+                                  variant: .normal,
+                                  title:
+                                      '식단 칼로리 ${_formatValueWithUnit(kcalIntake, 'kcal')}',
+                                  description:
+                                      '균형은 좋아요 다만 이번 식단은 탄수화물 비율이 조금 높아, 다음 식사는 단백질과 채소 위주로 가볍게 맞춰봐요',
+                                ),
+                              ),
                           ],
                         ),
                       ),
@@ -292,8 +301,10 @@ class _ReportPageState extends ConsumerState<ReportPage>
                                           DSListTitle.mediumNormal(
                                             title: selectedFoodItem?.name ?? '',
                                             trailingWidget: DSTextBadge.medium(
-                                              text:
-                                                  '${selectedFoodItem?.nutrients?.kcal?.value}kCal',
+                                              text: _formatValueWithUnit(
+                                                selectedFoodItem?.kcal?.value,
+                                                'kCal',
+                                              ),
                                               variant:
                                                   DSTextBadgeVariant.secondary,
                                               type: DSTextBadgeType.rectangle,
@@ -302,28 +313,40 @@ class _ReportPageState extends ConsumerState<ReportPage>
                                           DSDivider(type: DSDividerType.line),
                                           DSKeyValueItem.medium(
                                             title: '탄수화물',
-                                            description:
-                                                '${selectedFoodItem?.nutrients?.carbohydrate?.value}g',
+                                            description: _formatValueWithUnit(
+                                              selectedFoodItem
+                                                  ?.carbohydrate
+                                                  ?.value,
+                                              'g',
+                                            ),
                                           ),
                                           DSKeyValueItem.medium(
                                             title: '단백질',
-                                            description:
-                                                '${selectedFoodItem?.nutrients?.protein?.value}g',
+                                            description: _formatValueWithUnit(
+                                              selectedFoodItem?.protein?.value,
+                                              'g',
+                                            ),
                                           ),
                                           DSKeyValueItem.medium(
                                             title: '지방',
-                                            description:
-                                                '${selectedFoodItem?.nutrients?.fat?.value}g',
+                                            description: _formatValueWithUnit(
+                                              selectedFoodItem?.fat?.value,
+                                              'g',
+                                            ),
                                           ),
                                           DSKeyValueItem.medium(
                                             title: '당',
-                                            description:
-                                                '${selectedFoodItem?.nutrients?.sugar?.value}g',
+                                            description: _formatValueWithUnit(
+                                              selectedFoodItem?.sugar?.value,
+                                              'g',
+                                            ),
                                           ),
                                           DSKeyValueItem.medium(
                                             title: '나트륨',
-                                            description:
-                                                '${selectedFoodItem?.nutrients?.sodium?.value}mg',
+                                            description: _formatValueWithUnit(
+                                              selectedFoodItem?.sodium?.value,
+                                              'mg',
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -377,7 +400,7 @@ class _ReportPageState extends ConsumerState<ReportPage>
 
   Widget _buildMainNutritionBoxWidget({
     required NutritionType nutritionType,
-    required MacronutrientComparisonEntity macronutrientComparisonEntity,
+    required NutrientInfoEntity nutrientInfoEntity,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -408,7 +431,7 @@ class _ReportPageState extends ConsumerState<ReportPage>
               ),
             ),
             Text(
-              '${macronutrientComparisonEntity.intakeG}g',
+              _formatValueWithUnit(nutrientInfoEntity.intake, 'g'),
               style: context.textTheme.bodyXLMedium.copyWith(
                 color: context.semanticColors.textPrimary,
               ),
@@ -417,7 +440,7 @@ class _ReportPageState extends ConsumerState<ReportPage>
         ),
         SizedBox(height: context.componentGap.xxSmall),
         DSTextBadge.small(
-          text: '일일 권장 ${macronutrientComparisonEntity.percent}%',
+          text: '일일 권장 ${_formatPercent(nutrientInfoEntity.percent)}',
           variant: DSTextBadgeVariant.tertiary,
           type: DSTextBadgeType.circular,
         ),
@@ -426,7 +449,7 @@ class _ReportPageState extends ConsumerState<ReportPage>
   }
 
   Widget _buildSugarNutritionBoxWidget({
-    required SugarComparisonEntity sugarComparisonEntity,
+    required SugarInfoEntity sugarInfoEntity,
   }) {
     return Container(
       padding: EdgeInsets.fromLTRB(
@@ -446,10 +469,10 @@ class _ReportPageState extends ConsumerState<ReportPage>
           DSListItem.medium(
             variant: .normal,
             subTitle: '당',
-            title: '${sugarComparisonEntity.intakeG}g',
+            title: _formatValueWithUnit(sugarInfoEntity.intake, 'g'),
             titleBadge: DSTextBadge.small(
-              text: sugarComparisonEntity.statusEnum?.value ?? '',
-              variant: switch (sugarComparisonEntity.statusEnum) {
+              text: sugarInfoEntity.status?.value ?? '',
+              variant: switch (sugarInfoEntity.status) {
                 NutritionThresholdStatusEnum.normal =>
                   DSTextBadgeVariant.success,
                 NutritionThresholdStatusEnum.caution =>
@@ -459,7 +482,7 @@ class _ReportPageState extends ConsumerState<ReportPage>
               },
               type: DSTextBadgeType.circular,
             ),
-            description: '최대 ${sugarComparisonEntity.maxG}g',
+            description: '최대 ${_formatValueWithUnit(sugarInfoEntity.max, 'g')}',
           ),
         ],
       ),
@@ -467,7 +490,7 @@ class _ReportPageState extends ConsumerState<ReportPage>
   }
 
   Widget _buildSodiumNutritionBoxWidget({
-    required SodiumComparisonEntity sodiumComparisonEntity,
+    required SodiumInfoEntity sodiumInfoEntity,
   }) {
     return Container(
       padding: EdgeInsets.fromLTRB(
@@ -487,10 +510,10 @@ class _ReportPageState extends ConsumerState<ReportPage>
           DSListItem.medium(
             variant: .normal,
             subTitle: '나트륨',
-            title: '${sodiumComparisonEntity.intakeMg}mg',
+            title: _formatValueWithUnit(sodiumInfoEntity.intake, 'mg'),
             titleBadge: DSTextBadge.small(
-              text: sodiumComparisonEntity.statusEnum?.value ?? '',
-              variant: switch (sodiumComparisonEntity.statusEnum) {
+              text: sodiumInfoEntity.status?.value ?? '',
+              variant: switch (sodiumInfoEntity.status) {
                 NutritionThresholdStatusEnum.normal =>
                   DSTextBadgeVariant.success,
                 NutritionThresholdStatusEnum.caution =>
@@ -500,7 +523,8 @@ class _ReportPageState extends ConsumerState<ReportPage>
               },
               type: DSTextBadgeType.circular,
             ),
-            description: '0 - ${sodiumComparisonEntity.adequateMg}mg 권장',
+            description:
+                '0 - ${_formatValueWithUnit(sodiumInfoEntity.adequate, 'mg')} 권장',
           ),
         ],
       ),

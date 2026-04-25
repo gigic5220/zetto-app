@@ -10,26 +10,16 @@ abstract class AnalyzedFoodItemEntity with _$AnalyzedFoodItemEntity {
   const factory AnalyzedFoodItemEntity({
     required int id,
     @Default('') String name,
-    DishNutrientsEntity? nutrients,
-  }) = _AnalyzedFoodItemEntity;
-
-  factory AnalyzedFoodItemEntity.fromJson(Map<String, Object?> json) =>
-      _$AnalyzedFoodItemEntityFromJson(json);
-}
-
-@freezed
-abstract class DishNutrientsEntity with _$DishNutrientsEntity {
-  const factory DishNutrientsEntity({
     NutrientValueEntity? kcal,
     NutrientValueEntity? carbohydrate,
     NutrientValueEntity? protein,
     NutrientValueEntity? fat,
     NutrientValueEntity? sugar,
     NutrientValueEntity? sodium,
-  }) = _DishNutrientsEntity;
+  }) = _AnalyzedFoodItemEntity;
 
-  factory DishNutrientsEntity.fromJson(Map<String, Object?> json) =>
-      _$DishNutrientsEntityFromJson(json);
+  factory AnalyzedFoodItemEntity.fromJson(Map<String, Object?> json) =>
+      _$AnalyzedFoodItemEntityFromJson(json);
 }
 
 @freezed
@@ -54,7 +44,7 @@ abstract class FoodAnalyzeResultEntity with _$FoodAnalyzeResultEntity {
     @Default(<String>[]) List<String> assumptions,
     @Default('') String foodImageUrl,
     DateTime? createdAt,
-    NutritionComparisonEntity? nutritionComparison,
+    AnalysisNutritionInfoEntity? analysisNutritionInfo,
   }) = _FoodAnalyzeResultEntity;
 
   factory FoodAnalyzeResultEntity.fromJson(Map<String, Object?> json) =>
@@ -62,66 +52,53 @@ abstract class FoodAnalyzeResultEntity with _$FoodAnalyzeResultEntity {
 }
 
 @freezed
-abstract class NutritionComparisonEntity with _$NutritionComparisonEntity {
-  const factory NutritionComparisonEntity({
-    KcalComparisonEntity? kcal,
-    MacronutrientComparisonEntity? carbohydrate,
-    MacronutrientComparisonEntity? protein,
-    MacronutrientComparisonEntity? fat,
-    SugarComparisonEntity? sugar,
-    SodiumComparisonEntity? sodium,
-  }) = _NutritionComparisonEntity;
+abstract class AnalysisNutritionInfoEntity with _$AnalysisNutritionInfoEntity {
+  const factory AnalysisNutritionInfoEntity({
+    NutrientInfoEntity? kcal,
+    NutrientInfoEntity? carbohydrate,
+    NutrientInfoEntity? protein,
+    NutrientInfoEntity? fat,
+    SugarInfoEntity? sugar,
+    SodiumInfoEntity? sodium,
+  }) = _AnalysisNutritionInfoEntity;
 
-  factory NutritionComparisonEntity.fromJson(Map<String, Object?> json) =>
-      _$NutritionComparisonEntityFromJson(json);
+  factory AnalysisNutritionInfoEntity.fromJson(Map<String, Object?> json) =>
+      _$AnalysisNutritionInfoEntityFromJson(json);
 }
 
 @freezed
-abstract class KcalComparisonEntity with _$KcalComparisonEntity {
-  const factory KcalComparisonEntity({
-    double? intakeKcal,
-    int? dailyTargetKcal,
+abstract class NutrientInfoEntity with _$NutrientInfoEntity {
+  const factory NutrientInfoEntity({
+    double? intake,
+    int? target,
     double? percent,
-  }) = _KcalComparisonEntity;
+  }) = _NutrientInfoEntity;
 
-  factory KcalComparisonEntity.fromJson(Map<String, Object?> json) =>
-      _$KcalComparisonEntityFromJson(json);
+  factory NutrientInfoEntity.fromJson(Map<String, Object?> json) =>
+      _$NutrientInfoEntityFromJson(json);
 }
 
 @freezed
-abstract class MacronutrientComparisonEntity
-    with _$MacronutrientComparisonEntity {
-  const factory MacronutrientComparisonEntity({
-    double? intakeG,
-    int? dailyTargetG,
-    double? percent,
-  }) = _MacronutrientComparisonEntity;
+abstract class SugarInfoEntity with _$SugarInfoEntity {
+  const factory SugarInfoEntity({
+    double? intake,
+    int? max,
+    NutritionThresholdStatusEnum? status,
+  }) = _SugarInfoEntity;
 
-  factory MacronutrientComparisonEntity.fromJson(Map<String, Object?> json) =>
-      _$MacronutrientComparisonEntityFromJson(json);
+  factory SugarInfoEntity.fromJson(Map<String, Object?> json) =>
+      _$SugarInfoEntityFromJson(json);
 }
 
 @freezed
-abstract class SugarComparisonEntity with _$SugarComparisonEntity {
-  const factory SugarComparisonEntity({
-    double? intakeG,
-    int? maxG,
-    NutritionThresholdStatusEnum? statusEnum,
-  }) = _SugarComparisonEntity;
+abstract class SodiumInfoEntity with _$SodiumInfoEntity {
+  const factory SodiumInfoEntity({
+    double? intake,
+    int? adequate,
+    int? riskReduction,
+    NutritionThresholdStatusEnum? status,
+  }) = _SodiumInfoEntity;
 
-  factory SugarComparisonEntity.fromJson(Map<String, Object?> json) =>
-      _$SugarComparisonEntityFromJson(json);
-}
-
-@freezed
-abstract class SodiumComparisonEntity with _$SodiumComparisonEntity {
-  const factory SodiumComparisonEntity({
-    double? intakeMg,
-    int? adequateMg,
-    int? riskReductionMg,
-    NutritionThresholdStatusEnum? statusEnum,
-  }) = _SodiumComparisonEntity;
-
-  factory SodiumComparisonEntity.fromJson(Map<String, Object?> json) =>
-      _$SodiumComparisonEntityFromJson(json);
+  factory SodiumInfoEntity.fromJson(Map<String, Object?> json) =>
+      _$SodiumInfoEntityFromJson(json);
 }
