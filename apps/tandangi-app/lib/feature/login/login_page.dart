@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:async';
 
 import 'package:design_system/components/atoms.dart';
 import 'package:design_system/components/common.dart';
@@ -78,90 +78,27 @@ class _LoginPageState extends ConsumerState<LoginPage>
               ),
             ),
             const Spacer(),
-            AnimatedButton(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Color(0xFFFFE600),
-                  borderRadius: BorderRadius.circular(999),
-                ),
-                padding: const EdgeInsets.symmetric(vertical: 13),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  spacing: 8,
-                  children: [
-                    DSWrapper(
-                      uri: Assets.svgs.logoKakao,
-                      view: WrapperView.fix20,
-                    ),
-                    Text(
-                      '카카오로 계속하기',
-                      style: context.textTheme.buttonLSemiBold.copyWith(
-                        color: context.semanticColors.textPrimary,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+            const SizedBox(height: 8),
+            _LoginButton(
+              text: '카카오로 계속하기',
+              backgroundColor: Color(0xFFFFE600),
+              leadingUri: Assets.svgs.logoKakao,
               onTap: () async => await onPressedKakaoLoginButton(ref),
             ),
             const SizedBox(height: 8),
-            if (Platform.isIOS) ...[
-              AnimatedButton(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(999),
-                    border: Border.all(
-                      color: context.semanticColors.borderInverse,
-                    ),
-                  ),
-                  padding: const EdgeInsets.symmetric(vertical: 13),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    spacing: 8,
-                    children: [
-                      DSWrapper(
-                        uri: Assets.svgs.logoApple,
-                        view: WrapperView.fix20,
-                      ),
-                      Text(
-                        'Apple로 계속하기',
-                        style: context.textTheme.buttonLSemiBold.copyWith(
-                          color: context.semanticColors.textPrimary,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+            if (true) ...[
+              _LoginButton(
+                text: 'Apple로 계속하기',
+                leadingUri: Assets.svgs.logoApple,
                 onTap: () async => await onPressedAppleLoginButton(ref),
+                borderColor: context.semanticColors.borderInverse,
               ),
               const SizedBox(height: 8),
             ],
-            AnimatedButton(
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(999),
-                  border: Border.all(
-                    color: context.semanticColors.borderSubtle,
-                  ),
-                ),
-                padding: const EdgeInsets.symmetric(vertical: 13),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  spacing: 8,
-                  children: [
-                    DSWrapper(
-                      uri: Assets.svgs.logoGoogle,
-                      view: WrapperView.fix20,
-                    ),
-                    Text(
-                      '구글로 계속하기',
-                      style: context.textTheme.buttonLSemiBold.copyWith(
-                        color: context.semanticColors.textPrimary,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+            _LoginButton(
+              borderColor: context.semanticColors.borderSubtle,
+              text: '구글로 계속하기',
+              leadingUri: Assets.svgs.logoGoogle,
               onTap: () async => await onPressedGoogleLoginButton(ref),
             ),
             const SizedBox(height: 8),
@@ -191,6 +128,104 @@ class _LoginPageState extends ConsumerState<LoginPage>
               ],
             ),
             CommonBottomPadding(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _LoginButton extends StatefulWidget {
+  const _LoginButton({
+    required this.text,
+    required this.leadingUri,
+    required this.onTap,
+    this.backgroundColor,
+    this.borderColor,
+  });
+
+  final String text;
+  final String leadingUri;
+  final FutureOr<void> Function()? onTap;
+  final Color? backgroundColor;
+  final Color? borderColor;
+
+  @override
+  State<_LoginButton> createState() => _LoginButtonState();
+}
+
+class _LoginButtonState extends State<_LoginButton> {
+  Completer<void>? completer;
+  bool isLoading = false;
+
+  @override
+  Widget build(BuildContext context) {
+    isLoading = !(completer == null || completer!.isCompleted);
+
+    return AnimatedButton(
+      onTap: !isLoading && widget.onTap != null
+          ? () async {
+              if (completer != null && !completer!.isCompleted) return;
+
+              setState(() {
+                completer = Completer();
+              });
+
+              try {
+                await Future.wait<void>([
+                  Future.sync(widget.onTap!),
+                  Future.delayed(const Duration(milliseconds: 300)),
+                ]);
+              } catch (_) {
+              } finally {
+                if (!(completer?.isCompleted ?? true)) {
+                  completer?.complete();
+                }
+                if (mounted) setState(() {});
+              }
+            }
+          : null,
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: .circular(999),
+          color: widget.backgroundColor,
+          border: widget.borderColor != null
+              ? Border.all(
+                  color: widget.borderColor!,
+                  strokeAlign: BorderSide.strokeAlignOutside,
+                )
+              : null,
+        ),
+        padding: const EdgeInsets.symmetric(vertical: 12),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Opacity(
+              opacity: isLoading ? 0.0 : 1.0,
+              child: Row(
+                spacing: 8,
+                mainAxisSize: .min,
+                children: [
+                  DSWrapper(uri: widget.leadingUri, view: WrapperView.fix20),
+                  Text(
+                    widget.text,
+                    style: context.textTheme.buttonLSemiBold.copyWith(
+                      color: context.semanticColors.textPrimary,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            if (isLoading)
+              SizedBox.square(
+                dimension: 20,
+                child: CircularProgressIndicator(
+                  color: context.semanticColors.textPrimary,
+                  strokeWidth: 3,
+                  strokeCap: StrokeCap.round,
+                ),
+              ),
           ],
         ),
       ),

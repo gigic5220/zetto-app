@@ -9,16 +9,8 @@ mixin OnBoardingStateMixin {
     return ref.watch(_charactersProvider);
   }
 
-  int watchCurrentCarouselSliderIndex(WidgetRef ref) {
-    return ref.watch(_currentCarouselSliderIndexProvider);
-  }
-
   CharacterEntity? watchSelectedCharacter(WidgetRef ref) {
     return ref.watch(_selectedCharacterProvider);
-  }
-
-  String watchCharacterName(WidgetRef ref) {
-    return ref.watch(_characterNameProvider);
   }
 
   GenderEnum? watchGenderEnum(WidgetRef ref) {
@@ -29,20 +21,17 @@ mixin OnBoardingStateMixin {
     return ref.watch(_ageProvider);
   }
 
-  int? watchHeight(WidgetRef ref) {
-    return ref.watch(_heightProvider);
-  }
-
-  int? watchWeight(WidgetRef ref) {
-    return ref.watch(_weightProvider);
+  PhysicalActivityLevelEnum? watchPhysicalActivityLevel(WidgetRef ref) {
+    return ref.watch(_physicalActivityLevelProvider);
   }
 
   bool watchIsNextButtonEnabled(WidgetRef ref) {
     final currentStep = watchCurrentOnBoardingStep(ref);
-    final characterName = watchCharacterName(ref);
-    final height = watchHeight(ref);
-    final weight = watchWeight(ref);
+    final characterName = ref.watch(_characterNameProvider);
+    final height = ref.watch(_heightProvider);
+    final weight = ref.watch(_weightProvider);
     final age = watchAge(ref);
+    final physicalActivityLevel = watchPhysicalActivityLevel(ref);
     final isCharacterNameValid =
         characterName.isExist &&
         characterName.length >= 2 &&
@@ -55,6 +44,7 @@ mixin OnBoardingStateMixin {
       OnBoardingStep.characterName => isCharacterNameValid,
       OnBoardingStep.info => isHeightValid && isWeightValid,
       OnBoardingStep.age => isAgeValid,
+      OnBoardingStep.physicalActivityLevel => physicalActivityLevel != null,
     };
   }
 }

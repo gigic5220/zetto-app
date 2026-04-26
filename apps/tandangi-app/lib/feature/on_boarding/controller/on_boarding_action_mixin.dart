@@ -1,7 +1,37 @@
 part of 'on_boarding_provider.dart';
 
 mixin OnBoardingActionMixin {
-  Future<void> onTapNext(WidgetRef ref) async {
+  void handleBackAction(
+    WidgetRef ref, {
+    required Widget Function({
+      required VoidCallback onTapCancel,
+      required VoidCallback onTapConfirm,
+    })
+    buildBackModalWidgetCallback,
+  }) {
+    showDialog(
+      context: ref.context,
+      builder: (context) => buildBackModalWidgetCallback(
+        onTapCancel: () async {
+          await Future.wait<void>([
+            FirebaseAuth.instance.signOut(),
+            GoogleSignIn.instance.signOut(),
+          ]);
+          if (!context.mounted) return;
+          context.pop();
+          context.replaceNamed(LoginPage.routeName);
+        },
+        onTapConfirm: () {
+          context.pop();
+        },
+      ),
+    );
+  }
+
+  Future<void> onTapNext(
+    WidgetRef ref, {
+    required int currentCarouselSliderIndex,
+  }) async {
     final currentStep = ref.read(_currentOnBoardingStepProvider);
 
     final currentOnBoardingStepProvider = ref.read(
@@ -10,9 +40,6 @@ mixin OnBoardingActionMixin {
 
     switch (currentStep) {
       case OnBoardingStep.character:
-        final currentCarouselSliderIndex = ref.read(
-          _currentCarouselSliderIndexProvider,
-        );
         final characters = await ref.read(_charactersProvider.future);
         final selectedCharacter = characters[currentCarouselSliderIndex];
         ref.read(_selectedCharacterProvider.notifier).set(selectedCharacter);
@@ -25,6 +52,9 @@ mixin OnBoardingActionMixin {
         currentOnBoardingStepProvider.set(OnBoardingStep.age);
         break;
       case OnBoardingStep.age:
+        currentOnBoardingStepProvider.set(OnBoardingStep.physicalActivityLevel);
+        break;
+      case OnBoardingStep.physicalActivityLevel:
         final selectedCharacter = ref.read(_selectedCharacterProvider);
         final characterName = ref.read(_characterNameProvider);
         final genderEnum = ref.read(_genderEnumProvider);
@@ -58,7 +88,10 @@ mixin OnBoardingActionMixin {
     }
   }
 
-  Future<void> onTapPrevious(WidgetRef ref) async {
+  Future<void> onTapPrevious(
+    WidgetRef ref, {
+    required TabController genderTabController,
+  }) async {
     final currentStep = ref.read(_currentOnBoardingStepProvider);
     final currentOnBoardingStepProvider = ref.read(
       _currentOnBoardingStepProvider.notifier,
@@ -79,11 +112,17 @@ mixin OnBoardingActionMixin {
       case OnBoardingStep.age:
         currentOnBoardingStepProvider.set(OnBoardingStep.info);
         break;
+      case OnBoardingStep.physicalActivityLevel:
+        currentOnBoardingStepProvider.set(OnBoardingStep.age);
+        final genderEnum = ref.read(_genderEnumProvider);
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          print('genderEnum: $genderEnum');
+          genderTabController.animateTo(
+            genderEnum == GenderEnum.female ? 0 : 1,
+          );
+        });
+        break;
     }
-  }
-
-  void setCurrentCarouselSliderIndex(WidgetRef ref, {required int index}) {
-    ref.read(_currentCarouselSliderIndexProvider.notifier).set(index);
   }
 
   void setSelectedCharacter(
@@ -111,5 +150,14 @@ mixin OnBoardingActionMixin {
 
   void setHeight(WidgetRef ref, {required int? height}) {
     ref.read(_heightProvider.notifier).set(height);
+  }
+
+  void onTapPhysicalActivityLevel(
+    WidgetRef ref, {
+    required PhysicalActivityLevelEnum physicalActivityLevel,
+  }) {
+    ref
+        .read(_physicalActivityLevelProvider.notifier)
+        .set(physicalActivityLevel);
   }
 }

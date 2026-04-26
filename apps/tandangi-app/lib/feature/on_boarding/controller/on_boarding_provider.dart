@@ -1,4 +1,8 @@
+import 'dart:async';
+
+import 'package:carousel_slider/carousel_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -18,7 +22,13 @@ part 'on_boarding_action_mixin.dart';
 part 'on_boarding_provider.g.dart';
 part 'on_boarding_state_mixin.dart';
 
-enum OnBoardingStep { character, characterName, info, age }
+enum OnBoardingStep {
+  character,
+  characterName,
+  info,
+  age,
+  physicalActivityLevel,
+}
 
 @riverpod
 class _CurrentOnBoardingStep extends _$CurrentOnBoardingStep {
@@ -29,18 +39,6 @@ class _CurrentOnBoardingStep extends _$CurrentOnBoardingStep {
 
   void set(OnBoardingStep value) {
     state = value;
-  }
-}
-
-@riverpod
-class _CurrentCarouselSliderIndex extends _$CurrentCarouselSliderIndex {
-  @override
-  int build() {
-    return 0;
-  }
-
-  void set(int index) {
-    state = index;
   }
 }
 
@@ -121,5 +119,17 @@ class _Age extends _$Age {
 
   void set(int? age) {
     state = age;
+  }
+}
+
+@riverpod
+class _PhysicalActivityLevel extends _$PhysicalActivityLevel {
+  @override
+  PhysicalActivityLevelEnum? build() {
+    return null;
+  }
+
+  void set(PhysicalActivityLevelEnum physicalActivityLevel) {
+    state = physicalActivityLevel;
   }
 }

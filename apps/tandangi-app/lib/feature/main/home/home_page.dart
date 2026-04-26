@@ -14,6 +14,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tandangi/domain/enum/nutrition_type_enum.dart';
+import 'package:tandangi/feature/login/login_page.dart';
 import 'package:tandangi/feature/main/home/controller/home_provider.dart';
 import 'package:tandangi/feature/shop/shop_page.dart';
 import 'package:tandangi/gen/assets.gen.dart';
@@ -41,7 +42,16 @@ class _HomePageState extends ConsumerState<HomePage>
         logoUri: 'assets/images/logo.png',
         actionWidgetList: [
           DSSolidButton.medium(
-            text: '테스트',
+            text: '로그아웃',
+            onTap: () async {
+              await signOut();
+              if (!context.mounted) return;
+              context.replaceNamed(LoginPage.routeName);
+            },
+            variant: .primary,
+          ),
+          DSSolidButton.medium(
+            text: '상점',
             onTap: () {
               context.pushNamed(ShopPage.routeName);
             },

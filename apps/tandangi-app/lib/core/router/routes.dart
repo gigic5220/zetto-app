@@ -4,14 +4,13 @@ import 'dart:typed_data';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 import 'package:tandangi/core/di/di.dart';
+import 'package:tandangi/feature/login/login_page.dart';
 import 'package:tandangi/feature/main/edit_food_photo/edit_food_photo_page.dart';
 import 'package:tandangi/feature/main/home/home_page.dart';
-import 'package:tandangi/feature/login/login_page.dart';
 import 'package:tandangi/feature/main/main_page.dart';
 import 'package:tandangi/feature/main/my/my_page.dart';
 import 'package:tandangi/feature/main/report/report_page.dart';
@@ -38,7 +37,6 @@ class Router extends _$Router {
   GoRouter build() {
     return GoRouter(
       initialLocation: '/${SplashPage.routeName}',
-      //initialLocation: '/${ShopPage.routeName}',
       observers: [TalkerRouteObserver(getIt<Talker>())],
       debugLogDiagnostics: true,
       overridePlatformDefaultLocation: true,
