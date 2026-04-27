@@ -43,6 +43,10 @@ class $AssetsImagesGen {
   AssetGenImage get logoText =>
       const AssetGenImage('assets/images/logo_text.png');
 
+  /// File path: assets/images/logo_with_text.png
+  AssetGenImage get logoWithText =>
+      const AssetGenImage('assets/images/logo_with_text.png');
+
   /// File path: assets/images/sweet_potato.png
   AssetGenImage get sweetPotato =>
       const AssetGenImage('assets/images/sweet_potato.png');
@@ -61,6 +65,7 @@ class $AssetsImagesGen {
     logo,
     logoSubText,
     logoText,
+    logoWithText,
     sweetPotato,
     testCharacter1,
   ];

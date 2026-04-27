@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -11,7 +12,6 @@ import 'package:tandangi/domain/entity/user_character_detail_entity.dart';
 import 'package:tandangi/domain/repository/character_repository.dart';
 import 'package:tandangi/domain/repository/nutrition_repository.dart';
 import 'package:tandangi/feature/main/edit_food_photo/edit_food_photo_page.dart';
-import 'package:tandangi/feature/main/report/report_page.dart';
 
 part 'home_action_mixin.dart';
 part 'home_provider.g.dart';

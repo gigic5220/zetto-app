@@ -61,12 +61,14 @@ mixin OnBoardingActionMixin {
         final age = ref.read(_ageProvider);
         final height = ref.read(_heightProvider);
         final weight = ref.read(_weightProvider);
+        final physicalActivityLevel = ref.read(_physicalActivityLevelProvider);
         if (selectedCharacter == null ||
             !characterName.isExist ||
             genderEnum == null ||
             age == null ||
             height == null ||
-            weight == null) {
+            weight == null ||
+            physicalActivityLevel == null) {
           return;
         }
 
@@ -76,7 +78,7 @@ mixin OnBoardingActionMixin {
           age: age,
           height: height,
           weight: weight,
-          physicalActivityLevelEnum: PhysicalActivityLevelEnum.sedentary,
+          physicalActivityLevelEnum: physicalActivityLevel,
         );
 
         ref.invalidate(meProvider);

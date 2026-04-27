@@ -8,8 +8,12 @@ mixin HomeActionMixin {
     final XFile? xFile = await ImagePicker().pickImage(source: source);
     if (xFile == null) return;
     final Uint8List imageData = await xFile.readAsBytes();
+    final File file = File(xFile.path);
     if (!context.mounted) return;
-    context.pushNamed(EditFoodPhotoPage.routeName, extra: imageData);
+    context.pushNamed(
+      EditFoodPhotoPage.routeName,
+      extra: {'imageSource': source, 'uint8List': imageData, 'file': file},
+    );
   }
 
   void onTapFloating(WidgetRef ref) {

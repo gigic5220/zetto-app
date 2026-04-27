@@ -13,8 +13,6 @@ import 'package:tandangi/domain/enum/physical_activity_level_enum.dart';
 import 'package:tandangi/feature/on_boarding/controller/on_boarding_provider.dart';
 import 'package:tandangi/gen/assets.gen.dart';
 
-//stateful widget
-
 class OnBoardingPage extends ConsumerStatefulWidget {
   const OnBoardingPage({super.key});
 
@@ -118,7 +116,6 @@ class _OnBoardingPageState extends ConsumerState<OnBoardingPage>
                 },
               ),
               Expanded(child: _buildCurrentStepWidget()),
-              const Spacer(),
               Consumer(
                 builder: (context, ref, child) {
                   final currentStep = watchCurrentOnBoardingStep(ref);

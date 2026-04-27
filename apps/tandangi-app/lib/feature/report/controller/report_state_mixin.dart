@@ -1,11 +1,11 @@
 part of 'report_provider.dart';
 
 mixin ReportStateMixin {
-  AsyncValue<FoodAnalyzeResultEntity> watchFoodAnalyzeResult(WidgetRef ref) {
+  AsyncValue<FoodAnalysisEntity> watchFoodAnalyzeResult(WidgetRef ref) {
     return ref.watch(_foodAnalyzeResultProvider);
   }
 
-  AnalyzedFoodItemEntity? watchSelectedFoodItem(WidgetRef ref) {
+  FoodAnalysisFoodEntity? watchSelectedFoodItem(WidgetRef ref) {
     return ref.watch(_selectedFoodItemProvider);
   }
 }

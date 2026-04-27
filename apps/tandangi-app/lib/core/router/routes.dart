@@ -5,15 +5,19 @@ import 'dart:typed_data';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 import 'package:tandangi/core/di/di.dart';
+import 'package:tandangi/domain/entity/food_analysis_entity.dart';
+import 'package:tandangi/feature/analyze_loading/analyze_loading_page.dart';
 import 'package:tandangi/feature/login/login_page.dart';
 import 'package:tandangi/feature/main/edit_food_photo/edit_food_photo_page.dart';
 import 'package:tandangi/feature/main/home/home_page.dart';
 import 'package:tandangi/feature/main/main_page.dart';
 import 'package:tandangi/feature/main/my/my_page.dart';
-import 'package:tandangi/feature/main/report/report_page.dart';
+import 'package:tandangi/feature/report/edit_food_nutrition/edit_food_nutrition_page.dart';
+import 'package:tandangi/feature/report/report_page.dart';
 import 'package:tandangi/feature/on_boarding/on_boarding_page.dart';
 import 'package:tandangi/feature/shop/shop_page.dart';
 import 'package:tandangi/feature/splash/splash_page.dart';
@@ -162,28 +166,71 @@ class Router extends _$Router {
         GoRoute(
           name: EditFoodPhotoPage.routeName,
           path: '/${EditFoodPhotoPage.routeName}',
-          pageBuilder: (context, state) => buildPageWithDefaultTransition(
-            context: context,
-            state: state,
-            child: EditFoodPhotoPage(selectedPhoto: state.extra as Uint8List),
-          ),
+          pageBuilder: (context, state) {
+            final extra = state.extra as Map<String, dynamic>;
+            final imageSource = extra['imageSource'] as ImageSource;
+            final uint8List = extra['uint8List'] as Uint8List;
+            final file = extra['file'] as File;
+            return buildPageWithDefaultTransition(
+              context: context,
+              state: state,
+              child: EditFoodPhotoPage(
+                imageSource: imageSource,
+                uint8List: uint8List,
+                file: file,
+              ),
+            );
+          },
+        ),
+        GoRoute(
+          name: AnalyzeLoadingPage.routeName,
+          path: '/${AnalyzeLoadingPage.routeName}',
+          pageBuilder: (context, state) {
+            final extra = state.extra as Map<String, dynamic>;
+            final file = extra['file'] as File;
+            final includeWatermark = extra['includeWatermark'] as bool;
+            return buildPageWithDefaultTransition(
+              context: context,
+              state: state,
+              child: AnalyzeLoadingPage(
+                file: file,
+                includeWatermark: includeWatermark,
+              ),
+            );
+          },
         ),
         GoRoute(
           name: ReportPage.routeName,
           path: '/${ReportPage.routeName}',
           pageBuilder: (context, state) {
-            final extra = state.extra as Map<String, dynamic>;
-            final croppedPhoto = extra['croppedPhoto'] as File;
-            final includeWatermark = extra['includeWatermark'] as bool;
+            final foodAnalysisId =
+                state.uri.queryParameters['foodAnalysisId'] as String;
             return buildPageWithDefaultTransition(
               context: context,
               state: state,
-              child: ReportPage(
-                selectedPhoto: croppedPhoto,
-                includeWatermark: includeWatermark,
-              ),
+              child: ReportPage(foodAnalysisId: foodAnalysisId),
             );
           },
+          routes: [
+            GoRoute(
+              name: EditFoodNutritionPage.routeName,
+              path: '/${EditFoodNutritionPage.routeName}',
+              pageBuilder: (context, state) {
+                final extra = state.extra as Map<String, dynamic>;
+                final foodAnalysisId = extra['foodAnalysisId'] as int;
+                final foodAnalysisFoodItems =
+                    extra['analyzedFoodItems'] as List<FoodAnalysisFoodEntity>;
+                return buildPageWithDefaultTransition(
+                  context: context,
+                  state: state,
+                  child: EditFoodNutritionPage(
+                    foodAnalysisId: foodAnalysisId,
+                    foodAnalysisFoodItems: foodAnalysisFoodItems,
+                  ),
+                );
+              },
+            ),
+          ],
         ),
         GoRoute(
           name: ShopPage.routeName,

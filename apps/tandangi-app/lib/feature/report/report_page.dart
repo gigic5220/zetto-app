@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:core_app/components/async_widget.dart';
 import 'package:design_system/components/atoms.dart';
 import 'package:design_system/components/common.dart';
@@ -9,23 +7,18 @@ import 'package:design_system/components/organism.dart';
 import 'package:design_system/extenstion.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tandangi/domain/entity/food_analyze_result_entity.dart';
+import 'package:tandangi/domain/entity/food_analysis_entity.dart';
 import 'package:tandangi/domain/enum/nutrition_threshhold_status_enum.dart';
 import 'package:tandangi/domain/enum/nutrition_type_enum.dart';
-import 'package:tandangi/feature/main/report/controller/report_provider.dart';
+import 'package:tandangi/feature/report/controller/report_provider.dart';
 import 'package:tandangi/gen/assets.gen.dart';
 
 class ReportPage extends ConsumerStatefulWidget {
-  const ReportPage({
-    super.key,
-    required this.selectedPhoto,
-    required this.includeWatermark,
-  });
+  const ReportPage({super.key, required this.foodAnalysisId});
 
   static const String routeName = 'report';
 
-  final File selectedPhoto;
-  final bool includeWatermark;
+  final String foodAnalysisId;
   @override
   ConsumerState<ReportPage> createState() => _ReportPageState();
 }
@@ -43,10 +36,10 @@ class _ReportPageState extends ConsumerState<ReportPage>
     return '${createdAt.month}월 ${createdAt.day}일 | $period $hour12:$minute';
   }
 
-  AnalyzedFoodItemEntity? _pickMainFood(FoodAnalyzeResultEntity result) {
-    if (result.main.isNotEmpty) return result.main.first;
-    if (result.sides.isNotEmpty) return result.sides.first;
-    if (result.others.isNotEmpty) return result.others.first;
+  FoodAnalysisFoodEntity? _pickMainFood(FoodAnalysisEntity result) {
+    if (result.mainFoodItems.isNotEmpty) return result.mainFoodItems.first;
+    if (result.sideFoodItems.isNotEmpty) return result.sideFoodItems.first;
+    if (result.otherFoodItems.isNotEmpty) return result.otherFoodItems.first;
     return null;
   }
 
@@ -78,10 +71,7 @@ class _ReportPageState extends ConsumerState<ReportPage>
   Widget build(BuildContext context) {
     return ProviderScope(
       overrides: [
-        initialSelectedPhotoProvider.overrideWithValue(widget.selectedPhoto),
-        initialIncludeWatermarkProvider.overrideWithValue(
-          widget.includeWatermark,
-        ),
+        initialFoodAnalysisIdProvider.overrideWithValue(widget.foodAnalysisId),
       ],
       child: Scaffold(
         appBar: DSAppBar.page(text: '', showBackButton: true),
@@ -106,17 +96,17 @@ class _ReportPageState extends ConsumerState<ReportPage>
               builder: (foodAnalyzeResult) {
                 final mainFood = _pickMainFood(foodAnalyzeResult);
                 final analyzedFoodItems = [
-                  ...foodAnalyzeResult.main,
-                  ...foodAnalyzeResult.sides,
-                  ...foodAnalyzeResult.others,
+                  ...foodAnalyzeResult.mainFoodItems,
+                  ...foodAnalyzeResult.sideFoodItems,
+                  ...foodAnalyzeResult.otherFoodItems,
                 ];
-                final analysisNutritionInfo =
-                    foodAnalyzeResult.analysisNutritionInfo;
-                final carbohydrateInfo = analysisNutritionInfo?.carbohydrate;
-                final proteinInfo = analysisNutritionInfo?.protein;
-                final fatInfo = analysisNutritionInfo?.fat;
-                final sugarInfo = analysisNutritionInfo?.sugar;
-                final sodiumInfo = analysisNutritionInfo?.sodium;
+                final nutritionCompareInfo =
+                    foodAnalyzeResult.nutritionCompareInfo;
+                final carbohydrateInfo = nutritionCompareInfo?.carbohydrate;
+                final proteinInfo = nutritionCompareInfo?.protein;
+                final fatInfo = nutritionCompareInfo?.fat;
+                final sugarInfo = nutritionCompareInfo?.sugar;
+                final sodiumInfo = nutritionCompareInfo?.sodium;
                 final mainNutritionWidgets = <Widget>[
                   if (carbohydrateInfo != null)
                     Expanded(
@@ -154,7 +144,7 @@ class _ReportPageState extends ConsumerState<ReportPage>
                       ),
                     ),
                 ];
-                final kcalIntake = analysisNutritionInfo?.kcal?.intake;
+                final kcalIntake = nutritionCompareInfo?.kcal?.intake;
                 return SingleChildScrollView(
                   child: Column(
                     children: [
@@ -246,7 +236,7 @@ class _ReportPageState extends ConsumerState<ReportPage>
                                   variant: .tertiary,
                                   text: '수정하기',
                                   onTap: () {
-                                    //TODO: 수정하기 페이지로 이동
+                                    onTapEditFoodNutrition(ref);
                                   },
                                 ),
                               ),
@@ -400,7 +390,7 @@ class _ReportPageState extends ConsumerState<ReportPage>
 
   Widget _buildMainNutritionBoxWidget({
     required NutritionType nutritionType,
-    required NutrientInfoEntity nutrientInfoEntity,
+    required NutrientCompareInfoEntity nutrientInfoEntity,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -449,7 +439,7 @@ class _ReportPageState extends ConsumerState<ReportPage>
   }
 
   Widget _buildSugarNutritionBoxWidget({
-    required SugarInfoEntity sugarInfoEntity,
+    required SugarCompareInfoEntity sugarInfoEntity,
   }) {
     return Container(
       padding: EdgeInsets.fromLTRB(
@@ -471,8 +461,8 @@ class _ReportPageState extends ConsumerState<ReportPage>
             subTitle: '당',
             title: _formatValueWithUnit(sugarInfoEntity.intake, 'g'),
             titleBadge: DSTextBadge.small(
-              text: sugarInfoEntity.status?.value ?? '',
-              variant: switch (sugarInfoEntity.status) {
+              text: sugarInfoEntity.nutritionThresholdStatusEnum?.value ?? '',
+              variant: switch (sugarInfoEntity.nutritionThresholdStatusEnum) {
                 NutritionThresholdStatusEnum.normal =>
                   DSTextBadgeVariant.success,
                 NutritionThresholdStatusEnum.caution =>
@@ -490,7 +480,7 @@ class _ReportPageState extends ConsumerState<ReportPage>
   }
 
   Widget _buildSodiumNutritionBoxWidget({
-    required SodiumInfoEntity sodiumInfoEntity,
+    required SodiumCompareInfoEntity sodiumInfoEntity,
   }) {
     return Container(
       padding: EdgeInsets.fromLTRB(
@@ -512,8 +502,8 @@ class _ReportPageState extends ConsumerState<ReportPage>
             subTitle: '나트륨',
             title: _formatValueWithUnit(sodiumInfoEntity.intake, 'mg'),
             titleBadge: DSTextBadge.small(
-              text: sodiumInfoEntity.status?.value ?? '',
-              variant: switch (sodiumInfoEntity.status) {
+              text: sodiumInfoEntity.nutritionThresholdStatusEnum?.value ?? '',
+              variant: switch (sodiumInfoEntity.nutritionThresholdStatusEnum) {
                 NutritionThresholdStatusEnum.normal =>
                   DSTextBadgeVariant.success,
                 NutritionThresholdStatusEnum.caution =>

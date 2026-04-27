@@ -1,9 +1,11 @@
 import 'dart:io';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tandangi/core/di/di.dart';
-import 'package:tandangi/domain/entity/food_analyze_result_entity.dart';
+import 'package:tandangi/domain/entity/food_analysis_entity.dart';
 import 'package:tandangi/domain/repository/food_analyze_repository.dart';
+import 'package:tandangi/feature/report/edit_food_nutrition/edit_food_nutrition_page.dart';
 
 part 'report_action_mixin.dart';
 part 'report_provider.g.dart';
@@ -36,40 +38,33 @@ class UploadedFoodImage {
 }
 
 @Riverpod(dependencies: [])
-File initialSelectedPhoto(Ref ref) {
+String initialFoodAnalysisId(Ref ref) {
   throw Exception('argument를 초기화 시켜 주어야 합니다');
 }
 
-@Riverpod(dependencies: [])
-bool initialIncludeWatermark(Ref ref) {
-  throw Exception('argument를 초기화 시켜 주어야 합니다');
-}
-
-@Riverpod(dependencies: [initialSelectedPhoto, initialIncludeWatermark])
+@Riverpod(dependencies: [initialFoodAnalysisId])
 class _FoodAnalyzeResult extends _$FoodAnalyzeResult {
   @override
-  Future<FoodAnalyzeResultEntity> build() async {
-    final File selectedPhoto = ref.read(initialSelectedPhotoProvider);
-    final bool includeWatermark = ref.read(initialIncludeWatermarkProvider);
-    return await getIt<FoodAnalyzeRepository>().postFoodAnalysis(
-      imagePath: selectedPhoto.path,
-      includeWatermark: includeWatermark,
+  Future<FoodAnalysisEntity> build() async {
+    final foodAnalysisId = ref.watch(initialFoodAnalysisIdProvider);
+    return await getIt<FoodAnalyzeRepository>().getFoodAnalysis(
+      foodAnalysisId: int.parse(foodAnalysisId),
     );
   }
 }
 
-AnalyzedFoodItemEntity? _pickInitialFoodItem(FoodAnalyzeResultEntity? result) {
+FoodAnalysisFoodEntity? _pickInitialFoodItem(FoodAnalysisEntity? result) {
   if (result == null) return null;
-  if (result.main.isNotEmpty) return result.main.first;
-  if (result.sides.isNotEmpty) return result.sides.first;
-  if (result.others.isNotEmpty) return result.others.first;
+  if (result.mainFoodItems.isNotEmpty) return result.mainFoodItems.first;
+  if (result.sideFoodItems.isNotEmpty) return result.sideFoodItems.first;
+  if (result.otherFoodItems.isNotEmpty) return result.otherFoodItems.first;
   return null;
 }
 
 @Riverpod(dependencies: [_FoodAnalyzeResult])
 class _SelectedFoodItem extends _$SelectedFoodItem {
   @override
-  AnalyzedFoodItemEntity? build() {
+  FoodAnalysisFoodEntity? build() {
     final foodAnalyzeResult = ref.watch(_foodAnalyzeResultProvider);
     return switch (foodAnalyzeResult) {
       AsyncData(:final value) => _pickInitialFoodItem(value),
@@ -77,7 +72,7 @@ class _SelectedFoodItem extends _$SelectedFoodItem {
     };
   }
 
-  void set(AnalyzedFoodItemEntity value) {
+  void set(FoodAnalysisFoodEntity value) {
     state = value;
   }
 }

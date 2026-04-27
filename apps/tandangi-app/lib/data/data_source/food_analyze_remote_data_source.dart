@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:tandangi/data/dto/common_paging_request_dto.dart';
-import 'package:tandangi/data/dto/food_analyze_result_dto.dart';
+import 'package:tandangi/data/dto/food_history_items_serving_adjust_dto.dart';
+import 'package:tandangi/data/dto/food_analysis_dto.dart';
 import 'package:tandangi/data/dto/paged_list_response_dto.dart';
 
 abstract class FoodAnalyzeRemoteDataSource {
@@ -15,6 +16,11 @@ abstract class FoodAnalyzeRemoteDataSource {
   });
 
   Future<FoodAnalysisDto> getFoodAnalysis({required int foodAnalysisId});
+
+  Future<FoodHistoryItemsServingAdjustResponseDto> adjustHistoryItemsServings({
+    required int foodAnalysisId,
+    required FoodHistoryItemsServingAdjustRequestDto dto,
+  });
 }
 
 class FoodAnalyzeRemoteDataSourceImpl implements FoodAnalyzeRemoteDataSource {
@@ -85,5 +91,25 @@ class FoodAnalyzeRemoteDataSourceImpl implements FoodAnalyzeRemoteDataSource {
     }
 
     return FoodAnalysisDto.fromJson(data);
+  }
+
+  @override
+  Future<FoodHistoryItemsServingAdjustResponseDto> adjustHistoryItemsServings({
+    required int foodAnalysisId,
+    required FoodHistoryItemsServingAdjustRequestDto dto,
+  }) async {
+    final response = await _dio.patch<Map<String, dynamic>>(
+      '/api/food-analysis/$foodAnalysisId/history-items/servings',
+      data: dto.toJson(),
+    );
+
+    final data = response.data;
+    if (data == null) {
+      throw StateError(
+        'Empty response from /api/food-analysis/$foodAnalysisId/history-items/servings',
+      );
+    }
+
+    return FoodHistoryItemsServingAdjustResponseDto.fromJson(data);
   }
 }
