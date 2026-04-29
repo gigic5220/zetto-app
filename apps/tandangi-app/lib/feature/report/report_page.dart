@@ -111,21 +111,21 @@ class _ReportPageState extends ConsumerState<ReportPage>
                   if (carbohydrateInfo != null)
                     Expanded(
                       child: _buildMainNutritionBoxWidget(
-                        nutritionType: NutritionType.carbohydrate,
+                        nutritionType: NutritionTypeEnum.carbohydrate,
                         nutrientInfoEntity: carbohydrateInfo,
                       ),
                     ),
                   if (proteinInfo != null)
                     Expanded(
                       child: _buildMainNutritionBoxWidget(
-                        nutritionType: NutritionType.protein,
+                        nutritionType: NutritionTypeEnum.protein,
                         nutrientInfoEntity: proteinInfo,
                       ),
                     ),
                   if (fatInfo != null)
                     Expanded(
                       child: _buildMainNutritionBoxWidget(
-                        nutritionType: NutritionType.fat,
+                        nutritionType: NutritionTypeEnum.fat,
                         nutrientInfoEntity: fatInfo,
                       ),
                     ),
@@ -389,7 +389,7 @@ class _ReportPageState extends ConsumerState<ReportPage>
   }
 
   Widget _buildMainNutritionBoxWidget({
-    required NutritionType nutritionType,
+    required NutritionTypeEnum nutritionType,
     required NutrientCompareInfoEntity nutrientInfoEntity,
   }) {
     return Column(
@@ -397,9 +397,9 @@ class _ReportPageState extends ConsumerState<ReportPage>
       children: [
         DSWrapper(
           uri: switch (nutritionType) {
-            NutritionType.carbohydrate => Assets.images.sweetPotato.path,
-            NutritionType.protein => Assets.images.egg.path,
-            NutritionType.fat => Assets.images.avocado.path,
+            NutritionTypeEnum.carbohydrate => Assets.images.sweetPotato.path,
+            NutritionTypeEnum.protein => Assets.images.egg.path,
+            NutritionTypeEnum.fat => Assets.images.avocado.path,
             _ => throw UnimplementedError(),
           },
           view: WrapperView.fix24,
@@ -411,9 +411,9 @@ class _ReportPageState extends ConsumerState<ReportPage>
           children: [
             Text(
               switch (nutritionType) {
-                NutritionType.carbohydrate => '탄수',
-                NutritionType.protein => '단백',
-                NutritionType.fat => '지방',
+                NutritionTypeEnum.carbohydrate => '탄수',
+                NutritionTypeEnum.protein => '단백',
+                NutritionTypeEnum.fat => '지방',
                 _ => throw UnimplementedError(),
               },
               style: context.textTheme.bodyMRegular.copyWith(

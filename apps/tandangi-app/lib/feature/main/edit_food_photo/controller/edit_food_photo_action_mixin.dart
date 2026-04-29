@@ -21,7 +21,7 @@ mixin EditFoodPhotoActionMixin {
     final PreferenceStorage storage = PreferenceStorage();
     await storage.write('include_watermark', includeWatermark);
     if (!ref.context.mounted) return;
-    ref.context.pushNamed(
+    ref.context.replaceNamed(
       AnalyzeLoadingPage.routeName,
       extra: {'file': file, 'includeWatermark': includeWatermark},
     );

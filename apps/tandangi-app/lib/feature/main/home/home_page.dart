@@ -213,7 +213,8 @@ class _HomePageState extends ConsumerState<HomePage>
                                 child: Column(
                                   children: [
                                     NutritionRingChart(
-                                      nutritionType: NutritionType.carbohydrate,
+                                      nutritionType:
+                                          NutritionTypeEnum.carbohydrate,
                                       valueText: '16g',
                                       progress: 0.78,
                                       progressColor: context
@@ -226,7 +227,8 @@ class _HomePageState extends ConsumerState<HomePage>
                                       spacing: context.componentGap.xLarge,
                                       children: [
                                         NutritionRingChart(
-                                          nutritionType: NutritionType.protein,
+                                          nutritionType:
+                                              NutritionTypeEnum.protein,
                                           valueText: '16g',
                                           progress: 1.1,
                                           progressColor: context
@@ -234,7 +236,7 @@ class _HomePageState extends ConsumerState<HomePage>
                                               .chartCarbohydrate,
                                         ),
                                         NutritionRingChart(
-                                          nutritionType: NutritionType.fat,
+                                          nutritionType: NutritionTypeEnum.fat,
                                           valueText: '16g',
                                           progress: 0.78,
                                           progressColor: context
@@ -479,7 +481,7 @@ class NutritionRingChart extends StatelessWidget {
     required this.progressColor,
   });
 
-  final NutritionType nutritionType;
+  final NutritionTypeEnum nutritionType;
   final String valueText;
   final double progress;
   final Color progressColor;
@@ -492,9 +494,10 @@ class NutritionRingChart extends StatelessWidget {
         : '${(progress * 100).toStringAsFixed(0)}% 채움';
 
     Color progressColor = switch (nutritionType) {
-      NutritionType.carbohydrate => context.semanticColors.chartCarbohydrate,
-      NutritionType.protein => context.semanticColors.chartProtein,
-      NutritionType.fat => context.semanticColors.chartFat,
+      NutritionTypeEnum.carbohydrate =>
+        context.semanticColors.chartCarbohydrate,
+      NutritionTypeEnum.protein => context.semanticColors.chartProtein,
+      NutritionTypeEnum.fat => context.semanticColors.chartFat,
       _ => throw UnimplementedError(),
     };
 
@@ -503,9 +506,9 @@ class NutritionRingChart extends StatelessWidget {
         : progressColor;
 
     final String imagePath = switch (nutritionType) {
-      NutritionType.carbohydrate => Assets.images.sweetPotato.path,
-      NutritionType.protein => Assets.images.egg.path,
-      NutritionType.fat => Assets.images.avocado.path,
+      NutritionTypeEnum.carbohydrate => Assets.images.sweetPotato.path,
+      NutritionTypeEnum.protein => Assets.images.egg.path,
+      NutritionTypeEnum.fat => Assets.images.avocado.path,
       _ => throw UnimplementedError(),
     };
 
@@ -533,9 +536,9 @@ class NutritionRingChart extends StatelessWidget {
                 children: [
                   Text(
                     switch (nutritionType) {
-                      NutritionType.carbohydrate => '탄수화물',
-                      NutritionType.protein => '단백질',
-                      NutritionType.fat => '지방',
+                      NutritionTypeEnum.carbohydrate => '탄수화물',
+                      NutritionTypeEnum.protein => '단백질',
+                      NutritionTypeEnum.fat => '지방',
                       _ => throw UnimplementedError(),
                     },
                     style: context.textTheme.bodyMRegular.copyWith(

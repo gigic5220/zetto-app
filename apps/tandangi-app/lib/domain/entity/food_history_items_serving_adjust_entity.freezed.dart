@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$FoodHistoryItemServingAdjustmentEntity {
 
- int get foodHistoryItemId; double get serving;
+ int get foodHistoryItemId; double? get serving; double? get carbohydrate; double? get protein; double? get fat; double? get sodium; double? get sugar;
 /// Create a copy of FoodHistoryItemServingAdjustmentEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $FoodHistoryItemServingAdjustmentEntityCopyWith<FoodHistoryItemServingAdjustment
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is FoodHistoryItemServingAdjustmentEntity&&(identical(other.foodHistoryItemId, foodHistoryItemId) || other.foodHistoryItemId == foodHistoryItemId)&&(identical(other.serving, serving) || other.serving == serving));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FoodHistoryItemServingAdjustmentEntity&&(identical(other.foodHistoryItemId, foodHistoryItemId) || other.foodHistoryItemId == foodHistoryItemId)&&(identical(other.serving, serving) || other.serving == serving)&&(identical(other.carbohydrate, carbohydrate) || other.carbohydrate == carbohydrate)&&(identical(other.protein, protein) || other.protein == protein)&&(identical(other.fat, fat) || other.fat == fat)&&(identical(other.sodium, sodium) || other.sodium == sodium)&&(identical(other.sugar, sugar) || other.sugar == sugar));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,foodHistoryItemId,serving);
+int get hashCode => Object.hash(runtimeType,foodHistoryItemId,serving,carbohydrate,protein,fat,sodium,sugar);
 
 @override
 String toString() {
-  return 'FoodHistoryItemServingAdjustmentEntity(foodHistoryItemId: $foodHistoryItemId, serving: $serving)';
+  return 'FoodHistoryItemServingAdjustmentEntity(foodHistoryItemId: $foodHistoryItemId, serving: $serving, carbohydrate: $carbohydrate, protein: $protein, fat: $fat, sodium: $sodium, sugar: $sugar)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $FoodHistoryItemServingAdjustmentEntityCopyWith<$Res>  {
   factory $FoodHistoryItemServingAdjustmentEntityCopyWith(FoodHistoryItemServingAdjustmentEntity value, $Res Function(FoodHistoryItemServingAdjustmentEntity) _then) = _$FoodHistoryItemServingAdjustmentEntityCopyWithImpl;
 @useResult
 $Res call({
- int foodHistoryItemId, double serving
+ int foodHistoryItemId, double? serving, double? carbohydrate, double? protein, double? fat, double? sodium, double? sugar
 });
 
 
@@ -65,11 +65,16 @@ class _$FoodHistoryItemServingAdjustmentEntityCopyWithImpl<$Res>
 
 /// Create a copy of FoodHistoryItemServingAdjustmentEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? foodHistoryItemId = null,Object? serving = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? foodHistoryItemId = null,Object? serving = freezed,Object? carbohydrate = freezed,Object? protein = freezed,Object? fat = freezed,Object? sodium = freezed,Object? sugar = freezed,}) {
   return _then(_self.copyWith(
 foodHistoryItemId: null == foodHistoryItemId ? _self.foodHistoryItemId : foodHistoryItemId // ignore: cast_nullable_to_non_nullable
-as int,serving: null == serving ? _self.serving : serving // ignore: cast_nullable_to_non_nullable
-as double,
+as int,serving: freezed == serving ? _self.serving : serving // ignore: cast_nullable_to_non_nullable
+as double?,carbohydrate: freezed == carbohydrate ? _self.carbohydrate : carbohydrate // ignore: cast_nullable_to_non_nullable
+as double?,protein: freezed == protein ? _self.protein : protein // ignore: cast_nullable_to_non_nullable
+as double?,fat: freezed == fat ? _self.fat : fat // ignore: cast_nullable_to_non_nullable
+as double?,sodium: freezed == sodium ? _self.sodium : sodium // ignore: cast_nullable_to_non_nullable
+as double?,sugar: freezed == sugar ? _self.sugar : sugar // ignore: cast_nullable_to_non_nullable
+as double?,
   ));
 }
 
@@ -154,10 +159,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int foodHistoryItemId,  double serving)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int foodHistoryItemId,  double? serving,  double? carbohydrate,  double? protein,  double? fat,  double? sodium,  double? sugar)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _FoodHistoryItemServingAdjustmentEntity() when $default != null:
-return $default(_that.foodHistoryItemId,_that.serving);case _:
+return $default(_that.foodHistoryItemId,_that.serving,_that.carbohydrate,_that.protein,_that.fat,_that.sodium,_that.sugar);case _:
   return orElse();
 
 }
@@ -175,10 +180,10 @@ return $default(_that.foodHistoryItemId,_that.serving);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int foodHistoryItemId,  double serving)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int foodHistoryItemId,  double? serving,  double? carbohydrate,  double? protein,  double? fat,  double? sodium,  double? sugar)  $default,) {final _that = this;
 switch (_that) {
 case _FoodHistoryItemServingAdjustmentEntity():
-return $default(_that.foodHistoryItemId,_that.serving);case _:
+return $default(_that.foodHistoryItemId,_that.serving,_that.carbohydrate,_that.protein,_that.fat,_that.sodium,_that.sugar);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -195,10 +200,10 @@ return $default(_that.foodHistoryItemId,_that.serving);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int foodHistoryItemId,  double serving)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int foodHistoryItemId,  double? serving,  double? carbohydrate,  double? protein,  double? fat,  double? sodium,  double? sugar)?  $default,) {final _that = this;
 switch (_that) {
 case _FoodHistoryItemServingAdjustmentEntity() when $default != null:
-return $default(_that.foodHistoryItemId,_that.serving);case _:
+return $default(_that.foodHistoryItemId,_that.serving,_that.carbohydrate,_that.protein,_that.fat,_that.sodium,_that.sugar);case _:
   return null;
 
 }
@@ -210,11 +215,16 @@ return $default(_that.foodHistoryItemId,_that.serving);case _:
 @JsonSerializable()
 
 class _FoodHistoryItemServingAdjustmentEntity implements FoodHistoryItemServingAdjustmentEntity {
-  const _FoodHistoryItemServingAdjustmentEntity({required this.foodHistoryItemId, required this.serving});
+  const _FoodHistoryItemServingAdjustmentEntity({required this.foodHistoryItemId, this.serving, this.carbohydrate, this.protein, this.fat, this.sodium, this.sugar});
   factory _FoodHistoryItemServingAdjustmentEntity.fromJson(Map<String, dynamic> json) => _$FoodHistoryItemServingAdjustmentEntityFromJson(json);
 
 @override final  int foodHistoryItemId;
-@override final  double serving;
+@override final  double? serving;
+@override final  double? carbohydrate;
+@override final  double? protein;
+@override final  double? fat;
+@override final  double? sodium;
+@override final  double? sugar;
 
 /// Create a copy of FoodHistoryItemServingAdjustmentEntity
 /// with the given fields replaced by the non-null parameter values.
@@ -229,16 +239,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FoodHistoryItemServingAdjustmentEntity&&(identical(other.foodHistoryItemId, foodHistoryItemId) || other.foodHistoryItemId == foodHistoryItemId)&&(identical(other.serving, serving) || other.serving == serving));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FoodHistoryItemServingAdjustmentEntity&&(identical(other.foodHistoryItemId, foodHistoryItemId) || other.foodHistoryItemId == foodHistoryItemId)&&(identical(other.serving, serving) || other.serving == serving)&&(identical(other.carbohydrate, carbohydrate) || other.carbohydrate == carbohydrate)&&(identical(other.protein, protein) || other.protein == protein)&&(identical(other.fat, fat) || other.fat == fat)&&(identical(other.sodium, sodium) || other.sodium == sodium)&&(identical(other.sugar, sugar) || other.sugar == sugar));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,foodHistoryItemId,serving);
+int get hashCode => Object.hash(runtimeType,foodHistoryItemId,serving,carbohydrate,protein,fat,sodium,sugar);
 
 @override
 String toString() {
-  return 'FoodHistoryItemServingAdjustmentEntity(foodHistoryItemId: $foodHistoryItemId, serving: $serving)';
+  return 'FoodHistoryItemServingAdjustmentEntity(foodHistoryItemId: $foodHistoryItemId, serving: $serving, carbohydrate: $carbohydrate, protein: $protein, fat: $fat, sodium: $sodium, sugar: $sugar)';
 }
 
 
@@ -249,7 +259,7 @@ abstract mixin class _$FoodHistoryItemServingAdjustmentEntityCopyWith<$Res> impl
   factory _$FoodHistoryItemServingAdjustmentEntityCopyWith(_FoodHistoryItemServingAdjustmentEntity value, $Res Function(_FoodHistoryItemServingAdjustmentEntity) _then) = __$FoodHistoryItemServingAdjustmentEntityCopyWithImpl;
 @override @useResult
 $Res call({
- int foodHistoryItemId, double serving
+ int foodHistoryItemId, double? serving, double? carbohydrate, double? protein, double? fat, double? sodium, double? sugar
 });
 
 
@@ -266,11 +276,16 @@ class __$FoodHistoryItemServingAdjustmentEntityCopyWithImpl<$Res>
 
 /// Create a copy of FoodHistoryItemServingAdjustmentEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? foodHistoryItemId = null,Object? serving = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? foodHistoryItemId = null,Object? serving = freezed,Object? carbohydrate = freezed,Object? protein = freezed,Object? fat = freezed,Object? sodium = freezed,Object? sugar = freezed,}) {
   return _then(_FoodHistoryItemServingAdjustmentEntity(
 foodHistoryItemId: null == foodHistoryItemId ? _self.foodHistoryItemId : foodHistoryItemId // ignore: cast_nullable_to_non_nullable
-as int,serving: null == serving ? _self.serving : serving // ignore: cast_nullable_to_non_nullable
-as double,
+as int,serving: freezed == serving ? _self.serving : serving // ignore: cast_nullable_to_non_nullable
+as double?,carbohydrate: freezed == carbohydrate ? _self.carbohydrate : carbohydrate // ignore: cast_nullable_to_non_nullable
+as double?,protein: freezed == protein ? _self.protein : protein // ignore: cast_nullable_to_non_nullable
+as double?,fat: freezed == fat ? _self.fat : fat // ignore: cast_nullable_to_non_nullable
+as double?,sodium: freezed == sodium ? _self.sodium : sodium // ignore: cast_nullable_to_non_nullable
+as double?,sugar: freezed == sugar ? _self.sugar : sugar // ignore: cast_nullable_to_non_nullable
+as double?,
   ));
 }
 
@@ -846,7 +861,7 @@ as double,
 /// @nodoc
 mixin _$AdjustedFoodHistoryItemEntity {
 
- int get foodHistoryItemId; String get name; String get itemType; double get serving; double get kcal; double get carbohydrate; double get protein; double get fat;
+ int get foodHistoryItemId; String get name; String get itemType; double? get serving; double get kcal; double get carbohydrate; double get protein; double get fat;
 /// Create a copy of AdjustedFoodHistoryItemEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -879,7 +894,7 @@ abstract mixin class $AdjustedFoodHistoryItemEntityCopyWith<$Res>  {
   factory $AdjustedFoodHistoryItemEntityCopyWith(AdjustedFoodHistoryItemEntity value, $Res Function(AdjustedFoodHistoryItemEntity) _then) = _$AdjustedFoodHistoryItemEntityCopyWithImpl;
 @useResult
 $Res call({
- int foodHistoryItemId, String name, String itemType, double serving, double kcal, double carbohydrate, double protein, double fat
+ int foodHistoryItemId, String name, String itemType, double? serving, double kcal, double carbohydrate, double protein, double fat
 });
 
 
@@ -896,13 +911,13 @@ class _$AdjustedFoodHistoryItemEntityCopyWithImpl<$Res>
 
 /// Create a copy of AdjustedFoodHistoryItemEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? foodHistoryItemId = null,Object? name = null,Object? itemType = null,Object? serving = null,Object? kcal = null,Object? carbohydrate = null,Object? protein = null,Object? fat = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? foodHistoryItemId = null,Object? name = null,Object? itemType = null,Object? serving = freezed,Object? kcal = null,Object? carbohydrate = null,Object? protein = null,Object? fat = null,}) {
   return _then(_self.copyWith(
 foodHistoryItemId: null == foodHistoryItemId ? _self.foodHistoryItemId : foodHistoryItemId // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,itemType: null == itemType ? _self.itemType : itemType // ignore: cast_nullable_to_non_nullable
-as String,serving: null == serving ? _self.serving : serving // ignore: cast_nullable_to_non_nullable
-as double,kcal: null == kcal ? _self.kcal : kcal // ignore: cast_nullable_to_non_nullable
+as String,serving: freezed == serving ? _self.serving : serving // ignore: cast_nullable_to_non_nullable
+as double?,kcal: null == kcal ? _self.kcal : kcal // ignore: cast_nullable_to_non_nullable
 as double,carbohydrate: null == carbohydrate ? _self.carbohydrate : carbohydrate // ignore: cast_nullable_to_non_nullable
 as double,protein: null == protein ? _self.protein : protein // ignore: cast_nullable_to_non_nullable
 as double,fat: null == fat ? _self.fat : fat // ignore: cast_nullable_to_non_nullable
@@ -991,7 +1006,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int foodHistoryItemId,  String name,  String itemType,  double serving,  double kcal,  double carbohydrate,  double protein,  double fat)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int foodHistoryItemId,  String name,  String itemType,  double? serving,  double kcal,  double carbohydrate,  double protein,  double fat)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AdjustedFoodHistoryItemEntity() when $default != null:
 return $default(_that.foodHistoryItemId,_that.name,_that.itemType,_that.serving,_that.kcal,_that.carbohydrate,_that.protein,_that.fat);case _:
@@ -1012,7 +1027,7 @@ return $default(_that.foodHistoryItemId,_that.name,_that.itemType,_that.serving,
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int foodHistoryItemId,  String name,  String itemType,  double serving,  double kcal,  double carbohydrate,  double protein,  double fat)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int foodHistoryItemId,  String name,  String itemType,  double? serving,  double kcal,  double carbohydrate,  double protein,  double fat)  $default,) {final _that = this;
 switch (_that) {
 case _AdjustedFoodHistoryItemEntity():
 return $default(_that.foodHistoryItemId,_that.name,_that.itemType,_that.serving,_that.kcal,_that.carbohydrate,_that.protein,_that.fat);case _:
@@ -1032,7 +1047,7 @@ return $default(_that.foodHistoryItemId,_that.name,_that.itemType,_that.serving,
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int foodHistoryItemId,  String name,  String itemType,  double serving,  double kcal,  double carbohydrate,  double protein,  double fat)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int foodHistoryItemId,  String name,  String itemType,  double? serving,  double kcal,  double carbohydrate,  double protein,  double fat)?  $default,) {final _that = this;
 switch (_that) {
 case _AdjustedFoodHistoryItemEntity() when $default != null:
 return $default(_that.foodHistoryItemId,_that.name,_that.itemType,_that.serving,_that.kcal,_that.carbohydrate,_that.protein,_that.fat);case _:
@@ -1047,13 +1062,13 @@ return $default(_that.foodHistoryItemId,_that.name,_that.itemType,_that.serving,
 @JsonSerializable()
 
 class _AdjustedFoodHistoryItemEntity implements AdjustedFoodHistoryItemEntity {
-  const _AdjustedFoodHistoryItemEntity({required this.foodHistoryItemId, required this.name, required this.itemType, required this.serving, required this.kcal, required this.carbohydrate, required this.protein, required this.fat});
+  const _AdjustedFoodHistoryItemEntity({required this.foodHistoryItemId, required this.name, required this.itemType, this.serving, required this.kcal, required this.carbohydrate, required this.protein, required this.fat});
   factory _AdjustedFoodHistoryItemEntity.fromJson(Map<String, dynamic> json) => _$AdjustedFoodHistoryItemEntityFromJson(json);
 
 @override final  int foodHistoryItemId;
 @override final  String name;
 @override final  String itemType;
-@override final  double serving;
+@override final  double? serving;
 @override final  double kcal;
 @override final  double carbohydrate;
 @override final  double protein;
@@ -1092,7 +1107,7 @@ abstract mixin class _$AdjustedFoodHistoryItemEntityCopyWith<$Res> implements $A
   factory _$AdjustedFoodHistoryItemEntityCopyWith(_AdjustedFoodHistoryItemEntity value, $Res Function(_AdjustedFoodHistoryItemEntity) _then) = __$AdjustedFoodHistoryItemEntityCopyWithImpl;
 @override @useResult
 $Res call({
- int foodHistoryItemId, String name, String itemType, double serving, double kcal, double carbohydrate, double protein, double fat
+ int foodHistoryItemId, String name, String itemType, double? serving, double kcal, double carbohydrate, double protein, double fat
 });
 
 
@@ -1109,13 +1124,13 @@ class __$AdjustedFoodHistoryItemEntityCopyWithImpl<$Res>
 
 /// Create a copy of AdjustedFoodHistoryItemEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? foodHistoryItemId = null,Object? name = null,Object? itemType = null,Object? serving = null,Object? kcal = null,Object? carbohydrate = null,Object? protein = null,Object? fat = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? foodHistoryItemId = null,Object? name = null,Object? itemType = null,Object? serving = freezed,Object? kcal = null,Object? carbohydrate = null,Object? protein = null,Object? fat = null,}) {
   return _then(_AdjustedFoodHistoryItemEntity(
 foodHistoryItemId: null == foodHistoryItemId ? _self.foodHistoryItemId : foodHistoryItemId // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,itemType: null == itemType ? _self.itemType : itemType // ignore: cast_nullable_to_non_nullable
-as String,serving: null == serving ? _self.serving : serving // ignore: cast_nullable_to_non_nullable
-as double,kcal: null == kcal ? _self.kcal : kcal // ignore: cast_nullable_to_non_nullable
+as String,serving: freezed == serving ? _self.serving : serving // ignore: cast_nullable_to_non_nullable
+as double?,kcal: null == kcal ? _self.kcal : kcal // ignore: cast_nullable_to_non_nullable
 as double,carbohydrate: null == carbohydrate ? _self.carbohydrate : carbohydrate // ignore: cast_nullable_to_non_nullable
 as double,protein: null == protein ? _self.protein : protein // ignore: cast_nullable_to_non_nullable
 as double,fat: null == fat ? _self.fat : fat // ignore: cast_nullable_to_non_nullable

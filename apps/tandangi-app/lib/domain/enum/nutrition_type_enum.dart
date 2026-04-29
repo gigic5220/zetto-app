@@ -1,1 +1,1 @@
-enum NutritionType { carbohydrate, protein, fat, sugar, sodium }
+enum NutritionTypeEnum { carbohydrate, protein, fat, sugar, sodium }

@@ -14,6 +14,7 @@ typedef DSTextFieldValidator = String? Function(String? text);
 class DSTextField extends StatefulWidget {
   const DSTextField({
     super.key,
+    this.initialValue,
     this.suffixText,
     this.supportingText,
     this.textEditingController,
@@ -37,6 +38,8 @@ class DSTextField extends StatefulWidget {
     this.textAlign = TextAlign.start,
     this.obscureText = false,
   });
+
+  final String? initialValue;
 
   /// 폼 [validator] 밖에서 올린 에러(예: 로그인 API 실패).
   /// - `null`: 없음
@@ -165,8 +168,7 @@ class _DSTextFieldState extends State<DSTextField> {
     _calculate();
   }
 
-  bool get _isExternalErrorActive =>
-      widget.externalError != null && !_externalDismissed;
+  bool get _isExternalErrorActive => widget.externalError != null && !_externalDismissed;
 
   String? get _externalMessage {
     if (!_isExternalErrorActive) return null;
@@ -199,10 +201,7 @@ class _DSTextFieldState extends State<DSTextField> {
         if (isShowSupportingText)
           Padding(
             padding: const .only(left: 12),
-            child: Text(
-              lineText!,
-              style: context.textTheme.labelSMedium.copyWith(color: supportingTextColor),
-            ),
+            child: Text(lineText!, style: context.textTheme.labelSMedium.copyWith(color: supportingTextColor)),
           ),
         if (isShowTextCounter)
           Padding(
@@ -258,11 +257,12 @@ class _DSTextFieldState extends State<DSTextField> {
         children: [
           Expanded(
             child: TextFormField(
+              initialValue: widget.initialValue,
               textInputAction: widget.textInputAction,
               enabled: widget.isEnabled,
               obscureText: widget.obscureText,
               textAlign: widget.textAlign,
-              controller: textEditingController,
+              controller: widget.initialValue?.isNotEmpty == true ? null : textEditingController,
               keyboardType: widget.keyboardType,
               inputFormatters: widget.inputFormatters,
               focusNode: focusNode,

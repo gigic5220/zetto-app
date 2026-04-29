@@ -20,7 +20,12 @@ abstract class FoodHistoryItemServingAdjustmentRequestItemDto
     with _$FoodHistoryItemServingAdjustmentRequestItemDto {
   const factory FoodHistoryItemServingAdjustmentRequestItemDto({
     required int foodHistoryItemId,
-    required double serving,
+    double? serving,
+    double? carbohydrate,
+    double? protein,
+    double? fat,
+    double? sodium,
+    double? sugar,
   }) = _FoodHistoryItemServingAdjustmentRequestItemDto;
 
   factory FoodHistoryItemServingAdjustmentRequestItemDto.fromJson(
@@ -34,7 +39,8 @@ abstract class FoodHistoryItemsServingAdjustResponseDto
   const factory FoodHistoryItemsServingAdjustResponseDto({
     required int foodAnalysisId,
     required FoodHistoryItemsNutritionTotalsDto totals,
-    @Default(<AdjustedFoodHistoryItemDto>[]) List<AdjustedFoodHistoryItemDto> items,
+    @Default(<AdjustedFoodHistoryItemDto>[])
+    List<AdjustedFoodHistoryItemDto> items,
   }) = _FoodHistoryItemsServingAdjustResponseDto;
 
   factory FoodHistoryItemsServingAdjustResponseDto.fromJson(
@@ -63,7 +69,7 @@ abstract class AdjustedFoodHistoryItemDto with _$AdjustedFoodHistoryItemDto {
     required int foodHistoryItemId,
     required String name,
     required String itemType,
-    required double serving,
+    double? serving,
     required double kcal,
     required double carbohydrate,
     required double protein,

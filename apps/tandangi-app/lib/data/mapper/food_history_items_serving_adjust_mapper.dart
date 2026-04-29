@@ -11,6 +11,11 @@ class FoodHistoryItemsServingAdjustMapper {
             (item) => FoodHistoryItemServingAdjustmentRequestItemDto(
               foodHistoryItemId: item.foodHistoryItemId,
               serving: item.serving,
+              carbohydrate: item.carbohydrate,
+              protein: item.protein,
+              fat: item.fat,
+              sodium: item.sodium,
+              sugar: item.sugar,
             ),
           )
           .toList(),

@@ -12,7 +12,7 @@ mixin AnalyzeLoadingActionMixin {
           includeWatermark: includeWatermark,
         );
     if (context.mounted) {
-      context.pushNamed(
+      context.replaceNamed(
         ReportPage.routeName,
         queryParameters: {
           'foodAnalysisId': foodAnalysisResult.foodAnalysisId.toString(),

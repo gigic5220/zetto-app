@@ -8,7 +8,12 @@ abstract class FoodHistoryItemServingAdjustmentEntity
     with _$FoodHistoryItemServingAdjustmentEntity {
   const factory FoodHistoryItemServingAdjustmentEntity({
     required int foodHistoryItemId,
-    required double serving,
+    double? serving,
+    double? carbohydrate,
+    double? protein,
+    double? fat,
+    double? sodium,
+    double? sugar,
   }) = _FoodHistoryItemServingAdjustmentEntity;
 
   factory FoodHistoryItemServingAdjustmentEntity.fromJson(
@@ -53,7 +58,7 @@ abstract class AdjustedFoodHistoryItemEntity
     required int foodHistoryItemId,
     required String name,
     required String itemType,
-    required double serving,
+    double? serving,
     required double kcal,
     required double carbohydrate,
     required double protein,
