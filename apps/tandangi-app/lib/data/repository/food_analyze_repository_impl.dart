@@ -36,9 +36,11 @@ class FoodAnalyzeRepositoryImpl implements FoodAnalyzeRepository {
     int? page,
     int? size,
     List<String>? sort,
+    String? date,
   }) async {
     final paged = await _remote.getFoodAnalysises(
-      dto: CommonPagingRequestDto(page: page, size: size, sort: sort),
+      paging: CommonPagingRequestDto(page: page, size: size, sort: sort),
+      date: date,
     );
 
     return PagedListMapper.fromPagedResponseDto(

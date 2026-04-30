@@ -10,7 +10,7 @@ abstract class NutritionStandardResponseDto with _$NutritionStandardResponseDto 
     required int userId,
     required int eerKcal,
     required String standardSource,
-    required String activityLevel,
+    required String summaryTargetBasis,
     required int carbohydrateMinG,
     required int carbohydrateTargetG,
     required int carbohydrateMaxG,

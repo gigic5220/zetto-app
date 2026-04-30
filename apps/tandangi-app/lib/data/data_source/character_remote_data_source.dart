@@ -24,12 +24,14 @@ class CharacterRemoteDataSourceImpl implements CharacterRemoteDataSource {
 
   @override
   Future<void> putUserCharacter({required int characterId}) async {
-    await _dio.put('/api/characters/user/$characterId');
+    await _dio.patch('/api/characters/user/$characterId');
   }
 
   @override
   Future<UserCharacterDetailResponseDto> getUserCharacterDetail() async {
-    final response = await _dio.get<Map<String, dynamic>>('/api/characters/user');
+    final response = await _dio.get<Map<String, dynamic>>(
+      '/api/characters/user',
+    );
     final data = response.data;
     if (data == null) {
       throw StateError('Empty response from /api/characters/user');

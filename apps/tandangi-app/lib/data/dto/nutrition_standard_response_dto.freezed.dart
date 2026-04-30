@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$NutritionStandardResponseDto {
 
- int get id; int get userId; int get eerKcal; String get standardSource; String get activityLevel; int get carbohydrateMinG; int get carbohydrateTargetG; int get carbohydrateMaxG; int get proteinMinG; int get proteinTargetG; int get proteinMaxG; int get fatMinG; int get fatTargetG; int get fatMaxG; int get sugarLimitG; int get sodiumAdequateMg; int get sodiumRiskReductionMg; DateTime get createdAt; DateTime get updatedAt;
+ int get id; int get userId; int get eerKcal; String get standardSource; String get summaryTargetBasis; int get carbohydrateMinG; int get carbohydrateTargetG; int get carbohydrateMaxG; int get proteinMinG; int get proteinTargetG; int get proteinMaxG; int get fatMinG; int get fatTargetG; int get fatMaxG; int get sugarLimitG; int get sodiumAdequateMg; int get sodiumRiskReductionMg; DateTime get createdAt; DateTime get updatedAt;
 /// Create a copy of NutritionStandardResponseDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $NutritionStandardResponseDtoCopyWith<NutritionStandardResponseDto> get copyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NutritionStandardResponseDto&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.eerKcal, eerKcal) || other.eerKcal == eerKcal)&&(identical(other.standardSource, standardSource) || other.standardSource == standardSource)&&(identical(other.activityLevel, activityLevel) || other.activityLevel == activityLevel)&&(identical(other.carbohydrateMinG, carbohydrateMinG) || other.carbohydrateMinG == carbohydrateMinG)&&(identical(other.carbohydrateTargetG, carbohydrateTargetG) || other.carbohydrateTargetG == carbohydrateTargetG)&&(identical(other.carbohydrateMaxG, carbohydrateMaxG) || other.carbohydrateMaxG == carbohydrateMaxG)&&(identical(other.proteinMinG, proteinMinG) || other.proteinMinG == proteinMinG)&&(identical(other.proteinTargetG, proteinTargetG) || other.proteinTargetG == proteinTargetG)&&(identical(other.proteinMaxG, proteinMaxG) || other.proteinMaxG == proteinMaxG)&&(identical(other.fatMinG, fatMinG) || other.fatMinG == fatMinG)&&(identical(other.fatTargetG, fatTargetG) || other.fatTargetG == fatTargetG)&&(identical(other.fatMaxG, fatMaxG) || other.fatMaxG == fatMaxG)&&(identical(other.sugarLimitG, sugarLimitG) || other.sugarLimitG == sugarLimitG)&&(identical(other.sodiumAdequateMg, sodiumAdequateMg) || other.sodiumAdequateMg == sodiumAdequateMg)&&(identical(other.sodiumRiskReductionMg, sodiumRiskReductionMg) || other.sodiumRiskReductionMg == sodiumRiskReductionMg)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is NutritionStandardResponseDto&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.eerKcal, eerKcal) || other.eerKcal == eerKcal)&&(identical(other.standardSource, standardSource) || other.standardSource == standardSource)&&(identical(other.summaryTargetBasis, summaryTargetBasis) || other.summaryTargetBasis == summaryTargetBasis)&&(identical(other.carbohydrateMinG, carbohydrateMinG) || other.carbohydrateMinG == carbohydrateMinG)&&(identical(other.carbohydrateTargetG, carbohydrateTargetG) || other.carbohydrateTargetG == carbohydrateTargetG)&&(identical(other.carbohydrateMaxG, carbohydrateMaxG) || other.carbohydrateMaxG == carbohydrateMaxG)&&(identical(other.proteinMinG, proteinMinG) || other.proteinMinG == proteinMinG)&&(identical(other.proteinTargetG, proteinTargetG) || other.proteinTargetG == proteinTargetG)&&(identical(other.proteinMaxG, proteinMaxG) || other.proteinMaxG == proteinMaxG)&&(identical(other.fatMinG, fatMinG) || other.fatMinG == fatMinG)&&(identical(other.fatTargetG, fatTargetG) || other.fatTargetG == fatTargetG)&&(identical(other.fatMaxG, fatMaxG) || other.fatMaxG == fatMaxG)&&(identical(other.sugarLimitG, sugarLimitG) || other.sugarLimitG == sugarLimitG)&&(identical(other.sodiumAdequateMg, sodiumAdequateMg) || other.sodiumAdequateMg == sodiumAdequateMg)&&(identical(other.sodiumRiskReductionMg, sodiumRiskReductionMg) || other.sodiumRiskReductionMg == sodiumRiskReductionMg)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,id,userId,eerKcal,standardSource,activityLevel,carbohydrateMinG,carbohydrateTargetG,carbohydrateMaxG,proteinMinG,proteinTargetG,proteinMaxG,fatMinG,fatTargetG,fatMaxG,sugarLimitG,sodiumAdequateMg,sodiumRiskReductionMg,createdAt,updatedAt]);
+int get hashCode => Object.hashAll([runtimeType,id,userId,eerKcal,standardSource,summaryTargetBasis,carbohydrateMinG,carbohydrateTargetG,carbohydrateMaxG,proteinMinG,proteinTargetG,proteinMaxG,fatMinG,fatTargetG,fatMaxG,sugarLimitG,sodiumAdequateMg,sodiumRiskReductionMg,createdAt,updatedAt]);
 
 @override
 String toString() {
-  return 'NutritionStandardResponseDto(id: $id, userId: $userId, eerKcal: $eerKcal, standardSource: $standardSource, activityLevel: $activityLevel, carbohydrateMinG: $carbohydrateMinG, carbohydrateTargetG: $carbohydrateTargetG, carbohydrateMaxG: $carbohydrateMaxG, proteinMinG: $proteinMinG, proteinTargetG: $proteinTargetG, proteinMaxG: $proteinMaxG, fatMinG: $fatMinG, fatTargetG: $fatTargetG, fatMaxG: $fatMaxG, sugarLimitG: $sugarLimitG, sodiumAdequateMg: $sodiumAdequateMg, sodiumRiskReductionMg: $sodiumRiskReductionMg, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'NutritionStandardResponseDto(id: $id, userId: $userId, eerKcal: $eerKcal, standardSource: $standardSource, summaryTargetBasis: $summaryTargetBasis, carbohydrateMinG: $carbohydrateMinG, carbohydrateTargetG: $carbohydrateTargetG, carbohydrateMaxG: $carbohydrateMaxG, proteinMinG: $proteinMinG, proteinTargetG: $proteinTargetG, proteinMaxG: $proteinMaxG, fatMinG: $fatMinG, fatTargetG: $fatTargetG, fatMaxG: $fatMaxG, sugarLimitG: $sugarLimitG, sodiumAdequateMg: $sodiumAdequateMg, sodiumRiskReductionMg: $sodiumRiskReductionMg, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $NutritionStandardResponseDtoCopyWith<$Res>  {
   factory $NutritionStandardResponseDtoCopyWith(NutritionStandardResponseDto value, $Res Function(NutritionStandardResponseDto) _then) = _$NutritionStandardResponseDtoCopyWithImpl;
 @useResult
 $Res call({
- int id, int userId, int eerKcal, String standardSource, String activityLevel, int carbohydrateMinG, int carbohydrateTargetG, int carbohydrateMaxG, int proteinMinG, int proteinTargetG, int proteinMaxG, int fatMinG, int fatTargetG, int fatMaxG, int sugarLimitG, int sodiumAdequateMg, int sodiumRiskReductionMg, DateTime createdAt, DateTime updatedAt
+ int id, int userId, int eerKcal, String standardSource, String summaryTargetBasis, int carbohydrateMinG, int carbohydrateTargetG, int carbohydrateMaxG, int proteinMinG, int proteinTargetG, int proteinMaxG, int fatMinG, int fatTargetG, int fatMaxG, int sugarLimitG, int sodiumAdequateMg, int sodiumRiskReductionMg, DateTime createdAt, DateTime updatedAt
 });
 
 
@@ -65,13 +65,13 @@ class _$NutritionStandardResponseDtoCopyWithImpl<$Res>
 
 /// Create a copy of NutritionStandardResponseDto
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? userId = null,Object? eerKcal = null,Object? standardSource = null,Object? activityLevel = null,Object? carbohydrateMinG = null,Object? carbohydrateTargetG = null,Object? carbohydrateMaxG = null,Object? proteinMinG = null,Object? proteinTargetG = null,Object? proteinMaxG = null,Object? fatMinG = null,Object? fatTargetG = null,Object? fatMaxG = null,Object? sugarLimitG = null,Object? sodiumAdequateMg = null,Object? sodiumRiskReductionMg = null,Object? createdAt = null,Object? updatedAt = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? userId = null,Object? eerKcal = null,Object? standardSource = null,Object? summaryTargetBasis = null,Object? carbohydrateMinG = null,Object? carbohydrateTargetG = null,Object? carbohydrateMaxG = null,Object? proteinMinG = null,Object? proteinTargetG = null,Object? proteinMaxG = null,Object? fatMinG = null,Object? fatTargetG = null,Object? fatMaxG = null,Object? sugarLimitG = null,Object? sodiumAdequateMg = null,Object? sodiumRiskReductionMg = null,Object? createdAt = null,Object? updatedAt = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as int,eerKcal: null == eerKcal ? _self.eerKcal : eerKcal // ignore: cast_nullable_to_non_nullable
 as int,standardSource: null == standardSource ? _self.standardSource : standardSource // ignore: cast_nullable_to_non_nullable
-as String,activityLevel: null == activityLevel ? _self.activityLevel : activityLevel // ignore: cast_nullable_to_non_nullable
+as String,summaryTargetBasis: null == summaryTargetBasis ? _self.summaryTargetBasis : summaryTargetBasis // ignore: cast_nullable_to_non_nullable
 as String,carbohydrateMinG: null == carbohydrateMinG ? _self.carbohydrateMinG : carbohydrateMinG // ignore: cast_nullable_to_non_nullable
 as int,carbohydrateTargetG: null == carbohydrateTargetG ? _self.carbohydrateTargetG : carbohydrateTargetG // ignore: cast_nullable_to_non_nullable
 as int,carbohydrateMaxG: null == carbohydrateMaxG ? _self.carbohydrateMaxG : carbohydrateMaxG // ignore: cast_nullable_to_non_nullable
@@ -171,10 +171,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  int userId,  int eerKcal,  String standardSource,  String activityLevel,  int carbohydrateMinG,  int carbohydrateTargetG,  int carbohydrateMaxG,  int proteinMinG,  int proteinTargetG,  int proteinMaxG,  int fatMinG,  int fatTargetG,  int fatMaxG,  int sugarLimitG,  int sodiumAdequateMg,  int sodiumRiskReductionMg,  DateTime createdAt,  DateTime updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  int userId,  int eerKcal,  String standardSource,  String summaryTargetBasis,  int carbohydrateMinG,  int carbohydrateTargetG,  int carbohydrateMaxG,  int proteinMinG,  int proteinTargetG,  int proteinMaxG,  int fatMinG,  int fatTargetG,  int fatMaxG,  int sugarLimitG,  int sodiumAdequateMg,  int sodiumRiskReductionMg,  DateTime createdAt,  DateTime updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _NutritionStandardResponseDto() when $default != null:
-return $default(_that.id,_that.userId,_that.eerKcal,_that.standardSource,_that.activityLevel,_that.carbohydrateMinG,_that.carbohydrateTargetG,_that.carbohydrateMaxG,_that.proteinMinG,_that.proteinTargetG,_that.proteinMaxG,_that.fatMinG,_that.fatTargetG,_that.fatMaxG,_that.sugarLimitG,_that.sodiumAdequateMg,_that.sodiumRiskReductionMg,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.userId,_that.eerKcal,_that.standardSource,_that.summaryTargetBasis,_that.carbohydrateMinG,_that.carbohydrateTargetG,_that.carbohydrateMaxG,_that.proteinMinG,_that.proteinTargetG,_that.proteinMaxG,_that.fatMinG,_that.fatTargetG,_that.fatMaxG,_that.sugarLimitG,_that.sodiumAdequateMg,_that.sodiumRiskReductionMg,_that.createdAt,_that.updatedAt);case _:
   return orElse();
 
 }
@@ -192,10 +192,10 @@ return $default(_that.id,_that.userId,_that.eerKcal,_that.standardSource,_that.a
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  int userId,  int eerKcal,  String standardSource,  String activityLevel,  int carbohydrateMinG,  int carbohydrateTargetG,  int carbohydrateMaxG,  int proteinMinG,  int proteinTargetG,  int proteinMaxG,  int fatMinG,  int fatTargetG,  int fatMaxG,  int sugarLimitG,  int sodiumAdequateMg,  int sodiumRiskReductionMg,  DateTime createdAt,  DateTime updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  int userId,  int eerKcal,  String standardSource,  String summaryTargetBasis,  int carbohydrateMinG,  int carbohydrateTargetG,  int carbohydrateMaxG,  int proteinMinG,  int proteinTargetG,  int proteinMaxG,  int fatMinG,  int fatTargetG,  int fatMaxG,  int sugarLimitG,  int sodiumAdequateMg,  int sodiumRiskReductionMg,  DateTime createdAt,  DateTime updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _NutritionStandardResponseDto():
-return $default(_that.id,_that.userId,_that.eerKcal,_that.standardSource,_that.activityLevel,_that.carbohydrateMinG,_that.carbohydrateTargetG,_that.carbohydrateMaxG,_that.proteinMinG,_that.proteinTargetG,_that.proteinMaxG,_that.fatMinG,_that.fatTargetG,_that.fatMaxG,_that.sugarLimitG,_that.sodiumAdequateMg,_that.sodiumRiskReductionMg,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.userId,_that.eerKcal,_that.standardSource,_that.summaryTargetBasis,_that.carbohydrateMinG,_that.carbohydrateTargetG,_that.carbohydrateMaxG,_that.proteinMinG,_that.proteinTargetG,_that.proteinMaxG,_that.fatMinG,_that.fatTargetG,_that.fatMaxG,_that.sugarLimitG,_that.sodiumAdequateMg,_that.sodiumRiskReductionMg,_that.createdAt,_that.updatedAt);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -212,10 +212,10 @@ return $default(_that.id,_that.userId,_that.eerKcal,_that.standardSource,_that.a
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  int userId,  int eerKcal,  String standardSource,  String activityLevel,  int carbohydrateMinG,  int carbohydrateTargetG,  int carbohydrateMaxG,  int proteinMinG,  int proteinTargetG,  int proteinMaxG,  int fatMinG,  int fatTargetG,  int fatMaxG,  int sugarLimitG,  int sodiumAdequateMg,  int sodiumRiskReductionMg,  DateTime createdAt,  DateTime updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  int userId,  int eerKcal,  String standardSource,  String summaryTargetBasis,  int carbohydrateMinG,  int carbohydrateTargetG,  int carbohydrateMaxG,  int proteinMinG,  int proteinTargetG,  int proteinMaxG,  int fatMinG,  int fatTargetG,  int fatMaxG,  int sugarLimitG,  int sodiumAdequateMg,  int sodiumRiskReductionMg,  DateTime createdAt,  DateTime updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _NutritionStandardResponseDto() when $default != null:
-return $default(_that.id,_that.userId,_that.eerKcal,_that.standardSource,_that.activityLevel,_that.carbohydrateMinG,_that.carbohydrateTargetG,_that.carbohydrateMaxG,_that.proteinMinG,_that.proteinTargetG,_that.proteinMaxG,_that.fatMinG,_that.fatTargetG,_that.fatMaxG,_that.sugarLimitG,_that.sodiumAdequateMg,_that.sodiumRiskReductionMg,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.userId,_that.eerKcal,_that.standardSource,_that.summaryTargetBasis,_that.carbohydrateMinG,_that.carbohydrateTargetG,_that.carbohydrateMaxG,_that.proteinMinG,_that.proteinTargetG,_that.proteinMaxG,_that.fatMinG,_that.fatTargetG,_that.fatMaxG,_that.sugarLimitG,_that.sodiumAdequateMg,_that.sodiumRiskReductionMg,_that.createdAt,_that.updatedAt);case _:
   return null;
 
 }
@@ -227,14 +227,14 @@ return $default(_that.id,_that.userId,_that.eerKcal,_that.standardSource,_that.a
 @JsonSerializable()
 
 class _NutritionStandardResponseDto implements NutritionStandardResponseDto {
-  const _NutritionStandardResponseDto({required this.id, required this.userId, required this.eerKcal, required this.standardSource, required this.activityLevel, required this.carbohydrateMinG, required this.carbohydrateTargetG, required this.carbohydrateMaxG, required this.proteinMinG, required this.proteinTargetG, required this.proteinMaxG, required this.fatMinG, required this.fatTargetG, required this.fatMaxG, required this.sugarLimitG, required this.sodiumAdequateMg, required this.sodiumRiskReductionMg, required this.createdAt, required this.updatedAt});
+  const _NutritionStandardResponseDto({required this.id, required this.userId, required this.eerKcal, required this.standardSource, required this.summaryTargetBasis, required this.carbohydrateMinG, required this.carbohydrateTargetG, required this.carbohydrateMaxG, required this.proteinMinG, required this.proteinTargetG, required this.proteinMaxG, required this.fatMinG, required this.fatTargetG, required this.fatMaxG, required this.sugarLimitG, required this.sodiumAdequateMg, required this.sodiumRiskReductionMg, required this.createdAt, required this.updatedAt});
   factory _NutritionStandardResponseDto.fromJson(Map<String, dynamic> json) => _$NutritionStandardResponseDtoFromJson(json);
 
 @override final  int id;
 @override final  int userId;
 @override final  int eerKcal;
 @override final  String standardSource;
-@override final  String activityLevel;
+@override final  String summaryTargetBasis;
 @override final  int carbohydrateMinG;
 @override final  int carbohydrateTargetG;
 @override final  int carbohydrateMaxG;
@@ -263,16 +263,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NutritionStandardResponseDto&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.eerKcal, eerKcal) || other.eerKcal == eerKcal)&&(identical(other.standardSource, standardSource) || other.standardSource == standardSource)&&(identical(other.activityLevel, activityLevel) || other.activityLevel == activityLevel)&&(identical(other.carbohydrateMinG, carbohydrateMinG) || other.carbohydrateMinG == carbohydrateMinG)&&(identical(other.carbohydrateTargetG, carbohydrateTargetG) || other.carbohydrateTargetG == carbohydrateTargetG)&&(identical(other.carbohydrateMaxG, carbohydrateMaxG) || other.carbohydrateMaxG == carbohydrateMaxG)&&(identical(other.proteinMinG, proteinMinG) || other.proteinMinG == proteinMinG)&&(identical(other.proteinTargetG, proteinTargetG) || other.proteinTargetG == proteinTargetG)&&(identical(other.proteinMaxG, proteinMaxG) || other.proteinMaxG == proteinMaxG)&&(identical(other.fatMinG, fatMinG) || other.fatMinG == fatMinG)&&(identical(other.fatTargetG, fatTargetG) || other.fatTargetG == fatTargetG)&&(identical(other.fatMaxG, fatMaxG) || other.fatMaxG == fatMaxG)&&(identical(other.sugarLimitG, sugarLimitG) || other.sugarLimitG == sugarLimitG)&&(identical(other.sodiumAdequateMg, sodiumAdequateMg) || other.sodiumAdequateMg == sodiumAdequateMg)&&(identical(other.sodiumRiskReductionMg, sodiumRiskReductionMg) || other.sodiumRiskReductionMg == sodiumRiskReductionMg)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NutritionStandardResponseDto&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.eerKcal, eerKcal) || other.eerKcal == eerKcal)&&(identical(other.standardSource, standardSource) || other.standardSource == standardSource)&&(identical(other.summaryTargetBasis, summaryTargetBasis) || other.summaryTargetBasis == summaryTargetBasis)&&(identical(other.carbohydrateMinG, carbohydrateMinG) || other.carbohydrateMinG == carbohydrateMinG)&&(identical(other.carbohydrateTargetG, carbohydrateTargetG) || other.carbohydrateTargetG == carbohydrateTargetG)&&(identical(other.carbohydrateMaxG, carbohydrateMaxG) || other.carbohydrateMaxG == carbohydrateMaxG)&&(identical(other.proteinMinG, proteinMinG) || other.proteinMinG == proteinMinG)&&(identical(other.proteinTargetG, proteinTargetG) || other.proteinTargetG == proteinTargetG)&&(identical(other.proteinMaxG, proteinMaxG) || other.proteinMaxG == proteinMaxG)&&(identical(other.fatMinG, fatMinG) || other.fatMinG == fatMinG)&&(identical(other.fatTargetG, fatTargetG) || other.fatTargetG == fatTargetG)&&(identical(other.fatMaxG, fatMaxG) || other.fatMaxG == fatMaxG)&&(identical(other.sugarLimitG, sugarLimitG) || other.sugarLimitG == sugarLimitG)&&(identical(other.sodiumAdequateMg, sodiumAdequateMg) || other.sodiumAdequateMg == sodiumAdequateMg)&&(identical(other.sodiumRiskReductionMg, sodiumRiskReductionMg) || other.sodiumRiskReductionMg == sodiumRiskReductionMg)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,id,userId,eerKcal,standardSource,activityLevel,carbohydrateMinG,carbohydrateTargetG,carbohydrateMaxG,proteinMinG,proteinTargetG,proteinMaxG,fatMinG,fatTargetG,fatMaxG,sugarLimitG,sodiumAdequateMg,sodiumRiskReductionMg,createdAt,updatedAt]);
+int get hashCode => Object.hashAll([runtimeType,id,userId,eerKcal,standardSource,summaryTargetBasis,carbohydrateMinG,carbohydrateTargetG,carbohydrateMaxG,proteinMinG,proteinTargetG,proteinMaxG,fatMinG,fatTargetG,fatMaxG,sugarLimitG,sodiumAdequateMg,sodiumRiskReductionMg,createdAt,updatedAt]);
 
 @override
 String toString() {
-  return 'NutritionStandardResponseDto(id: $id, userId: $userId, eerKcal: $eerKcal, standardSource: $standardSource, activityLevel: $activityLevel, carbohydrateMinG: $carbohydrateMinG, carbohydrateTargetG: $carbohydrateTargetG, carbohydrateMaxG: $carbohydrateMaxG, proteinMinG: $proteinMinG, proteinTargetG: $proteinTargetG, proteinMaxG: $proteinMaxG, fatMinG: $fatMinG, fatTargetG: $fatTargetG, fatMaxG: $fatMaxG, sugarLimitG: $sugarLimitG, sodiumAdequateMg: $sodiumAdequateMg, sodiumRiskReductionMg: $sodiumRiskReductionMg, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'NutritionStandardResponseDto(id: $id, userId: $userId, eerKcal: $eerKcal, standardSource: $standardSource, summaryTargetBasis: $summaryTargetBasis, carbohydrateMinG: $carbohydrateMinG, carbohydrateTargetG: $carbohydrateTargetG, carbohydrateMaxG: $carbohydrateMaxG, proteinMinG: $proteinMinG, proteinTargetG: $proteinTargetG, proteinMaxG: $proteinMaxG, fatMinG: $fatMinG, fatTargetG: $fatTargetG, fatMaxG: $fatMaxG, sugarLimitG: $sugarLimitG, sodiumAdequateMg: $sodiumAdequateMg, sodiumRiskReductionMg: $sodiumRiskReductionMg, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
@@ -283,7 +283,7 @@ abstract mixin class _$NutritionStandardResponseDtoCopyWith<$Res> implements $Nu
   factory _$NutritionStandardResponseDtoCopyWith(_NutritionStandardResponseDto value, $Res Function(_NutritionStandardResponseDto) _then) = __$NutritionStandardResponseDtoCopyWithImpl;
 @override @useResult
 $Res call({
- int id, int userId, int eerKcal, String standardSource, String activityLevel, int carbohydrateMinG, int carbohydrateTargetG, int carbohydrateMaxG, int proteinMinG, int proteinTargetG, int proteinMaxG, int fatMinG, int fatTargetG, int fatMaxG, int sugarLimitG, int sodiumAdequateMg, int sodiumRiskReductionMg, DateTime createdAt, DateTime updatedAt
+ int id, int userId, int eerKcal, String standardSource, String summaryTargetBasis, int carbohydrateMinG, int carbohydrateTargetG, int carbohydrateMaxG, int proteinMinG, int proteinTargetG, int proteinMaxG, int fatMinG, int fatTargetG, int fatMaxG, int sugarLimitG, int sodiumAdequateMg, int sodiumRiskReductionMg, DateTime createdAt, DateTime updatedAt
 });
 
 
@@ -300,13 +300,13 @@ class __$NutritionStandardResponseDtoCopyWithImpl<$Res>
 
 /// Create a copy of NutritionStandardResponseDto
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? userId = null,Object? eerKcal = null,Object? standardSource = null,Object? activityLevel = null,Object? carbohydrateMinG = null,Object? carbohydrateTargetG = null,Object? carbohydrateMaxG = null,Object? proteinMinG = null,Object? proteinTargetG = null,Object? proteinMaxG = null,Object? fatMinG = null,Object? fatTargetG = null,Object? fatMaxG = null,Object? sugarLimitG = null,Object? sodiumAdequateMg = null,Object? sodiumRiskReductionMg = null,Object? createdAt = null,Object? updatedAt = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? userId = null,Object? eerKcal = null,Object? standardSource = null,Object? summaryTargetBasis = null,Object? carbohydrateMinG = null,Object? carbohydrateTargetG = null,Object? carbohydrateMaxG = null,Object? proteinMinG = null,Object? proteinTargetG = null,Object? proteinMaxG = null,Object? fatMinG = null,Object? fatTargetG = null,Object? fatMaxG = null,Object? sugarLimitG = null,Object? sodiumAdequateMg = null,Object? sodiumRiskReductionMg = null,Object? createdAt = null,Object? updatedAt = null,}) {
   return _then(_NutritionStandardResponseDto(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as int,eerKcal: null == eerKcal ? _self.eerKcal : eerKcal // ignore: cast_nullable_to_non_nullable
 as int,standardSource: null == standardSource ? _self.standardSource : standardSource // ignore: cast_nullable_to_non_nullable
-as String,activityLevel: null == activityLevel ? _self.activityLevel : activityLevel // ignore: cast_nullable_to_non_nullable
+as String,summaryTargetBasis: null == summaryTargetBasis ? _self.summaryTargetBasis : summaryTargetBasis // ignore: cast_nullable_to_non_nullable
 as String,carbohydrateMinG: null == carbohydrateMinG ? _self.carbohydrateMinG : carbohydrateMinG // ignore: cast_nullable_to_non_nullable
 as int,carbohydrateTargetG: null == carbohydrateTargetG ? _self.carbohydrateTargetG : carbohydrateTargetG // ignore: cast_nullable_to_non_nullable
 as int,carbohydrateMaxG: null == carbohydrateMaxG ? _self.carbohydrateMaxG : carbohydrateMaxG // ignore: cast_nullable_to_non_nullable

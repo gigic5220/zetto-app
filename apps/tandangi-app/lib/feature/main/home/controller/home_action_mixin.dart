@@ -22,4 +22,53 @@ mixin HomeActionMixin {
         .read(_isShowSelectPhotoButtonProvider.notifier)
         .set(!isShowSelectPhotoButton);
   }
+
+  void onTapChangeNutritionStandards(
+    WidgetRef ref, {
+    required Widget Function({
+      required void Function({
+        required NutritionSummaryTargetBasisEnum summaryTargetBasisEnum,
+      })
+      onTapSummaryTargetBasisEnum,
+    })
+    buildBottomSheetBodyWidgetCallback,
+    required Widget Function({
+      required VoidCallback onTapCancel,
+      required Future<void> Function() onTapChange,
+    })
+    buildBottomSheetCallToActionWidgetCallback,
+  }) {
+    DialogUtils.showLockedBottomSheet(
+      context: ref.context,
+      child: buildBottomSheetBodyWidgetCallback(
+        onTapSummaryTargetBasisEnum:
+            ({
+              required NutritionSummaryTargetBasisEnum summaryTargetBasisEnum,
+            }) {
+              ref
+                  .read(
+                    _selectedNutritionSummaryTargetBasisEnumProvider.notifier,
+                  )
+                  .set(summaryTargetBasisEnum);
+            },
+      ),
+      callToActionWidget: buildBottomSheetCallToActionWidgetCallback(
+        onTapCancel: () {
+          ref.context.pop();
+        },
+        onTapChange: () async {
+          final selectedNutritionSummaryTargetBasisEnum = ref.read(
+            _selectedNutritionSummaryTargetBasisEnumProvider,
+          );
+          if (selectedNutritionSummaryTargetBasisEnum == null) return;
+          await getIt<NutritionRepository>().updateSummaryTargetBasis(
+            selectedNutritionSummaryTargetBasisEnum,
+          );
+          ref.invalidate(_todayNutritionSummaryProvider);
+          if (!ref.context.mounted) return;
+          ref.context.pop();
+        },
+      ),
+    );
+  }
 }

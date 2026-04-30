@@ -13,6 +13,7 @@ abstract class FoodAnalyzeRepository {
     int? page,
     int? size,
     List<String>? sort,
+    String? date,
   });
 
   Future<FoodAnalysisEntity> getFoodAnalysis({required int foodAnalysisId});

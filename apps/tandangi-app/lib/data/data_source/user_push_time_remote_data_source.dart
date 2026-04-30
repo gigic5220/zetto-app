@@ -58,7 +58,7 @@ class UserPushTimeRemoteDataSourceImpl implements UserPushTimeRemoteDataSource {
     required String pushTime,
     required bool isEnabled,
   }) async {
-    final response = await _dio.put(
+    final response = await _dio.patch(
       '/api/user-push-times/$id',
       data: {'pushTime': pushTime, 'isEnabled': isEnabled},
     );

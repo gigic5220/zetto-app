@@ -138,6 +138,9 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/ic_reading_glass.svg
   String get icReadingGlass => 'assets/svgs/ic_reading_glass.svg';
 
+  /// File path: assets/svgs/ic_setting_fill.svg
+  String get icSettingFill => 'assets/svgs/ic_setting_fill.svg';
+
   /// File path: assets/svgs/ic_x.svg
   String get icX => 'assets/svgs/ic_x.svg';
 
@@ -149,9 +152,6 @@ class $AssetsSvgsGen {
 
   /// File path: assets/svgs/logo_kakao.svg
   String get logoKakao => 'assets/svgs/logo_kakao.svg';
-
-  /// File path: assets/svgs/setting.svg
-  String get setting => 'assets/svgs/setting.svg';
 
   /// List of all assets
   List<String> get values => [
@@ -176,11 +176,11 @@ class $AssetsSvgsGen {
     icPlus,
     icQuestionFill,
     icReadingGlass,
+    icSettingFill,
     icX,
     logoApple,
     logoGoogle,
     logoKakao,
-    setting,
   ];
 }
 

@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:tandangi/domain/enum/nutrition_grade_enum.dart';
 import 'package:tandangi/domain/enum/nutrition_status_enum.dart';
+import 'package:tandangi/domain/enum/nutrition_summary_target_basis_enum.dart';
 
 part 'today_nutrition_summary_entity.freezed.dart';
 part 'today_nutrition_summary_entity.g.dart';
@@ -12,10 +13,11 @@ abstract class TodayNutritionSummaryEntity with _$TodayNutritionSummaryEntity {
     required String timezone,
     required int analysisCount,
     required double totalKcal,
+    required NutritionSummaryTargetBasisEnum summaryTargetBasisEnum,
     required int? baseScore,
     required int? modifierScore,
     required int? totalScore,
-    required NutritionGradeEnum? grade,
+    required NutritionGradeEnum? gradeEnum,
     required NutrientSummaryEntity carbohydrate,
     required NutrientSummaryEntity protein,
     required NutrientSummaryEntity fat,

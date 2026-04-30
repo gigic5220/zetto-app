@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TodayNutritionSummaryResponseDto {
 
- DateTime get date; String get timezone; int get analysisCount; double get totalKcal; int? get baseScore; int? get modifierScore; int? get totalScore; String? get grade; NutrientSummaryResponseDto get carbohydrate; NutrientSummaryResponseDto get protein; NutrientSummaryResponseDto get fat; SugarSummaryResponseDto get sugar; SodiumSummaryResponseDto get sodium;
+ DateTime get date; String get timezone; int get analysisCount; double get totalKcal; String get summaryTargetBasis; int? get baseScore; int? get modifierScore; int? get totalScore; String? get grade; NutrientSummaryResponseDto get carbohydrate; NutrientSummaryResponseDto get protein; NutrientSummaryResponseDto get fat; SugarSummaryResponseDto get sugar; SodiumSummaryResponseDto get sodium;
 /// Create a copy of TodayNutritionSummaryResponseDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $TodayNutritionSummaryResponseDtoCopyWith<TodayNutritionSummaryResponseDto> get 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TodayNutritionSummaryResponseDto&&(identical(other.date, date) || other.date == date)&&(identical(other.timezone, timezone) || other.timezone == timezone)&&(identical(other.analysisCount, analysisCount) || other.analysisCount == analysisCount)&&(identical(other.totalKcal, totalKcal) || other.totalKcal == totalKcal)&&(identical(other.baseScore, baseScore) || other.baseScore == baseScore)&&(identical(other.modifierScore, modifierScore) || other.modifierScore == modifierScore)&&(identical(other.totalScore, totalScore) || other.totalScore == totalScore)&&(identical(other.grade, grade) || other.grade == grade)&&(identical(other.carbohydrate, carbohydrate) || other.carbohydrate == carbohydrate)&&(identical(other.protein, protein) || other.protein == protein)&&(identical(other.fat, fat) || other.fat == fat)&&(identical(other.sugar, sugar) || other.sugar == sugar)&&(identical(other.sodium, sodium) || other.sodium == sodium));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TodayNutritionSummaryResponseDto&&(identical(other.date, date) || other.date == date)&&(identical(other.timezone, timezone) || other.timezone == timezone)&&(identical(other.analysisCount, analysisCount) || other.analysisCount == analysisCount)&&(identical(other.totalKcal, totalKcal) || other.totalKcal == totalKcal)&&(identical(other.summaryTargetBasis, summaryTargetBasis) || other.summaryTargetBasis == summaryTargetBasis)&&(identical(other.baseScore, baseScore) || other.baseScore == baseScore)&&(identical(other.modifierScore, modifierScore) || other.modifierScore == modifierScore)&&(identical(other.totalScore, totalScore) || other.totalScore == totalScore)&&(identical(other.grade, grade) || other.grade == grade)&&(identical(other.carbohydrate, carbohydrate) || other.carbohydrate == carbohydrate)&&(identical(other.protein, protein) || other.protein == protein)&&(identical(other.fat, fat) || other.fat == fat)&&(identical(other.sugar, sugar) || other.sugar == sugar)&&(identical(other.sodium, sodium) || other.sodium == sodium));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,date,timezone,analysisCount,totalKcal,baseScore,modifierScore,totalScore,grade,carbohydrate,protein,fat,sugar,sodium);
+int get hashCode => Object.hash(runtimeType,date,timezone,analysisCount,totalKcal,summaryTargetBasis,baseScore,modifierScore,totalScore,grade,carbohydrate,protein,fat,sugar,sodium);
 
 @override
 String toString() {
-  return 'TodayNutritionSummaryResponseDto(date: $date, timezone: $timezone, analysisCount: $analysisCount, totalKcal: $totalKcal, baseScore: $baseScore, modifierScore: $modifierScore, totalScore: $totalScore, grade: $grade, carbohydrate: $carbohydrate, protein: $protein, fat: $fat, sugar: $sugar, sodium: $sodium)';
+  return 'TodayNutritionSummaryResponseDto(date: $date, timezone: $timezone, analysisCount: $analysisCount, totalKcal: $totalKcal, summaryTargetBasis: $summaryTargetBasis, baseScore: $baseScore, modifierScore: $modifierScore, totalScore: $totalScore, grade: $grade, carbohydrate: $carbohydrate, protein: $protein, fat: $fat, sugar: $sugar, sodium: $sodium)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $TodayNutritionSummaryResponseDtoCopyWith<$Res>  {
   factory $TodayNutritionSummaryResponseDtoCopyWith(TodayNutritionSummaryResponseDto value, $Res Function(TodayNutritionSummaryResponseDto) _then) = _$TodayNutritionSummaryResponseDtoCopyWithImpl;
 @useResult
 $Res call({
- DateTime date, String timezone, int analysisCount, double totalKcal, int? baseScore, int? modifierScore, int? totalScore, String? grade, NutrientSummaryResponseDto carbohydrate, NutrientSummaryResponseDto protein, NutrientSummaryResponseDto fat, SugarSummaryResponseDto sugar, SodiumSummaryResponseDto sodium
+ DateTime date, String timezone, int analysisCount, double totalKcal, String summaryTargetBasis, int? baseScore, int? modifierScore, int? totalScore, String? grade, NutrientSummaryResponseDto carbohydrate, NutrientSummaryResponseDto protein, NutrientSummaryResponseDto fat, SugarSummaryResponseDto sugar, SodiumSummaryResponseDto sodium
 });
 
 
@@ -65,13 +65,14 @@ class _$TodayNutritionSummaryResponseDtoCopyWithImpl<$Res>
 
 /// Create a copy of TodayNutritionSummaryResponseDto
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? date = null,Object? timezone = null,Object? analysisCount = null,Object? totalKcal = null,Object? baseScore = freezed,Object? modifierScore = freezed,Object? totalScore = freezed,Object? grade = freezed,Object? carbohydrate = null,Object? protein = null,Object? fat = null,Object? sugar = null,Object? sodium = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? date = null,Object? timezone = null,Object? analysisCount = null,Object? totalKcal = null,Object? summaryTargetBasis = null,Object? baseScore = freezed,Object? modifierScore = freezed,Object? totalScore = freezed,Object? grade = freezed,Object? carbohydrate = null,Object? protein = null,Object? fat = null,Object? sugar = null,Object? sodium = null,}) {
   return _then(_self.copyWith(
 date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
 as DateTime,timezone: null == timezone ? _self.timezone : timezone // ignore: cast_nullable_to_non_nullable
 as String,analysisCount: null == analysisCount ? _self.analysisCount : analysisCount // ignore: cast_nullable_to_non_nullable
 as int,totalKcal: null == totalKcal ? _self.totalKcal : totalKcal // ignore: cast_nullable_to_non_nullable
-as double,baseScore: freezed == baseScore ? _self.baseScore : baseScore // ignore: cast_nullable_to_non_nullable
+as double,summaryTargetBasis: null == summaryTargetBasis ? _self.summaryTargetBasis : summaryTargetBasis // ignore: cast_nullable_to_non_nullable
+as String,baseScore: freezed == baseScore ? _self.baseScore : baseScore // ignore: cast_nullable_to_non_nullable
 as int?,modifierScore: freezed == modifierScore ? _self.modifierScore : modifierScore // ignore: cast_nullable_to_non_nullable
 as int?,totalScore: freezed == totalScore ? _self.totalScore : totalScore // ignore: cast_nullable_to_non_nullable
 as int?,grade: freezed == grade ? _self.grade : grade // ignore: cast_nullable_to_non_nullable
@@ -210,10 +211,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DateTime date,  String timezone,  int analysisCount,  double totalKcal,  int? baseScore,  int? modifierScore,  int? totalScore,  String? grade,  NutrientSummaryResponseDto carbohydrate,  NutrientSummaryResponseDto protein,  NutrientSummaryResponseDto fat,  SugarSummaryResponseDto sugar,  SodiumSummaryResponseDto sodium)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DateTime date,  String timezone,  int analysisCount,  double totalKcal,  String summaryTargetBasis,  int? baseScore,  int? modifierScore,  int? totalScore,  String? grade,  NutrientSummaryResponseDto carbohydrate,  NutrientSummaryResponseDto protein,  NutrientSummaryResponseDto fat,  SugarSummaryResponseDto sugar,  SodiumSummaryResponseDto sodium)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TodayNutritionSummaryResponseDto() when $default != null:
-return $default(_that.date,_that.timezone,_that.analysisCount,_that.totalKcal,_that.baseScore,_that.modifierScore,_that.totalScore,_that.grade,_that.carbohydrate,_that.protein,_that.fat,_that.sugar,_that.sodium);case _:
+return $default(_that.date,_that.timezone,_that.analysisCount,_that.totalKcal,_that.summaryTargetBasis,_that.baseScore,_that.modifierScore,_that.totalScore,_that.grade,_that.carbohydrate,_that.protein,_that.fat,_that.sugar,_that.sodium);case _:
   return orElse();
 
 }
@@ -231,10 +232,10 @@ return $default(_that.date,_that.timezone,_that.analysisCount,_that.totalKcal,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DateTime date,  String timezone,  int analysisCount,  double totalKcal,  int? baseScore,  int? modifierScore,  int? totalScore,  String? grade,  NutrientSummaryResponseDto carbohydrate,  NutrientSummaryResponseDto protein,  NutrientSummaryResponseDto fat,  SugarSummaryResponseDto sugar,  SodiumSummaryResponseDto sodium)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DateTime date,  String timezone,  int analysisCount,  double totalKcal,  String summaryTargetBasis,  int? baseScore,  int? modifierScore,  int? totalScore,  String? grade,  NutrientSummaryResponseDto carbohydrate,  NutrientSummaryResponseDto protein,  NutrientSummaryResponseDto fat,  SugarSummaryResponseDto sugar,  SodiumSummaryResponseDto sodium)  $default,) {final _that = this;
 switch (_that) {
 case _TodayNutritionSummaryResponseDto():
-return $default(_that.date,_that.timezone,_that.analysisCount,_that.totalKcal,_that.baseScore,_that.modifierScore,_that.totalScore,_that.grade,_that.carbohydrate,_that.protein,_that.fat,_that.sugar,_that.sodium);case _:
+return $default(_that.date,_that.timezone,_that.analysisCount,_that.totalKcal,_that.summaryTargetBasis,_that.baseScore,_that.modifierScore,_that.totalScore,_that.grade,_that.carbohydrate,_that.protein,_that.fat,_that.sugar,_that.sodium);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -251,10 +252,10 @@ return $default(_that.date,_that.timezone,_that.analysisCount,_that.totalKcal,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DateTime date,  String timezone,  int analysisCount,  double totalKcal,  int? baseScore,  int? modifierScore,  int? totalScore,  String? grade,  NutrientSummaryResponseDto carbohydrate,  NutrientSummaryResponseDto protein,  NutrientSummaryResponseDto fat,  SugarSummaryResponseDto sugar,  SodiumSummaryResponseDto sodium)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DateTime date,  String timezone,  int analysisCount,  double totalKcal,  String summaryTargetBasis,  int? baseScore,  int? modifierScore,  int? totalScore,  String? grade,  NutrientSummaryResponseDto carbohydrate,  NutrientSummaryResponseDto protein,  NutrientSummaryResponseDto fat,  SugarSummaryResponseDto sugar,  SodiumSummaryResponseDto sodium)?  $default,) {final _that = this;
 switch (_that) {
 case _TodayNutritionSummaryResponseDto() when $default != null:
-return $default(_that.date,_that.timezone,_that.analysisCount,_that.totalKcal,_that.baseScore,_that.modifierScore,_that.totalScore,_that.grade,_that.carbohydrate,_that.protein,_that.fat,_that.sugar,_that.sodium);case _:
+return $default(_that.date,_that.timezone,_that.analysisCount,_that.totalKcal,_that.summaryTargetBasis,_that.baseScore,_that.modifierScore,_that.totalScore,_that.grade,_that.carbohydrate,_that.protein,_that.fat,_that.sugar,_that.sodium);case _:
   return null;
 
 }
@@ -266,13 +267,14 @@ return $default(_that.date,_that.timezone,_that.analysisCount,_that.totalKcal,_t
 @JsonSerializable()
 
 class _TodayNutritionSummaryResponseDto implements TodayNutritionSummaryResponseDto {
-  const _TodayNutritionSummaryResponseDto({required this.date, required this.timezone, required this.analysisCount, required this.totalKcal, this.baseScore, this.modifierScore, this.totalScore, this.grade, required this.carbohydrate, required this.protein, required this.fat, required this.sugar, required this.sodium});
+  const _TodayNutritionSummaryResponseDto({required this.date, required this.timezone, required this.analysisCount, required this.totalKcal, required this.summaryTargetBasis, this.baseScore, this.modifierScore, this.totalScore, this.grade, required this.carbohydrate, required this.protein, required this.fat, required this.sugar, required this.sodium});
   factory _TodayNutritionSummaryResponseDto.fromJson(Map<String, dynamic> json) => _$TodayNutritionSummaryResponseDtoFromJson(json);
 
 @override final  DateTime date;
 @override final  String timezone;
 @override final  int analysisCount;
 @override final  double totalKcal;
+@override final  String summaryTargetBasis;
 @override final  int? baseScore;
 @override final  int? modifierScore;
 @override final  int? totalScore;
@@ -296,16 +298,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TodayNutritionSummaryResponseDto&&(identical(other.date, date) || other.date == date)&&(identical(other.timezone, timezone) || other.timezone == timezone)&&(identical(other.analysisCount, analysisCount) || other.analysisCount == analysisCount)&&(identical(other.totalKcal, totalKcal) || other.totalKcal == totalKcal)&&(identical(other.baseScore, baseScore) || other.baseScore == baseScore)&&(identical(other.modifierScore, modifierScore) || other.modifierScore == modifierScore)&&(identical(other.totalScore, totalScore) || other.totalScore == totalScore)&&(identical(other.grade, grade) || other.grade == grade)&&(identical(other.carbohydrate, carbohydrate) || other.carbohydrate == carbohydrate)&&(identical(other.protein, protein) || other.protein == protein)&&(identical(other.fat, fat) || other.fat == fat)&&(identical(other.sugar, sugar) || other.sugar == sugar)&&(identical(other.sodium, sodium) || other.sodium == sodium));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TodayNutritionSummaryResponseDto&&(identical(other.date, date) || other.date == date)&&(identical(other.timezone, timezone) || other.timezone == timezone)&&(identical(other.analysisCount, analysisCount) || other.analysisCount == analysisCount)&&(identical(other.totalKcal, totalKcal) || other.totalKcal == totalKcal)&&(identical(other.summaryTargetBasis, summaryTargetBasis) || other.summaryTargetBasis == summaryTargetBasis)&&(identical(other.baseScore, baseScore) || other.baseScore == baseScore)&&(identical(other.modifierScore, modifierScore) || other.modifierScore == modifierScore)&&(identical(other.totalScore, totalScore) || other.totalScore == totalScore)&&(identical(other.grade, grade) || other.grade == grade)&&(identical(other.carbohydrate, carbohydrate) || other.carbohydrate == carbohydrate)&&(identical(other.protein, protein) || other.protein == protein)&&(identical(other.fat, fat) || other.fat == fat)&&(identical(other.sugar, sugar) || other.sugar == sugar)&&(identical(other.sodium, sodium) || other.sodium == sodium));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,date,timezone,analysisCount,totalKcal,baseScore,modifierScore,totalScore,grade,carbohydrate,protein,fat,sugar,sodium);
+int get hashCode => Object.hash(runtimeType,date,timezone,analysisCount,totalKcal,summaryTargetBasis,baseScore,modifierScore,totalScore,grade,carbohydrate,protein,fat,sugar,sodium);
 
 @override
 String toString() {
-  return 'TodayNutritionSummaryResponseDto(date: $date, timezone: $timezone, analysisCount: $analysisCount, totalKcal: $totalKcal, baseScore: $baseScore, modifierScore: $modifierScore, totalScore: $totalScore, grade: $grade, carbohydrate: $carbohydrate, protein: $protein, fat: $fat, sugar: $sugar, sodium: $sodium)';
+  return 'TodayNutritionSummaryResponseDto(date: $date, timezone: $timezone, analysisCount: $analysisCount, totalKcal: $totalKcal, summaryTargetBasis: $summaryTargetBasis, baseScore: $baseScore, modifierScore: $modifierScore, totalScore: $totalScore, grade: $grade, carbohydrate: $carbohydrate, protein: $protein, fat: $fat, sugar: $sugar, sodium: $sodium)';
 }
 
 
@@ -316,7 +318,7 @@ abstract mixin class _$TodayNutritionSummaryResponseDtoCopyWith<$Res> implements
   factory _$TodayNutritionSummaryResponseDtoCopyWith(_TodayNutritionSummaryResponseDto value, $Res Function(_TodayNutritionSummaryResponseDto) _then) = __$TodayNutritionSummaryResponseDtoCopyWithImpl;
 @override @useResult
 $Res call({
- DateTime date, String timezone, int analysisCount, double totalKcal, int? baseScore, int? modifierScore, int? totalScore, String? grade, NutrientSummaryResponseDto carbohydrate, NutrientSummaryResponseDto protein, NutrientSummaryResponseDto fat, SugarSummaryResponseDto sugar, SodiumSummaryResponseDto sodium
+ DateTime date, String timezone, int analysisCount, double totalKcal, String summaryTargetBasis, int? baseScore, int? modifierScore, int? totalScore, String? grade, NutrientSummaryResponseDto carbohydrate, NutrientSummaryResponseDto protein, NutrientSummaryResponseDto fat, SugarSummaryResponseDto sugar, SodiumSummaryResponseDto sodium
 });
 
 
@@ -333,13 +335,14 @@ class __$TodayNutritionSummaryResponseDtoCopyWithImpl<$Res>
 
 /// Create a copy of TodayNutritionSummaryResponseDto
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? date = null,Object? timezone = null,Object? analysisCount = null,Object? totalKcal = null,Object? baseScore = freezed,Object? modifierScore = freezed,Object? totalScore = freezed,Object? grade = freezed,Object? carbohydrate = null,Object? protein = null,Object? fat = null,Object? sugar = null,Object? sodium = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? date = null,Object? timezone = null,Object? analysisCount = null,Object? totalKcal = null,Object? summaryTargetBasis = null,Object? baseScore = freezed,Object? modifierScore = freezed,Object? totalScore = freezed,Object? grade = freezed,Object? carbohydrate = null,Object? protein = null,Object? fat = null,Object? sugar = null,Object? sodium = null,}) {
   return _then(_TodayNutritionSummaryResponseDto(
 date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
 as DateTime,timezone: null == timezone ? _self.timezone : timezone // ignore: cast_nullable_to_non_nullable
 as String,analysisCount: null == analysisCount ? _self.analysisCount : analysisCount // ignore: cast_nullable_to_non_nullable
 as int,totalKcal: null == totalKcal ? _self.totalKcal : totalKcal // ignore: cast_nullable_to_non_nullable
-as double,baseScore: freezed == baseScore ? _self.baseScore : baseScore // ignore: cast_nullable_to_non_nullable
+as double,summaryTargetBasis: null == summaryTargetBasis ? _self.summaryTargetBasis : summaryTargetBasis // ignore: cast_nullable_to_non_nullable
+as String,baseScore: freezed == baseScore ? _self.baseScore : baseScore // ignore: cast_nullable_to_non_nullable
 as int?,modifierScore: freezed == modifierScore ? _self.modifierScore : modifierScore // ignore: cast_nullable_to_non_nullable
 as int?,totalScore: freezed == totalScore ? _self.totalScore : totalScore // ignore: cast_nullable_to_non_nullable
 as int?,grade: freezed == grade ? _self.grade : grade // ignore: cast_nullable_to_non_nullable

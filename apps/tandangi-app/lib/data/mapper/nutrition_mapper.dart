@@ -13,7 +13,9 @@ class NutritionMapper {
       userId: dto.userId,
       eerKcal: dto.eerKcal,
       standardSource: dto.standardSource,
-      activityLevel: dto.activityLevel,
+      summaryTargetBasisEnum: EnumMapper.toNutritionSummaryTargetBasisEnum(
+        dto.summaryTargetBasis,
+      ),
       carbohydrateMinG: dto.carbohydrateMinG,
       carbohydrateTargetG: dto.carbohydrateTargetG,
       carbohydrateMaxG: dto.carbohydrateMaxG,
@@ -42,12 +44,15 @@ class NutritionMapper {
       baseScore: dto.baseScore,
       modifierScore: dto.modifierScore,
       totalScore: dto.totalScore,
-      grade: EnumMapper.toNutritionGradeEnum(dto.grade),
+      gradeEnum: EnumMapper.toNutritionGradeEnum(dto.grade),
       carbohydrate: toNutrientSummaryEntity(dto.carbohydrate),
       protein: toNutrientSummaryEntity(dto.protein),
       fat: toNutrientSummaryEntity(dto.fat),
       sugar: toSugarSummaryEntity(dto.sugar),
       sodium: toSodiumSummaryEntity(dto.sodium),
+      summaryTargetBasisEnum: EnumMapper.toNutritionSummaryTargetBasisEnum(
+        dto.summaryTargetBasis,
+      ),
     );
   }
 

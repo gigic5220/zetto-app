@@ -16,4 +16,16 @@ mixin HomeStateMixin {
   bool watchIsShowSelectPhotoButton(WidgetRef ref) {
     return ref.watch(_isShowSelectPhotoButtonProvider);
   }
+
+  NutritionSummaryTargetBasisEnum? watchSelectedNutritionSummaryTargetBasisEnum(
+    WidgetRef ref,
+  ) {
+    return ref.watch(_selectedNutritionSummaryTargetBasisEnumProvider);
+  }
+
+  AsyncValue<PagedListEntity<FoodAnalysisEntity>> watchFoodAnalysises(
+    WidgetRef ref,
+  ) {
+    return ref.watch(_foodAnalysisesProvider);
+  }
 }

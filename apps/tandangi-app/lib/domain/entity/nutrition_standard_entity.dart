@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:tandangi/domain/enum/nutrition_summary_target_basis_enum.dart';
 
 part 'nutrition_standard_entity.freezed.dart';
 part 'nutrition_standard_entity.g.dart';
@@ -10,7 +11,7 @@ abstract class NutritionStandardEntity with _$NutritionStandardEntity {
     required int userId,
     required int eerKcal,
     required String standardSource,
-    required String activityLevel,
+    required NutritionSummaryTargetBasisEnum summaryTargetBasisEnum,
     required int carbohydrateMinG,
     required int carbohydrateTargetG,
     required int carbohydrateMaxG,

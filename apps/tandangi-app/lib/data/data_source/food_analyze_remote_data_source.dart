@@ -12,7 +12,8 @@ abstract class FoodAnalyzeRemoteDataSource {
   });
 
   Future<PagedListResponseDto<FoodAnalysisDto>> getFoodAnalysises({
-    required CommonPagingRequestDto dto,
+    required CommonPagingRequestDto paging,
+    String? date,
   });
 
   Future<FoodAnalysisDto> getFoodAnalysis({required int foodAnalysisId});
@@ -58,11 +59,19 @@ class FoodAnalyzeRemoteDataSourceImpl implements FoodAnalyzeRemoteDataSource {
 
   @override
   Future<PagedListResponseDto<FoodAnalysisDto>> getFoodAnalysises({
-    required CommonPagingRequestDto dto,
+    required CommonPagingRequestDto paging,
+    String? date,
   }) async {
+    final queryParameters = Map<String, dynamic>.from(
+      paging.toQueryParameters(),
+    );
+    if (date != null && date.isNotEmpty) {
+      queryParameters['date'] = date;
+    }
+
     final response = await _dio.get(
       '/api/food-analysis',
-      queryParameters: dto.toQueryParameters(),
+      queryParameters: queryParameters,
     );
 
     final raw = response.data;

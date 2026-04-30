@@ -37,7 +37,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     required int height,
     required int weight,
   }) async {
-    return await _dio.put(
+    return await _dio.patch(
       '/api/user',
       data: {'age': age, 'gender': gender, 'height': height, 'weight': weight},
     );
@@ -52,7 +52,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     required int weight,
     required String physicalActivityLevel,
   }) async {
-    await _dio.put(
+    await _dio.patch(
       '/api/user/onboarding',
       data: {
         'characterId': characterId,

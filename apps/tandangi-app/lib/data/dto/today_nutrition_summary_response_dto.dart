@@ -11,6 +11,7 @@ abstract class TodayNutritionSummaryResponseDto
     required String timezone,
     required int analysisCount,
     required double totalKcal,
+    required String summaryTargetBasis,
     int? baseScore,
     int? modifierScore,
     int? totalScore,
