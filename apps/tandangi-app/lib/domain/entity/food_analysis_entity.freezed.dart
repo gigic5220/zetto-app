@@ -610,7 +610,7 @@ $NutritionCompareInfoEntityCopyWith<$Res>? get nutritionCompareInfo {
 /// @nodoc
 mixin _$FoodAnalysisFoodEntity {
 
- int get id; String get name; FoodAnalysisFoodNutrientEntity? get kcal; FoodAnalysisFoodNutrientEntity? get carbohydrate; FoodAnalysisFoodNutrientEntity? get protein; FoodAnalysisFoodNutrientEntity? get fat; FoodAnalysisFoodNutrientEntity? get sugar; FoodAnalysisFoodNutrientEntity? get sodium;
+ int get id; String get name; double get serving; FoodAnalysisFoodNutrientEntity? get originalKcal; FoodAnalysisFoodNutrientEntity? get originalCarbohydrate; FoodAnalysisFoodNutrientEntity? get originalProtein; FoodAnalysisFoodNutrientEntity? get originalFat; FoodAnalysisFoodNutrientEntity? get originalSugar; FoodAnalysisFoodNutrientEntity? get originalSodium; FoodAnalysisFoodNutrientEntity? get kcal; FoodAnalysisFoodNutrientEntity? get carbohydrate; FoodAnalysisFoodNutrientEntity? get protein; FoodAnalysisFoodNutrientEntity? get fat; FoodAnalysisFoodNutrientEntity? get sugar; FoodAnalysisFoodNutrientEntity? get sodium;
 /// Create a copy of FoodAnalysisFoodEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -623,16 +623,16 @@ $FoodAnalysisFoodEntityCopyWith<FoodAnalysisFoodEntity> get copyWith => _$FoodAn
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is FoodAnalysisFoodEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.kcal, kcal) || other.kcal == kcal)&&(identical(other.carbohydrate, carbohydrate) || other.carbohydrate == carbohydrate)&&(identical(other.protein, protein) || other.protein == protein)&&(identical(other.fat, fat) || other.fat == fat)&&(identical(other.sugar, sugar) || other.sugar == sugar)&&(identical(other.sodium, sodium) || other.sodium == sodium));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FoodAnalysisFoodEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.serving, serving) || other.serving == serving)&&(identical(other.originalKcal, originalKcal) || other.originalKcal == originalKcal)&&(identical(other.originalCarbohydrate, originalCarbohydrate) || other.originalCarbohydrate == originalCarbohydrate)&&(identical(other.originalProtein, originalProtein) || other.originalProtein == originalProtein)&&(identical(other.originalFat, originalFat) || other.originalFat == originalFat)&&(identical(other.originalSugar, originalSugar) || other.originalSugar == originalSugar)&&(identical(other.originalSodium, originalSodium) || other.originalSodium == originalSodium)&&(identical(other.kcal, kcal) || other.kcal == kcal)&&(identical(other.carbohydrate, carbohydrate) || other.carbohydrate == carbohydrate)&&(identical(other.protein, protein) || other.protein == protein)&&(identical(other.fat, fat) || other.fat == fat)&&(identical(other.sugar, sugar) || other.sugar == sugar)&&(identical(other.sodium, sodium) || other.sodium == sodium));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,kcal,carbohydrate,protein,fat,sugar,sodium);
+int get hashCode => Object.hash(runtimeType,id,name,serving,originalKcal,originalCarbohydrate,originalProtein,originalFat,originalSugar,originalSodium,kcal,carbohydrate,protein,fat,sugar,sodium);
 
 @override
 String toString() {
-  return 'FoodAnalysisFoodEntity(id: $id, name: $name, kcal: $kcal, carbohydrate: $carbohydrate, protein: $protein, fat: $fat, sugar: $sugar, sodium: $sodium)';
+  return 'FoodAnalysisFoodEntity(id: $id, name: $name, serving: $serving, originalKcal: $originalKcal, originalCarbohydrate: $originalCarbohydrate, originalProtein: $originalProtein, originalFat: $originalFat, originalSugar: $originalSugar, originalSodium: $originalSodium, kcal: $kcal, carbohydrate: $carbohydrate, protein: $protein, fat: $fat, sugar: $sugar, sodium: $sodium)';
 }
 
 
@@ -643,11 +643,11 @@ abstract mixin class $FoodAnalysisFoodEntityCopyWith<$Res>  {
   factory $FoodAnalysisFoodEntityCopyWith(FoodAnalysisFoodEntity value, $Res Function(FoodAnalysisFoodEntity) _then) = _$FoodAnalysisFoodEntityCopyWithImpl;
 @useResult
 $Res call({
- int id, String name, FoodAnalysisFoodNutrientEntity? kcal, FoodAnalysisFoodNutrientEntity? carbohydrate, FoodAnalysisFoodNutrientEntity? protein, FoodAnalysisFoodNutrientEntity? fat, FoodAnalysisFoodNutrientEntity? sugar, FoodAnalysisFoodNutrientEntity? sodium
+ int id, String name, double serving, FoodAnalysisFoodNutrientEntity? originalKcal, FoodAnalysisFoodNutrientEntity? originalCarbohydrate, FoodAnalysisFoodNutrientEntity? originalProtein, FoodAnalysisFoodNutrientEntity? originalFat, FoodAnalysisFoodNutrientEntity? originalSugar, FoodAnalysisFoodNutrientEntity? originalSodium, FoodAnalysisFoodNutrientEntity? kcal, FoodAnalysisFoodNutrientEntity? carbohydrate, FoodAnalysisFoodNutrientEntity? protein, FoodAnalysisFoodNutrientEntity? fat, FoodAnalysisFoodNutrientEntity? sugar, FoodAnalysisFoodNutrientEntity? sodium
 });
 
 
-$FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get kcal;$FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get carbohydrate;$FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get protein;$FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get fat;$FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get sugar;$FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get sodium;
+$FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get originalKcal;$FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get originalCarbohydrate;$FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get originalProtein;$FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get originalFat;$FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get originalSugar;$FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get originalSodium;$FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get kcal;$FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get carbohydrate;$FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get protein;$FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get fat;$FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get sugar;$FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get sodium;
 
 }
 /// @nodoc
@@ -660,11 +660,18 @@ class _$FoodAnalysisFoodEntityCopyWithImpl<$Res>
 
 /// Create a copy of FoodAnalysisFoodEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? kcal = freezed,Object? carbohydrate = freezed,Object? protein = freezed,Object? fat = freezed,Object? sugar = freezed,Object? sodium = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? serving = null,Object? originalKcal = freezed,Object? originalCarbohydrate = freezed,Object? originalProtein = freezed,Object? originalFat = freezed,Object? originalSugar = freezed,Object? originalSodium = freezed,Object? kcal = freezed,Object? carbohydrate = freezed,Object? protein = freezed,Object? fat = freezed,Object? sugar = freezed,Object? sodium = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,kcal: freezed == kcal ? _self.kcal : kcal // ignore: cast_nullable_to_non_nullable
+as String,serving: null == serving ? _self.serving : serving // ignore: cast_nullable_to_non_nullable
+as double,originalKcal: freezed == originalKcal ? _self.originalKcal : originalKcal // ignore: cast_nullable_to_non_nullable
+as FoodAnalysisFoodNutrientEntity?,originalCarbohydrate: freezed == originalCarbohydrate ? _self.originalCarbohydrate : originalCarbohydrate // ignore: cast_nullable_to_non_nullable
+as FoodAnalysisFoodNutrientEntity?,originalProtein: freezed == originalProtein ? _self.originalProtein : originalProtein // ignore: cast_nullable_to_non_nullable
+as FoodAnalysisFoodNutrientEntity?,originalFat: freezed == originalFat ? _self.originalFat : originalFat // ignore: cast_nullable_to_non_nullable
+as FoodAnalysisFoodNutrientEntity?,originalSugar: freezed == originalSugar ? _self.originalSugar : originalSugar // ignore: cast_nullable_to_non_nullable
+as FoodAnalysisFoodNutrientEntity?,originalSodium: freezed == originalSodium ? _self.originalSodium : originalSodium // ignore: cast_nullable_to_non_nullable
+as FoodAnalysisFoodNutrientEntity?,kcal: freezed == kcal ? _self.kcal : kcal // ignore: cast_nullable_to_non_nullable
 as FoodAnalysisFoodNutrientEntity?,carbohydrate: freezed == carbohydrate ? _self.carbohydrate : carbohydrate // ignore: cast_nullable_to_non_nullable
 as FoodAnalysisFoodNutrientEntity?,protein: freezed == protein ? _self.protein : protein // ignore: cast_nullable_to_non_nullable
 as FoodAnalysisFoodNutrientEntity?,fat: freezed == fat ? _self.fat : fat // ignore: cast_nullable_to_non_nullable
@@ -674,6 +681,78 @@ as FoodAnalysisFoodNutrientEntity?,
   ));
 }
 /// Create a copy of FoodAnalysisFoodEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get originalKcal {
+    if (_self.originalKcal == null) {
+    return null;
+  }
+
+  return $FoodAnalysisFoodNutrientEntityCopyWith<$Res>(_self.originalKcal!, (value) {
+    return _then(_self.copyWith(originalKcal: value));
+  });
+}/// Create a copy of FoodAnalysisFoodEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get originalCarbohydrate {
+    if (_self.originalCarbohydrate == null) {
+    return null;
+  }
+
+  return $FoodAnalysisFoodNutrientEntityCopyWith<$Res>(_self.originalCarbohydrate!, (value) {
+    return _then(_self.copyWith(originalCarbohydrate: value));
+  });
+}/// Create a copy of FoodAnalysisFoodEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get originalProtein {
+    if (_self.originalProtein == null) {
+    return null;
+  }
+
+  return $FoodAnalysisFoodNutrientEntityCopyWith<$Res>(_self.originalProtein!, (value) {
+    return _then(_self.copyWith(originalProtein: value));
+  });
+}/// Create a copy of FoodAnalysisFoodEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get originalFat {
+    if (_self.originalFat == null) {
+    return null;
+  }
+
+  return $FoodAnalysisFoodNutrientEntityCopyWith<$Res>(_self.originalFat!, (value) {
+    return _then(_self.copyWith(originalFat: value));
+  });
+}/// Create a copy of FoodAnalysisFoodEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get originalSugar {
+    if (_self.originalSugar == null) {
+    return null;
+  }
+
+  return $FoodAnalysisFoodNutrientEntityCopyWith<$Res>(_self.originalSugar!, (value) {
+    return _then(_self.copyWith(originalSugar: value));
+  });
+}/// Create a copy of FoodAnalysisFoodEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get originalSodium {
+    if (_self.originalSodium == null) {
+    return null;
+  }
+
+  return $FoodAnalysisFoodNutrientEntityCopyWith<$Res>(_self.originalSodium!, (value) {
+    return _then(_self.copyWith(originalSodium: value));
+  });
+}/// Create a copy of FoodAnalysisFoodEntity
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -827,10 +906,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String name,  FoodAnalysisFoodNutrientEntity? kcal,  FoodAnalysisFoodNutrientEntity? carbohydrate,  FoodAnalysisFoodNutrientEntity? protein,  FoodAnalysisFoodNutrientEntity? fat,  FoodAnalysisFoodNutrientEntity? sugar,  FoodAnalysisFoodNutrientEntity? sodium)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String name,  double serving,  FoodAnalysisFoodNutrientEntity? originalKcal,  FoodAnalysisFoodNutrientEntity? originalCarbohydrate,  FoodAnalysisFoodNutrientEntity? originalProtein,  FoodAnalysisFoodNutrientEntity? originalFat,  FoodAnalysisFoodNutrientEntity? originalSugar,  FoodAnalysisFoodNutrientEntity? originalSodium,  FoodAnalysisFoodNutrientEntity? kcal,  FoodAnalysisFoodNutrientEntity? carbohydrate,  FoodAnalysisFoodNutrientEntity? protein,  FoodAnalysisFoodNutrientEntity? fat,  FoodAnalysisFoodNutrientEntity? sugar,  FoodAnalysisFoodNutrientEntity? sodium)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _FoodAnalysisFoodEntity() when $default != null:
-return $default(_that.id,_that.name,_that.kcal,_that.carbohydrate,_that.protein,_that.fat,_that.sugar,_that.sodium);case _:
+return $default(_that.id,_that.name,_that.serving,_that.originalKcal,_that.originalCarbohydrate,_that.originalProtein,_that.originalFat,_that.originalSugar,_that.originalSodium,_that.kcal,_that.carbohydrate,_that.protein,_that.fat,_that.sugar,_that.sodium);case _:
   return orElse();
 
 }
@@ -848,10 +927,10 @@ return $default(_that.id,_that.name,_that.kcal,_that.carbohydrate,_that.protein,
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String name,  FoodAnalysisFoodNutrientEntity? kcal,  FoodAnalysisFoodNutrientEntity? carbohydrate,  FoodAnalysisFoodNutrientEntity? protein,  FoodAnalysisFoodNutrientEntity? fat,  FoodAnalysisFoodNutrientEntity? sugar,  FoodAnalysisFoodNutrientEntity? sodium)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String name,  double serving,  FoodAnalysisFoodNutrientEntity? originalKcal,  FoodAnalysisFoodNutrientEntity? originalCarbohydrate,  FoodAnalysisFoodNutrientEntity? originalProtein,  FoodAnalysisFoodNutrientEntity? originalFat,  FoodAnalysisFoodNutrientEntity? originalSugar,  FoodAnalysisFoodNutrientEntity? originalSodium,  FoodAnalysisFoodNutrientEntity? kcal,  FoodAnalysisFoodNutrientEntity? carbohydrate,  FoodAnalysisFoodNutrientEntity? protein,  FoodAnalysisFoodNutrientEntity? fat,  FoodAnalysisFoodNutrientEntity? sugar,  FoodAnalysisFoodNutrientEntity? sodium)  $default,) {final _that = this;
 switch (_that) {
 case _FoodAnalysisFoodEntity():
-return $default(_that.id,_that.name,_that.kcal,_that.carbohydrate,_that.protein,_that.fat,_that.sugar,_that.sodium);case _:
+return $default(_that.id,_that.name,_that.serving,_that.originalKcal,_that.originalCarbohydrate,_that.originalProtein,_that.originalFat,_that.originalSugar,_that.originalSodium,_that.kcal,_that.carbohydrate,_that.protein,_that.fat,_that.sugar,_that.sodium);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -868,10 +947,10 @@ return $default(_that.id,_that.name,_that.kcal,_that.carbohydrate,_that.protein,
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String name,  FoodAnalysisFoodNutrientEntity? kcal,  FoodAnalysisFoodNutrientEntity? carbohydrate,  FoodAnalysisFoodNutrientEntity? protein,  FoodAnalysisFoodNutrientEntity? fat,  FoodAnalysisFoodNutrientEntity? sugar,  FoodAnalysisFoodNutrientEntity? sodium)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String name,  double serving,  FoodAnalysisFoodNutrientEntity? originalKcal,  FoodAnalysisFoodNutrientEntity? originalCarbohydrate,  FoodAnalysisFoodNutrientEntity? originalProtein,  FoodAnalysisFoodNutrientEntity? originalFat,  FoodAnalysisFoodNutrientEntity? originalSugar,  FoodAnalysisFoodNutrientEntity? originalSodium,  FoodAnalysisFoodNutrientEntity? kcal,  FoodAnalysisFoodNutrientEntity? carbohydrate,  FoodAnalysisFoodNutrientEntity? protein,  FoodAnalysisFoodNutrientEntity? fat,  FoodAnalysisFoodNutrientEntity? sugar,  FoodAnalysisFoodNutrientEntity? sodium)?  $default,) {final _that = this;
 switch (_that) {
 case _FoodAnalysisFoodEntity() when $default != null:
-return $default(_that.id,_that.name,_that.kcal,_that.carbohydrate,_that.protein,_that.fat,_that.sugar,_that.sodium);case _:
+return $default(_that.id,_that.name,_that.serving,_that.originalKcal,_that.originalCarbohydrate,_that.originalProtein,_that.originalFat,_that.originalSugar,_that.originalSodium,_that.kcal,_that.carbohydrate,_that.protein,_that.fat,_that.sugar,_that.sodium);case _:
   return null;
 
 }
@@ -883,11 +962,18 @@ return $default(_that.id,_that.name,_that.kcal,_that.carbohydrate,_that.protein,
 @JsonSerializable()
 
 class _FoodAnalysisFoodEntity implements FoodAnalysisFoodEntity {
-  const _FoodAnalysisFoodEntity({required this.id, this.name = '', this.kcal, this.carbohydrate, this.protein, this.fat, this.sugar, this.sodium});
+  const _FoodAnalysisFoodEntity({required this.id, this.name = '', required this.serving, this.originalKcal, this.originalCarbohydrate, this.originalProtein, this.originalFat, this.originalSugar, this.originalSodium, this.kcal, this.carbohydrate, this.protein, this.fat, this.sugar, this.sodium});
   factory _FoodAnalysisFoodEntity.fromJson(Map<String, dynamic> json) => _$FoodAnalysisFoodEntityFromJson(json);
 
 @override final  int id;
 @override@JsonKey() final  String name;
+@override final  double serving;
+@override final  FoodAnalysisFoodNutrientEntity? originalKcal;
+@override final  FoodAnalysisFoodNutrientEntity? originalCarbohydrate;
+@override final  FoodAnalysisFoodNutrientEntity? originalProtein;
+@override final  FoodAnalysisFoodNutrientEntity? originalFat;
+@override final  FoodAnalysisFoodNutrientEntity? originalSugar;
+@override final  FoodAnalysisFoodNutrientEntity? originalSodium;
 @override final  FoodAnalysisFoodNutrientEntity? kcal;
 @override final  FoodAnalysisFoodNutrientEntity? carbohydrate;
 @override final  FoodAnalysisFoodNutrientEntity? protein;
@@ -908,16 +994,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FoodAnalysisFoodEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.kcal, kcal) || other.kcal == kcal)&&(identical(other.carbohydrate, carbohydrate) || other.carbohydrate == carbohydrate)&&(identical(other.protein, protein) || other.protein == protein)&&(identical(other.fat, fat) || other.fat == fat)&&(identical(other.sugar, sugar) || other.sugar == sugar)&&(identical(other.sodium, sodium) || other.sodium == sodium));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FoodAnalysisFoodEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.serving, serving) || other.serving == serving)&&(identical(other.originalKcal, originalKcal) || other.originalKcal == originalKcal)&&(identical(other.originalCarbohydrate, originalCarbohydrate) || other.originalCarbohydrate == originalCarbohydrate)&&(identical(other.originalProtein, originalProtein) || other.originalProtein == originalProtein)&&(identical(other.originalFat, originalFat) || other.originalFat == originalFat)&&(identical(other.originalSugar, originalSugar) || other.originalSugar == originalSugar)&&(identical(other.originalSodium, originalSodium) || other.originalSodium == originalSodium)&&(identical(other.kcal, kcal) || other.kcal == kcal)&&(identical(other.carbohydrate, carbohydrate) || other.carbohydrate == carbohydrate)&&(identical(other.protein, protein) || other.protein == protein)&&(identical(other.fat, fat) || other.fat == fat)&&(identical(other.sugar, sugar) || other.sugar == sugar)&&(identical(other.sodium, sodium) || other.sodium == sodium));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,kcal,carbohydrate,protein,fat,sugar,sodium);
+int get hashCode => Object.hash(runtimeType,id,name,serving,originalKcal,originalCarbohydrate,originalProtein,originalFat,originalSugar,originalSodium,kcal,carbohydrate,protein,fat,sugar,sodium);
 
 @override
 String toString() {
-  return 'FoodAnalysisFoodEntity(id: $id, name: $name, kcal: $kcal, carbohydrate: $carbohydrate, protein: $protein, fat: $fat, sugar: $sugar, sodium: $sodium)';
+  return 'FoodAnalysisFoodEntity(id: $id, name: $name, serving: $serving, originalKcal: $originalKcal, originalCarbohydrate: $originalCarbohydrate, originalProtein: $originalProtein, originalFat: $originalFat, originalSugar: $originalSugar, originalSodium: $originalSodium, kcal: $kcal, carbohydrate: $carbohydrate, protein: $protein, fat: $fat, sugar: $sugar, sodium: $sodium)';
 }
 
 
@@ -928,11 +1014,11 @@ abstract mixin class _$FoodAnalysisFoodEntityCopyWith<$Res> implements $FoodAnal
   factory _$FoodAnalysisFoodEntityCopyWith(_FoodAnalysisFoodEntity value, $Res Function(_FoodAnalysisFoodEntity) _then) = __$FoodAnalysisFoodEntityCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String name, FoodAnalysisFoodNutrientEntity? kcal, FoodAnalysisFoodNutrientEntity? carbohydrate, FoodAnalysisFoodNutrientEntity? protein, FoodAnalysisFoodNutrientEntity? fat, FoodAnalysisFoodNutrientEntity? sugar, FoodAnalysisFoodNutrientEntity? sodium
+ int id, String name, double serving, FoodAnalysisFoodNutrientEntity? originalKcal, FoodAnalysisFoodNutrientEntity? originalCarbohydrate, FoodAnalysisFoodNutrientEntity? originalProtein, FoodAnalysisFoodNutrientEntity? originalFat, FoodAnalysisFoodNutrientEntity? originalSugar, FoodAnalysisFoodNutrientEntity? originalSodium, FoodAnalysisFoodNutrientEntity? kcal, FoodAnalysisFoodNutrientEntity? carbohydrate, FoodAnalysisFoodNutrientEntity? protein, FoodAnalysisFoodNutrientEntity? fat, FoodAnalysisFoodNutrientEntity? sugar, FoodAnalysisFoodNutrientEntity? sodium
 });
 
 
-@override $FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get kcal;@override $FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get carbohydrate;@override $FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get protein;@override $FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get fat;@override $FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get sugar;@override $FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get sodium;
+@override $FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get originalKcal;@override $FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get originalCarbohydrate;@override $FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get originalProtein;@override $FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get originalFat;@override $FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get originalSugar;@override $FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get originalSodium;@override $FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get kcal;@override $FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get carbohydrate;@override $FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get protein;@override $FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get fat;@override $FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get sugar;@override $FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get sodium;
 
 }
 /// @nodoc
@@ -945,11 +1031,18 @@ class __$FoodAnalysisFoodEntityCopyWithImpl<$Res>
 
 /// Create a copy of FoodAnalysisFoodEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? kcal = freezed,Object? carbohydrate = freezed,Object? protein = freezed,Object? fat = freezed,Object? sugar = freezed,Object? sodium = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? serving = null,Object? originalKcal = freezed,Object? originalCarbohydrate = freezed,Object? originalProtein = freezed,Object? originalFat = freezed,Object? originalSugar = freezed,Object? originalSodium = freezed,Object? kcal = freezed,Object? carbohydrate = freezed,Object? protein = freezed,Object? fat = freezed,Object? sugar = freezed,Object? sodium = freezed,}) {
   return _then(_FoodAnalysisFoodEntity(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,kcal: freezed == kcal ? _self.kcal : kcal // ignore: cast_nullable_to_non_nullable
+as String,serving: null == serving ? _self.serving : serving // ignore: cast_nullable_to_non_nullable
+as double,originalKcal: freezed == originalKcal ? _self.originalKcal : originalKcal // ignore: cast_nullable_to_non_nullable
+as FoodAnalysisFoodNutrientEntity?,originalCarbohydrate: freezed == originalCarbohydrate ? _self.originalCarbohydrate : originalCarbohydrate // ignore: cast_nullable_to_non_nullable
+as FoodAnalysisFoodNutrientEntity?,originalProtein: freezed == originalProtein ? _self.originalProtein : originalProtein // ignore: cast_nullable_to_non_nullable
+as FoodAnalysisFoodNutrientEntity?,originalFat: freezed == originalFat ? _self.originalFat : originalFat // ignore: cast_nullable_to_non_nullable
+as FoodAnalysisFoodNutrientEntity?,originalSugar: freezed == originalSugar ? _self.originalSugar : originalSugar // ignore: cast_nullable_to_non_nullable
+as FoodAnalysisFoodNutrientEntity?,originalSodium: freezed == originalSodium ? _self.originalSodium : originalSodium // ignore: cast_nullable_to_non_nullable
+as FoodAnalysisFoodNutrientEntity?,kcal: freezed == kcal ? _self.kcal : kcal // ignore: cast_nullable_to_non_nullable
 as FoodAnalysisFoodNutrientEntity?,carbohydrate: freezed == carbohydrate ? _self.carbohydrate : carbohydrate // ignore: cast_nullable_to_non_nullable
 as FoodAnalysisFoodNutrientEntity?,protein: freezed == protein ? _self.protein : protein // ignore: cast_nullable_to_non_nullable
 as FoodAnalysisFoodNutrientEntity?,fat: freezed == fat ? _self.fat : fat // ignore: cast_nullable_to_non_nullable
@@ -960,6 +1053,78 @@ as FoodAnalysisFoodNutrientEntity?,
 }
 
 /// Create a copy of FoodAnalysisFoodEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get originalKcal {
+    if (_self.originalKcal == null) {
+    return null;
+  }
+
+  return $FoodAnalysisFoodNutrientEntityCopyWith<$Res>(_self.originalKcal!, (value) {
+    return _then(_self.copyWith(originalKcal: value));
+  });
+}/// Create a copy of FoodAnalysisFoodEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get originalCarbohydrate {
+    if (_self.originalCarbohydrate == null) {
+    return null;
+  }
+
+  return $FoodAnalysisFoodNutrientEntityCopyWith<$Res>(_self.originalCarbohydrate!, (value) {
+    return _then(_self.copyWith(originalCarbohydrate: value));
+  });
+}/// Create a copy of FoodAnalysisFoodEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get originalProtein {
+    if (_self.originalProtein == null) {
+    return null;
+  }
+
+  return $FoodAnalysisFoodNutrientEntityCopyWith<$Res>(_self.originalProtein!, (value) {
+    return _then(_self.copyWith(originalProtein: value));
+  });
+}/// Create a copy of FoodAnalysisFoodEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get originalFat {
+    if (_self.originalFat == null) {
+    return null;
+  }
+
+  return $FoodAnalysisFoodNutrientEntityCopyWith<$Res>(_self.originalFat!, (value) {
+    return _then(_self.copyWith(originalFat: value));
+  });
+}/// Create a copy of FoodAnalysisFoodEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get originalSugar {
+    if (_self.originalSugar == null) {
+    return null;
+  }
+
+  return $FoodAnalysisFoodNutrientEntityCopyWith<$Res>(_self.originalSugar!, (value) {
+    return _then(_self.copyWith(originalSugar: value));
+  });
+}/// Create a copy of FoodAnalysisFoodEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$FoodAnalysisFoodNutrientEntityCopyWith<$Res>? get originalSodium {
+    if (_self.originalSodium == null) {
+    return null;
+  }
+
+  return $FoodAnalysisFoodNutrientEntityCopyWith<$Res>(_self.originalSodium!, (value) {
+    return _then(_self.copyWith(originalSodium: value));
+  });
+}/// Create a copy of FoodAnalysisFoodEntity
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')

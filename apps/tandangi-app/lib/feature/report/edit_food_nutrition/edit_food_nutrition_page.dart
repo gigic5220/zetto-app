@@ -52,12 +52,11 @@ class _EditFoodNutritionPageState extends ConsumerState<EditFoodNutritionPage>
     return ProviderScope(
       overrides: [
         initialFoodAnalysisIdProvider.overrideWithValue(widget.foodAnalysisId),
-        initialAnalyzedFoodItemsWithQuantityProvider.overrideWithBuild(
+        initialAnalyzedFoodItemsProvider.overrideWithBuild(
           (ref, _) => widget.foodAnalysisFoodItems
               .map(
-                (foodAnalysisFoodEntity) => AnalyzedFoodItemEntityWithQuantity(
+                (foodAnalysisFoodEntity) => AnalyzedFoodItemEntity(
                   foodAnalysisFoodEntity: foodAnalysisFoodEntity,
-                  quantity: 1,
                 ),
               )
               .toList(),
@@ -86,29 +85,28 @@ class _EditFoodNutritionPageState extends ConsumerState<EditFoodNutritionPage>
                           alignment: Alignment.centerLeft,
                           child: Consumer(
                             builder: (context, ref, child) {
-                              final analyzedFoodItemsWithQuantity =
-                                  watchAnalyzedFoodItemsWithQuantity(ref);
+                              final analyzedFoodItems = watchAnalyzedFoodItems(
+                                ref,
+                              );
                               return DSCategory(
                                 padding: EdgeInsets.symmetric(
                                   horizontal: context.margin.width,
                                   vertical: context.componentPadding.medium,
                                 ),
-                                items: analyzedFoodItemsWithQuantity
+                                items: analyzedFoodItems
                                     .map(
-                                      (analyzedFoodItemsWithQuantity) =>
-                                          DSCategoryItem(
-                                            text: analyzedFoodItemsWithQuantity
-                                                .foodAnalysisFoodEntity
-                                                .name,
-                                          ),
+                                      (analyzedFoodItem) => DSCategoryItem(
+                                        text: analyzedFoodItem
+                                            .foodAnalysisFoodEntity
+                                            .name,
+                                      ),
                                     )
                                     .toList(),
                                 tabController: null,
                                 onTap: (index) {
-                                  onTapAnalyzedFoodItemEntityWithQuantity(
+                                  onTapAnalyzedFoodItemEntity(
                                     ref,
-                                    analyzedFoodItemEntityWithQuantity:
-                                        analyzedFoodItemsWithQuantity[index],
+                                    analyzedFoodItem: analyzedFoodItems[index],
                                   );
                                 },
                               );
@@ -123,571 +121,578 @@ class _EditFoodNutritionPageState extends ConsumerState<EditFoodNutritionPage>
                           child: SingleChildScrollView(
                             child: Consumer(
                               builder: (context, ref, child) {
-                                final analyzedFoodItemsWithQuantity =
-                                    watchAnalyzedFoodItemsWithQuantity(ref);
-                                return Column(
-                                  children: analyzedFoodItemsWithQuantity
-                                      .mapToIndexedList(
-                                        (
-                                          index,
-                                          analyzedFoodItemsWithQuantity,
-                                        ) => DSCard(
-                                          size: .medium,
-                                          child: SizedBox(
-                                            width: double.infinity,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                DSListTitle.mediumNormal(
-                                                  title:
-                                                      analyzedFoodItemsWithQuantity
-                                                          .foodAnalysisFoodEntity
-                                                          .name,
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Expanded(
-                                                      child: GestureDetector(
-                                                        onTap: () {
-                                                          onTapToggleEditMode(
-                                                            ref,
-                                                            index: index,
-                                                            editModeEnum:
+                                final selectedFoodItem = watchSelectedFoodItem(
+                                  ref,
+                                );
+
+                                if (selectedFoodItem == null) {
+                                  return const SizedBox.shrink();
+                                }
+
+                                return DSCard(
+                                  size: .medium,
+                                  child: SizedBox(
+                                    width: double.infinity,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        DSListTitle.mediumNormal(
+                                          title: selectedFoodItem
+                                              .foodAnalysisFoodEntity
+                                              .name,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  onTapToggleEditMode(
+                                                    ref,
+                                                    analyzedFoodItemId:
+                                                        selectedFoodItem
+                                                            .foodAnalysisFoodEntity
+                                                            .id,
+                                                    editModeEnum:
+                                                        EditModeEnum.amount,
+                                                  );
+                                                },
+                                                child: Container(
+                                                  alignment: Alignment.center,
+                                                  decoration: BoxDecoration(
+                                                    border: Border(
+                                                      bottom: BorderSide(
+                                                        color:
+                                                            selectedFoodItem
+                                                                    .editModeEnum ==
                                                                 EditModeEnum
-                                                                    .amount,
-                                                          );
-                                                        },
-                                                        child: Container(
-                                                          alignment:
-                                                              Alignment.center,
-                                                          decoration: BoxDecoration(
-                                                            border: Border(
-                                                              bottom: BorderSide(
-                                                                color:
-                                                                    analyzedFoodItemsWithQuantity
-                                                                            .editModeEnum ==
-                                                                        EditModeEnum
-                                                                            .amount
-                                                                    ? context
-                                                                          .semanticColors
-                                                                          .borderInverse
-                                                                    : Colors
-                                                                          .transparent,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          padding: EdgeInsets.all(
-                                                            context
-                                                                .componentPadding
-                                                                .xLarge,
-                                                          ),
-                                                          child: Text(
-                                                            '양으로 조절',
-                                                            style: context
-                                                                .textTheme
-                                                                .bodyLMedium
-                                                                .copyWith(
-                                                                  color: context
-                                                                      .semanticColors
-                                                                      .textPrimary,
-                                                                ),
-                                                          ),
-                                                        ),
+                                                                    .amount
+                                                            ? context
+                                                                  .semanticColors
+                                                                  .borderInverse
+                                                            : Colors
+                                                                  .transparent,
+                                                        width: 2,
                                                       ),
                                                     ),
-                                                    Expanded(
-                                                      child: GestureDetector(
-                                                        onTap: () {
-                                                          onTapToggleEditMode(
-                                                            ref,
-                                                            index: index,
-                                                            editModeEnum:
-                                                                EditModeEnum
-                                                                    .directInput,
-                                                          );
-                                                        },
-                                                        child: Container(
-                                                          alignment:
-                                                              Alignment.center,
-                                                          decoration: BoxDecoration(
-                                                            border: Border(
-                                                              bottom: BorderSide(
-                                                                color:
-                                                                    analyzedFoodItemsWithQuantity
-                                                                            .editModeEnum ==
-                                                                        EditModeEnum
-                                                                            .directInput
-                                                                    ? context
-                                                                          .semanticColors
-                                                                          .borderInverse
-                                                                    : Colors
-                                                                          .transparent,
-                                                                width: 2,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          padding: EdgeInsets.all(
-                                                            context
-                                                                .componentPadding
-                                                                .xLarge,
-                                                          ),
-                                                          child: Text(
-                                                            '직접 입력',
-                                                            style: context
-                                                                .textTheme
-                                                                .bodyLMedium
-                                                                .copyWith(
-                                                                  color: context
-                                                                      .semanticColors
-                                                                      .textPrimary,
-                                                                ),
-                                                          ),
+                                                  ),
+                                                  padding: EdgeInsets.all(
+                                                    context
+                                                        .componentPadding
+                                                        .xLarge,
+                                                  ),
+                                                  child: Text(
+                                                    '양으로 조절',
+                                                    style: context
+                                                        .textTheme
+                                                        .bodyLMedium
+                                                        .copyWith(
+                                                          color: context
+                                                              .semanticColors
+                                                              .textPrimary,
                                                         ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  onTapToggleEditMode(
+                                                    ref,
+                                                    analyzedFoodItemId:
+                                                        selectedFoodItem
+                                                            .foodAnalysisFoodEntity
+                                                            .id,
+                                                    editModeEnum: EditModeEnum
+                                                        .directInput,
+                                                  );
+                                                },
+                                                child: Container(
+                                                  alignment: Alignment.center,
+                                                  decoration: BoxDecoration(
+                                                    border: Border(
+                                                      bottom: BorderSide(
+                                                        color:
+                                                            selectedFoodItem
+                                                                    .editModeEnum ==
+                                                                EditModeEnum
+                                                                    .directInput
+                                                            ? context
+                                                                  .semanticColors
+                                                                  .borderInverse
+                                                            : Colors
+                                                                  .transparent,
+                                                        width: 2,
                                                       ),
                                                     ),
-                                                  ],
+                                                  ),
+                                                  padding: EdgeInsets.all(
+                                                    context
+                                                        .componentPadding
+                                                        .xLarge,
+                                                  ),
+                                                  child: Text(
+                                                    '직접 입력',
+                                                    style: context
+                                                        .textTheme
+                                                        .bodyLMedium
+                                                        .copyWith(
+                                                          color: context
+                                                              .semanticColors
+                                                              .textPrimary,
+                                                        ),
+                                                  ),
                                                 ),
-                                                SizedBox(
-                                                  height: context
-                                                      .componentGap
-                                                      .medium,
-                                                ),
-                                                if (analyzedFoodItemsWithQuantity
-                                                        .editModeEnum ==
-                                                    EditModeEnum
-                                                        .directInput) ...[
-                                                  Column(
-                                                    spacing: context
-                                                        .componentGap
-                                                        .medium,
-                                                    children: [
-                                                      Row(
-                                                        spacing: context
-                                                            .componentGap
-                                                            .medium,
-                                                        children: [
-                                                          Expanded(
-                                                            child: Text(
-                                                              '탄수화물',
-                                                              style: context
-                                                                  .textTheme
-                                                                  .bodyLMedium
-                                                                  .copyWith(
-                                                                    color: context
-                                                                        .semanticColors
-                                                                        .textPrimary,
-                                                                  ),
-                                                            ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: context.componentGap.medium,
+                                        ),
+                                        if (selectedFoodItem.editModeEnum ==
+                                            EditModeEnum.directInput) ...[
+                                          Column(
+                                            spacing:
+                                                context.componentGap.medium,
+                                            children: [
+                                              Row(
+                                                spacing:
+                                                    context.componentGap.medium,
+                                                children: [
+                                                  Expanded(
+                                                    child: Text(
+                                                      '탄수화물',
+                                                      style: context
+                                                          .textTheme
+                                                          .bodyLMedium
+                                                          .copyWith(
+                                                            color: context
+                                                                .semanticColors
+                                                                .textPrimary,
                                                           ),
-                                                          SizedBox(
-                                                            width: 100,
-                                                            child: DSTextField(
-                                                              initialValue:
-                                                                  analyzedFoodItemsWithQuantity
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 100,
+                                                    child: DSTextField(
+                                                      initialValue:
+                                                          (selectedFoodItem
+                                                                      .foodAnalysisFoodEntity
                                                                       .carbohydrate
-                                                                      .toInt()
-                                                                      .toString(),
-                                                              autoDisposeControllers:
-                                                                  false,
-                                                              keyboardType:
-                                                                  TextInputType
-                                                                      .number,
-                                                              onChangeCallback:
-                                                                  ({
-                                                                    required String
-                                                                    text,
-                                                                  }) {
-                                                                    onChangeNutrition(
-                                                                      ref,
-                                                                      index:
-                                                                          index,
-                                                                      nutritionTypeEnum:
-                                                                          NutritionTypeEnum
-                                                                              .carbohydrate,
-                                                                      text:
-                                                                          text,
-                                                                    );
-                                                                  },
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 30,
-                                                            child: Text(
-                                                              'g',
-                                                              style: context
-                                                                  .textTheme
-                                                                  .bodyLMedium
-                                                                  .copyWith(
-                                                                    color: context
-                                                                        .semanticColors
-                                                                        .textPrimary,
-                                                                  ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        spacing: context
-                                                            .componentGap
-                                                            .medium,
-                                                        children: [
-                                                          Expanded(
-                                                            child: Text(
-                                                              '단백질',
-                                                              style: context
-                                                                  .textTheme
-                                                                  .bodyLMedium
-                                                                  .copyWith(
-                                                                    color: context
-                                                                        .semanticColors
-                                                                        .textPrimary,
-                                                                  ),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 100,
-                                                            child: DSTextField(
-                                                              initialValue:
-                                                                  analyzedFoodItemsWithQuantity
-                                                                      .protein
-                                                                      .toInt()
-                                                                      .toString(),
-                                                              autoDisposeControllers:
-                                                                  false,
-                                                              onChangeCallback:
-                                                                  ({
-                                                                    required String
-                                                                    text,
-                                                                  }) {
-                                                                    onChangeNutrition(
-                                                                      ref,
-                                                                      index:
-                                                                          index,
-                                                                      nutritionTypeEnum:
-                                                                          NutritionTypeEnum
-                                                                              .protein,
-                                                                      text:
-                                                                          text,
-                                                                    );
-                                                                  },
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 30,
-                                                            child: Text(
-                                                              'g',
-                                                              style: context
-                                                                  .textTheme
-                                                                  .bodyLMedium
-                                                                  .copyWith(
-                                                                    color: context
-                                                                        .semanticColors
-                                                                        .textPrimary,
-                                                                  ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        spacing: context
-                                                            .componentGap
-                                                            .medium,
-                                                        children: [
-                                                          Expanded(
-                                                            child: Text(
-                                                              '지방',
-                                                              style: context
-                                                                  .textTheme
-                                                                  .bodyLMedium
-                                                                  .copyWith(
-                                                                    color: context
-                                                                        .semanticColors
-                                                                        .textPrimary,
-                                                                  ),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 100,
-                                                            child: DSTextField(
-                                                              initialValue:
-                                                                  analyzedFoodItemsWithQuantity
-                                                                      .fat
-                                                                      .toInt()
-                                                                      .toString(),
-                                                              autoDisposeControllers:
-                                                                  false,
-                                                              onChangeCallback:
-                                                                  ({
-                                                                    required String
-                                                                    text,
-                                                                  }) {
-                                                                    onChangeNutrition(
-                                                                      ref,
-                                                                      index:
-                                                                          index,
-                                                                      nutritionTypeEnum:
-                                                                          NutritionTypeEnum
-                                                                              .fat,
-                                                                      text:
-                                                                          text,
-                                                                    );
-                                                                  },
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 30,
-                                                            child: Text(
-                                                              'g',
-                                                              style: context
-                                                                  .textTheme
-                                                                  .bodyLMedium
-                                                                  .copyWith(
-                                                                    color: context
-                                                                        .semanticColors
-                                                                        .textPrimary,
-                                                                  ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        spacing: context
-                                                            .componentGap
-                                                            .medium,
-                                                        children: [
-                                                          Expanded(
-                                                            child: Text(
-                                                              '당',
-                                                              style: context
-                                                                  .textTheme
-                                                                  .bodyLMedium
-                                                                  .copyWith(
-                                                                    color: context
-                                                                        .semanticColors
-                                                                        .textPrimary,
-                                                                  ),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 100,
-                                                            child: DSTextField(
-                                                              initialValue:
-                                                                  analyzedFoodItemsWithQuantity
-                                                                      .sugar
-                                                                      .toInt()
-                                                                      .toString(),
-                                                              autoDisposeControllers:
-                                                                  false,
-                                                              onChangeCallback:
-                                                                  ({
-                                                                    required String
-                                                                    text,
-                                                                  }) {
-                                                                    onChangeNutrition(
-                                                                      ref,
-                                                                      index:
-                                                                          index,
-                                                                      nutritionTypeEnum:
-                                                                          NutritionTypeEnum
-                                                                              .sugar,
-                                                                      text:
-                                                                          text,
-                                                                    );
-                                                                  },
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 30,
-                                                            child: Text(
-                                                              'g',
-                                                              style: context
-                                                                  .textTheme
-                                                                  .bodyLMedium
-                                                                  .copyWith(
-                                                                    color: context
-                                                                        .semanticColors
-                                                                        .textPrimary,
-                                                                  ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        spacing: context
-                                                            .componentGap
-                                                            .medium,
-                                                        children: [
-                                                          Expanded(
-                                                            child: Text(
-                                                              '나트륨',
-                                                              style: context
-                                                                  .textTheme
-                                                                  .bodyLMedium
-                                                                  .copyWith(
-                                                                    color: context
-                                                                        .semanticColors
-                                                                        .textPrimary,
-                                                                  ),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 100,
-                                                            child: DSTextField(
-                                                              initialValue:
-                                                                  analyzedFoodItemsWithQuantity
-                                                                      .sodium
-                                                                      .toInt()
-                                                                      .toString(),
-                                                              autoDisposeControllers:
-                                                                  false,
-                                                              onChangeCallback:
-                                                                  ({
-                                                                    required String
-                                                                    text,
-                                                                  }) {
-                                                                    onChangeNutrition(
-                                                                      ref,
-                                                                      index:
-                                                                          index,
-                                                                      nutritionTypeEnum:
-                                                                          NutritionTypeEnum
-                                                                              .sodium,
-                                                                      text:
-                                                                          text,
-                                                                    );
-                                                                  },
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 30,
-                                                            child: Text(
-                                                              'mg',
-                                                              style: context
-                                                                  .textTheme
-                                                                  .bodyLMedium
-                                                                  .copyWith(
-                                                                    color: context
-                                                                        .semanticColors
-                                                                        .textPrimary,
-                                                                  ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
+                                                                      ?.value
+                                                                      ?.toInt() ??
+                                                                  0)
+                                                              .toString(),
+                                                      autoDisposeControllers:
+                                                          false,
+                                                      keyboardType:
+                                                          TextInputType.number,
+                                                      onChangeCallback:
+                                                          ({
+                                                            required String
+                                                            text,
+                                                          }) {
+                                                            onChangeNutrition(
+                                                              ref,
+                                                              analyzedFoodItemId:
+                                                                  selectedFoodItem
+                                                                      .foodAnalysisFoodEntity
+                                                                      .id,
+                                                              nutritionTypeEnum:
+                                                                  NutritionTypeEnum
+                                                                      .carbohydrate,
+                                                              text: text,
+                                                            );
+                                                          },
+                                                    ),
                                                   ),
-                                                ] else ...[
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    spacing: context
-                                                        .componentGap
-                                                        .large,
-                                                    children: [
-                                                      DSIconSolidButton.xSmall(
-                                                        isEnabled:
-                                                            analyzedFoodItemsWithQuantity
-                                                                .quantity >
-                                                            0.25,
-                                                        variant: .secondary,
-                                                        iconUri:
-                                                            Assets.svgs.icMinus,
-                                                        onTap: () {
-                                                          onTapQuantity(
-                                                            ref,
-                                                            index: index,
-                                                            analyzedFoodItemEntityWithQuantity:
-                                                                analyzedFoodItemsWithQuantity,
-                                                            isPlus: false,
-                                                          );
-                                                        },
-                                                      ),
-                                                      SizedBox(
-                                                        width: 70,
-                                                        child: Center(
-                                                          child: Text(
-                                                            '${_formatQuantity(analyzedFoodItemsWithQuantity.quantity)}인분',
-                                                            style: context
-                                                                .textTheme
-                                                                .listTitleMSemiBold,
+                                                  SizedBox(
+                                                    width: 30,
+                                                    child: Text(
+                                                      'g',
+                                                      style: context
+                                                          .textTheme
+                                                          .bodyLMedium
+                                                          .copyWith(
+                                                            color: context
+                                                                .semanticColors
+                                                                .textPrimary,
                                                           ),
-                                                        ),
-                                                      ),
-                                                      DSIconSolidButton.xSmall(
-                                                        isEnabled:
-                                                            analyzedFoodItemsWithQuantity
-                                                                .quantity <
-                                                            2.0,
-                                                        variant: .tertiary,
-                                                        iconUri:
-                                                            Assets.svgs.icPlus,
-                                                        onTap: () {
-                                                          onTapQuantity(
-                                                            ref,
-                                                            index: index,
-                                                            analyzedFoodItemEntityWithQuantity:
-                                                                analyzedFoodItemsWithQuantity,
-                                                            isPlus: true,
-                                                          );
-                                                        },
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  DSKeyValueItem.medium(
-                                                    title: '탄수화물',
-                                                    description:
-                                                        _formatValueWithUnit(
-                                                          analyzedFoodItemsWithQuantity
-                                                              .carbohydrate,
-                                                          'g',
-                                                        ),
-                                                  ),
-                                                  DSKeyValueItem.medium(
-                                                    title: '단백질',
-                                                    description:
-                                                        _formatValueWithUnit(
-                                                          analyzedFoodItemsWithQuantity
-                                                              .protein,
-                                                          'g',
-                                                        ),
-                                                  ),
-                                                  DSKeyValueItem.medium(
-                                                    title: '지방',
-                                                    description:
-                                                        _formatValueWithUnit(
-                                                          analyzedFoodItemsWithQuantity
-                                                              .fat,
-                                                          'g',
-                                                        ),
-                                                  ),
-                                                  DSKeyValueItem.medium(
-                                                    title: '당',
-                                                    description:
-                                                        _formatValueWithUnit(
-                                                          analyzedFoodItemsWithQuantity
-                                                              .sugar,
-                                                          'g',
-                                                        ),
-                                                  ),
-                                                  DSKeyValueItem.medium(
-                                                    title: '나트륨',
-                                                    description:
-                                                        _formatValueWithUnit(
-                                                          analyzedFoodItemsWithQuantity
-                                                              .sodium,
-                                                          'mg',
-                                                        ),
+                                                    ),
                                                   ),
                                                 ],
-                                              ],
+                                              ),
+                                              Row(
+                                                spacing:
+                                                    context.componentGap.medium,
+                                                children: [
+                                                  Expanded(
+                                                    child: Text(
+                                                      '단백질',
+                                                      style: context
+                                                          .textTheme
+                                                          .bodyLMedium
+                                                          .copyWith(
+                                                            color: context
+                                                                .semanticColors
+                                                                .textPrimary,
+                                                          ),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 100,
+                                                    child: DSTextField(
+                                                      initialValue:
+                                                          (selectedFoodItem
+                                                                      .foodAnalysisFoodEntity
+                                                                      .protein
+                                                                      ?.value
+                                                                      ?.toInt() ??
+                                                                  0)
+                                                              .toString(),
+                                                      autoDisposeControllers:
+                                                          false,
+                                                      onChangeCallback:
+                                                          ({
+                                                            required String
+                                                            text,
+                                                          }) {
+                                                            onChangeNutrition(
+                                                              ref,
+                                                              analyzedFoodItemId:
+                                                                  selectedFoodItem
+                                                                      .foodAnalysisFoodEntity
+                                                                      .id,
+                                                              nutritionTypeEnum:
+                                                                  NutritionTypeEnum
+                                                                      .protein,
+                                                              text: text,
+                                                            );
+                                                          },
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 30,
+                                                    child: Text(
+                                                      'g',
+                                                      style: context
+                                                          .textTheme
+                                                          .bodyLMedium
+                                                          .copyWith(
+                                                            color: context
+                                                                .semanticColors
+                                                                .textPrimary,
+                                                          ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Row(
+                                                spacing:
+                                                    context.componentGap.medium,
+                                                children: [
+                                                  Expanded(
+                                                    child: Text(
+                                                      '지방',
+                                                      style: context
+                                                          .textTheme
+                                                          .bodyLMedium
+                                                          .copyWith(
+                                                            color: context
+                                                                .semanticColors
+                                                                .textPrimary,
+                                                          ),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 100,
+                                                    child: DSTextField(
+                                                      initialValue:
+                                                          (selectedFoodItem
+                                                                      .foodAnalysisFoodEntity
+                                                                      .fat
+                                                                      ?.value
+                                                                      ?.toInt() ??
+                                                                  0)
+                                                              .toString(),
+                                                      autoDisposeControllers:
+                                                          false,
+                                                      onChangeCallback:
+                                                          ({
+                                                            required String
+                                                            text,
+                                                          }) {
+                                                            onChangeNutrition(
+                                                              ref,
+                                                              analyzedFoodItemId:
+                                                                  selectedFoodItem
+                                                                      .foodAnalysisFoodEntity
+                                                                      .id,
+                                                              nutritionTypeEnum:
+                                                                  NutritionTypeEnum
+                                                                      .fat,
+                                                              text: text,
+                                                            );
+                                                          },
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 30,
+                                                    child: Text(
+                                                      'g',
+                                                      style: context
+                                                          .textTheme
+                                                          .bodyLMedium
+                                                          .copyWith(
+                                                            color: context
+                                                                .semanticColors
+                                                                .textPrimary,
+                                                          ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Row(
+                                                spacing:
+                                                    context.componentGap.medium,
+                                                children: [
+                                                  Expanded(
+                                                    child: Text(
+                                                      '당',
+                                                      style: context
+                                                          .textTheme
+                                                          .bodyLMedium
+                                                          .copyWith(
+                                                            color: context
+                                                                .semanticColors
+                                                                .textPrimary,
+                                                          ),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 100,
+                                                    child: DSTextField(
+                                                      initialValue:
+                                                          (selectedFoodItem
+                                                                      .foodAnalysisFoodEntity
+                                                                      .sugar
+                                                                      ?.value
+                                                                      ?.toInt() ??
+                                                                  0)
+                                                              .toString(),
+                                                      autoDisposeControllers:
+                                                          false,
+                                                      onChangeCallback:
+                                                          ({
+                                                            required String
+                                                            text,
+                                                          }) {
+                                                            onChangeNutrition(
+                                                              ref,
+                                                              analyzedFoodItemId:
+                                                                  selectedFoodItem
+                                                                      .foodAnalysisFoodEntity
+                                                                      .id,
+                                                              nutritionTypeEnum:
+                                                                  NutritionTypeEnum
+                                                                      .sugar,
+                                                              text: text,
+                                                            );
+                                                          },
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 30,
+                                                    child: Text(
+                                                      'g',
+                                                      style: context
+                                                          .textTheme
+                                                          .bodyLMedium
+                                                          .copyWith(
+                                                            color: context
+                                                                .semanticColors
+                                                                .textPrimary,
+                                                          ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Row(
+                                                spacing:
+                                                    context.componentGap.medium,
+                                                children: [
+                                                  Expanded(
+                                                    child: Text(
+                                                      '나트륨',
+                                                      style: context
+                                                          .textTheme
+                                                          .bodyLMedium
+                                                          .copyWith(
+                                                            color: context
+                                                                .semanticColors
+                                                                .textPrimary,
+                                                          ),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 100,
+                                                    child: DSTextField(
+                                                      initialValue:
+                                                          (selectedFoodItem
+                                                                      .foodAnalysisFoodEntity
+                                                                      .sodium
+                                                                      ?.value
+                                                                      ?.toInt() ??
+                                                                  0)
+                                                              .toString(),
+                                                      autoDisposeControllers:
+                                                          false,
+                                                      onChangeCallback:
+                                                          ({
+                                                            required String
+                                                            text,
+                                                          }) {
+                                                            onChangeNutrition(
+                                                              ref,
+                                                              analyzedFoodItemId:
+                                                                  selectedFoodItem
+                                                                      .foodAnalysisFoodEntity
+                                                                      .id,
+                                                              nutritionTypeEnum:
+                                                                  NutritionTypeEnum
+                                                                      .sodium,
+                                                              text: text,
+                                                            );
+                                                          },
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 30,
+                                                    child: Text(
+                                                      'mg',
+                                                      style: context
+                                                          .textTheme
+                                                          .bodyLMedium
+                                                          .copyWith(
+                                                            color: context
+                                                                .semanticColors
+                                                                .textPrimary,
+                                                          ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ] else ...[
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            spacing: context.componentGap.large,
+                                            children: [
+                                              DSIconSolidButton.xSmall(
+                                                isEnabled:
+                                                    selectedFoodItem
+                                                        .foodAnalysisFoodEntity
+                                                        .serving >
+                                                    0.25,
+                                                variant: .secondary,
+                                                iconUri: Assets.svgs.icMinus,
+                                                onTap: () {
+                                                  onTapChangeServing(
+                                                    ref,
+                                                    analyzedFoodItem:
+                                                        selectedFoodItem,
+                                                    isPlus: false,
+                                                  );
+                                                },
+                                              ),
+                                              SizedBox(
+                                                width: 70,
+                                                child: Center(
+                                                  child: Text(
+                                                    '${_formatQuantity(selectedFoodItem.foodAnalysisFoodEntity.serving)}인분',
+                                                    style: context
+                                                        .textTheme
+                                                        .listTitleMSemiBold,
+                                                  ),
+                                                ),
+                                              ),
+                                              DSIconSolidButton.xSmall(
+                                                isEnabled:
+                                                    selectedFoodItem
+                                                        .foodAnalysisFoodEntity
+                                                        .serving <
+                                                    2.0,
+                                                variant: .tertiary,
+                                                iconUri: Assets.svgs.icPlus,
+                                                onTap: () {
+                                                  onTapChangeServing(
+                                                    ref,
+                                                    analyzedFoodItem:
+                                                        selectedFoodItem,
+                                                    isPlus: true,
+                                                  );
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                          DSKeyValueItem.medium(
+                                            title: '탄수화물',
+                                            description: _formatValueWithUnit(
+                                              selectedFoodItem
+                                                  .foodAnalysisFoodEntity
+                                                  .carbohydrate
+                                                  ?.value,
+                                              'g',
                                             ),
                                           ),
-                                        ),
-                                      )
-                                      .toList(),
+                                          DSKeyValueItem.medium(
+                                            title: '단백질',
+                                            description: _formatValueWithUnit(
+                                              selectedFoodItem
+                                                  .foodAnalysisFoodEntity
+                                                  .protein
+                                                  ?.value,
+                                              'g',
+                                            ),
+                                          ),
+                                          DSKeyValueItem.medium(
+                                            title: '지방',
+                                            description: _formatValueWithUnit(
+                                              selectedFoodItem
+                                                  .foodAnalysisFoodEntity
+                                                  .fat
+                                                  ?.value,
+                                              'g',
+                                            ),
+                                          ),
+                                          DSKeyValueItem.medium(
+                                            title: '당',
+                                            description: _formatValueWithUnit(
+                                              selectedFoodItem
+                                                  .foodAnalysisFoodEntity
+                                                  .sugar
+                                                  ?.value,
+                                              'g',
+                                            ),
+                                          ),
+                                          DSKeyValueItem.medium(
+                                            title: '나트륨',
+                                            description: _formatValueWithUnit(
+                                              selectedFoodItem
+                                                  .foodAnalysisFoodEntity
+                                                  .sodium
+                                                  ?.value,
+                                              'mg',
+                                            ),
+                                          ),
+                                        ],
+                                      ],
+                                    ),
+                                  ),
                                 );
                               },
                             ),

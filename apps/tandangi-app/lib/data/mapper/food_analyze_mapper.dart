@@ -12,9 +12,7 @@ class FoodAnalyzeMapper {
       assumptions: dto.assumptions ?? const [],
       foodImageUrl: dto.foodImageUrl ?? '',
       createdAt: dto.createdAt,
-      nutritionCompareInfo: _mapNutritionCompareInfo(
-        dto.nutritionCompareInfo,
-      ),
+      nutritionCompareInfo: _mapNutritionCompareInfo(dto.nutritionCompareInfo),
     );
   }
 
@@ -33,6 +31,13 @@ class FoodAnalyzeMapper {
             fat: _mapFoodNutrient(e.fat),
             sugar: _mapFoodNutrient(e.sugar),
             sodium: _mapFoodNutrient(e.sodium),
+            originalKcal: _mapFoodNutrient(e.originalKcal),
+            originalCarbohydrate: _mapFoodNutrient(e.originalCarbohydrate),
+            originalProtein: _mapFoodNutrient(e.originalProtein),
+            originalFat: _mapFoodNutrient(e.originalFat),
+            originalSugar: _mapFoodNutrient(e.originalSugar),
+            originalSodium: _mapFoodNutrient(e.originalSodium),
+            serving: e.serving ?? 1,
           ),
         )
         .toList();

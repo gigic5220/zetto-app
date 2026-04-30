@@ -1,9 +1,11 @@
 part of 'edit_food_nutrition_provider.dart';
 
 mixin EditFoodNutritionStateMixin {
-  List<AnalyzedFoodItemEntityWithQuantity> watchAnalyzedFoodItemsWithQuantity(
-    WidgetRef ref,
-  ) {
-    return ref.watch(initialAnalyzedFoodItemsWithQuantityProvider);
+  List<AnalyzedFoodItemEntity> watchAnalyzedFoodItems(WidgetRef ref) {
+    return ref.watch(initialAnalyzedFoodItemsProvider);
+  }
+
+  AnalyzedFoodItemEntity? watchSelectedFoodItem(WidgetRef ref) {
+    return ref.watch(_selectedFoodItemProvider);
   }
 }

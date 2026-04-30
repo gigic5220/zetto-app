@@ -38,6 +38,13 @@ abstract class FoodAnalysisFoodEntity with _$FoodAnalysisFoodEntity {
   const factory FoodAnalysisFoodEntity({
     required int id,
     @Default('') String name,
+    required double serving,
+    FoodAnalysisFoodNutrientEntity? originalKcal,
+    FoodAnalysisFoodNutrientEntity? originalCarbohydrate,
+    FoodAnalysisFoodNutrientEntity? originalProtein,
+    FoodAnalysisFoodNutrientEntity? originalFat,
+    FoodAnalysisFoodNutrientEntity? originalSugar,
+    FoodAnalysisFoodNutrientEntity? originalSodium,
     FoodAnalysisFoodNutrientEntity? kcal,
     FoodAnalysisFoodNutrientEntity? carbohydrate,
     FoodAnalysisFoodNutrientEntity? protein,

@@ -618,7 +618,7 @@ $NutritionCompareInfoDtoCopyWith<$Res>? get nutritionCompareInfo {
 /// @nodoc
 mixin _$FoodAnalysisFoodDto {
 
- int get id; String? get name; FoodAnalysisFoodNutrientDto? get kcal; FoodAnalysisFoodNutrientDto? get carbohydrate; FoodAnalysisFoodNutrientDto? get protein; FoodAnalysisFoodNutrientDto? get fat; FoodAnalysisFoodNutrientDto? get sugar; FoodAnalysisFoodNutrientDto? get sodium;
+ int get id; String? get name; double? get serving; FoodAnalysisFoodNutrientDto? get originalKcal; FoodAnalysisFoodNutrientDto? get originalCarbohydrate; FoodAnalysisFoodNutrientDto? get originalProtein; FoodAnalysisFoodNutrientDto? get originalFat; FoodAnalysisFoodNutrientDto? get originalSugar; FoodAnalysisFoodNutrientDto? get originalSodium; FoodAnalysisFoodNutrientDto? get kcal; FoodAnalysisFoodNutrientDto? get carbohydrate; FoodAnalysisFoodNutrientDto? get protein; FoodAnalysisFoodNutrientDto? get fat; FoodAnalysisFoodNutrientDto? get sugar; FoodAnalysisFoodNutrientDto? get sodium;
 /// Create a copy of FoodAnalysisFoodDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -631,16 +631,16 @@ $FoodAnalysisFoodDtoCopyWith<FoodAnalysisFoodDto> get copyWith => _$FoodAnalysis
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is FoodAnalysisFoodDto&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.kcal, kcal) || other.kcal == kcal)&&(identical(other.carbohydrate, carbohydrate) || other.carbohydrate == carbohydrate)&&(identical(other.protein, protein) || other.protein == protein)&&(identical(other.fat, fat) || other.fat == fat)&&(identical(other.sugar, sugar) || other.sugar == sugar)&&(identical(other.sodium, sodium) || other.sodium == sodium));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FoodAnalysisFoodDto&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.serving, serving) || other.serving == serving)&&(identical(other.originalKcal, originalKcal) || other.originalKcal == originalKcal)&&(identical(other.originalCarbohydrate, originalCarbohydrate) || other.originalCarbohydrate == originalCarbohydrate)&&(identical(other.originalProtein, originalProtein) || other.originalProtein == originalProtein)&&(identical(other.originalFat, originalFat) || other.originalFat == originalFat)&&(identical(other.originalSugar, originalSugar) || other.originalSugar == originalSugar)&&(identical(other.originalSodium, originalSodium) || other.originalSodium == originalSodium)&&(identical(other.kcal, kcal) || other.kcal == kcal)&&(identical(other.carbohydrate, carbohydrate) || other.carbohydrate == carbohydrate)&&(identical(other.protein, protein) || other.protein == protein)&&(identical(other.fat, fat) || other.fat == fat)&&(identical(other.sugar, sugar) || other.sugar == sugar)&&(identical(other.sodium, sodium) || other.sodium == sodium));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,kcal,carbohydrate,protein,fat,sugar,sodium);
+int get hashCode => Object.hash(runtimeType,id,name,serving,originalKcal,originalCarbohydrate,originalProtein,originalFat,originalSugar,originalSodium,kcal,carbohydrate,protein,fat,sugar,sodium);
 
 @override
 String toString() {
-  return 'FoodAnalysisFoodDto(id: $id, name: $name, kcal: $kcal, carbohydrate: $carbohydrate, protein: $protein, fat: $fat, sugar: $sugar, sodium: $sodium)';
+  return 'FoodAnalysisFoodDto(id: $id, name: $name, serving: $serving, originalKcal: $originalKcal, originalCarbohydrate: $originalCarbohydrate, originalProtein: $originalProtein, originalFat: $originalFat, originalSugar: $originalSugar, originalSodium: $originalSodium, kcal: $kcal, carbohydrate: $carbohydrate, protein: $protein, fat: $fat, sugar: $sugar, sodium: $sodium)';
 }
 
 
@@ -651,11 +651,11 @@ abstract mixin class $FoodAnalysisFoodDtoCopyWith<$Res>  {
   factory $FoodAnalysisFoodDtoCopyWith(FoodAnalysisFoodDto value, $Res Function(FoodAnalysisFoodDto) _then) = _$FoodAnalysisFoodDtoCopyWithImpl;
 @useResult
 $Res call({
- int id, String? name, FoodAnalysisFoodNutrientDto? kcal, FoodAnalysisFoodNutrientDto? carbohydrate, FoodAnalysisFoodNutrientDto? protein, FoodAnalysisFoodNutrientDto? fat, FoodAnalysisFoodNutrientDto? sugar, FoodAnalysisFoodNutrientDto? sodium
+ int id, String? name, double? serving, FoodAnalysisFoodNutrientDto? originalKcal, FoodAnalysisFoodNutrientDto? originalCarbohydrate, FoodAnalysisFoodNutrientDto? originalProtein, FoodAnalysisFoodNutrientDto? originalFat, FoodAnalysisFoodNutrientDto? originalSugar, FoodAnalysisFoodNutrientDto? originalSodium, FoodAnalysisFoodNutrientDto? kcal, FoodAnalysisFoodNutrientDto? carbohydrate, FoodAnalysisFoodNutrientDto? protein, FoodAnalysisFoodNutrientDto? fat, FoodAnalysisFoodNutrientDto? sugar, FoodAnalysisFoodNutrientDto? sodium
 });
 
 
-$FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get kcal;$FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get carbohydrate;$FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get protein;$FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get fat;$FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get sugar;$FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get sodium;
+$FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get originalKcal;$FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get originalCarbohydrate;$FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get originalProtein;$FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get originalFat;$FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get originalSugar;$FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get originalSodium;$FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get kcal;$FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get carbohydrate;$FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get protein;$FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get fat;$FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get sugar;$FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get sodium;
 
 }
 /// @nodoc
@@ -668,11 +668,18 @@ class _$FoodAnalysisFoodDtoCopyWithImpl<$Res>
 
 /// Create a copy of FoodAnalysisFoodDto
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = freezed,Object? kcal = freezed,Object? carbohydrate = freezed,Object? protein = freezed,Object? fat = freezed,Object? sugar = freezed,Object? sodium = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = freezed,Object? serving = freezed,Object? originalKcal = freezed,Object? originalCarbohydrate = freezed,Object? originalProtein = freezed,Object? originalFat = freezed,Object? originalSugar = freezed,Object? originalSodium = freezed,Object? kcal = freezed,Object? carbohydrate = freezed,Object? protein = freezed,Object? fat = freezed,Object? sugar = freezed,Object? sodium = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String?,kcal: freezed == kcal ? _self.kcal : kcal // ignore: cast_nullable_to_non_nullable
+as String?,serving: freezed == serving ? _self.serving : serving // ignore: cast_nullable_to_non_nullable
+as double?,originalKcal: freezed == originalKcal ? _self.originalKcal : originalKcal // ignore: cast_nullable_to_non_nullable
+as FoodAnalysisFoodNutrientDto?,originalCarbohydrate: freezed == originalCarbohydrate ? _self.originalCarbohydrate : originalCarbohydrate // ignore: cast_nullable_to_non_nullable
+as FoodAnalysisFoodNutrientDto?,originalProtein: freezed == originalProtein ? _self.originalProtein : originalProtein // ignore: cast_nullable_to_non_nullable
+as FoodAnalysisFoodNutrientDto?,originalFat: freezed == originalFat ? _self.originalFat : originalFat // ignore: cast_nullable_to_non_nullable
+as FoodAnalysisFoodNutrientDto?,originalSugar: freezed == originalSugar ? _self.originalSugar : originalSugar // ignore: cast_nullable_to_non_nullable
+as FoodAnalysisFoodNutrientDto?,originalSodium: freezed == originalSodium ? _self.originalSodium : originalSodium // ignore: cast_nullable_to_non_nullable
+as FoodAnalysisFoodNutrientDto?,kcal: freezed == kcal ? _self.kcal : kcal // ignore: cast_nullable_to_non_nullable
 as FoodAnalysisFoodNutrientDto?,carbohydrate: freezed == carbohydrate ? _self.carbohydrate : carbohydrate // ignore: cast_nullable_to_non_nullable
 as FoodAnalysisFoodNutrientDto?,protein: freezed == protein ? _self.protein : protein // ignore: cast_nullable_to_non_nullable
 as FoodAnalysisFoodNutrientDto?,fat: freezed == fat ? _self.fat : fat // ignore: cast_nullable_to_non_nullable
@@ -682,6 +689,78 @@ as FoodAnalysisFoodNutrientDto?,
   ));
 }
 /// Create a copy of FoodAnalysisFoodDto
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get originalKcal {
+    if (_self.originalKcal == null) {
+    return null;
+  }
+
+  return $FoodAnalysisFoodNutrientDtoCopyWith<$Res>(_self.originalKcal!, (value) {
+    return _then(_self.copyWith(originalKcal: value));
+  });
+}/// Create a copy of FoodAnalysisFoodDto
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get originalCarbohydrate {
+    if (_self.originalCarbohydrate == null) {
+    return null;
+  }
+
+  return $FoodAnalysisFoodNutrientDtoCopyWith<$Res>(_self.originalCarbohydrate!, (value) {
+    return _then(_self.copyWith(originalCarbohydrate: value));
+  });
+}/// Create a copy of FoodAnalysisFoodDto
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get originalProtein {
+    if (_self.originalProtein == null) {
+    return null;
+  }
+
+  return $FoodAnalysisFoodNutrientDtoCopyWith<$Res>(_self.originalProtein!, (value) {
+    return _then(_self.copyWith(originalProtein: value));
+  });
+}/// Create a copy of FoodAnalysisFoodDto
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get originalFat {
+    if (_self.originalFat == null) {
+    return null;
+  }
+
+  return $FoodAnalysisFoodNutrientDtoCopyWith<$Res>(_self.originalFat!, (value) {
+    return _then(_self.copyWith(originalFat: value));
+  });
+}/// Create a copy of FoodAnalysisFoodDto
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get originalSugar {
+    if (_self.originalSugar == null) {
+    return null;
+  }
+
+  return $FoodAnalysisFoodNutrientDtoCopyWith<$Res>(_self.originalSugar!, (value) {
+    return _then(_self.copyWith(originalSugar: value));
+  });
+}/// Create a copy of FoodAnalysisFoodDto
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get originalSodium {
+    if (_self.originalSodium == null) {
+    return null;
+  }
+
+  return $FoodAnalysisFoodNutrientDtoCopyWith<$Res>(_self.originalSodium!, (value) {
+    return _then(_self.copyWith(originalSodium: value));
+  });
+}/// Create a copy of FoodAnalysisFoodDto
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -835,10 +914,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String? name,  FoodAnalysisFoodNutrientDto? kcal,  FoodAnalysisFoodNutrientDto? carbohydrate,  FoodAnalysisFoodNutrientDto? protein,  FoodAnalysisFoodNutrientDto? fat,  FoodAnalysisFoodNutrientDto? sugar,  FoodAnalysisFoodNutrientDto? sodium)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String? name,  double? serving,  FoodAnalysisFoodNutrientDto? originalKcal,  FoodAnalysisFoodNutrientDto? originalCarbohydrate,  FoodAnalysisFoodNutrientDto? originalProtein,  FoodAnalysisFoodNutrientDto? originalFat,  FoodAnalysisFoodNutrientDto? originalSugar,  FoodAnalysisFoodNutrientDto? originalSodium,  FoodAnalysisFoodNutrientDto? kcal,  FoodAnalysisFoodNutrientDto? carbohydrate,  FoodAnalysisFoodNutrientDto? protein,  FoodAnalysisFoodNutrientDto? fat,  FoodAnalysisFoodNutrientDto? sugar,  FoodAnalysisFoodNutrientDto? sodium)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _FoodAnalysisFoodDto() when $default != null:
-return $default(_that.id,_that.name,_that.kcal,_that.carbohydrate,_that.protein,_that.fat,_that.sugar,_that.sodium);case _:
+return $default(_that.id,_that.name,_that.serving,_that.originalKcal,_that.originalCarbohydrate,_that.originalProtein,_that.originalFat,_that.originalSugar,_that.originalSodium,_that.kcal,_that.carbohydrate,_that.protein,_that.fat,_that.sugar,_that.sodium);case _:
   return orElse();
 
 }
@@ -856,10 +935,10 @@ return $default(_that.id,_that.name,_that.kcal,_that.carbohydrate,_that.protein,
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String? name,  FoodAnalysisFoodNutrientDto? kcal,  FoodAnalysisFoodNutrientDto? carbohydrate,  FoodAnalysisFoodNutrientDto? protein,  FoodAnalysisFoodNutrientDto? fat,  FoodAnalysisFoodNutrientDto? sugar,  FoodAnalysisFoodNutrientDto? sodium)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String? name,  double? serving,  FoodAnalysisFoodNutrientDto? originalKcal,  FoodAnalysisFoodNutrientDto? originalCarbohydrate,  FoodAnalysisFoodNutrientDto? originalProtein,  FoodAnalysisFoodNutrientDto? originalFat,  FoodAnalysisFoodNutrientDto? originalSugar,  FoodAnalysisFoodNutrientDto? originalSodium,  FoodAnalysisFoodNutrientDto? kcal,  FoodAnalysisFoodNutrientDto? carbohydrate,  FoodAnalysisFoodNutrientDto? protein,  FoodAnalysisFoodNutrientDto? fat,  FoodAnalysisFoodNutrientDto? sugar,  FoodAnalysisFoodNutrientDto? sodium)  $default,) {final _that = this;
 switch (_that) {
 case _FoodAnalysisFoodDto():
-return $default(_that.id,_that.name,_that.kcal,_that.carbohydrate,_that.protein,_that.fat,_that.sugar,_that.sodium);case _:
+return $default(_that.id,_that.name,_that.serving,_that.originalKcal,_that.originalCarbohydrate,_that.originalProtein,_that.originalFat,_that.originalSugar,_that.originalSodium,_that.kcal,_that.carbohydrate,_that.protein,_that.fat,_that.sugar,_that.sodium);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -876,10 +955,10 @@ return $default(_that.id,_that.name,_that.kcal,_that.carbohydrate,_that.protein,
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String? name,  FoodAnalysisFoodNutrientDto? kcal,  FoodAnalysisFoodNutrientDto? carbohydrate,  FoodAnalysisFoodNutrientDto? protein,  FoodAnalysisFoodNutrientDto? fat,  FoodAnalysisFoodNutrientDto? sugar,  FoodAnalysisFoodNutrientDto? sodium)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String? name,  double? serving,  FoodAnalysisFoodNutrientDto? originalKcal,  FoodAnalysisFoodNutrientDto? originalCarbohydrate,  FoodAnalysisFoodNutrientDto? originalProtein,  FoodAnalysisFoodNutrientDto? originalFat,  FoodAnalysisFoodNutrientDto? originalSugar,  FoodAnalysisFoodNutrientDto? originalSodium,  FoodAnalysisFoodNutrientDto? kcal,  FoodAnalysisFoodNutrientDto? carbohydrate,  FoodAnalysisFoodNutrientDto? protein,  FoodAnalysisFoodNutrientDto? fat,  FoodAnalysisFoodNutrientDto? sugar,  FoodAnalysisFoodNutrientDto? sodium)?  $default,) {final _that = this;
 switch (_that) {
 case _FoodAnalysisFoodDto() when $default != null:
-return $default(_that.id,_that.name,_that.kcal,_that.carbohydrate,_that.protein,_that.fat,_that.sugar,_that.sodium);case _:
+return $default(_that.id,_that.name,_that.serving,_that.originalKcal,_that.originalCarbohydrate,_that.originalProtein,_that.originalFat,_that.originalSugar,_that.originalSodium,_that.kcal,_that.carbohydrate,_that.protein,_that.fat,_that.sugar,_that.sodium);case _:
   return null;
 
 }
@@ -891,11 +970,18 @@ return $default(_that.id,_that.name,_that.kcal,_that.carbohydrate,_that.protein,
 @JsonSerializable()
 
 class _FoodAnalysisFoodDto implements FoodAnalysisFoodDto {
-  const _FoodAnalysisFoodDto({required this.id, this.name, this.kcal, this.carbohydrate, this.protein, this.fat, this.sugar, this.sodium});
+  const _FoodAnalysisFoodDto({required this.id, this.name, this.serving, this.originalKcal, this.originalCarbohydrate, this.originalProtein, this.originalFat, this.originalSugar, this.originalSodium, this.kcal, this.carbohydrate, this.protein, this.fat, this.sugar, this.sodium});
   factory _FoodAnalysisFoodDto.fromJson(Map<String, dynamic> json) => _$FoodAnalysisFoodDtoFromJson(json);
 
 @override final  int id;
 @override final  String? name;
+@override final  double? serving;
+@override final  FoodAnalysisFoodNutrientDto? originalKcal;
+@override final  FoodAnalysisFoodNutrientDto? originalCarbohydrate;
+@override final  FoodAnalysisFoodNutrientDto? originalProtein;
+@override final  FoodAnalysisFoodNutrientDto? originalFat;
+@override final  FoodAnalysisFoodNutrientDto? originalSugar;
+@override final  FoodAnalysisFoodNutrientDto? originalSodium;
 @override final  FoodAnalysisFoodNutrientDto? kcal;
 @override final  FoodAnalysisFoodNutrientDto? carbohydrate;
 @override final  FoodAnalysisFoodNutrientDto? protein;
@@ -916,16 +1002,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FoodAnalysisFoodDto&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.kcal, kcal) || other.kcal == kcal)&&(identical(other.carbohydrate, carbohydrate) || other.carbohydrate == carbohydrate)&&(identical(other.protein, protein) || other.protein == protein)&&(identical(other.fat, fat) || other.fat == fat)&&(identical(other.sugar, sugar) || other.sugar == sugar)&&(identical(other.sodium, sodium) || other.sodium == sodium));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FoodAnalysisFoodDto&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.serving, serving) || other.serving == serving)&&(identical(other.originalKcal, originalKcal) || other.originalKcal == originalKcal)&&(identical(other.originalCarbohydrate, originalCarbohydrate) || other.originalCarbohydrate == originalCarbohydrate)&&(identical(other.originalProtein, originalProtein) || other.originalProtein == originalProtein)&&(identical(other.originalFat, originalFat) || other.originalFat == originalFat)&&(identical(other.originalSugar, originalSugar) || other.originalSugar == originalSugar)&&(identical(other.originalSodium, originalSodium) || other.originalSodium == originalSodium)&&(identical(other.kcal, kcal) || other.kcal == kcal)&&(identical(other.carbohydrate, carbohydrate) || other.carbohydrate == carbohydrate)&&(identical(other.protein, protein) || other.protein == protein)&&(identical(other.fat, fat) || other.fat == fat)&&(identical(other.sugar, sugar) || other.sugar == sugar)&&(identical(other.sodium, sodium) || other.sodium == sodium));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,kcal,carbohydrate,protein,fat,sugar,sodium);
+int get hashCode => Object.hash(runtimeType,id,name,serving,originalKcal,originalCarbohydrate,originalProtein,originalFat,originalSugar,originalSodium,kcal,carbohydrate,protein,fat,sugar,sodium);
 
 @override
 String toString() {
-  return 'FoodAnalysisFoodDto(id: $id, name: $name, kcal: $kcal, carbohydrate: $carbohydrate, protein: $protein, fat: $fat, sugar: $sugar, sodium: $sodium)';
+  return 'FoodAnalysisFoodDto(id: $id, name: $name, serving: $serving, originalKcal: $originalKcal, originalCarbohydrate: $originalCarbohydrate, originalProtein: $originalProtein, originalFat: $originalFat, originalSugar: $originalSugar, originalSodium: $originalSodium, kcal: $kcal, carbohydrate: $carbohydrate, protein: $protein, fat: $fat, sugar: $sugar, sodium: $sodium)';
 }
 
 
@@ -936,11 +1022,11 @@ abstract mixin class _$FoodAnalysisFoodDtoCopyWith<$Res> implements $FoodAnalysi
   factory _$FoodAnalysisFoodDtoCopyWith(_FoodAnalysisFoodDto value, $Res Function(_FoodAnalysisFoodDto) _then) = __$FoodAnalysisFoodDtoCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String? name, FoodAnalysisFoodNutrientDto? kcal, FoodAnalysisFoodNutrientDto? carbohydrate, FoodAnalysisFoodNutrientDto? protein, FoodAnalysisFoodNutrientDto? fat, FoodAnalysisFoodNutrientDto? sugar, FoodAnalysisFoodNutrientDto? sodium
+ int id, String? name, double? serving, FoodAnalysisFoodNutrientDto? originalKcal, FoodAnalysisFoodNutrientDto? originalCarbohydrate, FoodAnalysisFoodNutrientDto? originalProtein, FoodAnalysisFoodNutrientDto? originalFat, FoodAnalysisFoodNutrientDto? originalSugar, FoodAnalysisFoodNutrientDto? originalSodium, FoodAnalysisFoodNutrientDto? kcal, FoodAnalysisFoodNutrientDto? carbohydrate, FoodAnalysisFoodNutrientDto? protein, FoodAnalysisFoodNutrientDto? fat, FoodAnalysisFoodNutrientDto? sugar, FoodAnalysisFoodNutrientDto? sodium
 });
 
 
-@override $FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get kcal;@override $FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get carbohydrate;@override $FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get protein;@override $FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get fat;@override $FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get sugar;@override $FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get sodium;
+@override $FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get originalKcal;@override $FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get originalCarbohydrate;@override $FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get originalProtein;@override $FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get originalFat;@override $FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get originalSugar;@override $FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get originalSodium;@override $FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get kcal;@override $FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get carbohydrate;@override $FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get protein;@override $FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get fat;@override $FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get sugar;@override $FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get sodium;
 
 }
 /// @nodoc
@@ -953,11 +1039,18 @@ class __$FoodAnalysisFoodDtoCopyWithImpl<$Res>
 
 /// Create a copy of FoodAnalysisFoodDto
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = freezed,Object? kcal = freezed,Object? carbohydrate = freezed,Object? protein = freezed,Object? fat = freezed,Object? sugar = freezed,Object? sodium = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = freezed,Object? serving = freezed,Object? originalKcal = freezed,Object? originalCarbohydrate = freezed,Object? originalProtein = freezed,Object? originalFat = freezed,Object? originalSugar = freezed,Object? originalSodium = freezed,Object? kcal = freezed,Object? carbohydrate = freezed,Object? protein = freezed,Object? fat = freezed,Object? sugar = freezed,Object? sodium = freezed,}) {
   return _then(_FoodAnalysisFoodDto(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String?,kcal: freezed == kcal ? _self.kcal : kcal // ignore: cast_nullable_to_non_nullable
+as String?,serving: freezed == serving ? _self.serving : serving // ignore: cast_nullable_to_non_nullable
+as double?,originalKcal: freezed == originalKcal ? _self.originalKcal : originalKcal // ignore: cast_nullable_to_non_nullable
+as FoodAnalysisFoodNutrientDto?,originalCarbohydrate: freezed == originalCarbohydrate ? _self.originalCarbohydrate : originalCarbohydrate // ignore: cast_nullable_to_non_nullable
+as FoodAnalysisFoodNutrientDto?,originalProtein: freezed == originalProtein ? _self.originalProtein : originalProtein // ignore: cast_nullable_to_non_nullable
+as FoodAnalysisFoodNutrientDto?,originalFat: freezed == originalFat ? _self.originalFat : originalFat // ignore: cast_nullable_to_non_nullable
+as FoodAnalysisFoodNutrientDto?,originalSugar: freezed == originalSugar ? _self.originalSugar : originalSugar // ignore: cast_nullable_to_non_nullable
+as FoodAnalysisFoodNutrientDto?,originalSodium: freezed == originalSodium ? _self.originalSodium : originalSodium // ignore: cast_nullable_to_non_nullable
+as FoodAnalysisFoodNutrientDto?,kcal: freezed == kcal ? _self.kcal : kcal // ignore: cast_nullable_to_non_nullable
 as FoodAnalysisFoodNutrientDto?,carbohydrate: freezed == carbohydrate ? _self.carbohydrate : carbohydrate // ignore: cast_nullable_to_non_nullable
 as FoodAnalysisFoodNutrientDto?,protein: freezed == protein ? _self.protein : protein // ignore: cast_nullable_to_non_nullable
 as FoodAnalysisFoodNutrientDto?,fat: freezed == fat ? _self.fat : fat // ignore: cast_nullable_to_non_nullable
@@ -968,6 +1061,78 @@ as FoodAnalysisFoodNutrientDto?,
 }
 
 /// Create a copy of FoodAnalysisFoodDto
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get originalKcal {
+    if (_self.originalKcal == null) {
+    return null;
+  }
+
+  return $FoodAnalysisFoodNutrientDtoCopyWith<$Res>(_self.originalKcal!, (value) {
+    return _then(_self.copyWith(originalKcal: value));
+  });
+}/// Create a copy of FoodAnalysisFoodDto
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get originalCarbohydrate {
+    if (_self.originalCarbohydrate == null) {
+    return null;
+  }
+
+  return $FoodAnalysisFoodNutrientDtoCopyWith<$Res>(_self.originalCarbohydrate!, (value) {
+    return _then(_self.copyWith(originalCarbohydrate: value));
+  });
+}/// Create a copy of FoodAnalysisFoodDto
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get originalProtein {
+    if (_self.originalProtein == null) {
+    return null;
+  }
+
+  return $FoodAnalysisFoodNutrientDtoCopyWith<$Res>(_self.originalProtein!, (value) {
+    return _then(_self.copyWith(originalProtein: value));
+  });
+}/// Create a copy of FoodAnalysisFoodDto
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get originalFat {
+    if (_self.originalFat == null) {
+    return null;
+  }
+
+  return $FoodAnalysisFoodNutrientDtoCopyWith<$Res>(_self.originalFat!, (value) {
+    return _then(_self.copyWith(originalFat: value));
+  });
+}/// Create a copy of FoodAnalysisFoodDto
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get originalSugar {
+    if (_self.originalSugar == null) {
+    return null;
+  }
+
+  return $FoodAnalysisFoodNutrientDtoCopyWith<$Res>(_self.originalSugar!, (value) {
+    return _then(_self.copyWith(originalSugar: value));
+  });
+}/// Create a copy of FoodAnalysisFoodDto
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$FoodAnalysisFoodNutrientDtoCopyWith<$Res>? get originalSodium {
+    if (_self.originalSodium == null) {
+    return null;
+  }
+
+  return $FoodAnalysisFoodNutrientDtoCopyWith<$Res>(_self.originalSodium!, (value) {
+    return _then(_self.copyWith(originalSodium: value));
+  });
+}/// Create a copy of FoodAnalysisFoodDto
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')

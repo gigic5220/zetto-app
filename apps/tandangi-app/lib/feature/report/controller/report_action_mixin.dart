@@ -1,6 +1,11 @@
 part of 'report_provider.dart';
 
 mixin ReportActionMixin {
+  void onPageFocused(WidgetRef ref) {
+    print('onPageFocused');
+    ref.invalidate(_foodAnalyzeResultProvider);
+  }
+
   void onTapAnalyzedFoodItem(
     WidgetRef ref, {
     required FoodAnalysisFoodEntity foodItem,

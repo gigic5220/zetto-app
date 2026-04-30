@@ -34,6 +34,13 @@ abstract class FoodAnalysisFoodDto with _$FoodAnalysisFoodDto {
   const factory FoodAnalysisFoodDto({
     required int id,
     String? name,
+    double? serving,
+    FoodAnalysisFoodNutrientDto? originalKcal,
+    FoodAnalysisFoodNutrientDto? originalCarbohydrate,
+    FoodAnalysisFoodNutrientDto? originalProtein,
+    FoodAnalysisFoodNutrientDto? originalFat,
+    FoodAnalysisFoodNutrientDto? originalSugar,
+    FoodAnalysisFoodNutrientDto? originalSodium,
     FoodAnalysisFoodNutrientDto? kcal,
     FoodAnalysisFoodNutrientDto? carbohydrate,
     FoodAnalysisFoodNutrientDto? protein,
