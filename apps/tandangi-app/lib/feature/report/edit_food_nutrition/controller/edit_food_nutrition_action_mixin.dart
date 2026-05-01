@@ -3,33 +3,38 @@ part of 'edit_food_nutrition_provider.dart';
 mixin EditFoodNutritionActionMixin {
   void onTapAnalyzedFoodItemEntity(
     WidgetRef ref, {
-    required AnalyzedFoodItemEntity analyzedFoodItem,
+    required int selectedFoodItemIndex,
   }) {
-    ref.read(_selectedFoodItemProvider.notifier).set(analyzedFoodItem);
+    ref
+        .read(_selectedFoodItemIndexProvider.notifier)
+        .set(selectedFoodItemIndex);
   }
 
   void onTapToggleEditMode(
     WidgetRef ref, {
-    required int analyzedFoodItemId,
+    required AnalyzedFoodItemEntity selectedFoodItem,
     required EditModeEnum editModeEnum,
   }) {
+    if (selectedFoodItem.isRemoved) {
+      return;
+    }
     final analyzedFoodItems = ref.read(initialAnalyzedFoodItemsProvider);
-    final index = analyzedFoodItems.indexWhere(
-      (analyzedFoodItem) =>
-          analyzedFoodItem.foodAnalysisFoodEntity.id == analyzedFoodItemId,
-    );
-
     final copiedAnalyzedFoodItems = [...analyzedFoodItems];
 
-    final targetAnalyzedFoodItemEntity = copiedAnalyzedFoodItems[index];
+    final targetIndex = copiedAnalyzedFoodItems.indexWhere(
+      (analyzedFoodItem) =>
+          analyzedFoodItem.foodAnalysisFoodEntity.id ==
+          selectedFoodItem.foodAnalysisFoodEntity.id,
+    );
+
+    final targetAnalyzedFoodItemEntity = copiedAnalyzedFoodItems[targetIndex];
 
     if (targetAnalyzedFoodItemEntity.editModeEnum == editModeEnum) {
       return;
     }
 
-    copiedAnalyzedFoodItems[index] = targetAnalyzedFoodItemEntity.copyWith(
-      editModeEnum: editModeEnum,
-    );
+    copiedAnalyzedFoodItems[targetIndex] = targetAnalyzedFoodItemEntity
+        .copyWith(editModeEnum: editModeEnum);
 
     ref
         .read(initialAnalyzedFoodItemsProvider.notifier)
@@ -130,6 +135,9 @@ mixin EditFoodNutritionActionMixin {
     required AnalyzedFoodItemEntity analyzedFoodItem,
     required bool isPlus,
   }) {
+    if (analyzedFoodItem.isRemoved) {
+      return;
+    }
     final currentServing = analyzedFoodItem.foodAnalysisFoodEntity.serving;
     final analyzedFoodItems = ref.read(initialAnalyzedFoodItemsProvider);
     final index = analyzedFoodItems.indexOf(analyzedFoodItem);
@@ -187,7 +195,7 @@ mixin EditFoodNutritionActionMixin {
   Future<void> onTapSave(WidgetRef ref) async {
     final foodAnalysisId = ref.read(initialFoodAnalysisIdProvider);
     final analyzedFoodItems = ref.read(initialAnalyzedFoodItemsProvider);
-    await getIt<FoodAnalyzeRepository>().adjustHistoryItemsServings(
+    await getIt<FoodAnalyzeRepository>().adjustHistoryItems(
       foodAnalysisId: foodAnalysisId,
       items: analyzedFoodItems
           .map(
@@ -196,46 +204,53 @@ mixin EditFoodNutritionActionMixin {
             ) => FoodHistoryItemServingAdjustmentEntity(
               foodHistoryItemId:
                   analyzedFoodItemWithQuantity.foodAnalysisFoodEntity.id,
-              serving:
-                  analyzedFoodItemWithQuantity.editModeEnum ==
-                      EditModeEnum.amount
+              isRemove: analyzedFoodItemWithQuantity.isRemoved,
+              serving: analyzedFoodItemWithQuantity.isRemoved
+                  ? null
+                  : analyzedFoodItemWithQuantity.editModeEnum ==
+                        EditModeEnum.amount
                   ? analyzedFoodItemWithQuantity.foodAnalysisFoodEntity.serving
                   : null,
-              carbohydrate:
-                  analyzedFoodItemWithQuantity.editModeEnum ==
-                      EditModeEnum.directInput
+              carbohydrate: analyzedFoodItemWithQuantity.isRemoved
+                  ? null
+                  : analyzedFoodItemWithQuantity.editModeEnum ==
+                        EditModeEnum.directInput
                   ? analyzedFoodItemWithQuantity
                         .foodAnalysisFoodEntity
                         .carbohydrate
                         ?.value
                   : null,
-              protein:
-                  analyzedFoodItemWithQuantity.editModeEnum ==
-                      EditModeEnum.directInput
+              protein: analyzedFoodItemWithQuantity.isRemoved
+                  ? null
+                  : analyzedFoodItemWithQuantity.editModeEnum ==
+                        EditModeEnum.directInput
                   ? analyzedFoodItemWithQuantity
                         .foodAnalysisFoodEntity
                         .protein
                         ?.value
                   : null,
-              fat:
-                  analyzedFoodItemWithQuantity.editModeEnum ==
-                      EditModeEnum.directInput
+              fat: analyzedFoodItemWithQuantity.isRemoved
+                  ? null
+                  : analyzedFoodItemWithQuantity.editModeEnum ==
+                        EditModeEnum.directInput
                   ? analyzedFoodItemWithQuantity
                         .foodAnalysisFoodEntity
                         .fat
                         ?.value
                   : null,
-              sodium:
-                  analyzedFoodItemWithQuantity.editModeEnum ==
-                      EditModeEnum.directInput
+              sodium: analyzedFoodItemWithQuantity.isRemoved
+                  ? null
+                  : analyzedFoodItemWithQuantity.editModeEnum ==
+                        EditModeEnum.directInput
                   ? analyzedFoodItemWithQuantity
                         .foodAnalysisFoodEntity
                         .sodium
                         ?.value
                   : null,
-              sugar:
-                  analyzedFoodItemWithQuantity.editModeEnum ==
-                      EditModeEnum.directInput
+              sugar: analyzedFoodItemWithQuantity.isRemoved
+                  ? null
+                  : analyzedFoodItemWithQuantity.editModeEnum ==
+                        EditModeEnum.directInput
                   ? analyzedFoodItemWithQuantity
                         .foodAnalysisFoodEntity
                         .sugar
@@ -247,5 +262,18 @@ mixin EditFoodNutritionActionMixin {
     );
     if (!ref.context.mounted) return;
     ref.context.pop(true);
+  }
+
+  void onTapRemoveFood(WidgetRef ref, AnalyzedFoodItemEntity analyzedFoodItem) {
+    final analyzedFoodItems = ref.read(initialAnalyzedFoodItemsProvider);
+    final index = analyzedFoodItems.indexOf(analyzedFoodItem);
+
+    final copiedAnalyzedFoodItems = [...analyzedFoodItems];
+    copiedAnalyzedFoodItems[index] = copiedAnalyzedFoodItems[index].copyWith(
+      isRemoved: !copiedAnalyzedFoodItems[index].isRemoved,
+    );
+    ref
+        .read(initialAnalyzedFoodItemsProvider.notifier)
+        .set(copiedAnalyzedFoodItems);
   }
 }

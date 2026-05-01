@@ -35,10 +35,7 @@ class _ReportPageState extends ConsumerState<ReportPage>
   @override
   Future<void> onFocused(bool isFirstTime) async {
     if (!isFirstTime) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (!mounted) return;
-        onPageFocused(_scopedRef);
-      });
+      onPageFocused(_scopedRef);
     }
   }
 
@@ -237,7 +234,7 @@ class _ReportPageState extends ConsumerState<ReportPage>
                                     onTap: (index) {
                                       onTapAnalyzedFoodItem(
                                         ref,
-                                        foodItem: analyzedFoodItems[index],
+                                        selectedFoodItemIndex: index,
                                       );
                                     },
                                   ),
@@ -245,8 +242,10 @@ class _ReportPageState extends ConsumerState<ReportPage>
                                 SizedBox(height: context.componentGap.xxSmall),
                                 Consumer(
                                   builder: (context, ref, child) {
+                                    final selectedFoodItemIndex =
+                                        watchSelectedFoodItemIndex(ref);
                                     final selectedFoodItem =
-                                        watchSelectedFoodItem(ref);
+                                        analyzedFoodItems[selectedFoodItemIndex];
                                     return Padding(
                                       padding: EdgeInsets.symmetric(
                                         horizontal: context.margin.width,
@@ -260,15 +259,13 @@ class _ReportPageState extends ConsumerState<ReportPage>
                                                 CrossAxisAlignment.start,
                                             children: [
                                               DSListTitle.mediumNormal(
-                                                title:
-                                                    selectedFoodItem?.name ??
-                                                    '',
+                                                title: selectedFoodItem.name,
                                                 trailingWidget:
                                                     DSTextBadge.medium(
                                                       text:
                                                           _formatValueWithUnit(
                                                             selectedFoodItem
-                                                                ?.kcal
+                                                                .kcal
                                                                 ?.value,
                                                             'kCal',
                                                           ),
@@ -287,7 +284,7 @@ class _ReportPageState extends ConsumerState<ReportPage>
                                                 description:
                                                     _formatValueWithUnit(
                                                       selectedFoodItem
-                                                          ?.carbohydrate
+                                                          .carbohydrate
                                                           ?.value,
                                                       'g',
                                                     ),
@@ -297,7 +294,7 @@ class _ReportPageState extends ConsumerState<ReportPage>
                                                 description:
                                                     _formatValueWithUnit(
                                                       selectedFoodItem
-                                                          ?.protein
+                                                          .protein
                                                           ?.value,
                                                       'g',
                                                     ),
@@ -307,7 +304,7 @@ class _ReportPageState extends ConsumerState<ReportPage>
                                                 description:
                                                     _formatValueWithUnit(
                                                       selectedFoodItem
-                                                          ?.fat
+                                                          .fat
                                                           ?.value,
                                                       'g',
                                                     ),
@@ -317,7 +314,7 @@ class _ReportPageState extends ConsumerState<ReportPage>
                                                 description:
                                                     _formatValueWithUnit(
                                                       selectedFoodItem
-                                                          ?.sugar
+                                                          .sugar
                                                           ?.value,
                                                       'g',
                                                     ),
@@ -327,7 +324,7 @@ class _ReportPageState extends ConsumerState<ReportPage>
                                                 description:
                                                     _formatValueWithUnit(
                                                       selectedFoodItem
-                                                          ?.sodium
+                                                          .sodium
                                                           ?.value,
                                                       'mg',
                                                     ),

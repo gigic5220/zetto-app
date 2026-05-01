@@ -7,7 +7,7 @@ import '../../foundations/component/colors/generated_component_colors.dart';
 import '../common/animated_button.dart';
 import '../ions/ds_wrapper.dart';
 
-enum DSTextButtonVariant { primary, secondary }
+enum DSTextButtonVariant { primary, secondary, warning }
 
 class DSTextButton extends StatefulWidget {
   const DSTextButton({
@@ -69,6 +69,9 @@ class _DSTextButtonState extends State<DSTextButton> {
         break;
       case .secondary:
         textColor = textButtonColors.secondary;
+        break;
+      case .warning:
+        textColor = textButtonColors.warning;
         break;
     }
 

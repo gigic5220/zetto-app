@@ -284,7 +284,7 @@ as List<FoodHistoryItemServingAdjustmentRequestItemDto>,
 /// @nodoc
 mixin _$FoodHistoryItemServingAdjustmentRequestItemDto {
 
- int get foodHistoryItemId; double? get serving; double? get carbohydrate; double? get protein; double? get fat; double? get sodium; double? get sugar;
+ int get foodHistoryItemId; bool? get isRemove; double? get serving; double? get carbohydrate; double? get protein; double? get fat; double? get sodium; double? get sugar;
 /// Create a copy of FoodHistoryItemServingAdjustmentRequestItemDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -297,16 +297,16 @@ $FoodHistoryItemServingAdjustmentRequestItemDtoCopyWith<FoodHistoryItemServingAd
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is FoodHistoryItemServingAdjustmentRequestItemDto&&(identical(other.foodHistoryItemId, foodHistoryItemId) || other.foodHistoryItemId == foodHistoryItemId)&&(identical(other.serving, serving) || other.serving == serving)&&(identical(other.carbohydrate, carbohydrate) || other.carbohydrate == carbohydrate)&&(identical(other.protein, protein) || other.protein == protein)&&(identical(other.fat, fat) || other.fat == fat)&&(identical(other.sodium, sodium) || other.sodium == sodium)&&(identical(other.sugar, sugar) || other.sugar == sugar));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FoodHistoryItemServingAdjustmentRequestItemDto&&(identical(other.foodHistoryItemId, foodHistoryItemId) || other.foodHistoryItemId == foodHistoryItemId)&&(identical(other.isRemove, isRemove) || other.isRemove == isRemove)&&(identical(other.serving, serving) || other.serving == serving)&&(identical(other.carbohydrate, carbohydrate) || other.carbohydrate == carbohydrate)&&(identical(other.protein, protein) || other.protein == protein)&&(identical(other.fat, fat) || other.fat == fat)&&(identical(other.sodium, sodium) || other.sodium == sodium)&&(identical(other.sugar, sugar) || other.sugar == sugar));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,foodHistoryItemId,serving,carbohydrate,protein,fat,sodium,sugar);
+int get hashCode => Object.hash(runtimeType,foodHistoryItemId,isRemove,serving,carbohydrate,protein,fat,sodium,sugar);
 
 @override
 String toString() {
-  return 'FoodHistoryItemServingAdjustmentRequestItemDto(foodHistoryItemId: $foodHistoryItemId, serving: $serving, carbohydrate: $carbohydrate, protein: $protein, fat: $fat, sodium: $sodium, sugar: $sugar)';
+  return 'FoodHistoryItemServingAdjustmentRequestItemDto(foodHistoryItemId: $foodHistoryItemId, isRemove: $isRemove, serving: $serving, carbohydrate: $carbohydrate, protein: $protein, fat: $fat, sodium: $sodium, sugar: $sugar)';
 }
 
 
@@ -317,7 +317,7 @@ abstract mixin class $FoodHistoryItemServingAdjustmentRequestItemDtoCopyWith<$Re
   factory $FoodHistoryItemServingAdjustmentRequestItemDtoCopyWith(FoodHistoryItemServingAdjustmentRequestItemDto value, $Res Function(FoodHistoryItemServingAdjustmentRequestItemDto) _then) = _$FoodHistoryItemServingAdjustmentRequestItemDtoCopyWithImpl;
 @useResult
 $Res call({
- int foodHistoryItemId, double? serving, double? carbohydrate, double? protein, double? fat, double? sodium, double? sugar
+ int foodHistoryItemId, bool? isRemove, double? serving, double? carbohydrate, double? protein, double? fat, double? sodium, double? sugar
 });
 
 
@@ -334,10 +334,11 @@ class _$FoodHistoryItemServingAdjustmentRequestItemDtoCopyWithImpl<$Res>
 
 /// Create a copy of FoodHistoryItemServingAdjustmentRequestItemDto
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? foodHistoryItemId = null,Object? serving = freezed,Object? carbohydrate = freezed,Object? protein = freezed,Object? fat = freezed,Object? sodium = freezed,Object? sugar = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? foodHistoryItemId = null,Object? isRemove = freezed,Object? serving = freezed,Object? carbohydrate = freezed,Object? protein = freezed,Object? fat = freezed,Object? sodium = freezed,Object? sugar = freezed,}) {
   return _then(_self.copyWith(
 foodHistoryItemId: null == foodHistoryItemId ? _self.foodHistoryItemId : foodHistoryItemId // ignore: cast_nullable_to_non_nullable
-as int,serving: freezed == serving ? _self.serving : serving // ignore: cast_nullable_to_non_nullable
+as int,isRemove: freezed == isRemove ? _self.isRemove : isRemove // ignore: cast_nullable_to_non_nullable
+as bool?,serving: freezed == serving ? _self.serving : serving // ignore: cast_nullable_to_non_nullable
 as double?,carbohydrate: freezed == carbohydrate ? _self.carbohydrate : carbohydrate // ignore: cast_nullable_to_non_nullable
 as double?,protein: freezed == protein ? _self.protein : protein // ignore: cast_nullable_to_non_nullable
 as double?,fat: freezed == fat ? _self.fat : fat // ignore: cast_nullable_to_non_nullable
@@ -428,10 +429,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int foodHistoryItemId,  double? serving,  double? carbohydrate,  double? protein,  double? fat,  double? sodium,  double? sugar)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int foodHistoryItemId,  bool? isRemove,  double? serving,  double? carbohydrate,  double? protein,  double? fat,  double? sodium,  double? sugar)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _FoodHistoryItemServingAdjustmentRequestItemDto() when $default != null:
-return $default(_that.foodHistoryItemId,_that.serving,_that.carbohydrate,_that.protein,_that.fat,_that.sodium,_that.sugar);case _:
+return $default(_that.foodHistoryItemId,_that.isRemove,_that.serving,_that.carbohydrate,_that.protein,_that.fat,_that.sodium,_that.sugar);case _:
   return orElse();
 
 }
@@ -449,10 +450,10 @@ return $default(_that.foodHistoryItemId,_that.serving,_that.carbohydrate,_that.p
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int foodHistoryItemId,  double? serving,  double? carbohydrate,  double? protein,  double? fat,  double? sodium,  double? sugar)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int foodHistoryItemId,  bool? isRemove,  double? serving,  double? carbohydrate,  double? protein,  double? fat,  double? sodium,  double? sugar)  $default,) {final _that = this;
 switch (_that) {
 case _FoodHistoryItemServingAdjustmentRequestItemDto():
-return $default(_that.foodHistoryItemId,_that.serving,_that.carbohydrate,_that.protein,_that.fat,_that.sodium,_that.sugar);case _:
+return $default(_that.foodHistoryItemId,_that.isRemove,_that.serving,_that.carbohydrate,_that.protein,_that.fat,_that.sodium,_that.sugar);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -469,10 +470,10 @@ return $default(_that.foodHistoryItemId,_that.serving,_that.carbohydrate,_that.p
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int foodHistoryItemId,  double? serving,  double? carbohydrate,  double? protein,  double? fat,  double? sodium,  double? sugar)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int foodHistoryItemId,  bool? isRemove,  double? serving,  double? carbohydrate,  double? protein,  double? fat,  double? sodium,  double? sugar)?  $default,) {final _that = this;
 switch (_that) {
 case _FoodHistoryItemServingAdjustmentRequestItemDto() when $default != null:
-return $default(_that.foodHistoryItemId,_that.serving,_that.carbohydrate,_that.protein,_that.fat,_that.sodium,_that.sugar);case _:
+return $default(_that.foodHistoryItemId,_that.isRemove,_that.serving,_that.carbohydrate,_that.protein,_that.fat,_that.sodium,_that.sugar);case _:
   return null;
 
 }
@@ -484,10 +485,11 @@ return $default(_that.foodHistoryItemId,_that.serving,_that.carbohydrate,_that.p
 @JsonSerializable()
 
 class _FoodHistoryItemServingAdjustmentRequestItemDto implements FoodHistoryItemServingAdjustmentRequestItemDto {
-  const _FoodHistoryItemServingAdjustmentRequestItemDto({required this.foodHistoryItemId, this.serving, this.carbohydrate, this.protein, this.fat, this.sodium, this.sugar});
+  const _FoodHistoryItemServingAdjustmentRequestItemDto({required this.foodHistoryItemId, this.isRemove, this.serving, this.carbohydrate, this.protein, this.fat, this.sodium, this.sugar});
   factory _FoodHistoryItemServingAdjustmentRequestItemDto.fromJson(Map<String, dynamic> json) => _$FoodHistoryItemServingAdjustmentRequestItemDtoFromJson(json);
 
 @override final  int foodHistoryItemId;
+@override final  bool? isRemove;
 @override final  double? serving;
 @override final  double? carbohydrate;
 @override final  double? protein;
@@ -508,16 +510,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FoodHistoryItemServingAdjustmentRequestItemDto&&(identical(other.foodHistoryItemId, foodHistoryItemId) || other.foodHistoryItemId == foodHistoryItemId)&&(identical(other.serving, serving) || other.serving == serving)&&(identical(other.carbohydrate, carbohydrate) || other.carbohydrate == carbohydrate)&&(identical(other.protein, protein) || other.protein == protein)&&(identical(other.fat, fat) || other.fat == fat)&&(identical(other.sodium, sodium) || other.sodium == sodium)&&(identical(other.sugar, sugar) || other.sugar == sugar));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FoodHistoryItemServingAdjustmentRequestItemDto&&(identical(other.foodHistoryItemId, foodHistoryItemId) || other.foodHistoryItemId == foodHistoryItemId)&&(identical(other.isRemove, isRemove) || other.isRemove == isRemove)&&(identical(other.serving, serving) || other.serving == serving)&&(identical(other.carbohydrate, carbohydrate) || other.carbohydrate == carbohydrate)&&(identical(other.protein, protein) || other.protein == protein)&&(identical(other.fat, fat) || other.fat == fat)&&(identical(other.sodium, sodium) || other.sodium == sodium)&&(identical(other.sugar, sugar) || other.sugar == sugar));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,foodHistoryItemId,serving,carbohydrate,protein,fat,sodium,sugar);
+int get hashCode => Object.hash(runtimeType,foodHistoryItemId,isRemove,serving,carbohydrate,protein,fat,sodium,sugar);
 
 @override
 String toString() {
-  return 'FoodHistoryItemServingAdjustmentRequestItemDto(foodHistoryItemId: $foodHistoryItemId, serving: $serving, carbohydrate: $carbohydrate, protein: $protein, fat: $fat, sodium: $sodium, sugar: $sugar)';
+  return 'FoodHistoryItemServingAdjustmentRequestItemDto(foodHistoryItemId: $foodHistoryItemId, isRemove: $isRemove, serving: $serving, carbohydrate: $carbohydrate, protein: $protein, fat: $fat, sodium: $sodium, sugar: $sugar)';
 }
 
 
@@ -528,7 +530,7 @@ abstract mixin class _$FoodHistoryItemServingAdjustmentRequestItemDtoCopyWith<$R
   factory _$FoodHistoryItemServingAdjustmentRequestItemDtoCopyWith(_FoodHistoryItemServingAdjustmentRequestItemDto value, $Res Function(_FoodHistoryItemServingAdjustmentRequestItemDto) _then) = __$FoodHistoryItemServingAdjustmentRequestItemDtoCopyWithImpl;
 @override @useResult
 $Res call({
- int foodHistoryItemId, double? serving, double? carbohydrate, double? protein, double? fat, double? sodium, double? sugar
+ int foodHistoryItemId, bool? isRemove, double? serving, double? carbohydrate, double? protein, double? fat, double? sodium, double? sugar
 });
 
 
@@ -545,10 +547,11 @@ class __$FoodHistoryItemServingAdjustmentRequestItemDtoCopyWithImpl<$Res>
 
 /// Create a copy of FoodHistoryItemServingAdjustmentRequestItemDto
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? foodHistoryItemId = null,Object? serving = freezed,Object? carbohydrate = freezed,Object? protein = freezed,Object? fat = freezed,Object? sodium = freezed,Object? sugar = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? foodHistoryItemId = null,Object? isRemove = freezed,Object? serving = freezed,Object? carbohydrate = freezed,Object? protein = freezed,Object? fat = freezed,Object? sodium = freezed,Object? sugar = freezed,}) {
   return _then(_FoodHistoryItemServingAdjustmentRequestItemDto(
 foodHistoryItemId: null == foodHistoryItemId ? _self.foodHistoryItemId : foodHistoryItemId // ignore: cast_nullable_to_non_nullable
-as int,serving: freezed == serving ? _self.serving : serving // ignore: cast_nullable_to_non_nullable
+as int,isRemove: freezed == isRemove ? _self.isRemove : isRemove // ignore: cast_nullable_to_non_nullable
+as bool?,serving: freezed == serving ? _self.serving : serving // ignore: cast_nullable_to_non_nullable
 as double?,carbohydrate: freezed == carbohydrate ? _self.carbohydrate : carbohydrate // ignore: cast_nullable_to_non_nullable
 as double?,protein: freezed == protein ? _self.protein : protein // ignore: cast_nullable_to_non_nullable
 as double?,fat: freezed == fat ? _self.fat : fat // ignore: cast_nullable_to_non_nullable

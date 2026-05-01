@@ -1,6 +1,10 @@
 part of 'home_provider.dart';
 
 mixin HomeActionMixin {
+  void onPageFocused(WidgetRef ref) {
+    ref.invalidate(_todayNutritionSummaryProvider);
+  }
+
   void onTapSelectPhoto(
     BuildContext context, {
     required ImageSource source,

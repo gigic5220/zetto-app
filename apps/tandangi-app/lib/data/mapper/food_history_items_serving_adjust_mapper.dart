@@ -10,6 +10,7 @@ class FoodHistoryItemsServingAdjustMapper {
           .map(
             (item) => FoodHistoryItemServingAdjustmentRequestItemDto(
               foodHistoryItemId: item.foodHistoryItemId,
+              isRemove: item.isRemove,
               serving: item.serving,
               carbohydrate: item.carbohydrate,
               protein: item.protein,

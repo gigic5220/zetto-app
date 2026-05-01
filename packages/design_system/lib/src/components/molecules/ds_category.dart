@@ -15,19 +15,27 @@ class DSCategoryItem {
 }
 
 class DSCategory extends StatefulWidget {
-  const DSCategory({super.key, required this.items, required this.tabController, this.padding, this.onTap});
+  const DSCategory({
+    super.key,
+    required this.items,
+    required this.tabController,
+    this.padding,
+    this.onTap,
+    this.useDefaultTabController = true,
+  });
 
   final List<DSCategoryItem> items;
   final TabController? tabController;
   final EdgeInsetsGeometry? padding;
   final Function(int index)? onTap;
+  final bool useDefaultTabController;
 
   @override
   State<DSCategory> createState() => _DSCategoryState();
 }
 
 class _DSCategoryState extends State<DSCategory> with TickerProviderStateMixin {
-  late TabController tabController;
+  late TabController? tabController;
   late CategoryFillColors categoryFillColors;
   late CategoryTextColors categoryTextColors;
 
@@ -38,14 +46,18 @@ class _DSCategoryState extends State<DSCategory> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    tabController = widget.tabController ?? TabController(length: widget.items.length, vsync: this);
+    tabController =
+        widget.tabController ??
+        (widget.useDefaultTabController ? TabController(length: widget.items.length, vsync: this) : null);
   }
 
   @override
   void didUpdateWidget(covariant DSCategory oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.items != widget.items) {
-      tabController = widget.tabController ?? TabController(length: widget.items.length, vsync: this);
+      tabController =
+          widget.tabController ??
+          (widget.useDefaultTabController ? TabController(length: widget.items.length, vsync: this) : null);
     }
     _calculate();
   }

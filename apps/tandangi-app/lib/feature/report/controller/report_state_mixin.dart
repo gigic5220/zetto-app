@@ -5,7 +5,7 @@ mixin ReportStateMixin {
     return ref.watch(_foodAnalyzeResultProvider);
   }
 
-  FoodAnalysisFoodEntity? watchSelectedFoodItem(WidgetRef ref) {
-    return ref.watch(_selectedFoodItemProvider);
+  int watchSelectedFoodItemIndex(WidgetRef ref) {
+    return ref.watch(_selectedFoodItemIndexProvider);
   }
 }

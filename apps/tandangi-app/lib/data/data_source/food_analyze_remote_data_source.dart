@@ -18,7 +18,7 @@ abstract class FoodAnalyzeRemoteDataSource {
 
   Future<FoodAnalysisDto> getFoodAnalysis({required int foodAnalysisId});
 
-  Future<FoodHistoryItemsServingAdjustResponseDto> adjustHistoryItemsServings({
+  Future<FoodHistoryItemsServingAdjustResponseDto> adjustHistoryItems({
     required int foodAnalysisId,
     required FoodHistoryItemsServingAdjustRequestDto dto,
   });
@@ -103,19 +103,19 @@ class FoodAnalyzeRemoteDataSourceImpl implements FoodAnalyzeRemoteDataSource {
   }
 
   @override
-  Future<FoodHistoryItemsServingAdjustResponseDto> adjustHistoryItemsServings({
+  Future<FoodHistoryItemsServingAdjustResponseDto> adjustHistoryItems({
     required int foodAnalysisId,
     required FoodHistoryItemsServingAdjustRequestDto dto,
   }) async {
     final response = await _dio.patch<Map<String, dynamic>>(
-      '/api/food-analysis/$foodAnalysisId/history-items/servings',
+      '/api/food-analysis/$foodAnalysisId/history-items',
       data: dto.toJson(),
     );
 
     final data = response.data;
     if (data == null) {
       throw StateError(
-        'Empty response from /api/food-analysis/$foodAnalysisId/history-items/servings',
+        'Empty response from /api/food-analysis/$foodAnalysisId/history-items',
       );
     }
 

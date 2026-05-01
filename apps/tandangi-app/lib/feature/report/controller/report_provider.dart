@@ -53,26 +53,14 @@ class _FoodAnalyzeResult extends _$FoodAnalyzeResult {
   }
 }
 
-FoodAnalysisFoodEntity? _pickInitialFoodItem(FoodAnalysisEntity? result) {
-  if (result == null) return null;
-  if (result.mainFoodItems.isNotEmpty) return result.mainFoodItems.first;
-  if (result.sideFoodItems.isNotEmpty) return result.sideFoodItems.first;
-  if (result.otherFoodItems.isNotEmpty) return result.otherFoodItems.first;
-  return null;
-}
-
-@Riverpod(dependencies: [_FoodAnalyzeResult])
-class _SelectedFoodItem extends _$SelectedFoodItem {
+@riverpod
+class _SelectedFoodItemIndex extends _$SelectedFoodItemIndex {
   @override
-  FoodAnalysisFoodEntity? build() {
-    final foodAnalyzeResult = ref.watch(_foodAnalyzeResultProvider);
-    return switch (foodAnalyzeResult) {
-      AsyncData(:final value) => _pickInitialFoodItem(value),
-      _ => null,
-    };
+  int build() {
+    return 0;
   }
 
-  void set(FoodAnalysisFoodEntity value) {
+  void set(int value) {
     state = value;
   }
 }

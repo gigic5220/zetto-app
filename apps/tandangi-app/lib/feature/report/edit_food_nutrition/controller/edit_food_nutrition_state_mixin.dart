@@ -5,7 +5,7 @@ mixin EditFoodNutritionStateMixin {
     return ref.watch(initialAnalyzedFoodItemsProvider);
   }
 
-  AnalyzedFoodItemEntity? watchSelectedFoodItem(WidgetRef ref) {
-    return ref.watch(_selectedFoodItemProvider);
+  int watchSelectedFoodItemIndex(WidgetRef ref) {
+    return ref.watch(_selectedFoodItemIndexProvider);
   }
 }

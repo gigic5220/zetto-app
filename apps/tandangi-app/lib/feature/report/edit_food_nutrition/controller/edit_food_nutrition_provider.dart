@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -18,19 +17,23 @@ class AnalyzedFoodItemEntity {
   AnalyzedFoodItemEntity({
     required this.foodAnalysisFoodEntity,
     this.editModeEnum = EditModeEnum.amount,
+    this.isRemoved = false,
   });
 
   final FoodAnalysisFoodEntity foodAnalysisFoodEntity;
   final EditModeEnum editModeEnum;
+  final bool isRemoved;
 
   AnalyzedFoodItemEntity copyWith({
     FoodAnalysisFoodEntity? foodAnalysisFoodEntity,
     EditModeEnum? editModeEnum,
+    bool? isRemoved,
   }) {
     return AnalyzedFoodItemEntity(
       foodAnalysisFoodEntity:
           foodAnalysisFoodEntity ?? this.foodAnalysisFoodEntity,
       editModeEnum: editModeEnum ?? this.editModeEnum,
+      isRemoved: isRemoved ?? this.isRemoved,
     );
   }
 }
@@ -52,15 +55,14 @@ class InitialAnalyzedFoodItems extends _$InitialAnalyzedFoodItems {
   }
 }
 
-@Riverpod(dependencies: [InitialAnalyzedFoodItems])
-class _SelectedFoodItem extends _$SelectedFoodItem {
+@riverpod
+class _SelectedFoodItemIndex extends _$SelectedFoodItemIndex {
   @override
-  AnalyzedFoodItemEntity? build() {
-    final analyzedFoodItems = ref.watch(initialAnalyzedFoodItemsProvider);
-    return analyzedFoodItems.first;
+  int build() {
+    return 0;
   }
 
-  void set(AnalyzedFoodItemEntity value) {
+  void set(int value) {
     state = value;
   }
 }

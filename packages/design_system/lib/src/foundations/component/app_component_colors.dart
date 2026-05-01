@@ -373,6 +373,7 @@ class AppComponentColors extends ThemeExtension<AppComponentColors> {
       primary: AppSemanticColors.light.brandPrimary,
       secondary: AppSemanticColors.light.textSecondary,
       disabled: AppSemanticColors.light.textDisabled,
+      warning: AppSemanticColors.light.textWarning,
     ),
     pickerCalendarText: PickerCalendarTextColors(
       primary: AppSemanticColors.light.textPrimary,
@@ -649,6 +650,7 @@ class AppComponentColors extends ThemeExtension<AppComponentColors> {
       primary: AppSemanticColors.dark.brandStrong,
       secondary: AppSemanticColors.dark.textSecondary,
       disabled: AppSemanticColors.dark.textDisabled,
+      warning: AppSemanticColors.dark.textWarning,
     ),
     pickerCalendarText: PickerCalendarTextColors(
       primary: AppSemanticColors.dark.textPrimary,
@@ -1151,6 +1153,7 @@ class AppComponentColors extends ThemeExtension<AppComponentColors> {
         primary: Color.lerp(textButton.primary, other.textButton.primary, t) ?? textButton.primary,
         secondary: Color.lerp(textButton.secondary, other.textButton.secondary, t) ?? textButton.secondary,
         disabled: Color.lerp(textButton.disabled, other.textButton.disabled, t) ?? textButton.disabled,
+        warning: Color.lerp(textButton.warning, other.textButton.warning, t) ?? textButton.warning,
       ),
       pickerCalendarText: PickerCalendarTextColors(
         primary:

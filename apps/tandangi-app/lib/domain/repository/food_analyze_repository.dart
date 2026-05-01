@@ -18,7 +18,7 @@ abstract class FoodAnalyzeRepository {
 
   Future<FoodAnalysisEntity> getFoodAnalysis({required int foodAnalysisId});
 
-  Future<FoodHistoryItemsServingAdjustEntity> adjustHistoryItemsServings({
+  Future<FoodHistoryItemsServingAdjustEntity> adjustHistoryItems({
     required int foodAnalysisId,
     required List<FoodHistoryItemServingAdjustmentEntity> items,
   });

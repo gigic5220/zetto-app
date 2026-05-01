@@ -8,6 +8,7 @@ abstract class FoodHistoryItemServingAdjustmentEntity
     with _$FoodHistoryItemServingAdjustmentEntity {
   const factory FoodHistoryItemServingAdjustmentEntity({
     required int foodHistoryItemId,
+    bool? isRemove,
     double? serving,
     double? carbohydrate,
     double? protein,

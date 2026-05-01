@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:core_app/components/async_widget.dart';
+import 'package:core_app/route/route.dart';
 import 'package:design_system/components/atoms.dart';
 import 'package:design_system/components/common.dart';
 import 'package:design_system/components/ions.dart';
@@ -23,6 +24,7 @@ import 'package:tandangi/feature/login/login_page.dart';
 import 'package:tandangi/feature/main/home/controller/home_provider.dart';
 import 'package:tandangi/feature/shop/shop_page.dart';
 import 'package:tandangi/gen/assets.gen.dart';
+import 'package:tandangi/util/extension/string_extension.dart';
 
 Future<void> signOut() async {
   await FirebaseAuth.instance.signOut();
@@ -39,7 +41,13 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<HomePage>
-    with HomeStateMixin, HomeActionMixin {
+    with HomeStateMixin, HomeActionMixin, GoRouterWatcherPage {
+  @override
+  void onFocused(bool isFirstTime) {
+    super.onFocused(isFirstTime);
+    onPageFocused(ref);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -203,27 +211,35 @@ class _HomePageState extends ConsumerState<HomePage>
                         builder: (userCharacterDetail, todayNutritionSummary) {
                           return Column(
                             children: [
-                              DSViewTitle.large(
-                                subTitle:
-                                    '오늘의 ${userCharacterDetail.userCharacter.characterName}',
-                                title:
-                                    '${todayNutritionSummary.gradeEnum?.value}등급 ${userCharacterDetail.userCharacter.characterOriginName}',
-                                description:
-                                    '균형이 좋아요! 다만 탄수화물 비율이 조금 높아, 다음 식사는 단백질과 채소 위주로 가볍게 맞춰봐요',
-                                trailingWidget: DSIconSolidButton.xSmall(
-                                  variant: .tertiary,
-                                  iconUri: Assets.svgs.icSettingFill,
-                                  onTap: () {
-                                    onTapChangeNutritionStandards(
-                                      ref,
-                                      buildBottomSheetBodyWidgetCallback:
-                                          _buildBottomSheetBodyWidget,
-                                      buildBottomSheetCallToActionWidgetCallback:
-                                          _buildBottomSheetCallToActionWidget,
-                                    );
-                                  },
+                              if (todayNutritionSummary.analysisCount == 0) ...[
+                                DSViewTitle.large(
+                                  title: '오늘은 아직 먹은게 없어요',
+                                  description:
+                                      '오른쪽 아래 + 버튼으로 ${userCharacterDetail.userCharacter.characterName.checkBottomConsonan() ? '${userCharacterDetail.userCharacter.characterName}을' : '${userCharacterDetail.userCharacter.characterName}를'} 먹여주세요!',
                                 ),
-                              ),
+                              ] else ...[
+                                DSViewTitle.large(
+                                  subTitle:
+                                      '오늘의 ${userCharacterDetail.userCharacter.characterName}',
+                                  title:
+                                      '${todayNutritionSummary.gradeEnum?.value}등급 ${userCharacterDetail.userCharacter.characterOriginName}',
+                                  description:
+                                      '균형이 좋아요! 다만 탄수화물 비율이 조금 높아, 다음 식사는 단백질과 채소 위주로 가볍게 맞춰봐요',
+                                  trailingWidget: DSIconSolidButton.xSmall(
+                                    variant: .tertiary,
+                                    iconUri: Assets.svgs.icSettingFill,
+                                    onTap: () {
+                                      onTapChangeNutritionStandards(
+                                        ref,
+                                        buildBottomSheetBodyWidgetCallback:
+                                            _buildBottomSheetBodyWidget,
+                                        buildBottomSheetCallToActionWidgetCallback:
+                                            _buildBottomSheetCallToActionWidget,
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ],
                               Padding(
                                 padding: EdgeInsets.symmetric(
                                   vertical: context.componentPadding.small,
@@ -489,7 +505,6 @@ class _HomePageState extends ConsumerState<HomePage>
                               ),
                               SizedBox(height: context.componentGap.xxxLarge),
                               DSListTitle.mediumNormal(title: '오늘 먹었어요'),
-
                               Consumer(
                                 builder: (context, ref, child) {
                                   final foodAnalysises = watchFoodAnalysises(
@@ -497,14 +512,19 @@ class _HomePageState extends ConsumerState<HomePage>
                                   );
                                   return AsyncWidget(
                                     asyncValue: foodAnalysises,
-                                    emptyWidget: DSEmptyArea(
-                                      type: .section,
-                                      title: '아직 먹인 음식이 없어요',
-                                      description: '밥을 먹이면 탄단지 그래프가 채워져요',
-                                    ),
                                     builder: (foodAnalysises) {
+                                      final itemList = foodAnalysises.content;
+
+                                      if (itemList.isEmpty) {
+                                        return DSEmptyArea(
+                                          type: .section,
+                                          title: '아직 먹인 음식이 없어요',
+                                          description: '밥을 먹이면 탄단지 그래프가 채워져요',
+                                        );
+                                      }
+
                                       return Column(
-                                        children: foodAnalysises.content
+                                        children: itemList
                                             .map(
                                               (foodAnalysis) => DSBanner.normal(
                                                 listItemWidget: DSListItem.small(

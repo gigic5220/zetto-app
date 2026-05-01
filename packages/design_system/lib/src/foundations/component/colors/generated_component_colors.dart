@@ -548,11 +548,17 @@ class DividerFillColors {
 
 @immutable
 class TextButtonColors {
-  const TextButtonColors({required this.primary, required this.secondary, required this.disabled});
+  const TextButtonColors({
+    required this.primary,
+    required this.secondary,
+    required this.disabled,
+    required this.warning,
+  });
 
   final Color primary;
   final Color secondary;
   final Color disabled;
+  final Color warning;
 }
 
 class PickerCalendarTextColors {

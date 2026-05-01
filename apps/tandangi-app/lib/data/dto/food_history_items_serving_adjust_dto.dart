@@ -20,6 +20,7 @@ abstract class FoodHistoryItemServingAdjustmentRequestItemDto
     with _$FoodHistoryItemServingAdjustmentRequestItemDto {
   const factory FoodHistoryItemServingAdjustmentRequestItemDto({
     required int foodHistoryItemId,
+    bool? isRemove,
     double? serving,
     double? carbohydrate,
     double? protein,

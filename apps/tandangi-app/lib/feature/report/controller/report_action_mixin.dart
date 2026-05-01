@@ -8,9 +8,11 @@ mixin ReportActionMixin {
 
   void onTapAnalyzedFoodItem(
     WidgetRef ref, {
-    required FoodAnalysisFoodEntity foodItem,
+    required int selectedFoodItemIndex,
   }) {
-    ref.read(_selectedFoodItemProvider.notifier).set(foodItem);
+    ref
+        .read(_selectedFoodItemIndexProvider.notifier)
+        .set(selectedFoodItemIndex);
   }
 
   void onTapEditFoodNutrition(WidgetRef ref) {

@@ -58,11 +58,11 @@ class FoodAnalyzeRepositoryImpl implements FoodAnalyzeRepository {
   }
 
   @override
-  Future<FoodHistoryItemsServingAdjustEntity> adjustHistoryItemsServings({
+  Future<FoodHistoryItemsServingAdjustEntity> adjustHistoryItems({
     required int foodAnalysisId,
     required List<FoodHistoryItemServingAdjustmentEntity> items,
   }) async {
-    final dto = await _remote.adjustHistoryItemsServings(
+    final dto = await _remote.adjustHistoryItems(
       foodAnalysisId: foodAnalysisId,
       dto: FoodHistoryItemsServingAdjustMapper.toRequestDto(items),
     );
