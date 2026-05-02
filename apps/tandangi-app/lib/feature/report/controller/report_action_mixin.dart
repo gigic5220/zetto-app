@@ -2,7 +2,7 @@ part of 'report_provider.dart';
 
 mixin ReportActionMixin {
   void onPageFocused(WidgetRef ref) {
-    print('onPageFocused');
+    ref.invalidate(_selectedFoodItemIndexProvider);
     ref.invalidate(_foodAnalyzeResultProvider);
   }
 

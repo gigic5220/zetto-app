@@ -7,7 +7,7 @@ part 'user_character_detail_entity.freezed.dart';
 abstract class UserCharacterDetailEntity with _$UserCharacterDetailEntity {
   const factory UserCharacterDetailEntity({
     required UserCharacterSectionEntity userCharacter,
-    required UserCharacterStateRowEntity userCharacterState,
+    UserCharacterStateRowEntity? userCharacterState,
     @Default(<UserCharacterSubStateRowEntity>[])
     List<UserCharacterSubStateRowEntity> userCharacterSubStates,
     @Default('') String description,

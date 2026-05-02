@@ -7,10 +7,10 @@ mixin HomeStateMixin {
     return ref.watch(_userCharacterDetailProvider);
   }
 
-  AsyncValue<TodayNutritionSummaryEntity> watchTodayNutritionSummary(
+  AsyncValue<DailyNutritionSummariesEntity> watchDailyNutritionSummaries(
     WidgetRef ref,
   ) {
-    return ref.watch(_todayNutritionSummaryProvider);
+    return ref.watch(_dailyNutritionSummariesProvider);
   }
 
   bool watchIsShowSelectPhotoButton(WidgetRef ref) {
@@ -27,5 +27,9 @@ mixin HomeStateMixin {
     WidgetRef ref,
   ) {
     return ref.watch(_foodAnalysisesProvider);
+  }
+
+  AsyncValue<NutritionStandardEntity> watchNutritionStandard(WidgetRef ref) {
+    return ref.watch(_nutritionStandardProvider);
   }
 }

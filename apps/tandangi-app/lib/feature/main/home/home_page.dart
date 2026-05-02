@@ -16,6 +16,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tandangi/core/extension/datetime_extension.dart';
 import 'package:tandangi/core/extension/double_extension.dart';
+import 'package:tandangi/domain/entity/daily_nutrition_summary_entity.dart';
 import 'package:tandangi/domain/entity/food_analysis_entity.dart';
 import 'package:tandangi/domain/enum/nutrition_status_enum.dart';
 import 'package:tandangi/domain/enum/nutrition_summary_target_basis_enum.dart';
@@ -29,6 +30,30 @@ import 'package:tandangi/util/extension/string_extension.dart';
 Future<void> signOut() async {
   await FirebaseAuth.instance.signOut();
   await GoogleSignIn.instance.signOut();
+}
+
+double _dailyMacroAchievementPercent(double intakeG, int targetG) {
+  if (targetG <= 0) return 0;
+  return (intakeG / targetG) * 100;
+}
+
+NutritionStatusEnum _dailySugarStatus(DailyNutritionSummaryEntity e) {
+  final limit = e.sugarLimitG;
+  if (limit <= 0) return NutritionStatusEnum.adequate;
+  final ratio = e.sugarIntakeG / limit;
+  if (ratio <= 1.0) return NutritionStatusEnum.adequate;
+  if (ratio <= 1.2) return NutritionStatusEnum.careful;
+  return NutritionStatusEnum.excessive;
+}
+
+NutritionStatusEnum _dailySodiumStatus(DailyNutritionSummaryEntity e) {
+  final risk = e.sodiumRiskReductionMg;
+  if (risk <= 0) return NutritionStatusEnum.adequate;
+  final intake = e.sodiumIntakeMg;
+  if (intake < e.sodiumAdequateMg) return NutritionStatusEnum.deficient;
+  if (intake <= risk) return NutritionStatusEnum.adequate;
+  if (intake <= risk * 1.15) return NutritionStatusEnum.careful;
+  return NutritionStatusEnum.excessive;
 }
 
 class HomePage extends ConsumerStatefulWidget {
@@ -202,364 +227,372 @@ class _HomePageState extends ConsumerState<HomePage>
                   child: Consumer(
                     builder: (context, ref, child) {
                       final userCharacterDetail = watchUserCharacterDetail(ref);
-                      final todayNutritionSummary = watchTodayNutritionSummary(
-                        ref,
-                      );
-                      return AsyncWidget.combine2(
+                      final dailyNutritionSummaries =
+                          watchDailyNutritionSummaries(ref);
+                      return AsyncWidget.combine3(
                         first: userCharacterDetail,
-                        second: todayNutritionSummary,
-                        builder: (userCharacterDetail, todayNutritionSummary) {
-                          return Column(
-                            children: [
-                              if (todayNutritionSummary.analysisCount == 0) ...[
-                                DSViewTitle.large(
-                                  title: '오늘은 아직 먹은게 없어요',
-                                  description:
-                                      '오른쪽 아래 + 버튼으로 ${userCharacterDetail.userCharacter.characterName.checkBottomConsonan() ? '${userCharacterDetail.userCharacter.characterName}을' : '${userCharacterDetail.userCharacter.characterName}를'} 먹여주세요!',
-                                ),
-                              ] else ...[
-                                DSViewTitle.large(
-                                  subTitle:
-                                      '오늘의 ${userCharacterDetail.userCharacter.characterName}',
-                                  title:
-                                      '${todayNutritionSummary.gradeEnum?.value}등급 ${userCharacterDetail.userCharacter.characterOriginName}',
-                                  description:
-                                      '균형이 좋아요! 다만 탄수화물 비율이 조금 높아, 다음 식사는 단백질과 채소 위주로 가볍게 맞춰봐요',
-                                  trailingWidget: DSIconSolidButton.xSmall(
-                                    variant: .tertiary,
-                                    iconUri: Assets.svgs.icSettingFill,
-                                    onTap: () {
-                                      onTapChangeNutritionStandards(
-                                        ref,
-                                        buildBottomSheetBodyWidgetCallback:
-                                            _buildBottomSheetBodyWidget,
-                                        buildBottomSheetCallToActionWidgetCallback:
-                                            _buildBottomSheetCallToActionWidget,
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ],
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                  vertical: context.componentPadding.small,
-                                ),
-                                child: Column(
-                                  children: [
-                                    NutritionRingChart(
-                                      nutritionType:
-                                          NutritionTypeEnum.carbohydrate,
-                                      valueText:
-                                          '${todayNutritionSummary.carbohydrate.intakeG.toRoundedString()}g',
-                                      standardValueText: switch (todayNutritionSummary
-                                          .summaryTargetBasisEnum) {
-                                        NutritionSummaryTargetBasisEnum.min =>
-                                          '${todayNutritionSummary.carbohydrate.minG}g',
-                                        NutritionSummaryTargetBasisEnum
-                                            .target =>
-                                          '${todayNutritionSummary.carbohydrate.targetG}g',
-                                        NutritionSummaryTargetBasisEnum.max =>
-                                          '${todayNutritionSummary.carbohydrate.maxG}g',
-                                      },
-                                      progress: todayNutritionSummary
-                                          .carbohydrate
-                                          .achievementPercent
-                                          .toPercentage(),
-                                      progressColor: context
-                                          .semanticColors
-                                          .chartCarbohydrate,
+                        second: dailyNutritionSummaries,
+                        third: watchNutritionStandard(ref),
+                        builder:
+                            (
+                              userCharacterDetail,
+                              dailyNutritionSummaries,
+                              nutritionStandard,
+                            ) {
+                              final DailyNutritionSummaryEntity?
+                              dailyNutritionSummary =
+                                  dailyNutritionSummaries.summaries.isNotEmpty
+                                  ? dailyNutritionSummaries.summaries.first
+                                  : null;
+                              final NutritionStatusEnum? sugarStatus =
+                                  dailyNutritionSummary != null
+                                  ? _dailySugarStatus(dailyNutritionSummary)
+                                  : null;
+                              final NutritionStatusEnum? sodiumStatus =
+                                  dailyNutritionSummary != null
+                                  ? _dailySodiumStatus(dailyNutritionSummary)
+                                  : null;
+                              return Column(
+                                children: [
+                                  if (dailyNutritionSummary == null) ...[
+                                    DSViewTitle.large(
+                                      title: '오늘은 아직 먹은게 없어요',
+                                      description:
+                                          '오른쪽 아래 + 버튼으로 ${userCharacterDetail.userCharacter.characterName.checkBottomConsonan() ? '${userCharacterDetail.userCharacter.characterName}을' : '${userCharacterDetail.userCharacter.characterName}를'} 먹여주세요!',
                                     ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      spacing: context.componentGap.xLarge,
+                                  ] else ...[
+                                    DSViewTitle.large(
+                                      subTitle:
+                                          '오늘의 ${userCharacterDetail.userCharacter.characterName}',
+                                      title:
+                                          '${dailyNutritionSummary.gradeEnum?.value}등급 ${userCharacterDetail.userCharacter.characterOriginName}',
+                                      description:
+                                          '균형이 좋아요! 다만 탄수화물 비율이 조금 높아, 다음 식사는 단백질과 채소 위주로 가볍게 맞춰봐요',
+                                      trailingWidget: DSIconSolidButton.xSmall(
+                                        variant: .tertiary,
+                                        iconUri: Assets.svgs.icSettingFill,
+                                        onTap: () {
+                                          onTapChangeNutritionStandards(
+                                            ref,
+                                            buildBottomSheetBodyWidgetCallback:
+                                                _buildBottomSheetBodyWidget,
+                                            buildBottomSheetCallToActionWidgetCallback:
+                                                _buildBottomSheetCallToActionWidget,
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      vertical: context.componentPadding.small,
+                                    ),
+                                    child: Column(
                                       children: [
                                         NutritionRingChart(
                                           nutritionType:
-                                              NutritionTypeEnum.protein,
+                                              NutritionTypeEnum.carbohydrate,
                                           valueText:
-                                              '${todayNutritionSummary.protein.intakeG.toRoundedString()}g',
-                                          standardValueText: switch (todayNutritionSummary
-                                              .summaryTargetBasisEnum) {
-                                            NutritionSummaryTargetBasisEnum
-                                                .min =>
-                                              '${todayNutritionSummary.protein.minG}g',
-                                            NutritionSummaryTargetBasisEnum
-                                                .target =>
-                                              '${todayNutritionSummary.protein.targetG}g',
-                                            NutritionSummaryTargetBasisEnum
-                                                .max =>
-                                              '${todayNutritionSummary.protein.maxG}g',
-                                          },
-                                          progress: todayNutritionSummary
-                                              .protein
-                                              .achievementPercent
-                                              .toPercentage(),
+                                              '${dailyNutritionSummary?.carbohydrateIntakeG.toRoundedString() ?? 0}g',
+                                          progress:
+                                              dailyNutritionSummary != null
+                                              ? _dailyMacroAchievementPercent(
+                                                  dailyNutritionSummary
+                                                      .carbohydrateIntakeG,
+                                                  dailyNutritionSummary
+                                                      .carbohydrateTargetG,
+                                                ).toPercentage()
+                                              : 0,
                                           progressColor: context
                                               .semanticColors
                                               .chartCarbohydrate,
                                         ),
-                                        NutritionRingChart(
-                                          nutritionType: NutritionTypeEnum.fat,
-                                          valueText:
-                                              '${todayNutritionSummary.fat.intakeG.toRoundedString()}g',
-                                          standardValueText: switch (todayNutritionSummary
-                                              .summaryTargetBasisEnum) {
-                                            NutritionSummaryTargetBasisEnum
-                                                .min =>
-                                              '${todayNutritionSummary.fat.minG}g',
-                                            NutritionSummaryTargetBasisEnum
-                                                .target =>
-                                              '${todayNutritionSummary.fat.targetG}g',
-                                            NutritionSummaryTargetBasisEnum
-                                                .max =>
-                                              '${todayNutritionSummary.fat.maxG}g',
-                                          },
-                                          progress: todayNutritionSummary
-                                              .fat
-                                              .achievementPercent
-                                              .toPercentage(),
-                                          progressColor: context
-                                              .semanticColors
-                                              .chartCarbohydrate,
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          spacing: context.componentGap.xLarge,
+                                          children: [
+                                            NutritionRingChart(
+                                              nutritionType:
+                                                  NutritionTypeEnum.protein,
+                                              valueText:
+                                                  '${dailyNutritionSummary?.proteinIntakeG.toRoundedString() ?? 0}g',
+                                              progress:
+                                                  dailyNutritionSummary != null
+                                                  ? _dailyMacroAchievementPercent(
+                                                      dailyNutritionSummary
+                                                          .proteinIntakeG,
+                                                      dailyNutritionSummary
+                                                          .proteinTargetG,
+                                                    ).toPercentage()
+                                                  : 0,
+                                              progressColor: context
+                                                  .semanticColors
+                                                  .chartCarbohydrate,
+                                            ),
+                                            NutritionRingChart(
+                                              nutritionType:
+                                                  NutritionTypeEnum.fat,
+                                              valueText:
+                                                  '${dailyNutritionSummary?.fatIntakeG.toRoundedString() ?? 0}g',
+                                              progress:
+                                                  dailyNutritionSummary != null
+                                                  ? _dailyMacroAchievementPercent(
+                                                      dailyNutritionSummary
+                                                          .fatIntakeG,
+                                                      dailyNutritionSummary
+                                                          .fatTargetG,
+                                                    ).toPercentage()
+                                                  : 0,
+                                              progressColor: context
+                                                  .semanticColors
+                                                  .chartCarbohydrate,
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(height: context.componentGap.medium),
-                              DSListTitle.mediumNormal(title: '단짠 신호'),
-                              Row(
-                                spacing: context.componentGap.small,
-                                children: [
-                                  Expanded(
-                                    child: Container(
-                                      padding: EdgeInsets.fromLTRB(
-                                        context.componentPadding.xxLarge,
-                                        context.componentPadding.xLarge,
-                                        context.componentPadding.xxLarge,
-                                        context.componentPadding.xSmall,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(
-                                          context.componentRadius.xLarge,
-                                        ),
-                                        border: Border.all(
-                                          color: switch (todayNutritionSummary
-                                              .sugar
-                                              .status) {
-                                            NutritionStatusEnum.adequate ||
-                                            NutritionStatusEnum.deficient =>
-                                              context
-                                                  .semanticColors
-                                                  .borderSubtle,
-                                            NutritionStatusEnum.careful ||
-                                            NutritionStatusEnum.excessive =>
-                                              context
-                                                  .semanticColors
-                                                  .borderWarning,
-                                            _ =>
-                                              context
-                                                  .semanticColors
-                                                  .borderSubtle,
-                                          },
-                                        ),
-                                      ),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          DSWrapper(
-                                            uri: Assets.images.avocado.path,
-                                            view: WrapperView.fix24,
-                                          ),
-                                          DSListItem.medium(
-                                            variant: .normal,
-                                            title: '당',
-                                            subTitle:
-                                                '${todayNutritionSummary.sugar.intakeG.toRoundedString()}g',
-                                            titleBadge: DSTextBadge.small(
-                                              text: todayNutritionSummary
-                                                  .sugar
-                                                  .status
-                                                  .value,
-                                              variant:
-                                                  switch (todayNutritionSummary
-                                                      .sugar
-                                                      .status) {
-                                                    NutritionStatusEnum
-                                                        .adequate =>
-                                                      DSTextBadgeVariant
-                                                          .success,
-                                                    NutritionStatusEnum
-                                                        .deficient =>
-                                                      DSTextBadgeVariant
-                                                          .success,
-                                                    NutritionStatusEnum
-                                                        .careful =>
-                                                      DSTextBadgeVariant
-                                                          .warning,
-                                                    NutritionStatusEnum
-                                                        .excessive =>
-                                                      DSTextBadgeVariant
-                                                          .warning,
-                                                    _ =>
-                                                      DSTextBadgeVariant
-                                                          .success,
-                                                  },
-                                              type: DSTextBadgeType.circular,
-                                            ),
-                                            description:
-                                                '최대 ${todayNutritionSummary.sugar.limitG}g',
-                                          ),
-                                        ],
-                                      ),
-                                    ),
                                   ),
-                                  Expanded(
-                                    child: Container(
-                                      padding: EdgeInsets.fromLTRB(
-                                        context.componentPadding.xxLarge,
-                                        context.componentPadding.xLarge,
-                                        context.componentPadding.xxLarge,
-                                        context.componentPadding.xSmall,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(
-                                          context.componentRadius.xLarge,
-                                        ),
-                                        border: Border.all(
-                                          color: switch (todayNutritionSummary
-                                              .sodium
-                                              .status) {
-                                            NutritionStatusEnum.adequate ||
-                                            NutritionStatusEnum.deficient =>
-                                              context
-                                                  .semanticColors
-                                                  .borderSubtle,
-                                            NutritionStatusEnum.careful ||
-                                            NutritionStatusEnum.excessive =>
-                                              context
-                                                  .semanticColors
-                                                  .borderWarning,
-                                            _ =>
-                                              context
-                                                  .semanticColors
-                                                  .borderSubtle,
-                                          },
-                                        ),
-                                      ),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          DSWrapper(
-                                            uri: Assets.images.avocado.path,
-                                            view: WrapperView.fix24,
+                                  SizedBox(height: context.componentGap.medium),
+                                  DSListTitle.mediumNormal(title: '단짠 신호'),
+                                  Row(
+                                    spacing: context.componentGap.small,
+                                    children: [
+                                      Expanded(
+                                        child: Container(
+                                          padding: EdgeInsets.fromLTRB(
+                                            context.componentPadding.xxLarge,
+                                            context.componentPadding.xLarge,
+                                            context.componentPadding.xxLarge,
+                                            context.componentPadding.xSmall,
                                           ),
-                                          DSListItem.medium(
-                                            variant: .normal,
-                                            title: '나트륨',
-                                            subTitle:
-                                                '${todayNutritionSummary.sodium.intakeMg.toRoundedString()}mg',
-                                            titleBadge: DSTextBadge.small(
-                                              text: todayNutritionSummary
-                                                  .sodium
-                                                  .status
-                                                  .value,
-                                              variant:
-                                                  switch (todayNutritionSummary
-                                                      .sugar
-                                                      .status) {
-                                                    NutritionStatusEnum
-                                                        .adequate =>
-                                                      DSTextBadgeVariant
-                                                          .success,
-                                                    NutritionStatusEnum
-                                                        .deficient =>
-                                                      DSTextBadgeVariant
-                                                          .success,
-                                                    NutritionStatusEnum
-                                                        .careful =>
-                                                      DSTextBadgeVariant
-                                                          .warning,
-                                                    NutritionStatusEnum
-                                                        .excessive =>
-                                                      DSTextBadgeVariant
-                                                          .warning,
-                                                    _ =>
-                                                      DSTextBadgeVariant
-                                                          .success,
-                                                  },
-                                              type: DSTextBadgeType.circular,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(
+                                              context.componentRadius.xLarge,
                                             ),
-                                            description:
-                                                '최대 ${todayNutritionSummary.sodium.riskReductionMg}mg',
+                                            border: Border.all(
+                                              color: switch (sugarStatus) {
+                                                NutritionStatusEnum.adequate ||
+                                                NutritionStatusEnum.deficient =>
+                                                  context
+                                                      .semanticColors
+                                                      .borderSubtle,
+                                                NutritionStatusEnum.careful ||
+                                                NutritionStatusEnum.excessive =>
+                                                  context
+                                                      .semanticColors
+                                                      .borderWarning,
+                                                _ =>
+                                                  context
+                                                      .semanticColors
+                                                      .borderSubtle,
+                                              },
+                                            ),
                                           ),
-                                        ],
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              DSWrapper(
+                                                uri: Assets.images.avocado.path,
+                                                view: WrapperView.fix24,
+                                              ),
+                                              DSListItem.medium(
+                                                variant: .normal,
+                                                title: '당',
+                                                subTitle:
+                                                    '${dailyNutritionSummary?.sugarIntakeG.toRoundedString() ?? 0}g',
+                                                titleBadge: sugarStatus != null
+                                                    ? DSTextBadge.small(
+                                                        text: sugarStatus.value,
+                                                        variant: switch (sugarStatus) {
+                                                          NutritionStatusEnum
+                                                              .adequate =>
+                                                            DSTextBadgeVariant
+                                                                .success,
+                                                          NutritionStatusEnum
+                                                              .deficient =>
+                                                            DSTextBadgeVariant
+                                                                .success,
+                                                          NutritionStatusEnum
+                                                              .careful =>
+                                                            DSTextBadgeVariant
+                                                                .warning,
+                                                          NutritionStatusEnum
+                                                              .excessive =>
+                                                            DSTextBadgeVariant
+                                                                .warning,
+                                                          _ =>
+                                                            DSTextBadgeVariant
+                                                                .success,
+                                                        },
+                                                        type: DSTextBadgeType
+                                                            .circular,
+                                                      )
+                                                    : null,
+                                                description:
+                                                    '최대 ${nutritionStandard.sugarLimitG}g',
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                       ),
-                                    ),
+                                      Expanded(
+                                        child: Container(
+                                          padding: EdgeInsets.fromLTRB(
+                                            context.componentPadding.xxLarge,
+                                            context.componentPadding.xLarge,
+                                            context.componentPadding.xxLarge,
+                                            context.componentPadding.xSmall,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(
+                                              context.componentRadius.xLarge,
+                                            ),
+                                            border: Border.all(
+                                              color: switch (sodiumStatus) {
+                                                NutritionStatusEnum.adequate ||
+                                                NutritionStatusEnum.deficient =>
+                                                  context
+                                                      .semanticColors
+                                                      .borderSubtle,
+                                                NutritionStatusEnum.careful ||
+                                                NutritionStatusEnum.excessive =>
+                                                  context
+                                                      .semanticColors
+                                                      .borderWarning,
+                                                _ =>
+                                                  context
+                                                      .semanticColors
+                                                      .borderSubtle,
+                                              },
+                                            ),
+                                          ),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              DSWrapper(
+                                                uri: Assets.images.avocado.path,
+                                                view: WrapperView.fix24,
+                                              ),
+                                              DSListItem.medium(
+                                                variant: .normal,
+                                                title: '나트륨',
+                                                subTitle:
+                                                    '${dailyNutritionSummary?.sodiumIntakeMg.toRoundedString() ?? 0}mg',
+                                                titleBadge: sodiumStatus != null
+                                                    ? DSTextBadge.small(
+                                                        text:
+                                                            sodiumStatus.value,
+                                                        variant: switch (sodiumStatus) {
+                                                          NutritionStatusEnum
+                                                              .adequate =>
+                                                            DSTextBadgeVariant
+                                                                .success,
+                                                          NutritionStatusEnum
+                                                              .deficient =>
+                                                            DSTextBadgeVariant
+                                                                .success,
+                                                          NutritionStatusEnum
+                                                              .careful =>
+                                                            DSTextBadgeVariant
+                                                                .warning,
+                                                          NutritionStatusEnum
+                                                              .excessive =>
+                                                            DSTextBadgeVariant
+                                                                .warning,
+                                                          _ =>
+                                                            DSTextBadgeVariant
+                                                                .success,
+                                                        },
+                                                        type: DSTextBadgeType
+                                                            .circular,
+                                                      )
+                                                    : null,
+                                                description:
+                                                    '최대 ${nutritionStandard.sodiumRiskReductionMg}mg',
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                              SizedBox(height: context.componentGap.xxxLarge),
-                              DSListTitle.mediumNormal(title: '오늘 먹었어요'),
-                              Consumer(
-                                builder: (context, ref, child) {
-                                  final foodAnalysises = watchFoodAnalysises(
-                                    ref,
-                                  );
-                                  return AsyncWidget(
-                                    asyncValue: foodAnalysises,
-                                    builder: (foodAnalysises) {
-                                      final itemList = foodAnalysises.content;
+                                  SizedBox(
+                                    height: context.componentGap.xxxLarge,
+                                  ),
+                                  DSListTitle.mediumNormal(title: '오늘 먹었어요'),
+                                  Consumer(
+                                    builder: (context, ref, child) {
+                                      final foodAnalysises =
+                                          watchFoodAnalysises(ref);
+                                      return AsyncWidget(
+                                        asyncValue: foodAnalysises,
+                                        builder: (foodAnalysises) {
+                                          final itemList =
+                                              foodAnalysises.content;
 
-                                      if (itemList.isEmpty) {
-                                        return DSEmptyArea(
-                                          type: .section,
-                                          title: '아직 먹인 음식이 없어요',
-                                          description: '밥을 먹이면 탄단지 그래프가 채워져요',
-                                        );
-                                      }
+                                          if (itemList.isEmpty) {
+                                            return DSEmptyArea(
+                                              type: .section,
+                                              title: '아직 먹인 음식이 없어요',
+                                              description:
+                                                  '밥을 먹이면 탄단지 그래프가 채워져요',
+                                            );
+                                          }
 
-                                      return Column(
-                                        children: itemList
-                                            .map(
-                                              (foodAnalysis) => DSBanner.normal(
-                                                listItemWidget: DSListItem.small(
-                                                  leadingWidget: DSWrapper(
-                                                    uri: foodAnalysis
-                                                        .foodImageUrl,
-                                                    view: WrapperView.image52(
-                                                      context,
+                                          return Column(
+                                            children: itemList
+                                                .map(
+                                                  (
+                                                    foodAnalysis,
+                                                  ) => GestureDetector(
+                                                    behavior: HitTestBehavior
+                                                        .translucent,
+                                                    onTap: () {
+                                                      onTapFoodAnalysisItem(
+                                                        ref,
+                                                        foodAnalysis:
+                                                            foodAnalysis,
+                                                      );
+                                                    },
+                                                    child: DSBanner.normal(
+                                                      listItemWidget: DSListItem.small(
+                                                        leadingWidget: DSWrapper(
+                                                          uri: foodAnalysis
+                                                              .foodImageUrl,
+                                                          view:
+                                                              WrapperView.image52(
+                                                                context,
+                                                              ),
+                                                        ),
+                                                        variant: .normal,
+                                                        title:
+                                                            _pickMainFood(
+                                                              foodAnalysis,
+                                                            )?.name ??
+                                                            '',
+                                                        description:
+                                                            '탄 ${_pickMainFood(foodAnalysis)?.carbohydrate?.value?.toRoundedString()}g | 단 ${_pickMainFood(foodAnalysis)?.protein?.value?.toRoundedString()}g | 지 ${_pickMainFood(foodAnalysis)?.fat?.value?.toRoundedString()}g',
+                                                        trailingText: foodAnalysis
+                                                            .createdAt
+                                                            ?.relativePastLabelKo(),
+                                                      ),
                                                     ),
                                                   ),
-                                                  variant: .normal,
-                                                  title:
-                                                      _pickMainFood(
-                                                        foodAnalysis,
-                                                      )?.name ??
-                                                      '',
-                                                  description:
-                                                      '탄 ${_pickMainFood(foodAnalysis)?.carbohydrate?.value?.toRoundedString()}g | 단 ${_pickMainFood(foodAnalysis)?.protein?.value?.toRoundedString()}g | 지 ${_pickMainFood(foodAnalysis)?.fat?.value?.toRoundedString()}g',
-                                                  trailingText: foodAnalysis
-                                                      .createdAt
-                                                      ?.relativePastLabelKo(),
-                                                ),
-                                              ),
-                                            )
-                                            .toList(),
+                                                )
+                                                .toList(),
+                                          );
+                                        },
                                       );
                                     },
-                                  );
-                                },
-                              ),
-                              const SizedBox(height: 64),
-                              CommonBottomPadding(),
-                            ],
-                          );
-                        },
+                                  ),
+                                  const SizedBox(height: 64),
+                                  CommonBottomPadding(),
+                                ],
+                              );
+                            },
                       );
                     },
                   ),
@@ -726,7 +759,7 @@ class _HomePageState extends ConsumerState<HomePage>
       builder: (context, ref, child) {
         final selectedNutritionSummaryTargetBasisEnum =
             watchSelectedNutritionSummaryTargetBasisEnum(ref);
-        final todayNutritionSummary = watchTodayNutritionSummary(ref);
+        final dailyNutritionSummaries = watchDailyNutritionSummaries(ref);
         return DSCallToAction.horizontal(
           buttons: [
             DSSolidButton.large(
@@ -739,7 +772,11 @@ class _HomePageState extends ConsumerState<HomePage>
             DSSolidButton.large(
               isEnabled:
                   selectedNutritionSummaryTargetBasisEnum !=
-                  todayNutritionSummary.value?.summaryTargetBasisEnum,
+                  dailyNutritionSummaries
+                      .value
+                      ?.summaries
+                      .first
+                      .summaryTargetBasisEnum,
               variant: .primary,
               text: '변경',
               onTap: () async {
@@ -780,14 +817,12 @@ class NutritionRingChart extends StatelessWidget {
     super.key,
     required this.nutritionType,
     required this.valueText,
-    required this.standardValueText,
     required this.progress, // 배율(1.0=목표 달성). 초과 시 뱃지는 넘친 %만
     required this.progressColor,
   });
 
   final NutritionTypeEnum nutritionType;
   final String valueText;
-  final String standardValueText;
   final double progress;
   final Color progressColor;
 
@@ -850,26 +885,13 @@ class NutritionRingChart extends StatelessWidget {
                       color: context.semanticColors.textTertiary,
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        valueText,
-                        style: context.textTheme.titleSSemiBold.copyWith(
-                          color: context.semanticColors.textPrimary,
-                        ),
-                      ),
-                      Text(
-                        '/$standardValueText',
-                        style: context.textTheme.bodySMedium.copyWith(
-                          color: context.semanticColors.textTertiary,
-                        ),
-                      ),
-                    ],
+                  Text(
+                    valueText,
+                    style: context.textTheme.titleSSemiBold.copyWith(
+                      color: context.semanticColors.textPrimary,
+                    ),
                   ),
                   const SizedBox(height: 2),
-
                   DSTextBadge.small(
                     text: badgePercentText,
                     variant: isOverLimit

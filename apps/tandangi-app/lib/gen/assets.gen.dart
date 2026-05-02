@@ -99,6 +99,9 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/ic_bang_fill.svg
   String get icBangFill => 'assets/svgs/ic_bang_fill.svg';
 
+  /// File path: assets/svgs/ic_calendar_fill.svg
+  String get icCalendarFill => 'assets/svgs/ic_calendar_fill.svg';
+
   /// File path: assets/svgs/ic_camera_fill.svg
   String get icCameraFill => 'assets/svgs/ic_camera_fill.svg';
 
@@ -120,6 +123,9 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/ic_dropdown_up_fill.svg
   String get icDropdownUpFill => 'assets/svgs/ic_dropdown_up_fill.svg';
 
+  /// File path: assets/svgs/ic_home_fill.svg
+  String get icHomeFill => 'assets/svgs/ic_home_fill.svg';
+
   /// File path: assets/svgs/ic_minus.svg
   String get icMinus => 'assets/svgs/ic_minus.svg';
 
@@ -131,6 +137,9 @@ class $AssetsSvgsGen {
 
   /// File path: assets/svgs/ic_plus.svg
   String get icPlus => 'assets/svgs/ic_plus.svg';
+
+  /// File path: assets/svgs/ic_profile_fill.svg
+  String get icProfileFill => 'assets/svgs/ic_profile_fill.svg';
 
   /// File path: assets/svgs/ic_question_fill.svg
   String get icQuestionFill => 'assets/svgs/ic_question_fill.svg';
@@ -163,6 +172,7 @@ class $AssetsSvgsGen {
     icArrowRight,
     icBack,
     icBangFill,
+    icCalendarFill,
     icCameraFill,
     icCheckmark,
     icChevronRight,
@@ -170,10 +180,12 @@ class $AssetsSvgsGen {
     icDotFill,
     icDropdownDownFill,
     icDropdownUpFill,
+    icHomeFill,
     icMinus,
     icPencilFill,
     icPhotoFill,
     icPlus,
+    icProfileFill,
     icQuestionFill,
     icReadingGlass,
     icSettingFill,

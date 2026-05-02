@@ -100,7 +100,7 @@ class _DSNoticeState extends State<DSNotice> {
             Text(widget.title, style: titleStyle),
             if (widget.description?.isNotEmpty == true) ...[
               SizedBox(height: descriptionGap),
-              Text(widget.description!, style: descriptionStyle),
+              Text(widget.description!, style: descriptionStyle, textAlign: TextAlign.center),
             ],
           ],
         ),

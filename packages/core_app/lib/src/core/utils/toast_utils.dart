@@ -25,7 +25,7 @@ abstract class ToastUtils {
   static Future<void> showToast(
     BuildContext context,
     DSToast Function(Completer<bool> completer) toastBuilder, {
-    double baseBottomPadding = 12.0,
+    double baseTopPadding = 56,
     VoidCallback? onDismissed,
   }) async {
     Completer<bool> completer = Completer<bool>();
@@ -40,7 +40,7 @@ abstract class ToastUtils {
           valueListenable: _activeToastKeys,
           builder: (context, activeKeys, child) {
             // 토스트를 보여줄 bottom padding 계산
-            double bottomPadding = baseBottomPadding + MediaQuery.paddingOf(context).bottom;
+            double topPadding = baseTopPadding + MediaQuery.paddingOf(context).top;
 
             // 현재 토스트의 위치를 리스트에서 찾기 (0부터 시작)
             final currentKeyIndex = activeKeys.indexOf(currentToastKey);
@@ -52,17 +52,17 @@ abstract class ToastUtils {
               for (int i = 0; i < currentKeyIndex; i++) {
                 final toastRenderBox = activeKeys[i].currentContext?.findRenderObject() as RenderBox?;
                 if (toastRenderBox != null) {
-                  bottomPadding += toastRenderBox.size.height + _toastSpacing;
+                  topPadding += toastRenderBox.size.height + _toastSpacing;
                 }
               }
             }
 
             return Align(
-              alignment: Alignment.bottomCenter,
+              alignment: Alignment.topCenter,
               child: AnimatedPadding(
                 duration: _animationDuration,
                 curve: Curves.easeInOut,
-                padding: EdgeInsets.only(bottom: bottomPadding),
+                padding: EdgeInsets.only(top: topPadding),
                 child: child,
               ),
             );

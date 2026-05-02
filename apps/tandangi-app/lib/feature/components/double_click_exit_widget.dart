@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart' hide SnackBar;
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tandangi/util/toast_message.dart';
 
 class DoubleClickExitWidget extends ConsumerStatefulWidget {
   const DoubleClickExitWidget({
@@ -40,7 +39,6 @@ class _DoubleClickExitWidgetState extends ConsumerState<DoubleClickExitWidget> {
         }
         _lastPressedTime = DateTime.now();
         if (isFirstClick) {
-          ToastMessage.showReplace(title: '뒤로가기 버튼을 한 번 더 누르면 앱이 종료됩니다');
           return;
         } else {
           SystemNavigator.pop();

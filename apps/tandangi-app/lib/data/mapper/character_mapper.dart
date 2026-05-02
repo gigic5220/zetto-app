@@ -28,14 +28,18 @@ class CharacterMapper {
         characterName: dto.userCharacter.characterName,
         characterOriginName: dto.userCharacter.characterOriginName,
       ),
-      userCharacterState: UserCharacterStateRowEntity(
-        id: dto.userCharacterState.id,
-        userCharacterId: dto.userCharacterState.userCharacterId,
-        characterStateId: dto.userCharacterState.characterStateId,
-        characterStateCode: dto.userCharacterState.characterStateCode,
-        characterStateName: dto.userCharacterState.characterStateName,
-        createdAt: _parseOffsetDateTime(dto.userCharacterState.createdAt),
-      ),
+      userCharacterState: dto.userCharacterState != null
+          ? UserCharacterStateRowEntity(
+              id: dto.userCharacterState!.id,
+              userCharacterId: dto.userCharacterState!.userCharacterId,
+              characterStateId: dto.userCharacterState!.characterStateId,
+              characterStateCode: dto.userCharacterState!.characterStateCode,
+              characterStateName: dto.userCharacterState!.characterStateName,
+              createdAt: _parseOffsetDateTime(
+                dto.userCharacterState!.createdAt,
+              ),
+            )
+          : null,
       userCharacterSubStates: dto.userCharacterSubStates
           .map(
             (e) => UserCharacterSubStateRowEntity(

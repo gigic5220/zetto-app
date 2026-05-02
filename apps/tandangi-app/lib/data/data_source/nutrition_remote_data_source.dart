@@ -1,11 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:tandangi/data/dto/nutrition_standard_response_dto.dart';
-import 'package:tandangi/data/dto/today_nutrition_summary_response_dto.dart';
 import 'package:tandangi/data/dto/user_nutrition_summary_target_basis_update_request_dto.dart';
 
 abstract class NutritionRemoteDataSource {
   Future<NutritionStandardResponseDto> getNutritionStandard();
-  Future<TodayNutritionSummaryResponseDto> getTodayNutritionSummary();
   Future<NutritionStandardResponseDto> patchSummaryTargetBasis(
     UserNutritionSummaryTargetBasisUpdateRequestDto request,
   );
@@ -21,13 +19,6 @@ class NutritionRemoteDataSourceImpl implements NutritionRemoteDataSource {
     final response = await _dio.get('/api/nutrition');
     final data = response.data as Map<String, dynamic>;
     return NutritionStandardResponseDto.fromJson(data);
-  }
-
-  @override
-  Future<TodayNutritionSummaryResponseDto> getTodayNutritionSummary() async {
-    final response = await _dio.get('/api/nutrition/today-summary');
-    final data = response.data as Map<String, dynamic>;
-    return TodayNutritionSummaryResponseDto.fromJson(data);
   }
 
   @override

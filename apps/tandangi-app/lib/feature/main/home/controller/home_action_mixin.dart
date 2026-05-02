@@ -2,7 +2,9 @@ part of 'home_provider.dart';
 
 mixin HomeActionMixin {
   void onPageFocused(WidgetRef ref) {
-    ref.invalidate(_todayNutritionSummaryProvider);
+    ref.invalidate(_dailyNutritionSummariesProvider);
+    ref.invalidate(_userCharacterDetailProvider);
+    ref.invalidate(_foodAnalysisesProvider);
   }
 
   void onTapSelectPhoto(
@@ -68,11 +70,27 @@ mixin HomeActionMixin {
           await getIt<NutritionRepository>().updateSummaryTargetBasis(
             selectedNutritionSummaryTargetBasisEnum,
           );
-          ref.invalidate(_todayNutritionSummaryProvider);
+          ref.invalidate(_dailyNutritionSummariesProvider);
           if (!ref.context.mounted) return;
+          ToastUtils.showToast(
+            ref.context,
+            (context) => DSToast(type: .success, text: '식단 기준을 변경했어요'),
+          );
           ref.context.pop();
         },
       ),
+    );
+  }
+
+  void onTapFoodAnalysisItem(
+    WidgetRef ref, {
+    required FoodAnalysisEntity foodAnalysis,
+  }) {
+    ref.context.pushNamed(
+      ReportPage.routeName,
+      queryParameters: {
+        'foodAnalysisId': foodAnalysis.foodAnalysisId.toString(),
+      },
     );
   }
 }

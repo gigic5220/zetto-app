@@ -1,6 +1,28 @@
 part of 'edit_food_nutrition_provider.dart';
 
 mixin EditFoodNutritionActionMixin {
+  void handleBackAction(
+    WidgetRef ref, {
+    required Widget Function({
+      required VoidCallback onTapCancel,
+      required VoidCallback onTapConfirm,
+    })
+    buildBackModalWidgetCallback,
+  }) {
+    showDialog(
+      context: ref.context,
+      builder: (context) => buildBackModalWidgetCallback(
+        onTapCancel: () async {
+          context.pop();
+        },
+        onTapConfirm: () {
+          context.pop();
+          context.pop();
+        },
+      ),
+    );
+  }
+
   void onTapAnalyzedFoodItemEntity(
     WidgetRef ref, {
     required int selectedFoodItemIndex,
@@ -261,12 +283,38 @@ mixin EditFoodNutritionActionMixin {
           .toList(),
     );
     if (!ref.context.mounted) return;
-    ref.context.pop(true);
+    ToastUtils.showToast(
+      ref.context,
+      (context) => DSToast(type: .success, text: '수정한 내용이 반영됐어요'),
+    );
+    ref.context.pop();
   }
 
-  void onTapRemoveFood(WidgetRef ref, AnalyzedFoodItemEntity analyzedFoodItem) {
+  void onTapRemoveFood(
+    WidgetRef ref, {
+    required AnalyzedFoodItemEntity selectedFoodItem,
+    required Widget Function({
+      required VoidCallback onTapConfirm,
+      required VoidCallback onTapCancel,
+    })
+    buildRemoveLastFoodModalWidgetCallback,
+  }) {
     final analyzedFoodItems = ref.read(initialAnalyzedFoodItemsProvider);
-    final index = analyzedFoodItems.indexOf(analyzedFoodItem);
+    if (analyzedFoodItems.length <= 1) {
+      showDialog(
+        context: ref.context,
+        builder: (context) => buildRemoveLastFoodModalWidgetCallback(
+          onTapConfirm: () {
+            context.pop();
+          },
+          onTapCancel: () {
+            context.goNamed(HomePage.routeName);
+          },
+        ),
+      );
+      return;
+    }
+    final index = analyzedFoodItems.indexOf(selectedFoodItem);
 
     final copiedAnalyzedFoodItems = [...analyzedFoodItems];
     copiedAnalyzedFoodItems[index] = copiedAnalyzedFoodItems[index].copyWith(

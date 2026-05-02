@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UserCharacterDetailResponseDto {
 
- UserCharacterSectionDto get userCharacter; UserCharacterStateRowDto get userCharacterState; List<UserCharacterSubStateRowDto> get userCharacterSubStates; String get description; String get characterImageUrl;
+ UserCharacterSectionDto get userCharacter; UserCharacterStateRowDto? get userCharacterState; List<UserCharacterSubStateRowDto> get userCharacterSubStates; String get description; String get characterImageUrl;
 /// Create a copy of UserCharacterDetailResponseDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,11 +48,11 @@ abstract mixin class $UserCharacterDetailResponseDtoCopyWith<$Res>  {
   factory $UserCharacterDetailResponseDtoCopyWith(UserCharacterDetailResponseDto value, $Res Function(UserCharacterDetailResponseDto) _then) = _$UserCharacterDetailResponseDtoCopyWithImpl;
 @useResult
 $Res call({
- UserCharacterSectionDto userCharacter, UserCharacterStateRowDto userCharacterState, List<UserCharacterSubStateRowDto> userCharacterSubStates, String description, String characterImageUrl
+ UserCharacterSectionDto userCharacter, UserCharacterStateRowDto? userCharacterState, List<UserCharacterSubStateRowDto> userCharacterSubStates, String description, String characterImageUrl
 });
 
 
-$UserCharacterSectionDtoCopyWith<$Res> get userCharacter;$UserCharacterStateRowDtoCopyWith<$Res> get userCharacterState;
+$UserCharacterSectionDtoCopyWith<$Res> get userCharacter;$UserCharacterStateRowDtoCopyWith<$Res>? get userCharacterState;
 
 }
 /// @nodoc
@@ -65,11 +65,11 @@ class _$UserCharacterDetailResponseDtoCopyWithImpl<$Res>
 
 /// Create a copy of UserCharacterDetailResponseDto
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? userCharacter = null,Object? userCharacterState = null,Object? userCharacterSubStates = null,Object? description = null,Object? characterImageUrl = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? userCharacter = null,Object? userCharacterState = freezed,Object? userCharacterSubStates = null,Object? description = null,Object? characterImageUrl = null,}) {
   return _then(_self.copyWith(
 userCharacter: null == userCharacter ? _self.userCharacter : userCharacter // ignore: cast_nullable_to_non_nullable
-as UserCharacterSectionDto,userCharacterState: null == userCharacterState ? _self.userCharacterState : userCharacterState // ignore: cast_nullable_to_non_nullable
-as UserCharacterStateRowDto,userCharacterSubStates: null == userCharacterSubStates ? _self.userCharacterSubStates : userCharacterSubStates // ignore: cast_nullable_to_non_nullable
+as UserCharacterSectionDto,userCharacterState: freezed == userCharacterState ? _self.userCharacterState : userCharacterState // ignore: cast_nullable_to_non_nullable
+as UserCharacterStateRowDto?,userCharacterSubStates: null == userCharacterSubStates ? _self.userCharacterSubStates : userCharacterSubStates // ignore: cast_nullable_to_non_nullable
 as List<UserCharacterSubStateRowDto>,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String,characterImageUrl: null == characterImageUrl ? _self.characterImageUrl : characterImageUrl // ignore: cast_nullable_to_non_nullable
 as String,
@@ -88,9 +88,12 @@ $UserCharacterSectionDtoCopyWith<$Res> get userCharacter {
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$UserCharacterStateRowDtoCopyWith<$Res> get userCharacterState {
-  
-  return $UserCharacterStateRowDtoCopyWith<$Res>(_self.userCharacterState, (value) {
+$UserCharacterStateRowDtoCopyWith<$Res>? get userCharacterState {
+    if (_self.userCharacterState == null) {
+    return null;
+  }
+
+  return $UserCharacterStateRowDtoCopyWith<$Res>(_self.userCharacterState!, (value) {
     return _then(_self.copyWith(userCharacterState: value));
   });
 }
@@ -175,7 +178,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( UserCharacterSectionDto userCharacter,  UserCharacterStateRowDto userCharacterState,  List<UserCharacterSubStateRowDto> userCharacterSubStates,  String description,  String characterImageUrl)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( UserCharacterSectionDto userCharacter,  UserCharacterStateRowDto? userCharacterState,  List<UserCharacterSubStateRowDto> userCharacterSubStates,  String description,  String characterImageUrl)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _UserCharacterDetailResponseDto() when $default != null:
 return $default(_that.userCharacter,_that.userCharacterState,_that.userCharacterSubStates,_that.description,_that.characterImageUrl);case _:
@@ -196,7 +199,7 @@ return $default(_that.userCharacter,_that.userCharacterState,_that.userCharacter
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( UserCharacterSectionDto userCharacter,  UserCharacterStateRowDto userCharacterState,  List<UserCharacterSubStateRowDto> userCharacterSubStates,  String description,  String characterImageUrl)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( UserCharacterSectionDto userCharacter,  UserCharacterStateRowDto? userCharacterState,  List<UserCharacterSubStateRowDto> userCharacterSubStates,  String description,  String characterImageUrl)  $default,) {final _that = this;
 switch (_that) {
 case _UserCharacterDetailResponseDto():
 return $default(_that.userCharacter,_that.userCharacterState,_that.userCharacterSubStates,_that.description,_that.characterImageUrl);case _:
@@ -216,7 +219,7 @@ return $default(_that.userCharacter,_that.userCharacterState,_that.userCharacter
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( UserCharacterSectionDto userCharacter,  UserCharacterStateRowDto userCharacterState,  List<UserCharacterSubStateRowDto> userCharacterSubStates,  String description,  String characterImageUrl)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( UserCharacterSectionDto userCharacter,  UserCharacterStateRowDto? userCharacterState,  List<UserCharacterSubStateRowDto> userCharacterSubStates,  String description,  String characterImageUrl)?  $default,) {final _that = this;
 switch (_that) {
 case _UserCharacterDetailResponseDto() when $default != null:
 return $default(_that.userCharacter,_that.userCharacterState,_that.userCharacterSubStates,_that.description,_that.characterImageUrl);case _:
@@ -231,11 +234,11 @@ return $default(_that.userCharacter,_that.userCharacterState,_that.userCharacter
 @JsonSerializable()
 
 class _UserCharacterDetailResponseDto implements UserCharacterDetailResponseDto {
-  const _UserCharacterDetailResponseDto({required this.userCharacter, required this.userCharacterState, final  List<UserCharacterSubStateRowDto> userCharacterSubStates = const <UserCharacterSubStateRowDto>[], this.description = '', required this.characterImageUrl}): _userCharacterSubStates = userCharacterSubStates;
+  const _UserCharacterDetailResponseDto({required this.userCharacter, this.userCharacterState, final  List<UserCharacterSubStateRowDto> userCharacterSubStates = const <UserCharacterSubStateRowDto>[], this.description = '', required this.characterImageUrl}): _userCharacterSubStates = userCharacterSubStates;
   factory _UserCharacterDetailResponseDto.fromJson(Map<String, dynamic> json) => _$UserCharacterDetailResponseDtoFromJson(json);
 
 @override final  UserCharacterSectionDto userCharacter;
-@override final  UserCharacterStateRowDto userCharacterState;
+@override final  UserCharacterStateRowDto? userCharacterState;
  final  List<UserCharacterSubStateRowDto> _userCharacterSubStates;
 @override@JsonKey() List<UserCharacterSubStateRowDto> get userCharacterSubStates {
   if (_userCharacterSubStates is EqualUnmodifiableListView) return _userCharacterSubStates;
@@ -279,11 +282,11 @@ abstract mixin class _$UserCharacterDetailResponseDtoCopyWith<$Res> implements $
   factory _$UserCharacterDetailResponseDtoCopyWith(_UserCharacterDetailResponseDto value, $Res Function(_UserCharacterDetailResponseDto) _then) = __$UserCharacterDetailResponseDtoCopyWithImpl;
 @override @useResult
 $Res call({
- UserCharacterSectionDto userCharacter, UserCharacterStateRowDto userCharacterState, List<UserCharacterSubStateRowDto> userCharacterSubStates, String description, String characterImageUrl
+ UserCharacterSectionDto userCharacter, UserCharacterStateRowDto? userCharacterState, List<UserCharacterSubStateRowDto> userCharacterSubStates, String description, String characterImageUrl
 });
 
 
-@override $UserCharacterSectionDtoCopyWith<$Res> get userCharacter;@override $UserCharacterStateRowDtoCopyWith<$Res> get userCharacterState;
+@override $UserCharacterSectionDtoCopyWith<$Res> get userCharacter;@override $UserCharacterStateRowDtoCopyWith<$Res>? get userCharacterState;
 
 }
 /// @nodoc
@@ -296,11 +299,11 @@ class __$UserCharacterDetailResponseDtoCopyWithImpl<$Res>
 
 /// Create a copy of UserCharacterDetailResponseDto
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? userCharacter = null,Object? userCharacterState = null,Object? userCharacterSubStates = null,Object? description = null,Object? characterImageUrl = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? userCharacter = null,Object? userCharacterState = freezed,Object? userCharacterSubStates = null,Object? description = null,Object? characterImageUrl = null,}) {
   return _then(_UserCharacterDetailResponseDto(
 userCharacter: null == userCharacter ? _self.userCharacter : userCharacter // ignore: cast_nullable_to_non_nullable
-as UserCharacterSectionDto,userCharacterState: null == userCharacterState ? _self.userCharacterState : userCharacterState // ignore: cast_nullable_to_non_nullable
-as UserCharacterStateRowDto,userCharacterSubStates: null == userCharacterSubStates ? _self._userCharacterSubStates : userCharacterSubStates // ignore: cast_nullable_to_non_nullable
+as UserCharacterSectionDto,userCharacterState: freezed == userCharacterState ? _self.userCharacterState : userCharacterState // ignore: cast_nullable_to_non_nullable
+as UserCharacterStateRowDto?,userCharacterSubStates: null == userCharacterSubStates ? _self._userCharacterSubStates : userCharacterSubStates // ignore: cast_nullable_to_non_nullable
 as List<UserCharacterSubStateRowDto>,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String,characterImageUrl: null == characterImageUrl ? _self.characterImageUrl : characterImageUrl // ignore: cast_nullable_to_non_nullable
 as String,
@@ -320,9 +323,12 @@ $UserCharacterSectionDtoCopyWith<$Res> get userCharacter {
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$UserCharacterStateRowDtoCopyWith<$Res> get userCharacterState {
-  
-  return $UserCharacterStateRowDtoCopyWith<$Res>(_self.userCharacterState, (value) {
+$UserCharacterStateRowDtoCopyWith<$Res>? get userCharacterState {
+    if (_self.userCharacterState == null) {
+    return null;
+  }
+
+  return $UserCharacterStateRowDtoCopyWith<$Res>(_self.userCharacterState!, (value) {
     return _then(_self.copyWith(userCharacterState: value));
   });
 }

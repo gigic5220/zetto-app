@@ -9,7 +9,7 @@ abstract class UserCharacterDetailResponseDto
     with _$UserCharacterDetailResponseDto {
   const factory UserCharacterDetailResponseDto({
     required UserCharacterSectionDto userCharacter,
-    required UserCharacterStateRowDto userCharacterState,
+    UserCharacterStateRowDto? userCharacterState,
     @Default(<UserCharacterSubStateRowDto>[])
     List<UserCharacterSubStateRowDto> userCharacterSubStates,
     @Default('') String description,
