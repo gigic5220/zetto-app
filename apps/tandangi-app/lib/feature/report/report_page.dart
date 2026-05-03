@@ -8,6 +8,8 @@ import 'package:design_system/components/organism.dart';
 import 'package:design_system/extenstion.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:screenshot/screenshot.dart';
+import 'package:tandangi/core/extension/double_extension.dart';
 import 'package:tandangi/domain/entity/food_analysis_entity.dart';
 import 'package:tandangi/domain/enum/nutrition_threshhold_status_enum.dart';
 import 'package:tandangi/domain/enum/nutrition_type_enum.dart';
@@ -31,6 +33,13 @@ class _ReportPageState extends ConsumerState<ReportPage>
         SingleTickerProviderStateMixin,
         GoRouterWatcherPage {
   late WidgetRef _scopedRef;
+  late ScreenshotController _screenshotController;
+
+  @override
+  void initState() {
+    super.initState();
+    _screenshotController = ScreenshotController();
+  }
 
   @override
   Future<void> onFocused(bool isFirstTime) async {
@@ -49,7 +58,24 @@ class _ReportPageState extends ConsumerState<ReportPage>
         builder: (context, ref, child) {
           _scopedRef = ref;
           return Scaffold(
-            appBar: DSAppBar.page(text: '', showBackButton: true),
+            appBar: DSAppBar.page(
+              text: '',
+              showBackButton: true,
+              actionWidgetList: [
+                DSAppBarActionWidget(
+                  wrapper: DSWrapper(
+                    uri: Assets.svgs.icUpload,
+                    view: WrapperView.fix20,
+                  ),
+                  onTap: () {
+                    onTapShare(
+                      ref,
+                      screenshotController: _screenshotController,
+                    );
+                  },
+                ),
+              ],
+            ),
             body: Consumer(
               builder: (context, ref, child) {
                 final foodAnalyzeResult = watchFoodAnalyzeResult(ref);
@@ -122,76 +148,91 @@ class _ReportPageState extends ConsumerState<ReportPage>
                     return SingleChildScrollView(
                       child: Column(
                         children: [
-                          LayoutBuilder(
-                            builder: (context, constraints) {
-                              return DSWrapper(
-                                uri: foodAnalyzeResult.foodImageUrl,
-                                view: WrapperView(
-                                  size: constraints.maxWidth,
-                                  ratio: 1,
-                                ),
-                              );
-                            },
-                          ),
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(
-                              context.margin.width,
-                              context.componentPadding.xxxLarge,
-                              context.margin.width,
-                              context.componentGap.xLarge,
-                            ),
+                          Screenshot(
+                            controller: _screenshotController,
                             child: Column(
                               children: [
-                                DSViewTitle.small(
-                                  subTitle: _formatCreatedAt(
-                                    foodAnalyzeResult.createdAt,
-                                  ),
-                                  title: mainFood?.name ?? '',
-                                  description: '이번 식단의 영양 구성은?',
+                                LayoutBuilder(
+                                  builder: (context, constraints) {
+                                    return DSWrapper(
+                                      uri: foodAnalyzeResult.foodImageUrl,
+                                      view: WrapperView(
+                                        size: constraints.maxWidth,
+                                        ratio: 1,
+                                      ),
+                                    );
+                                  },
                                 ),
-                                if (mainNutritionWidgets.isNotEmpty) ...[
-                                  Container(
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal:
-                                          context.componentPadding.xSmall,
-                                      vertical:
-                                          context.componentPadding.xxLarge,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(
-                                        context.componentRadius.small,
-                                      ),
-                                      border: Border.all(
-                                        color:
-                                            context.semanticColors.borderSubtle,
-                                      ),
-                                    ),
-                                    child: Row(children: mainNutritionWidgets),
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(
+                                    context.margin.width,
+                                    context.componentPadding.xxxLarge,
+                                    context.margin.width,
+                                    context.componentGap.xLarge,
                                   ),
-                                ],
-                                if (detailNutritionWidgets.isNotEmpty)
-                                  SizedBox(height: context.componentGap.small),
-                                if (detailNutritionWidgets.isNotEmpty)
-                                  Row(
-                                    spacing: context.componentGap.small,
-                                    children: detailNutritionWidgets,
-                                  ),
-                                if (kcalIntake != null)
-                                  SizedBox(height: context.componentGap.small),
-                                if (kcalIntake != null)
-                                  DSBanner.normal(
-                                    listItemWidget: DSListItem.small(
-                                      leadingWidget: DSWrapper(
-                                        uri: Assets.svgs.icReadingGlass,
-                                        view: WrapperView.fix16,
+                                  child: Column(
+                                    children: [
+                                      DSViewTitle.small(
+                                        subTitle: _formatCreatedAt(
+                                          foodAnalyzeResult.createdAt,
+                                        ),
+                                        title: mainFood?.name ?? '',
+                                        description: '이번 식단의 영양 구성은?',
                                       ),
-                                      variant: .normal,
-                                      title:
-                                          '식단 칼로리 ${_formatValueWithUnit(kcalIntake, 'kcal')}',
-                                      description:
-                                          '균형은 좋아요 다만 이번 식단은 탄수화물 비율이 조금 높아, 다음 식사는 단백질과 채소 위주로 가볍게 맞춰봐요',
-                                    ),
+                                      if (mainNutritionWidgets.isNotEmpty) ...[
+                                        Container(
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal:
+                                                context.componentPadding.xSmall,
+                                            vertical: context
+                                                .componentPadding
+                                                .xxLarge,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(
+                                              context.componentRadius.small,
+                                            ),
+                                            border: Border.all(
+                                              color: context
+                                                  .semanticColors
+                                                  .borderSubtle,
+                                            ),
+                                          ),
+                                          child: Row(
+                                            children: mainNutritionWidgets,
+                                          ),
+                                        ),
+                                      ],
+                                      if (detailNutritionWidgets.isNotEmpty)
+                                        SizedBox(
+                                          height: context.componentGap.small,
+                                        ),
+                                      if (detailNutritionWidgets.isNotEmpty)
+                                        Row(
+                                          spacing: context.componentGap.small,
+                                          children: detailNutritionWidgets,
+                                        ),
+                                      if (kcalIntake != null)
+                                        SizedBox(
+                                          height: context.componentGap.small,
+                                        ),
+                                      if (kcalIntake != null)
+                                        DSBanner.normal(
+                                          listItemWidget: DSListItem.small(
+                                            leadingWidget: DSWrapper(
+                                              uri: Assets.svgs.icReadingGlass,
+                                              view: WrapperView.fix16,
+                                            ),
+                                            variant: .normal,
+                                            title:
+                                                '식단 칼로리 ${kcalIntake.toRoundedString()}kcal',
+                                            description:
+                                                '균형은 좋아요 다만 이번 식단은 탄수화물 비율이 조금 높아, 다음 식사는 단백질과 채소 위주로 가볍게 맞춰봐요',
+                                          ),
+                                        ),
+                                    ],
                                   ),
+                                ),
                               ],
                             ),
                           ),
@@ -260,21 +301,14 @@ class _ReportPageState extends ConsumerState<ReportPage>
                                             children: [
                                               DSListTitle.mediumNormal(
                                                 title: selectedFoodItem.name,
-                                                trailingWidget:
-                                                    DSTextBadge.medium(
-                                                      text:
-                                                          _formatValueWithUnit(
-                                                            selectedFoodItem
-                                                                .kcal
-                                                                ?.value,
-                                                            'kCal',
-                                                          ),
-                                                      variant:
-                                                          DSTextBadgeVariant
-                                                              .secondary,
-                                                      type: DSTextBadgeType
-                                                          .rectangle,
-                                                    ),
+                                                trailingWidget: DSTextBadge.medium(
+                                                  text:
+                                                      '${selectedFoodItem.kcal?.value?.toRoundedString() ?? 0}kCal',
+                                                  variant: DSTextBadgeVariant
+                                                      .secondary,
+                                                  type:
+                                                      DSTextBadgeType.rectangle,
+                                                ),
                                               ),
                                               DSDivider(
                                                 type: DSDividerType.line,
@@ -282,52 +316,27 @@ class _ReportPageState extends ConsumerState<ReportPage>
                                               DSKeyValueItem.medium(
                                                 title: '탄수화물',
                                                 description:
-                                                    _formatValueWithUnit(
-                                                      selectedFoodItem
-                                                          .carbohydrate
-                                                          ?.value,
-                                                      'g',
-                                                    ),
+                                                    '${selectedFoodItem.carbohydrate?.value?.toRoundedString() ?? 0}g',
                                               ),
                                               DSKeyValueItem.medium(
                                                 title: '단백질',
                                                 description:
-                                                    _formatValueWithUnit(
-                                                      selectedFoodItem
-                                                          .protein
-                                                          ?.value,
-                                                      'g',
-                                                    ),
+                                                    '${selectedFoodItem.protein?.value?.toRoundedString() ?? 0}g',
                                               ),
                                               DSKeyValueItem.medium(
                                                 title: '지방',
                                                 description:
-                                                    _formatValueWithUnit(
-                                                      selectedFoodItem
-                                                          .fat
-                                                          ?.value,
-                                                      'g',
-                                                    ),
+                                                    '${selectedFoodItem.fat?.value?.toRoundedString() ?? 0}g',
                                               ),
                                               DSKeyValueItem.medium(
                                                 title: '당',
                                                 description:
-                                                    _formatValueWithUnit(
-                                                      selectedFoodItem
-                                                          .sugar
-                                                          ?.value,
-                                                      'g',
-                                                    ),
+                                                    '${selectedFoodItem.sugar?.value?.toRoundedString() ?? 0}g',
                                               ),
                                               DSKeyValueItem.medium(
                                                 title: '나트륨',
                                                 description:
-                                                    _formatValueWithUnit(
-                                                      selectedFoodItem
-                                                          .sodium
-                                                          ?.value,
-                                                      'mg',
-                                                    ),
+                                                    '${selectedFoodItem.sodium?.value?.toRoundedString() ?? 0}mg',
                                               ),
                                             ],
                                           ),
@@ -419,7 +428,7 @@ class _ReportPageState extends ConsumerState<ReportPage>
               ),
             ),
             Text(
-              _formatValueWithUnit(nutrientInfoEntity.intake, 'g'),
+              '${nutrientInfoEntity.intake?.toRoundedString() ?? 0}g',
               style: context.textTheme.bodyXLMedium.copyWith(
                 color: context.semanticColors.textPrimary,
               ),
@@ -440,11 +449,9 @@ class _ReportPageState extends ConsumerState<ReportPage>
     required SugarCompareInfoEntity sugarInfoEntity,
   }) {
     return Container(
-      padding: EdgeInsets.fromLTRB(
-        context.componentPadding.xxLarge,
-        context.componentPadding.xLarge,
-        context.componentPadding.xxLarge,
-        context.componentPadding.xSmall,
+      padding: EdgeInsets.symmetric(
+        horizontal: context.componentPadding.xxLarge,
+        vertical: context.componentPadding.small,
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(context.componentRadius.xLarge),
@@ -453,11 +460,10 @@ class _ReportPageState extends ConsumerState<ReportPage>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          DSWrapper(uri: Assets.images.avocado.path, view: WrapperView.fix24),
           DSListItem.medium(
             variant: .normal,
             subTitle: '당',
-            title: _formatValueWithUnit(sugarInfoEntity.intake, 'g'),
+            title: '${sugarInfoEntity.intake?.toRoundedString() ?? 0}g',
             titleBadge: DSTextBadge.small(
               text: sugarInfoEntity.nutritionThresholdStatusEnum?.value ?? '',
               variant: switch (sugarInfoEntity.nutritionThresholdStatusEnum) {
@@ -470,7 +476,7 @@ class _ReportPageState extends ConsumerState<ReportPage>
               },
               type: DSTextBadgeType.circular,
             ),
-            description: '최대 ${_formatValueWithUnit(sugarInfoEntity.max, 'g')}',
+            description: '최대 ${sugarInfoEntity.max ?? 0}g',
           ),
         ],
       ),
@@ -481,11 +487,9 @@ class _ReportPageState extends ConsumerState<ReportPage>
     required SodiumCompareInfoEntity sodiumInfoEntity,
   }) {
     return Container(
-      padding: EdgeInsets.fromLTRB(
-        context.componentPadding.xxLarge,
-        context.componentPadding.xLarge,
-        context.componentPadding.xxLarge,
-        context.componentPadding.xSmall,
+      padding: EdgeInsets.symmetric(
+        horizontal: context.componentPadding.xxLarge,
+        vertical: context.componentPadding.small,
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(context.componentRadius.xLarge),
@@ -494,11 +498,10 @@ class _ReportPageState extends ConsumerState<ReportPage>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          DSWrapper(uri: Assets.images.avocado.path, view: WrapperView.fix24),
           DSListItem.medium(
             variant: .normal,
             subTitle: '나트륨',
-            title: _formatValueWithUnit(sodiumInfoEntity.intake, 'mg'),
+            title: '${sodiumInfoEntity.intake?.toRoundedString() ?? 0}mg',
             titleBadge: DSTextBadge.small(
               text: sodiumInfoEntity.nutritionThresholdStatusEnum?.value ?? '',
               variant: switch (sodiumInfoEntity.nutritionThresholdStatusEnum) {
@@ -511,8 +514,7 @@ class _ReportPageState extends ConsumerState<ReportPage>
               },
               type: DSTextBadgeType.circular,
             ),
-            description:
-                '0 - ${_formatValueWithUnit(sodiumInfoEntity.adequate, 'mg')} 권장',
+            description: '0 - ${sodiumInfoEntity.adequate ?? 0}mg 권장',
           ),
         ],
       ),
@@ -522,12 +524,13 @@ class _ReportPageState extends ConsumerState<ReportPage>
   String _formatCreatedAt(DateTime? createdAt) {
     if (createdAt == null) return '';
 
-    final hour = createdAt.hour;
+    final local = createdAt.toLocal();
+    final hour = local.hour;
     final period = hour < 12 ? '오전' : '오후';
     final hour12 = hour % 12 == 0 ? 12 : hour % 12;
-    final minute = createdAt.minute.toString().padLeft(2, '0');
+    final minute = local.minute.toString().padLeft(2, '0');
 
-    return '${createdAt.month}월 ${createdAt.day}일 | $period $hour12:$minute';
+    return '${local.month}월 ${local.day}일 | $period $hour12:$minute';
   }
 
   FoodAnalysisFoodEntity? _pickMainFood(FoodAnalysisEntity result) {
@@ -544,11 +547,6 @@ class _ReportPageState extends ConsumerState<ReportPage>
       return doubleValue.toInt().toString();
     }
     return doubleValue.toString();
-  }
-
-  String _formatValueWithUnit(num? value, String unit) {
-    if (value == null) return '-';
-    return '${_formatNumber(value)}$unit';
   }
 
   String _formatPercent(double? value) {

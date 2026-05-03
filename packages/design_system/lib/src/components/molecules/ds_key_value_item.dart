@@ -5,28 +5,28 @@ import '../../extension/context_extension.dart';
 enum DSKeyValueItemSize { large, medium, small }
 
 class DSKeyValueItem extends StatefulWidget {
-  const DSKeyValueItem._({required this.size, required this.title, required this.description});
+  const DSKeyValueItem._({required this.size, required this.title, this.description});
 
-  factory DSKeyValueItem.large({required String title, required String description}) =>
+  factory DSKeyValueItem.large({required String title, String? description}) =>
       DSKeyValueItem._(size: .large, title: title, description: description);
 
   factory DSKeyValueItem.medium({
     required String title,
-    required String description,
+    String? description,
     bool isEnabled = true,
     VoidCallback? onTap,
   }) => DSKeyValueItem._(size: .medium, title: title, description: description);
 
   factory DSKeyValueItem.small({
     required String title,
-    required String description,
+    String? description,
     bool isEnabled = true,
     VoidCallback? onTap,
   }) => DSKeyValueItem._(size: .small, title: title, description: description);
 
   final DSKeyValueItemSize size;
   final String title;
-  final String description;
+  final String? description;
 
   @override
   State<DSKeyValueItem> createState() => _DSKeyValueItemState();
@@ -85,8 +85,10 @@ class _DSKeyValueItemState extends State<DSKeyValueItem> {
       child: Row(
         children: [
           SizedBox(width: 100, child: Text(widget.title, style: titleStyle, maxLines: 2)),
-          SizedBox(width: titleGap),
-          Expanded(child: Text(widget.description, style: descriptionTextStyle, maxLines: 2)),
+          if (widget.description?.isNotEmpty == true) ...[
+            SizedBox(width: titleGap),
+            Expanded(child: Text(widget.description!, style: descriptionTextStyle, maxLines: 2)),
+          ],
         ],
       ),
     );

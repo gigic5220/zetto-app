@@ -1,7 +1,11 @@
 import 'dart:io';
+import 'dart:ui';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:screenshot/screenshot.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:tandangi/core/di/di.dart';
 import 'package:tandangi/domain/entity/food_analysis_entity.dart';
 import 'package:tandangi/domain/repository/food_analyze_repository.dart';

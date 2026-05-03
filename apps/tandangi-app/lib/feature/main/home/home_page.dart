@@ -574,7 +574,7 @@ class _HomePageState extends ConsumerState<HomePage>
                                                             )?.name ??
                                                             '',
                                                         description:
-                                                            '탄 ${_pickMainFood(foodAnalysis)?.carbohydrate?.value?.toRoundedString()}g | 단 ${_pickMainFood(foodAnalysis)?.protein?.value?.toRoundedString()}g | 지 ${_pickMainFood(foodAnalysis)?.fat?.value?.toRoundedString()}g',
+                                                            '탄 ${foodAnalysis.nutritionCompareInfo?.carbohydrate?.intake?.toRoundedString()}g | 단 ${foodAnalysis.nutritionCompareInfo?.protein?.intake?.toRoundedString()}g | 지 ${foodAnalysis.nutritionCompareInfo?.fat?.intake?.toRoundedString()}g',
                                                         trailingText: foodAnalysis
                                                             .createdAt
                                                             ?.relativePastLabelKo(),
@@ -676,11 +676,13 @@ class _HomePageState extends ConsumerState<HomePage>
   }
 
   Widget _buildBottomSheetBodyWidget({
+    required NutritionSummaryTargetBasisEnum? originalSummaryTargetBasisEnum,
     required void Function({
       required NutritionSummaryTargetBasisEnum summaryTargetBasisEnum,
     })
     onTapSummaryTargetBasisEnum,
   }) {
+    print('originalSummaryTargetBasisEnum: $originalSummaryTargetBasisEnum');
     return Consumer(
       builder: (context, ref, child) {
         final selectedNutritionSummaryTargetBasisEnum =
@@ -695,6 +697,15 @@ class _HomePageState extends ConsumerState<HomePage>
             ),
             DSListControl.medium(
               title: '가볍게 관리',
+              titleBadge:
+                  originalSummaryTargetBasisEnum ==
+                      NutritionSummaryTargetBasisEnum.max
+                  ? DSTextBadge.small(
+                      text: '현재 기준',
+                      variant: DSTextBadgeVariant.secondary,
+                      type: .circular,
+                    )
+                  : null,
               description: '섭취 기준을 조금 여유 있게 잡아요',
               toggleValue:
                   selectedNutritionSummaryTargetBasisEnum ==
@@ -712,6 +723,15 @@ class _HomePageState extends ConsumerState<HomePage>
             ),
             DSListControl.medium(
               title: '균형있게 관리',
+              titleBadge:
+                  originalSummaryTargetBasisEnum ==
+                      NutritionSummaryTargetBasisEnum.target
+                  ? DSTextBadge.small(
+                      text: '현재 기준',
+                      variant: DSTextBadgeVariant.secondary,
+                      type: .circular,
+                    )
+                  : null,
               description: '권장 섭취량의 중간값으로 관리해요',
               toggleValue:
                   selectedNutritionSummaryTargetBasisEnum ==
@@ -730,6 +750,15 @@ class _HomePageState extends ConsumerState<HomePage>
             ),
             DSListControl.medium(
               title: '조금 더 신경써서 관리',
+              titleBadge:
+                  originalSummaryTargetBasisEnum ==
+                      NutritionSummaryTargetBasisEnum.min
+                  ? DSTextBadge.small(
+                      text: '현재 기준',
+                      variant: DSTextBadgeVariant.secondary,
+                      type: .circular,
+                    )
+                  : null,
               description: '섭취 기준을 조금 타이트하게 잡아요',
               toggleValue:
                   selectedNutritionSummaryTargetBasisEnum ==

@@ -150,6 +150,9 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/ic_setting_fill.svg
   String get icSettingFill => 'assets/svgs/ic_setting_fill.svg';
 
+  /// File path: assets/svgs/ic_upload.svg
+  String get icUpload => 'assets/svgs/ic_upload.svg';
+
   /// File path: assets/svgs/ic_x.svg
   String get icX => 'assets/svgs/ic_x.svg';
 
@@ -189,6 +192,7 @@ class $AssetsSvgsGen {
     icQuestionFill,
     icReadingGlass,
     icSettingFill,
+    icUpload,
     icX,
     logoApple,
     logoGoogle,

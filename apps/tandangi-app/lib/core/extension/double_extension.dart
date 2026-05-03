@@ -1,10 +1,12 @@
 //extension on double
 extension DoubleExtension on double {
+  /// 소수 첫째 자리까지 반올림해 표시하고, 그 자리가 0이면 정수만 표시합니다.
   String toRoundedString() {
-    if (this == roundToDouble()) {
-      return toInt().toString();
+    final s = toStringAsFixed(1);
+    if (s.endsWith('.0')) {
+      return s.substring(0, s.length - 2);
     }
-    return toString();
+    return s;
   }
 
   double toPercentage() {

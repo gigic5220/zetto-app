@@ -32,6 +32,7 @@ mixin HomeActionMixin {
   void onTapChangeNutritionStandards(
     WidgetRef ref, {
     required Widget Function({
+      required NutritionSummaryTargetBasisEnum? originalSummaryTargetBasisEnum,
       required void Function({
         required NutritionSummaryTargetBasisEnum summaryTargetBasisEnum,
       })
@@ -44,9 +45,14 @@ mixin HomeActionMixin {
     })
     buildBottomSheetCallToActionWidgetCallback,
   }) {
+    final dailyNutritionSummaries = ref.read(_dailyNutritionSummariesProvider);
+    final originalSummaryTargetBasisEnum =
+        dailyNutritionSummaries.value?.summaries.first.summaryTargetBasisEnum;
+    print('originalSummaryTargetBasisEnum: $originalSummaryTargetBasisEnum');
     DialogUtils.showLockedBottomSheet(
       context: ref.context,
       child: buildBottomSheetBodyWidgetCallback(
+        originalSummaryTargetBasisEnum: originalSummaryTargetBasisEnum,
         onTapSummaryTargetBasisEnum:
             ({
               required NutritionSummaryTargetBasisEnum summaryTargetBasisEnum,

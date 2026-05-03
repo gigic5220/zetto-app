@@ -6,6 +6,28 @@ mixin ReportActionMixin {
     ref.invalidate(_foodAnalyzeResultProvider);
   }
 
+  Future<void> onTapShare(
+    WidgetRef ref, {
+    required ScreenshotController screenshotController,
+  }) async {
+    final capturedImage = await screenshotController.capture();
+    if (capturedImage == null) return;
+
+    final renderBox = ref.context.findRenderObject() as RenderBox?;
+
+    await SharePlus.instance.share(
+      ShareParams(
+        files: [XFile.fromData(capturedImage, mimeType: 'image/png')],
+        fileNameOverrides: [
+          'tandangi-report-${DateTime.now().millisecondsSinceEpoch}.png',
+        ],
+        sharePositionOrigin: renderBox == null
+            ? null
+            : renderBox.localToGlobal(Offset.zero) & renderBox.size,
+      ),
+    );
+  }
+
   void onTapAnalyzedFoodItem(
     WidgetRef ref, {
     required int selectedFoodItemIndex,

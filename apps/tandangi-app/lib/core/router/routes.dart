@@ -13,6 +13,7 @@ import 'package:tandangi/domain/entity/food_analysis_entity.dart';
 import 'package:tandangi/feature/analyze_loading/analyze_loading_page.dart';
 import 'package:tandangi/feature/login/login_page.dart';
 import 'package:tandangi/feature/main/edit_food_photo/edit_food_photo_page.dart';
+import 'package:tandangi/feature/main/history/history_page.dart';
 import 'package:tandangi/feature/main/home/home_page.dart';
 import 'package:tandangi/feature/main/main_page.dart';
 import 'package:tandangi/feature/main/my/my_page.dart';
@@ -107,18 +108,17 @@ class Router extends _$Router {
                 ),
               ],
             ),
-            // StatefulShellBranch(
-            //   navigatorKey: ref.watch(shellNavigationKeyProvider),
-            //   routes: [
-            //     GoRoute(
-            //       name: ReportPage.routeName,
-            //       path: '/report',
-            //       pageBuilder: (context, state) => NoTransitionPage(
-            //         child: ReportPage(xFile: state.extra as XFile),
-            //       ),
-            //     ),
-            //   ],
-            // ),
+            StatefulShellBranch(
+              //navigatorKey: ref.watch(shellNavigationKeyProvider),
+              routes: [
+                GoRoute(
+                  name: HistoryPage.routeName,
+                  path: '/hisotry',
+                  pageBuilder: (context, state) =>
+                      NoTransitionPage(child: HistoryPage()),
+                ),
+              ],
+            ),
             StatefulShellBranch(
               //navigatorKey: ref.watch(shellNavigationKeyProvider),
               routes: [

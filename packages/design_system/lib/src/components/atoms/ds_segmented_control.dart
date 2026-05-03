@@ -96,8 +96,16 @@ class _DSSegmentedControlState extends State<DSSegmentedControl> with TickerProv
   @override
   void didUpdateWidget(covariant DSSegmentedControl oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.items != widget.items) {
-      tabController = widget.tabController ?? TabController(length: widget.items.length, vsync: this);
+    // Item list often gets a new instance each build; only recreate when length changes.
+    if (oldWidget.items.length != widget.items.length) {
+      final previousIndex = tabController.index;
+      tabController =
+          widget.tabController ??
+          TabController(
+            length: widget.items.length,
+            vsync: this,
+            initialIndex: previousIndex.clamp(0, widget.items.length - 1),
+          );
     }
     _calculate();
   }
